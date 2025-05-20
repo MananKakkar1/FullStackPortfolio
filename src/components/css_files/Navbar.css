@@ -1,0 +1,83 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 8px 16px;
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    box-sizing: border-box;
+}
+
+.logo {
+    height: 40px;
+    width: auto;
+    margin-left: 0;
+    font-size: 0; /* Hide text if any */
+    display: block;
+}
+
+.navbar {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.navbar a {
+    font-size: 20px;
+    color: #00fff7;
+    font-weight: 500;
+    margin-left: 40px;
+    text-decoration: none;
+    white-space: nowrap;
+    position: relative; /* Needed for the underline */
+}
+
+.navbar a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 100%;
+    height: 3px;
+    background: #00fff7;
+    opacity: 0.5;
+    border-radius: 2px;
+    transform: scaleX(0);
+    transition: 0.2s;
+}
+
+.navbar a:hover::after,
+.navbar a:focus::after {
+    transform: scaleX(1);
+}
+
+
+/* Responsive: stack nav links vertically on small screens */
+@media (max-width: 600px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 8px;
+    }
+    .navbar {
+        width: 100%;
+        justify-content: flex-start;
+        margin-top: 8px;
+    }
+    .navbar a {
+        margin-left: 0;
+        margin-right: 16px;
+        margin-bottom: 8px;
+    }
+}
+
+.h1 {
+    position: relative;
+    font-size: 30px;
+    color: #00fff7;
+    font-weight: 500;
+    margin-left: 40px;
+}

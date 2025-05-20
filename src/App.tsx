@@ -1,9 +1,14 @@
+import Navbar from "./components/Navbar";
+import "./index.css";
+import Home from "./components/Home";
+
 const App = () => {
   return (
     <div>
-      <h1>Full Stack Portfolio</h1>
+      <Navbar />
+      <Home />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
