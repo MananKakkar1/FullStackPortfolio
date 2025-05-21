@@ -1,4 +1,4 @@
-import '../components/css_files/Projects.css'
+import "../components/css_files/Projects.css";
 export type Project = {
   id: string;
   title: string;
@@ -13,6 +13,7 @@ let projectsList = [
     description:
       "A simple chess game built with HTML, CSS, JavaScript, and Python.",
     image: "/images/temp.jpg",
+    sourceUrl: "https://github.com/MananKakkar1/Chess_Game",
   },
   {
     id: "portfolio-website",
@@ -20,6 +21,7 @@ let projectsList = [
     description:
       "A personal portfolio website built using React, TypeScript, and modern web technologies to showcase my skills and projects.",
     image: "/images/temp.jpg",
+    sourceUrl: "https://github.com/MananKakkar1/FullStackPortfolio",
   },
   {
     id: "file-system-tree-visualizer",
@@ -27,6 +29,7 @@ let projectsList = [
     description:
       "A visualizer for file system trees, built with Python and Pygame, to help users understand the structure of their file systems.",
     image: "/images/temp.jpg",
+    sourceUrl: "https://github.com/MananKakkar1/File-System-Tree-Visualizer",
   },
   {
     id: "system-overlay-python-script",
@@ -34,6 +37,7 @@ let projectsList = [
     description:
       "A Python script that overlays system information on the screen, providing real-time updates on system performance.",
     image: "/images/temp.jpg",
+    sourceUrl: "https://github.com/MananKakkar1/System-Overlay-Python-Script",
   },
   {
     id: "ai-paint-desktop-app",
@@ -41,6 +45,7 @@ let projectsList = [
     description:
       "AI-Paint is a desktop application inspired by Microsoft Paint, allowing users to draw freely as well as generate AI-created images using text prompts.",
     image: "/images/temp.jpg",
+    sourceUrl: "https://github.com/MananKakkar1/AI_Paint_Application",
   },
   {
     id: "custom-linux-shell",
@@ -48,6 +53,7 @@ let projectsList = [
     description:
       "A custom Linux shell built using C, designed to provide a unique command-line interface and support for various shell features.",
     image: "/images/temp.jpg",
+    sourceUrl: "https://github.com/MananKakkar1/Custom-Linux-Shell",
   },
   {
     id: "maze-runner-game",
@@ -55,6 +61,7 @@ let projectsList = [
     description:
       "A maze runner game built with python's pygame, where players navigate through a maze to reach the finish line.",
     image: "/images/temp.jpg",
+    sourceUrl: "https://github.com/MananKakkar1/MazeRunnerGame",
   },
   {
     id: "sokoban-game",
@@ -62,6 +69,7 @@ let projectsList = [
     description:
       "A Sokoban game built with risc-v assembly, where players push boxes to designated locations on a board.",
     image: "/images/temp.jpg",
+    sourceUrl: "https://github.com/MananKakkar1/Sokoban",
   },
   {
     id: "paint-like-desktop-app",
@@ -69,6 +77,7 @@ let projectsList = [
     description:
       "A desktop application inspired by Microsoft Paint, allowing users to draw freely and create digital art.",
     image: "/images/temp.jpg",
+    sourceUrl: "https://github.com/MananKakkar1/Paint_Like_Application",
   },
   {
     id: "world-population-data-extractor",
@@ -76,14 +85,17 @@ let projectsList = [
     description:
       "A Python script that extracts and organizes world population data from various sources in a csv file, providing insights into global demographics.",
     image: "/images/temp.jpg",
+    sourceUrl:
+      "https://github.com/MananKakkar1/world_population_data_extractor",
   },
   {
     id: "pokemon-game",
     title: "Pokemon Game",
     description:
       "A Text based Pokemon game built with Python, where players can play through a story driven by user choices.",
-    image: "/images/temp.jpg", 
-  }
+    image: "/images/temp.jpg",
+    sourceUrl: "https://github.com/MananKakkar1/Pokemon",
+  },
 ];
 
 const Projects = () => (

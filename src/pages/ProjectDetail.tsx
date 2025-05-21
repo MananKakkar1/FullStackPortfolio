@@ -20,6 +20,16 @@ const ProjectDetail = () => {
         <h2>{project.title}</h2>
         <img src={project.image} alt={project.title} />
         <p>{project.description}</p>
+        {project.sourceUrl && (
+          <a
+            href={project.sourceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="source-btn"
+          >
+            View Source Code on GitHub
+          </a>
+        )}
       </div>
     </div>
   );
