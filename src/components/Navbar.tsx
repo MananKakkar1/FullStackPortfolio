@@ -18,15 +18,35 @@ const Navbar = () => {
     }
   };
 
+  const handleHomeClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (location.pathname === "/Home") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.history.replaceState(null, "", "/Home");
+    }
+  };
+
+  const handleNavScrollTop = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  };
+
   return (
     <div>
       <header className="header">
         <img src="/images/logo.png" alt="Logo" className="logo" />
         <nav className="navbar">
-          <Link to="/Home">Home</Link>
-          <Link to="/projects">Projects</Link>
-          <Link to="/about">About Me</Link>
-          <a href="/#contact-sec" onClick={handleContactClick}>Contact Me</a>
+          <Link to="/Home" onClick={handleHomeClick}>
+            Home
+          </Link>
+          <Link to="/projects" onClick={handleNavScrollTop}>
+            Projects
+          </Link>
+          <Link to="/about" onClick={handleNavScrollTop}>
+            About Me
+          </Link>
+          <a href="/#contact-sec" onClick={handleContactClick}>
+            Contact Me
+          </a>
         </nav>
       </header>
     </div>

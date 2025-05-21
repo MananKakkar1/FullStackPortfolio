@@ -1,5 +1,4 @@
 body, .hero-section, .hero-left, .hero-right {
-    
     color: #00fff7;
     font-family: "Poppins", sans-serif;
     font-weight: 700;
@@ -208,19 +207,18 @@ h1 {
 }
 
 .project-entry {
-  /* Use a subtle transparent background or none */
-  background: rgba(0, 0, 0, 0.55); /* Optional: subtle card effect */
-  border: 2px solid #00fff7;
-  border-radius: 18px;
-  box-shadow: 0 4px 24px rgba(0,255,247,0.10);
-  padding: 24px 20px 20px 20px;
-  max-width: 320px;
-  min-width: 260px;
-  min-height: 420px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: transform 0.2s, box-shadow 0.2s;
+    background: rgba(0, 0, 0, 0.55);
+    border: 2px solid #00fff7;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(0,255,247,0.10);
+    padding: 24px 20px 20px 20px;
+    max-width: 320px;
+    min-width: 260px;
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .contact-section {
@@ -230,8 +228,8 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-bottom: none; /* No border at the end */
-    border-top: 2px solid #00fff7;    /* Already handled by previous section */
+    border-bottom: none;
+    border-top: 2px solid #00fff7;
     min-height: 95vh;
 }
 
@@ -240,55 +238,55 @@ h1 {
 }
 
 .contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  width: 100%;
-  max-width: none;
-  margin-top: 16px;
-  padding: 0 2vw; /* Optional: add some horizontal padding */
-  box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+    max-width: none;
+    margin-top: 16px;
+    padding: 0 2vw;
+    box-sizing: border-box;
 }
 
 .contact-form input,
 .contact-form textarea {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 14px;
-  border-radius: 8px;
-  border: 1.5px solid #00fff7;
-  background: #111;
-  color: #00fff7;
-  font-size: 1rem;
-  resize: none;
-  font-family: "Poppins", sans-serif;
-  transition: border 0.2s;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px;
+    border-radius: 8px;
+    border: 1.5px solid #00fff7;
+    background: #111;
+    color: #00fff7;
+    font-size: 1rem;
+    resize: none;
+    font-family: "Poppins", sans-serif;
+    transition: border 0.2s;
 }
 
 .contact-form input:focus,
 .contact-form textarea:focus {
-  outline: none;
-  border: 2px solid #00fff7;
-  background: #181818;
+    outline: none;
+    border: 2px solid #00fff7;
+    background: #181818;
 }
 
 .contact-form button {
-  display: inline-block;
-  align-self: flex-start; /* Prevents the button from stretching full width */
-  background: #000;
-  color: #00fff7;
-  font-weight: 700;
-  padding: 12px 32px;
-  border-radius: 24px;
-  text-decoration: none;
-  font-size: 1.1rem;
-  margin-bottom: 20px;
-  border: 2px solid #00fff7;
-  cursor: pointer;
-  transition: 0.2s, color 0.2s;
+    display: inline-block;
+    align-self: flex-start;
+    background: #000;
+    color: #00fff7;
+    font-weight: 700;
+    padding: 12px 32px;
+    border-radius: 24px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    border: 2px solid #00fff7;
+    cursor: pointer;
+    transition: 0.2s, color 0.2s;
 }
 
 .contact-form button:hover {
-  background: #00bfb7;
-  color: #fff;
+    background: #00bfb7;
+    color: #fff;
 }
