@@ -1,11 +1,20 @@
 import "../components/css_files/Home.css";
 import { projectsList } from "./Projects";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 const Home = () => {
   const bestProjects = projectsList.slice(0, 3);
   const location = useLocation();
+
+  // State for form fields
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+  const [status, setStatus] = useState("");
 
   useEffect(() => {
     if (location.hash === "#contact-sec") {
@@ -15,6 +24,36 @@ const Home = () => {
       }
     }
   }, [location]);
+
+  // Handle input changes
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  // Handle form submit
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("Sending...");
+    try {
+      const res = await fetch("http://localhost:5000/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          message: `Subject: ${form.subject}\n\n${form.message}`,
+        }),
+      });
+      if (res.ok) {
+        setStatus("Message sent!");
+        setForm({ name: "", email: "", subject: "", message: "" });
+      } else {
+        setStatus("Failed to send message.");
+      }
+    } catch {
+      setStatus("Failed to send message.");
+    }
+  };
 
   return (
     <div className="home-page-root">
@@ -71,13 +110,41 @@ const Home = () => {
       </div>
       <div className="contact-section" id="contact-sec">
         <h1>Contact Me</h1>
-        <form className="contact-form">
-          <input type="text" placeholder="Your Name" required />
-          <input type="email" placeholder="Your Email" required />
-          <input type="text" placeholder="Subject" required />
-          <textarea placeholder="Your Message" required />
+        <form className="contact-form" onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            required
+            value={form.name}
+            onChange={handleChange}
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Your Email"
+            required
+            value={form.email}
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            name="subject"
+            placeholder="Subject"
+            required
+            value={form.subject}
+            onChange={handleChange}
+          />
+          <textarea
+            name="message"
+            placeholder="Your Message"
+            required
+            value={form.message}
+            onChange={handleChange}
+          />
           <button type="submit">Send</button>
         </form>
+        {status && <div style={{ marginTop: "16px", color: "#00fff7" }}>{status}</div>}
       </div>
     </div>
   );
