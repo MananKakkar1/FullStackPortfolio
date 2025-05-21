@@ -25,7 +25,7 @@ let projectsList = [
     id: "file-system-tree-visualizer",
     title: "File System Tree Visualizer",
     description:
-      "A visualizer for file system trees, built with React and D3.js, to help users understand the structure of their file systems.",
+      "A visualizer for file system trees, built with Python and Pygame, to help users understand the structure of their file systems.",
     image: "/images/temp.jpg",
   },
   {
@@ -76,6 +76,13 @@ let projectsList = [
     description:
       "A Python script that extracts and organizes world population data from various sources in a csv file, providing insights into global demographics.",
     image: "/images/temp.jpg",
+  },
+  {
+    id: "pokemon-game",
+    title: "Pokemon Game",
+    description:
+      "A Text based Pokemon game built with Python, where players can play through a story driven by user choices.",
+    image: "/images/temp.jpg", 
   }
 ];
 
