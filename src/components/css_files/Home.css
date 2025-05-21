@@ -27,6 +27,8 @@ h3 {
 
 .highlight {
     color: #00fff7;
+    display: block;
+    margin-bottom: 0.2em;
 }
 
 .hero-section {

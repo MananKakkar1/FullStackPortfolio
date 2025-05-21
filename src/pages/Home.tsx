@@ -13,8 +13,7 @@ const Home = () => {
       </div>
       <div className="hero-right">
         <h1>
-          <span className="highlight">Hi, I'm Manan</span>,<br />
-          <span className="highlight">Upcoming Software Engineer</span>
+          <span className="highlight">Hi, I'm Manan</span>
         </h1>
         <p>
           A passionate developer dedicated to crafting professional, functional,
