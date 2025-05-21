@@ -1,13 +1,20 @@
 import Navbar from "./components/Navbar";
 import "./index.css";
-import Home from "./components/Home";
+import Home from "./pages/Home";
+import Projects from "./pages/projects";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const App = () => {
   return (
-    <div>
+    <Router>
       <Navbar />
-      <Home />
-    </div>
+      <div style={{ marginTop: "70px" }}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/projects" element={<Projects />} />
+        </Routes>
+      </div>
+    </Router>
   );
 };
 
