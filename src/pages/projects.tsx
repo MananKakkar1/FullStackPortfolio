@@ -81,7 +81,7 @@ let projectsList = [
 
 const Projects = () => (
   <div className="projects-page-background">
-    <h2>My Projects</h2>
+    <h1>My Projects</h1>
     <div className="projects-list">
       {projectsList.map((project) => (
         <a
