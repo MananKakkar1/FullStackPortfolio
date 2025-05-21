@@ -1,15 +1,12 @@
 body, .hero-section, .hero-left, .hero-right {
-    color: #00fff7;
+    color: var(--text);
     font-family: "Poppins", sans-serif;
     font-weight: 700;
     letter-spacing: 0.5px;
 }
 
-h1, h2, h3, h4, h5, h6, p, a, span, .stat-number, .stat-label {
-    color: #00fff7;
-    font-family: "Poppins", sans-serif;
-    font-weight: 700;
-    letter-spacing: 0.5px;
+h1, h2, h3, h4, h5, h6, .stat-label {
+    color: var(--label-color);
 }
 
 h2 {
@@ -25,7 +22,7 @@ h3 {
 }
 
 .highlight {
-    color: #00fff7;
+    color: var(--text);
     display: block;
     margin-bottom: 0.2em;
 }
@@ -41,7 +38,8 @@ h3 {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    border-bottom: 2px solid #00fff7;
+    border-bottom: 2px solid var(--text);
+    border-color: black;
     padding-bottom: 32px;
     margin-bottom: 32px;
 }
@@ -65,7 +63,7 @@ h3 {
     height: 180px;
     border-radius: 50%;
     object-fit: cover;
-    border: 6px solid #00fff7;
+    border: 6px solid var(--text);
     box-shadow: 0 4px 32px rgba(0,255,247,0.15);
 }
 
@@ -74,14 +72,14 @@ h3 {
     left: 50%;
     transform: translateX(-50%);
     background: #000;
-    color: #00fff7;
+    color: var(--text);
     font-size: 1rem;
     padding: 6px 16px;
     border-radius: 20px;
     font-weight: 700;
     box-shadow: 0 2px 8px rgba(0,255,247,0.08);
     white-space: nowrap;
-    border: 2px solid #00fff7;
+    border: 2px solid var(--text);
 }
 
 .badge-experience {
@@ -92,7 +90,7 @@ h3 {
     bottom: 10px;
     left: 10%;
     transform: none;
-    background: #00fff7;
+    background: var(--text);
     color: #000;
     border: none;
 }
@@ -108,13 +106,13 @@ h3 {
 
 .badge-available {
     background: #000;
-    color: #00fff7;
+    color: var(--text);
     font-size: 0.95rem;
     margin-bottom: 8px;
     padding: 4px 14px;
     border-radius: 14px;
     font-weight: 700;
-    border: 2px solid #00fff7;
+    border: 2px solid var(--text);
 }
 
 h1 {
@@ -126,28 +124,28 @@ h1 {
 
 .hero-right p {
     font-size: 1.2rem;
-    color: #00fff7;
+    color: var(--text);
     margin: 0 0 12px 0;
     max-width: 400px;
 }
 
 .cta-btn {
     display: inline-block;
-    background: #000;
-    color: #00fff7;
+    background: var(--button-bg);
+    color: var(--button-text);
     font-weight: 700;
     padding: 12px 32px;
     border-radius: 24px;
     text-decoration: none;
     font-size: 1.1rem;
     margin-bottom: 20px;
-    border: 2px solid #00fff7;
-    transition: 0.2s, color 0.2s;
+    border: 2px solid var(--card-border);
+    transition: background 0.2s, color 0.2s;
 }
 
 .cta-btn:hover {
-    background: #00fff7;
-    color: #000;
+    background: var(--button-text);
+    color: var(--button-bg);
 }
 
 .stats {
@@ -160,13 +158,13 @@ h1 {
 .stat-number {
     font-size: 1.6rem;
     font-weight: 700;
-    color: #00fff7;
+    color: var(--text);
     display: block;
 }
 
 .stat-label {
     font-size: 1rem;
-    color: #00fff7;
+    color: var(--text);
 }
 
 @media (max-width: 900px) {
@@ -187,6 +185,7 @@ h1 {
 
 .featured-projects h1 {
     margin-bottom: 150px;
+    color: var(--text);
 }
 
 .featured-projects .home-projects-list {
@@ -207,10 +206,10 @@ h1 {
 }
 
 .project-entry {
-    background: rgba(0, 0, 0, 0.55);
-    border: 2px solid #00fff7;
-    border-radius: 18px;
-    box-shadow: 0 4px 24px rgba(0,255,247,0.10);
+    background: var(--card-bg);
+    border: 2px solid var(--card-border);
+    box-shadow: var(--card-shadow);
+    color: var(--text);
     padding: 24px 20px 20px 20px;
     max-width: 320px;
     min-width: 260px;
@@ -221,6 +220,38 @@ h1 {
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
+.project-entry h3 {
+    color: var(--label-color);
+}
+
+.project-entry .project-description {
+    color: var(--text);
+    font-weight: 500;
+    font-size: 1.1rem;
+    text-align: center;
+    margin-top: 12px;
+}
+
+.project-entry:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 8px 32px rgba(0,255,247,0.18);
+    border-color: var(--label-color);
+}
+
+.project-entry:hover h3 {
+    color: var(--button-text);
+}
+
+.project-entry:hover .project-description {
+    color: var(--label-color);
+}
+
+.project-entry:focus,
+.project-entry:active {
+    border-color: var(--label-color) !important;
+    outline: none;
+}
+
 .contact-section {
     width: 100%;
     background: transparent;
@@ -229,12 +260,14 @@ h1 {
     flex-direction: column;
     align-items: center;
     border-bottom: none;
-    border-top: 2px solid #00fff7;
+    border-top: 2px solid var(--text);
+    border-color: black;
     min-height: 95vh;
 }
 
 .contact-section h1 {
     margin-bottom: 100px;
+    color: var(--text);
 }
 
 .contact-form {
@@ -254,9 +287,9 @@ h1 {
     box-sizing: border-box;
     padding: 14px;
     border-radius: 8px;
-    border: 1.5px solid #00fff7;
-    background: #111;
-    color: #00fff7;
+    border: 1.5px solid var(--text);
+    background: transparent;
+    color: var(--text);
     font-size: 1rem;
     resize: none;
     font-family: "Poppins", sans-serif;
@@ -266,27 +299,40 @@ h1 {
 .contact-form input:focus,
 .contact-form textarea:focus {
     outline: none;
-    border: 2px solid #00fff7;
-    background: #181818;
+    border: 2px solid var(--text);
+    background: transparent;
 }
 
 .contact-form button {
     display: inline-block;
     align-self: flex-start;
-    background: #000;
-    color: #00fff7;
+    background: var(--button-bg);
+    color: var(--button-text);
     font-weight: 700;
     padding: 12px 32px;
     border-radius: 24px;
     text-decoration: none;
     font-size: 1.1rem;
     margin-bottom: 20px;
-    border: 2px solid #00fff7;
+    border: 2px solid var(--text);
     cursor: pointer;
-    transition: 0.2s, color 0.2s;
+    transition: background 0.2s, color 0.2s;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    color: var(--label-color);
+    opacity: 1;
 }
 
 .contact-form button:hover {
     background: #00bfb7;
     color: #fff;
+}
+
+.home-page-root {
+    background: var(--bg-gradient);
+    color: var(--text);
+    min-height: 100vh;
+    width: 100vw;
 }

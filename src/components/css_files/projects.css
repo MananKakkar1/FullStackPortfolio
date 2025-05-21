@@ -1,7 +1,8 @@
 .projects-page-background {
     min-height: 100vh;
     width: 100vw;
-    background: radial-gradient(circle, #000000 0%, #017d81 100%);
+    background: var(--bg-gradient);
+    color: var(--text);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -20,10 +21,10 @@
 }
 
 .project-entry {
-    background: rgba(0, 0, 0, 0.85);
-    border: 2px solid #00fff7;
+    background: var(--card-bg);
+    border: 2px solid var(--card-border);
     border-radius: 18px;
-    box-shadow: 0 4px 24px rgba(0,255,247,0.10);
+    box-shadow: var(--card-shadow);
     padding: 24px 20px 20px 20px;
     max-width: 320px;
     min-width: 260px;
@@ -33,12 +34,13 @@
     align-items: center;
     justify-content: flex-start;
     transition: transform 0.2s, box-shadow 0.2s;
+    color: var(--text);
 }
 
 .project-entry:hover {
     transform: translateY(-8px) scale(1.03);
     box-shadow: 0 8px 32px rgba(0,255,247,0.18);
-    border-color: #00fff7;
+    border-color: var(--label-color);
 }
 
 .project-entry img {
@@ -48,19 +50,44 @@
     border-radius: 10px;
     margin-bottom: 16px;
     background: #222;
-    border: 1px solid #00fff7;
+    border: 1px solid var(--card-border);
 }
 
 .project-entry h3 {
     margin: 0 0 10px 0;
     font-size: 1.3rem;
-    color: #00fff7;
+    color: var(--label-color);
     text-align: center;
+}
+.project-entry:hover h3 {
+    color: var(--label-color);
 }
 
 .project-entry p {
-    color: #b2ffff;
+    color: var(--label-color);
     font-size: 1rem;
     text-align: center;
     margin: 0;
+}
+.project-entry:hover p {
+    color: var(--label-color);
+}
+
+.project-entry a,
+.project-entry button {
+    background: var(--button-bg);
+    color: var(--button-text);
+    border: 2px solid var(--card-border);
+    border-radius: 8px;
+    padding: 8px 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    text-decoration: none;
+}
+
+.project-entry a:hover,
+.project-entry button:hover {
+    background: var(--button-text);
+    color: var(--button-bg);
 }

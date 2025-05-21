@@ -103,7 +103,7 @@ const Home = () => {
             >
               <img src={project.image} alt={project.title} />
               <h3>{project.title}</h3>
-              <p>{project.description}</p>
+              <p className="project-description">{project.description}</p>
             </a>
           ))}
         </div>
