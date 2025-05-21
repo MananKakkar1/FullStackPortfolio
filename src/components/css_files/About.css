@@ -73,3 +73,22 @@ body {
 .about-goals {
     margin-bottom: 0; /* or adjust as needed */
 }
+
+.linkedin-btn {
+    color: #00fff7;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 24px;
+    cursor: pointer;
+    text-decoration: underline;
+    transition: color 0.2s;
+}
+
+.linkedin-btn:hover {
+    color: #017d81;
+}

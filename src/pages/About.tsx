@@ -7,6 +7,14 @@ const About = () => {
       <div className="about-image-placeholder">
         <img src="./images/temp.jpg" alt="Profile" className="profile-img" />
       </div>
+      <a
+        href="https://www.linkedin.com/in/manankakkar11/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="linkedin-btn"
+      >
+        LinkedIn
+      </a>
       <div className="about-content">
         <p className="about-intro">
           I am a passionate developer dedicated to crafting professional,

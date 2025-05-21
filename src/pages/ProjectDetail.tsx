@@ -27,7 +27,7 @@ const ProjectDetail = () => {
             rel="noopener noreferrer"
             className="source-btn"
           >
-            View Source Code on GitHub
+            To learn more, check out the source code on my personal Github
           </a>
         )}
       </div>
