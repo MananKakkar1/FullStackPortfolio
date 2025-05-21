@@ -3,7 +3,7 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 const themes = ["theme-dark", "theme-light"];
 const ThemeContext = createContext({
   theme: "theme-dark",
-  setTheme: (t: string) => {},
+  setTheme: (_t: string) => {},
   themes,
 });
 
