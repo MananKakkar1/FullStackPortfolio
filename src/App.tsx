@@ -1,7 +1,8 @@
 import Navbar from "./components/Navbar";
 import "./index.css";
 import Home from "./pages/Home";
-import Projects from "./pages/projects";
+import Projects from "./pages/Projects";
+import ProjectDetail from "./pages/ProjectDetail";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const App = () => {
@@ -12,6 +13,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<Projects />} />
+          <Route path="/projects/:projectId" element={<ProjectDetail />} />
         </Routes>
       </div>
     </Router>

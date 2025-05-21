@@ -1,0 +1,66 @@
+.projects-page-background {
+    min-height: 100vh;
+    width: 100vw;
+    background: radial-gradient(circle, #000000 0%, #017d81 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 40px;
+    box-sizing: border-box;
+}
+
+.projects-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 32px;
+    width: 100%;
+}
+
+.project-entry {
+    background: rgba(0, 0, 0, 0.85);
+    border: 2px solid #00fff7;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(0,255,247,0.10);
+    padding: 24px 20px 20px 20px;
+    max-width: 320px;
+    min-width: 260px;
+    min-height: 420px; /* Ensures all cards have the same height */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.project-entry:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 8px 32px rgba(0,255,247,0.18);
+    border-color: #00fff7;
+}
+
+.project-entry img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 16px;
+    background: #222;
+    border: 1px solid #00fff7;
+}
+
+.project-entry h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.3rem;
+    color: #00fff7;
+    text-align: center;
+}
+
+.project-entry p {
+    color: #b2ffff;
+    font-size: 1rem;
+    text-align: center;
+    margin: 0;
+}
