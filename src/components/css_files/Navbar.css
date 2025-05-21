@@ -4,7 +4,7 @@
     left: 0;
     width: 100%;
     padding: 8px 16px;
-    background-color: black;
+    background-color: transparent;
     display: flex;
     justify-content: space-between;
     align-items: center;
