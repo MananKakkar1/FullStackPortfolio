@@ -326,8 +326,8 @@ h1 {
 }
 
 .contact-form button:hover {
-    background: #00bfb7;
-    color: #fff;
+    background: var(--button-text);
+    color: var(--button-bg);
 }
 
 .home-page-root {
