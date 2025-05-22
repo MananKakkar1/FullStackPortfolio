@@ -10,7 +10,6 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import ThemeSelector from "./components/ThemeSelector";
 import { ThemeProvider } from "./components/ThemeContext";
 
 const App = () => {
@@ -19,7 +18,6 @@ const App = () => {
       <Router>
         <Navbar />
         <div style={{ marginTop: "70px" }}>
-          <ThemeSelector />
           <Routes>
             <Route path="/" element={<Navigate to="/Home" replace />} />
             <Route path="/Home" element={<Home />} />

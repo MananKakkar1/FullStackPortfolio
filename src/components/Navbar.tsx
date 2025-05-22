@@ -1,5 +1,6 @@
 import "./css_files/Navbar.css";
 import { useLocation, useNavigate, Link } from "react-router-dom";
+import ThemeSelector from "./ThemeSelector";
 
 const Navbar = () => {
   const location = useLocation();
@@ -48,6 +49,7 @@ const Navbar = () => {
             Contact Me
           </a>
         </nav>
+        <ThemeSelector />
       </header>
     </div>
   );
