@@ -19,6 +19,7 @@ const App = () => {
       <Router>
         <Navbar />
         <div style={{ marginTop: "70px" }}>
+          <ThemeSelector />
           <Routes>
             <Route path="/" element={<Navigate to="/Home" replace />} />
             <Route path="/Home" element={<Home />} />
@@ -26,7 +27,6 @@ const App = () => {
             <Route path="/projects/:projectId" element={<ProjectDetail />} />
             <Route path="/about" element={<About />} />
           </Routes>
-          <ThemeSelector />
         </div>
       </Router>
     </ThemeProvider>

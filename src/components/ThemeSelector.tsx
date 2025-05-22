@@ -15,7 +15,7 @@ const ThemeSelector = () => {
 
   return (
     <>
-      <button onClick={() => setOpen(true)}>
+      <button className="change-theme-btn" onClick={() => setOpen(true)}>
         Change Theme
       </button>
       {open && (
