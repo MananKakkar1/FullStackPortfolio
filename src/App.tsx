@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Projects from "./pages/Projects";
 import ProjectDetail from "./pages/ProjectDetail";
 import About from "./pages/About";
+import ResumeGenerator from "./pages/ResumeGenerator";
 import {
   BrowserRouter as Router,
   Routes,
@@ -24,6 +25,7 @@ const App = () => {
             <Route path="/projects" element={<Projects />} />
             <Route path="/projects/:projectId" element={<ProjectDetail />} />
             <Route path="/about" element={<About />} />
+            <Route path="/resume" element={<ResumeGenerator />} />
           </Routes>
         </div>
       </Router>

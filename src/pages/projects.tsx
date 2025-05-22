@@ -4,6 +4,7 @@ export type Project = {
   title: string;
   description: string;
   image: string;
+  technologies: string; // Added technologies attribute
 };
 
 let projectsList = [
@@ -14,6 +15,8 @@ let projectsList = [
       "A simple chess game built with HTML, CSS, JavaScript, and Python.",
     image: "/images/temp.jpg",
     sourceUrl: "https://github.com/MananKakkar1/Chess_Game",
+    category: "Website",
+    technologies: "HTML, CSS, JavaScript, Python",
   },
   {
     id: "portfolio-website",
@@ -22,6 +25,8 @@ let projectsList = [
       "A personal portfolio website built using React, TypeScript, and modern web technologies to showcase my skills and projects.",
     image: "/images/temp.jpg",
     sourceUrl: "https://github.com/MananKakkar1/FullStackPortfolio",
+    category: "Website",
+    technologies: "React, TypeScript, CSS",
   },
   {
     id: "file-system-tree-visualizer",
@@ -30,6 +35,8 @@ let projectsList = [
       "A visualizer for file system trees, built with Python and Pygame, to help users understand the structure of their file systems.",
     image: "/images/temp.jpg",
     sourceUrl: "https://github.com/MananKakkar1/File-System-Tree-Visualizer",
+    category: "Data Extraction",
+    technologies: "Python, Pygame",
   },
   {
     id: "system-overlay-python-script",
@@ -38,6 +45,8 @@ let projectsList = [
       "A Python script that overlays system information on the screen, providing real-time updates on system performance.",
     image: "/images/temp.jpg",
     sourceUrl: "https://github.com/MananKakkar1/System-Overlay-Python-Script",
+    category: "Data Extraction",
+    technologies: "Python",
   },
   {
     id: "ai-paint-desktop-app",
@@ -46,6 +55,8 @@ let projectsList = [
       "AI-Paint is a desktop application inspired by Microsoft Paint, allowing users to draw freely as well as generate AI-created images using text prompts.",
     image: "/images/temp.jpg",
     sourceUrl: "https://github.com/MananKakkar1/AI_Paint_Application",
+    category: "Desktop Applications",
+    technologies: "Python, Tkinter, OpenAI API",
   },
   {
     id: "custom-linux-shell",
@@ -54,6 +65,8 @@ let projectsList = [
       "A custom Linux shell built using C, designed to provide a unique command-line interface and support for various shell features.",
     image: "/images/temp.jpg",
     sourceUrl: "https://github.com/MananKakkar1/Custom-Linux-Shell",
+    category: "Custom Shell",
+    technologies: "C",
   },
   {
     id: "maze-runner-game",
@@ -62,6 +75,8 @@ let projectsList = [
       "A maze runner game built with python's pygame, where players navigate through a maze to reach the finish line.",
     image: "/images/temp.jpg",
     sourceUrl: "https://github.com/MananKakkar1/MazeRunnerGame",
+    category: "Games",
+    technologies: "Python, Pygame",
   },
   {
     id: "sokoban-game",
@@ -70,6 +85,8 @@ let projectsList = [
       "A Sokoban game built with risc-v assembly, where players push boxes to designated locations on a board.",
     image: "/images/temp.jpg",
     sourceUrl: "https://github.com/MananKakkar1/Sokoban",
+    category: "Games",
+    technologies: "RISC-V Assembly",
   },
   {
     id: "paint-like-desktop-app",
@@ -78,6 +95,8 @@ let projectsList = [
       "A desktop application inspired by Microsoft Paint, allowing users to draw freely and create digital art.",
     image: "/images/temp.jpg",
     sourceUrl: "https://github.com/MananKakkar1/Paint_Like_Application",
+    category: "Desktop Applications",
+    technologies: "Python, Tkinter",
   },
   {
     id: "world-population-data-extractor",
@@ -87,6 +106,8 @@ let projectsList = [
     image: "/images/temp.jpg",
     sourceUrl:
       "https://github.com/MananKakkar1/world_population_data_extractor",
+    category: "Data Extraction",
+    technologies: "Python, CSV",
   },
   {
     id: "pokemon-game",
@@ -95,6 +116,8 @@ let projectsList = [
       "A Text based Pokemon game built with Python, where players can play through a story driven by user choices.",
     image: "/images/temp.jpg",
     sourceUrl: "https://github.com/MananKakkar1/Pokemon",
+    category: "Text-Based Games",
+    technologies: "Python",
   },
 ];
 
