@@ -2,7 +2,6 @@ import "../components/css_files/Home.css";
 import { projectsList } from "./Projects";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import tempImg from "../assets/temp.jpg"; 
 import photoImg from "../assets/photo.jpg"; 
 
 const FLIP_DURATION = 600;

@@ -1,5 +1,4 @@
 import "../components/css_files/Projects.css";
-import tempImg from "../assets/temp.jpg";
 import chessImg from "../assets/chess-pic.png";
 import portfolioImg from "../assets/portfolio2.png";
 import fileSystemImg from "../assets/file-system-tree.png";
