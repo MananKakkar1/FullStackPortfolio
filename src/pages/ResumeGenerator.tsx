@@ -100,9 +100,7 @@ ${projects
   .map(
     (p: Project) => `    \\resumeProjectHeading
         {\\textbf{${p.title}} $|$ \\emph{${p.technologies || "Tech"}}}
-        \\resumeItemListStart
-          \\resumeItem{${p.description}}
-        \\resumeItemListEnd`
+        ${p.latex_description}`
   )
   .join("\n")}
   \\resumeSubHeadingListEnd
