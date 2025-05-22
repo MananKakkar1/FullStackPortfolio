@@ -5,6 +5,12 @@ import "../components/css_files/Projects.css";
 import "../components/css_files/ResumeGenerator.css";
 
 const latexTemplate = (projects: typeof projectsList) => `
+%-------------------------
+% Resume in Latex
+% Author : Sidratul Muntaha Ahmed
+% License : MIT
+%------------------------
+
 \\documentclass[letterpaper,11pt]{article}
 
 \\usepackage{latexsym}
@@ -94,6 +100,9 @@ const latexTemplate = (projects: typeof projectsList) => `
 \\newcommand{\\resumeSubHeadingListEnd}{\\end{itemize}}
 \\newcommand{\\resumeItemListStart}{\\begin{itemize}}
 \\newcommand{\\resumeItemListEnd}{\\end{itemize}\\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \\begin{document}
 
