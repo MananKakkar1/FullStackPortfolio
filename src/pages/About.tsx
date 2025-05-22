@@ -1,5 +1,5 @@
 import "../components/css_files/About.css";
-import tempImg from "../assets/temp.jpg";
+import tempImg from "../assets/photo.jpg";
 
 const About = () => {
   return (

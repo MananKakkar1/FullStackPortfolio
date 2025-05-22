@@ -1,5 +1,17 @@
 import "../components/css_files/Projects.css";
 import tempImg from "../assets/temp.jpg";
+import chessImg from "../assets/chess-pic.png";
+import portfolioImg from "../assets/portfolio2.png";
+import fileSystemImg from "../assets/file-system-tree.png";
+import paintLikeImg from "../assets/paint-like.png";
+import aiPaintImg from "../assets/ai-paint.png";
+import sokobanImg from "../assets/sokoban.png";
+import mazeRunnerImg from "../assets/maze-game.png";
+import shellImg from "../assets/shell.png";
+import extractorImg from "../assets/extractor.png";
+import pokemonImg from "../assets/pokemon.png";
+import systemOverlayImg from "../assets/system-overlay.png";
+
 
 export type Project = {
   id: string;
@@ -18,7 +30,7 @@ const projectsList: Project[] = [
     title: "Chess Game",
     description:
       "A simple chess game built with HTML, CSS, JavaScript, and Python.",
-    image: tempImg,
+    image: chessImg,
     sourceUrl: "https://github.com/MananKakkar1/Chess_Game",
     category: "Website",
     technologies: "JavaScript + HTML + CSS + Python (Flask)",
@@ -36,7 +48,7 @@ const projectsList: Project[] = [
     title: "Portfolio Website",
     description:
       "A personal portfolio website built using React, TypeScript, and modern web technologies to showcase my skills and projects.",
-    image: tempImg,
+    image: portfolioImg,
     sourceUrl: "https://github.com/MananKakkar1/FullStackPortfolio",
     category: "Website",
     technologies: "React + TypeScript + Vite + Node.js + Express.js + Nodemailer",
@@ -55,7 +67,7 @@ const projectsList: Project[] = [
     title: "File System Tree Visualizer",
     description:
       "A visualizer for file system trees, built with Python and Pygame, to help users understand the structure of their file systems.",
-    image: tempImg,
+    image: fileSystemImg,
     sourceUrl: "https://github.com/MananKakkar1/File-System-Tree-Visualizer",
     category: "Data Extraction",
     technologies: "Python + Pygame",
@@ -73,7 +85,7 @@ const projectsList: Project[] = [
     title: "System Overlay Python Script",
     description:
       "A Python script that overlays system information on the screen, providing real-time updates on system performance.",
-    image: tempImg,
+    image: systemOverlayImg,
     sourceUrl: "https://github.com/MananKakkar1/System-Overlay-Python-Script",
     category: "Data Extraction",
     technologies: "Python + OpenHardwareMonitor",
@@ -91,7 +103,7 @@ const projectsList: Project[] = [
     title: "AI-Paint Desktop App",
     description:
       "AI-Paint is a desktop application inspired by Microsoft Paint, allowing users to draw freely as well as generate AI-created images using text prompts.",
-    image: tempImg,
+    image: aiPaintImg,
     sourceUrl: "https://github.com/MananKakkar1/AI_Paint_Application",
     category: "Desktop Applications",
     technologies: "Java + JavaFX + Llama3",
@@ -109,7 +121,7 @@ const projectsList: Project[] = [
     title: "Custom Linux Shell",
     description:
       "A custom Linux shell built using C, designed to provide a unique command-line interface and support for various shell features.",
-    image: tempImg,
+    image: shellImg,
     sourceUrl: "https://github.com/MananKakkar1/Custom-Linux-Shell",
     category: "Custom Shell",
     technologies: "C + Unix Sockets + Process Management",
@@ -127,7 +139,7 @@ const projectsList: Project[] = [
     title: "Maze Runner Game",
     description:
       "A maze runner game built with python's pygame, where players navigate through a maze to reach the finish line.",
-    image: tempImg,
+    image: mazeRunnerImg,
     sourceUrl: "https://github.com/MananKakkar1/MazeRunnerGame",
     category: "Games",
     technologies: "Python + Pygame",
@@ -145,7 +157,7 @@ const projectsList: Project[] = [
     title: "Sokoban Game",
     description:
       "A Sokoban game built with risc-v assembly, where players push boxes to designated locations on a board.",
-    image: tempImg,
+    image: sokobanImg,
     sourceUrl: "https://github.com/MananKakkar1/Sokoban",
     category: "Games",
     technologies: "RISC-V Assembly",
@@ -163,7 +175,7 @@ const projectsList: Project[] = [
     title: "Paint-Like Desktop App",
     description:
       "A desktop application inspired by Microsoft Paint, allowing users to draw freely and create digital art.",
-    image: tempImg,
+    image: paintLikeImg,
     sourceUrl: "https://github.com/MananKakkar1/Paint_Like_Application",
     category: "Desktop Applications",
     technologies: "Java + JavaFX + CSS",
@@ -181,7 +193,7 @@ const projectsList: Project[] = [
     title: "World Population Data Extractor",
     description:
       "A Python script that extracts and organizes world population data from various sources in a csv file, providing insights into global demographics.",
-    image: tempImg,
+    image: extractorImg,
     sourceUrl:
       "https://github.com/MananKakkar1/world_population_data_extractor",
     category: "Data Extraction",
@@ -200,7 +212,7 @@ const projectsList: Project[] = [
     title: "Pokemon Game",
     description:
       "A Text based Pokemon game built with Python, where players can play through a story driven by user choices.",
-    image: tempImg,
+    image: pokemonImg,
     sourceUrl: "https://github.com/MananKakkar1/Pokemon",
     category: "Text-Based Games",
     technologies: "Python",

@@ -58,8 +58,10 @@ h3 {
 }
 
 .profile-img {
-    width: 180px;
-    height: 180px;
+    width: 400px;
+    height: 400px;
+    max-width: 300px;
+    max-height: 300px;
     border-radius: 50%;
     object-fit: cover;
     border: 6px solid var(--text);
