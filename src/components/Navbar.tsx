@@ -48,7 +48,7 @@ const Navbar = () => {
           <a href="/#contact-sec" onClick={handleContactClick}>
             Contact Me
           </a>
-          <Link to="/resume">Resume Generator</Link>
+          <Link to="/resume" onClick={handleNavScrollTop}>Resume Generator</Link>
         </nav>
         <ThemeSelector />
       </header>
