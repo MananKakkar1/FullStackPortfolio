@@ -1,6 +1,7 @@
 import "./css_files/Navbar.css";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import ThemeSelector from "./ThemeSelector";
+import logo1 from "../assets/logo1.png";
 
 const Navbar = () => {
   const location = useLocation();
@@ -34,7 +35,7 @@ const Navbar = () => {
   return (
     <div>
       <header className="header">
-        <img src="/images/logo1.png" alt="Logo" className="logo" />
+        <img src={logo1} alt="Logo" className="logo" />
         <nav className="navbar">
           <Link to="/Home" onClick={handleHomeClick}>
             Home
@@ -48,7 +49,9 @@ const Navbar = () => {
           <a href="/#contact-sec" onClick={handleContactClick}>
             Contact Me
           </a>
-          <Link to="/resume" onClick={handleNavScrollTop}>Resume Generator</Link>
+          <Link to="/resume" onClick={handleNavScrollTop}>
+            Resume Generator
+          </Link>
         </nav>
         <ThemeSelector />
       </header>

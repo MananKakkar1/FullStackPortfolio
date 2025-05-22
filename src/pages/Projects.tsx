@@ -1,20 +1,23 @@
 import "../components/css_files/Projects.css";
+import tempImg from "../assets/temp.jpg";
+
 export type Project = {
   id: string;
   title: string;
   description: string;
   image: string;
+  sourceUrl: string;
   category: string;
   technologies: string;
 };
 
-let projectsList = [
+const projectsList: Project[] = [
   {
     id: "chess-game",
     title: "Chess Game",
     description:
       "A simple chess game built with HTML, CSS, JavaScript, and Python.",
-    image: "../assets/temp.jpg",
+    image: tempImg,
     sourceUrl: "https://github.com/MananKakkar1/Chess_Game",
     category: "Website",
     technologies: "HTML, CSS, JavaScript, Python",
@@ -24,7 +27,7 @@ let projectsList = [
     title: "Portfolio Website",
     description:
       "A personal portfolio website built using React, TypeScript, and modern web technologies to showcase my skills and projects.",
-    image: "../assets/temp.jpg",
+    image: tempImg,
     sourceUrl: "https://github.com/MananKakkar1/FullStackPortfolio",
     category: "Website",
     technologies: "React, TypeScript, CSS",
@@ -34,7 +37,7 @@ let projectsList = [
     title: "File System Tree Visualizer",
     description:
       "A visualizer for file system trees, built with Python and Pygame, to help users understand the structure of their file systems.",
-    image: "../assets/temp.jpg",
+    image: tempImg,
     sourceUrl: "https://github.com/MananKakkar1/File-System-Tree-Visualizer",
     category: "Data Extraction",
     technologies: "Python, Pygame",
@@ -44,7 +47,7 @@ let projectsList = [
     title: "System Overlay Python Script",
     description:
       "A Python script that overlays system information on the screen, providing real-time updates on system performance.",
-    image: "../assets/temp.jpg",
+    image: tempImg,
     sourceUrl: "https://github.com/MananKakkar1/System-Overlay-Python-Script",
     category: "Data Extraction",
     technologies: "Python",
@@ -54,7 +57,7 @@ let projectsList = [
     title: "AI-Paint Desktop App",
     description:
       "AI-Paint is a desktop application inspired by Microsoft Paint, allowing users to draw freely as well as generate AI-created images using text prompts.",
-    image: "../assets/temp.jpg",
+    image: tempImg,
     sourceUrl: "https://github.com/MananKakkar1/AI_Paint_Application",
     category: "Desktop Applications",
     technologies: "Python, Tkinter, OpenAI API",
@@ -64,7 +67,7 @@ let projectsList = [
     title: "Custom Linux Shell",
     description:
       "A custom Linux shell built using C, designed to provide a unique command-line interface and support for various shell features.",
-    image: "../assets/temp.jpg",
+    image: tempImg,
     sourceUrl: "https://github.com/MananKakkar1/Custom-Linux-Shell",
     category: "Custom Shell",
     technologies: "C",
@@ -74,7 +77,7 @@ let projectsList = [
     title: "Maze Runner Game",
     description:
       "A maze runner game built with python's pygame, where players navigate through a maze to reach the finish line.",
-    image: "../assets/temp.jpg",
+    image: tempImg,
     sourceUrl: "https://github.com/MananKakkar1/MazeRunnerGame",
     category: "Games",
     technologies: "Python, Pygame",
@@ -84,7 +87,7 @@ let projectsList = [
     title: "Sokoban Game",
     description:
       "A Sokoban game built with risc-v assembly, where players push boxes to designated locations on a board.",
-    image: "../assets/temp.jpg",
+    image: tempImg,
     sourceUrl: "https://github.com/MananKakkar1/Sokoban",
     category: "Games",
     technologies: "RISC-V Assembly",
@@ -94,7 +97,7 @@ let projectsList = [
     title: "Paint-Like Desktop App",
     description:
       "A desktop application inspired by Microsoft Paint, allowing users to draw freely and create digital art.",
-    image: "../assets/temp.jpg",
+    image: tempImg,
     sourceUrl: "https://github.com/MananKakkar1/Paint_Like_Application",
     category: "Desktop Applications",
     technologies: "Python, Tkinter",
@@ -104,7 +107,7 @@ let projectsList = [
     title: "World Population Data Extractor",
     description:
       "A Python script that extracts and organizes world population data from various sources in a csv file, providing insights into global demographics.",
-    image: "../assets/temp.jpg",
+    image: tempImg,
     sourceUrl:
       "https://github.com/MananKakkar1/world_population_data_extractor",
     category: "Data Extraction",
@@ -115,7 +118,7 @@ let projectsList = [
     title: "Pokemon Game",
     description:
       "A Text based Pokemon game built with Python, where players can play through a story driven by user choices.",
-    image: "/assets/temp.jpg",
+    image: tempImg,
     sourceUrl: "https://github.com/MananKakkar1/Pokemon",
     category: "Text-Based Games",
     technologies: "Python",

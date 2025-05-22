@@ -2,6 +2,7 @@ import "../components/css_files/Home.css";
 import { projectsList } from "./Projects";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import tempImg from "../assets/temp.jpg"; // <-- Add this import
 
 const FLIP_DURATION = 600;
 
@@ -116,7 +117,7 @@ const Home = () => {
         <div className="hero-left">
           <div className="profile-img-wrapper">
             <img
-              src="./images/temp.jpg"
+              src={tempImg} // <-- Use imported image here
               alt="Profile"
               className="profile-img"
             />

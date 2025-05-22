@@ -1,11 +1,12 @@
 import "../components/css_files/About.css";
+import tempImg from "../assets/temp.jpg";
 
 const About = () => {
   return (
     <div className="about-container">
       <h1>About Me</h1>
       <div className="about-image-placeholder">
-        <img src="./images/temp.jpg" alt="Profile" className="profile-img" />
+        <img src={tempImg} alt="Profile" className="profile-img" />
       </div>
       <a
         href="https://www.linkedin.com/in/manankakkar11/"
