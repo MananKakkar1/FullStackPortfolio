@@ -33,3 +33,7 @@ app.post('/api/contact', async (req, res) => {
 });
 
 app.listen(5000, () => console.log('Server running on port 5000'));
+
+export default function handler(req, res) {
+  res.status(200).json({ message: "Hello from Vercel backend!" });
+}
