@@ -4,6 +4,7 @@ import type { Project } from "./Projects.tsx";
 import "../components/css_files/ProjectDetail.css";
 
 const ProjectDetail = () => {
+  console.log("ProjectDetail component rendered");
   const { projectId } = useParams<{ projectId: string }>();
   const project = projectsList.find((p: Project) => p.id === projectId);
 
