@@ -118,8 +118,10 @@ const latexTemplate = (projects: typeof projectsList) => `
 \\section{Education}
   \\resumeSubHeadingListStart
     \\resumeSubheading
-      {University of Toronto Mississauga}{Mississauga, Ontario}
-      {Honours Bachelor of Science: Computer Science Specialist}{Expected June 2028}
+      {University of Toronto Mississauga}
+      {Mississauga, Ontario}
+      {Honours Bachelor of Science: Computer Science Specialist}
+      {Expected June 2028}
           \\resumeItemListStart
             \\resumeItem{Enrolled in the UTMCIP Co-op Program}
           \\resumeItemListEnd
