@@ -23,7 +23,7 @@
 }
 
 .theme-animated {
-    --bg-gradient: url("/images/animated-background.gif") center center/cover no-repeat fixed;
+    --bg-gradient: url("../../assets/animated-background.gif") center center/cover no-repeat fixed;
     --text: #fff700;
     --card-bg: rgba(0, 0, 0, 0.7);
     --card-border: #fff700;
@@ -35,7 +35,7 @@
 }
 
 .theme-starwars {
-    --bg-gradient: url("/images/venator-and-kamino.1920x1080.gif") center center/cover no-repeat fixed;
+    --bg-gradient: url("../../assets/venator-and-kamino.1920x1080.gif") center center/cover no-repeat fixed;
     --text: #fff700;
     --card-bg: rgba(0, 0, 0, 0.7);
     --card-border: #fff700;
@@ -120,14 +120,14 @@ body.theme-animated {
 }
 
 .theme-preview-theme-animated {
-    background: url("/images/animated-background.gif") center center/contain no-repeat;
+    background: url("../../assets/animated-background.gif") center center/contain no-repeat;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
 }
 
 .theme-preview-theme-starwars {
-    background: url("/images/venator-and-kamino.1920x1080.gif") center center/contain no-repeat;
+    background: url("../../assets/venator-and-kamino.1920x1080.gif") center center/contain no-repeat;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
