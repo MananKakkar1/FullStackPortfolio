@@ -1,13 +1,10 @@
 import nodemailer from "nodemailer";
-import cors from "cors";
-import express from "express";
-require("dotenv").config();
 
-const app = express();
-app.use(express.json());
-app.use(cors());
+export default async function handler(req, res) {
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
+  }
 
-app.post("/api/contact", async (req, res) => {
   const { name, email, message } = req.body;
 
   const transporter = nodemailer.createTransport({
@@ -26,15 +23,7 @@ app.post("/api/contact", async (req, res) => {
       text: message,
     });
     res.status(200).json({ success: true });
-    console.log("Email sent successfully");
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
-    console.error("Error sending email:", error);
   }
-});
-
-app.listen(5000, () => console.log("Server running on port 5000"));
-
-export default function handler(req, res) {
-  res.status(200).json({ message: "Hello from Vercel backend!" });
 }
