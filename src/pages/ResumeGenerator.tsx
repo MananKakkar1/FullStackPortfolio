@@ -146,7 +146,7 @@ const ResumeGenerator = () => {
   return (
     <div className="projects-page-background">
       <h1>Dynamic Resume Generator</h1>
-      <label>
+      <label className="category-filter">
         Filter by category:{" "}
         <select value={selected} onChange={(e) => setSelected(e.target.value)}>
           {categories.map((cat) => (

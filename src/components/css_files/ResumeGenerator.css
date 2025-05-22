@@ -29,3 +29,42 @@
     text-align: left;
     line-height: 1.6;
 }
+
+.category-filter {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    font-size: 1.1rem;
+    color: var(--filter);
+}
+
+.category-filter select {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--card-bg, #388e3c);
+    font-size: 1rem;
+    background: transparent;
+    color: var(--button-bg, #388e3c);
+    transition: border 0.2s;
+}
+
+.category-filter select:focus {
+    outline: none;
+    border-color: var(--card-bg);
+}
+
+.category-filter select:hover {
+    border-color: var(--card-bg);
+}
+
+.category-filter select,
+.category-filter select option {
+    background: var(--button-bg, #388e3c);
+    color: var(--button-text, #388e3c);
+}
+
+.category-filter select option {
+    background-color: var(--button-bg);
+    color: var(--button-text, #ffd600);
+}
