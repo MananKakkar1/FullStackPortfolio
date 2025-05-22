@@ -3,7 +3,7 @@ import { projectsList } from "./Projects";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
-const FLIP_DURATION = 600; // ms
+const FLIP_DURATION = 600;
 
 interface Project {
   id: string | number;
@@ -13,7 +13,6 @@ interface Project {
 }
 
 function getRandomProjects(projectsList: Project[], count: number, exclude: { id: string | number }[] = []) {
-  // Exclude currently displayed projects to avoid double flip
   const available = projectsList.filter(
     (p) => !exclude.some((e) => e.id === p.id)
   );
@@ -22,7 +21,6 @@ function getRandomProjects(projectsList: Project[], count: number, exclude: { id
     const idx = Math.floor(Math.random() * available.length);
     selected.push(available.splice(idx, 1)[0]);
   }
-  // If not enough, fill from the rest (allows repeats only if not enough unique)
   if (selected.length < count) {
     const rest = projectsList.filter(
       (p: { id: string | number }) => !selected.some((s: { id: string | number }) => s.id === p.id)
@@ -38,7 +36,6 @@ function getRandomProjects(projectsList: Project[], count: number, exclude: { id
 const Home = () => {
   const location = useLocation();
 
-  // Flipping featured projects state
   const [displayed, setDisplayed] = useState(() =>
     getRandomProjects(projectsList, 3)
   );
@@ -59,10 +56,8 @@ const Home = () => {
     }, 15000);
 
     return () => clearInterval(interval);
-    // eslint-disable-next-line
   }, [projectsList, displayed]);
 
-  // State for form fields
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -80,14 +75,12 @@ const Home = () => {
     }
   }, [location]);
 
-  // Handle input changes
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // Handle form submit
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("Sending...");

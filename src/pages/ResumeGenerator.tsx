@@ -3,7 +3,6 @@ import { projectsList } from "./Projects";
 import "../components/css_files/Projects.css";
 import "../components/css_files/ResumeGenerator.css";
 
-// LaTeX template with your provided header and education/skills sections
 const latexTemplate = (projects: typeof projectsList) => `
 \\documentclass[letterpaper,11pt]{article}
 \\usepackage{latexsym}

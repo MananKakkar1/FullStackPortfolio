@@ -4,7 +4,7 @@ export type Project = {
   title: string;
   description: string;
   image: string;
-  technologies: string; // Added technologies attribute
+  technologies: string;
 };
 
 let projectsList = [

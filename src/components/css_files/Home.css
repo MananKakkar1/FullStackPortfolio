@@ -339,8 +339,8 @@ h1 {
 
 .project-flip-container {
   perspective: 1000px;
-  width: 320px; /* match your card width */
-  height: 420px; /* match your card height */
+  width: 320px;
+  height: 420px; 
   display: inline-block;
 }
 

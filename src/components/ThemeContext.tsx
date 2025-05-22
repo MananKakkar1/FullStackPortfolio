@@ -10,7 +10,6 @@ const ThemeContext = createContext({
 export const useTheme = () => useContext(ThemeContext);
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-  // Read initial theme from localStorage, fallback to 'theme-dark'
   const [theme, setThemeState] = useState(
     () => localStorage.getItem("theme") || "theme-dark"
   );
@@ -18,7 +17,7 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     document.body.classList.remove(...themes);
     document.body.classList.add(theme);
-    localStorage.setItem("theme", theme); // Persist theme
+    localStorage.setItem("theme", theme);
   }, [theme]);
 
   const setTheme = (t: string) => setThemeState(t);
