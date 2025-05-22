@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { projectsList } from "./Projects";
-import type { Project } from "./Projects";
+import { projectsList } from "./Projects.tsx";
+import type { Project } from "./Projects.tsx";
 import "../components/css_files/Projects.css";
 import "../components/css_files/ResumeGenerator.css";
 

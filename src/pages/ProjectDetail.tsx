@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
-import { projectsList } from "./Projects";
-import type { Project } from "./Projects";
+import { projectsList } from "./Projects.tsx";
+import type { Project } from "./Projects.tsx";
 import "../components/css_files/ProjectDetail.css";
 
 const ProjectDetail = () => {
