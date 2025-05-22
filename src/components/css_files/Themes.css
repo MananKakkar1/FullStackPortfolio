@@ -10,7 +10,7 @@
     --label-color: #00fff7;
 }
 
-.theme-light {
+.theme-red {
     --bg-gradient: radial-gradient(circle, #000000 0%, #ff0000 100%);
     --text: #ffffff;
     --card-bg: transparent;
@@ -19,6 +19,32 @@
     --button-bg: #800303;
     --button-text: #ffffff;
     --label-color: #ffffff;
+}
+
+.theme-animated {
+    --bg-gradient: url("/images/animated-background.gif") center center/cover no-repeat fixed;
+    --text: #fff700;
+    --card-bg: rgba(0, 0, 0, 0.7);
+    --card-border: #fff700;
+    --card-shadow: 0 4px 32px rgba(255,247,0,0.13);
+    --button-bg: #fff700;
+    --button-text: #000;
+    --label-color: #fff700;
+}
+
+.theme-starwars {
+    --bg-gradient: url("/images/venator-and-kamino.1920x1080.gif") center center/cover no-repeat fixed;
+    --text: #fff700;
+    --card-bg: rgba(0, 0, 0, 0.7);
+    --card-border: #fff700;
+    --card-shadow: 0 4px 32px rgba(255,247,0,0.13);
+    --button-bg: #fff700;
+    --button-text: #000;
+    --label-color: #fff700;
+}
+
+body.theme-animated {
+    background: var(--bg-gradient);
 }
 
 /* ThemeSelector modal styles */
@@ -87,8 +113,22 @@
     background: radial-gradient(circle, #000000 0%, #017d81 100%);
 }
 
-.theme-preview-theme-light {
+.theme-preview-theme-red {
     background: radial-gradient(circle, #000000 0%, #ff0000 100%);
+}
+
+.theme-preview-theme-animated {
+    background: url("/images/animated-background.gif") center center/contain no-repeat;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.theme-preview-theme-starwars {
+    background: url("/images/venator-and-kamino.1920x1080.gif") center center/contain no-repeat;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .theme-selector-close {

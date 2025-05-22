@@ -33,7 +33,7 @@ const Navbar = () => {
   return (
     <div>
       <header className="header">
-        <img src="/images/logo.png" alt="Logo" className="logo" />
+        <img src="/images/logo1.png" alt="Logo" className="logo" />
         <nav className="navbar">
           <Link to="/Home" onClick={handleHomeClick}>
             Home

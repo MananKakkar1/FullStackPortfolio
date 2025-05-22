@@ -2,9 +2,11 @@ import { useState } from "react";
 import { useTheme } from "./ThemeContext";
 import './css_files/Themes.css';
 
-const themePreviews: Record<'theme-dark' | 'theme-light', string> = {
+const themePreviews: Record<'theme-dark' | 'theme-red' | 'theme-animated' | 'theme-starwars', string> = {
     "theme-dark": "Dark Theme",
-    "theme-light": "Light Theme",
+    "theme-red": "Red Theme",
+    "theme-animated": "Animated Theme",
+    "theme-starwars": "Star Wars Theme",
 };
 
 const ThemeSelector = () => {
