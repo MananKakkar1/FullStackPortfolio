@@ -21,7 +21,7 @@ const projectsList: Project[] = [
     image: tempImg,
     sourceUrl: "https://github.com/MananKakkar1/Chess_Game",
     category: "Website",
-    technologies: "HTML, CSS, JavaScript, Python",
+    technologies: "JavaScript + HTML + CSS + Python (Flask)",
     latex_description: `
     \\resumeItemListStart
     \\resumeItem{Built a responsive web-based chess platform, supporting complete chess rules, move validation, and real-time user interaction.}
@@ -39,7 +39,7 @@ const projectsList: Project[] = [
     image: tempImg,
     sourceUrl: "https://github.com/MananKakkar1/FullStackPortfolio",
     category: "Website",
-    technologies: "React, TypeScript, CSS",
+    technologies: "React + TypeScript + Vite + Node.js + Express.js + Nodemailer",
     latex_description: `
     \\resumeItemListStart
     \\resumeItem{Developed a responsive and interactive personal portfolio website using \\textbf{React} with \\textbf{TypeScript}, leveraging \\textbf{Vite} for efficient bundling and development workflow.}
@@ -58,7 +58,7 @@ const projectsList: Project[] = [
     image: tempImg,
     sourceUrl: "https://github.com/MananKakkar1/File-System-Tree-Visualizer",
     category: "Data Extraction",
-    technologies: "Python, Pygame",
+    technologies: "Python + Pygame",
     latex_description: `
     \\resumeItemListStart
     \\resumeItem{Built an interactive visualization tool in \\textbf{Python using Pygame}, dynamically representing complex file system structures as hierarchical trees.}
@@ -76,7 +76,7 @@ const projectsList: Project[] = [
     image: tempImg,
     sourceUrl: "https://github.com/MananKakkar1/System-Overlay-Python-Script",
     category: "Data Extraction",
-    technologies: "Python",
+    technologies: "Python + OpenHardwareMonitor",
     latex_description: `
     \\resumeItemListStart
     \\resumeItem{Developed a Python script to overlay real-time system information (CPU, memory, etc.) directly on the user's screen for instant monitoring.}
@@ -94,7 +94,7 @@ const projectsList: Project[] = [
     image: tempImg,
     sourceUrl: "https://github.com/MananKakkar1/AI_Paint_Application",
     category: "Desktop Applications",
-    technologies: "Python, Tkinter, OpenAI API",
+    technologies: "Java + JavaFX + Llama3",
     latex_description: `
     \\resumeItemListStart
     \\resumeItem{Created a desktop drawing application inspired by Microsoft Paint, enabling users to sketch and design freely.}
@@ -112,7 +112,7 @@ const projectsList: Project[] = [
     image: tempImg,
     sourceUrl: "https://github.com/MananKakkar1/Custom-Linux-Shell",
     category: "Custom Shell",
-    technologies: "C",
+    technologies: "C + Unix Sockets + Process Management",
     latex_description: `
     \\resumeItemListStart
     \\resumeItem{Engineered a Linux shell from scratch in \\textbf{C}, supporting custom commands, dynamic environment variables, and enhanced user interactions.}
@@ -130,7 +130,7 @@ const projectsList: Project[] = [
     image: tempImg,
     sourceUrl: "https://github.com/MananKakkar1/MazeRunnerGame",
     category: "Games",
-    technologies: "Python, Pygame",
+    technologies: "Python + Pygame",
     latex_description: `
     \\resumeItemListStart
     \\resumeItem{Developed an interactive maze runner game using \\textbf{Python Pygame}, challenging players to navigate through complex mazes.}
@@ -166,7 +166,7 @@ const projectsList: Project[] = [
     image: tempImg,
     sourceUrl: "https://github.com/MananKakkar1/Paint_Like_Application",
     category: "Desktop Applications",
-    technologies: "Python, Tkinter",
+    technologies: "Java + JavaFX + CSS",
     latex_description: `
     \\resumeItemListStart
     \\resumeItem{Developed a desktop drawing application inspired by Microsoft Paint using \\textbf{Python Tkinter}.}
@@ -185,7 +185,7 @@ const projectsList: Project[] = [
     sourceUrl:
       "https://github.com/MananKakkar1/world_population_data_extractor",
     category: "Data Extraction",
-    technologies: "Python, CSV",
+    technologies: "Python + CSV",
     latex_description: `
     \\resumeItemListStart
     \\resumeItem{Created a Python script to extract, clean, and organize world population data from multiple online sources.}
