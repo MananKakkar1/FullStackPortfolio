@@ -111,7 +111,9 @@ ${projects
 `;
 
 const getCategories = () => {
-  const cats = Array.from(new Set(projectsList.map((p: Project) => p.category)));
+  const cats = Array.from(
+    new Set(projectsList.map((p: Project) => p.category))
+  );
   return ["All", ...cats];
 };
 
@@ -150,7 +152,7 @@ const ResumeGenerator = () => {
       <label className="category-filter">
         Filter by category:{" "}
         <select value={selected} onChange={(e) => setSelected(e.target.value)}>
-          {categories.map((cat) => (
+          {(categories as string[]).map((cat) => (
             <option key={cat}>{cat}</option>
           ))}
         </select>
@@ -204,10 +206,14 @@ const ResumeGenerator = () => {
             ))}
         </div>
       )}
-      <button className="download-btn" onClick={handleDownload} disabled={selectedProjects.length === 0}>
+      <button
+        className="download-btn"
+        onClick={handleDownload}
+        disabled={selectedProjects.length === 0}
+      >
         Download LaTeX (.tex)
       </button>
-      <p className="latex-info" style={{ marginTop: 24}}>
+      <p className="latex-info" style={{ marginTop: 24 }}>
         You can compile the downloaded <code>.tex</code> file using Overleaf or
         your local LaTeX installation.
       </p>
