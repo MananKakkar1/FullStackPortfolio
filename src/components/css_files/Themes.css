@@ -1,5 +1,5 @@
 .theme-dark {
-    --bg-gradient: radial-gradient(circle, #000000 0%, #017d81 100%);
+    --bg-gradient: linear-gradient(135deg, #000000 0%, #017d81 100%);
     --text: #00fff7;
     --card-bg: rgba(0, 0, 0, 0.88);
     --card-border: #00fff7;

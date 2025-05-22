@@ -137,7 +137,7 @@ const projectsList: Project[] = [
     id: "maze-runner-game",
     title: "Maze Runner Game",
     description:
-      "A maze runner game built with python's pygame, where players navigate through a maze to reach the finish line.",
+      "A maze runner game built with python's pygame, where players navigate through a randomly generated maze to reach the finish line.",
     image: mazeRunnerImg,
     sourceUrl: "https://github.com/MananKakkar1/MazeRunnerGame",
     category: "Games",
