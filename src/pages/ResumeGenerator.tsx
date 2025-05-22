@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { projectsList } from "./Projects";
+import type { Project } from "./Projects";
 import "../components/css_files/Projects.css";
 import "../components/css_files/ResumeGenerator.css";
 
@@ -97,7 +98,7 @@ const latexTemplate = (projects: typeof projectsList) => `
   \\resumeSubHeadingListStart
 ${projects
   .map(
-    (p) => `    \\resumeProjectHeading
+    (p: Project) => `    \\resumeProjectHeading
         {\\textbf{${p.title}} $|$ \\emph{${p.technologies || "Tech"}}}
         \\resumeItemListStart
           \\resumeItem{${p.description}}
@@ -110,7 +111,7 @@ ${projects
 `;
 
 const getCategories = () => {
-  const cats = Array.from(new Set(projectsList.map((p) => p.category)));
+  const cats = Array.from(new Set(projectsList.map((p: Project) => p.category)));
   return ["All", ...cats];
 };
 
@@ -122,7 +123,7 @@ const ResumeGenerator = () => {
   const filteredProjects =
     selected === "All"
       ? projectsList
-      : projectsList.filter((p) => p.category === selected);
+      : projectsList.filter((p: Project) => p.category === selected);
 
   const handleProjectClick = (id: string) => {
     setSelectedProjects((prev) =>
@@ -132,7 +133,7 @@ const ResumeGenerator = () => {
 
   const handleDownload = () => {
     const latex = latexTemplate(
-      projectsList.filter((p) => selectedProjects.includes(p.id))
+      projectsList.filter((p: Project) => selectedProjects.includes(p.id))
     );
     const blob = new Blob([latex], { type: "text/x-tex" });
     const url = URL.createObjectURL(blob);
@@ -155,7 +156,7 @@ const ResumeGenerator = () => {
         </select>
       </label>
       <div className="projects-list">
-        {filteredProjects.map((project) => (
+        {filteredProjects.map((project: Project) => (
           <div
             key={project.id}
             className="project-entry"
@@ -184,8 +185,8 @@ const ResumeGenerator = () => {
       ) : (
         <div className="projects-list">
           {projectsList
-            .filter((p) => selectedProjects.includes(p.id))
-            .map((p) => (
+            .filter((p: Project) => selectedProjects.includes(p.id))
+            .map((p: Project) => (
               <div
                 key={p.id}
                 className="project-entry"
