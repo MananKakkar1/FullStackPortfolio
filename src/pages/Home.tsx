@@ -12,7 +12,11 @@ interface Project {
   image: string;
 }
 
-function getRandomProjects(projectsList: Project[], count: number, exclude: { id: string | number }[] = []) {
+function getRandomProjects(
+  projectsList: Project[],
+  count: number,
+  exclude: { id: string | number }[] = []
+) {
   const available = projectsList.filter(
     (p) => !exclude.some((e) => e.id === p.id)
   );
@@ -23,7 +27,8 @@ function getRandomProjects(projectsList: Project[], count: number, exclude: { id
   }
   if (selected.length < count) {
     const rest = projectsList.filter(
-      (p: { id: string | number }) => !selected.some((s: { id: string | number }) => s.id === p.id)
+      (p: { id: string | number }) =>
+        !selected.some((s: { id: string | number }) => s.id === p.id)
     );
     while (selected.length < count && rest.length) {
       const idx = Math.floor(Math.random() * rest.length);
