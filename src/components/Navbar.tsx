@@ -1,7 +1,7 @@
 import "./css_files/Navbar.css";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import ThemeSelector from "./ThemeSelector";
-import logo1 from "../assets/logo1.png";
+import logo1 from "/logo1.png";
 
 const Navbar = () => {
   const location = useLocation();
