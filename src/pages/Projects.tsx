@@ -88,7 +88,7 @@ const projectsList: Project[] = [
     image: systemOverlayImg,
     sourceUrl: "https://github.com/MananKakkar1/System-Overlay-Python-Script",
     category: "Data Extraction",
-    technologies: "Python + OpenHardwareMonitor",
+    technologies: "Python + OpenHardwareMonitor + Python's Tkinter",
     latex_description: `
     \\resumeItemListStart
     \\resumeItem{Developed a Python script to overlay real-time system information (CPU, memory, etc.) directly on the user's screen for instant monitoring.}
