@@ -213,7 +213,7 @@ const projectsList: Project[] = [
       "A Text based Pokemon game built with Python, where players can play through a story driven by user choices.",
     image: pokemonImg,
     sourceUrl: "https://github.com/MananKakkar1/Pokemon",
-    category: "Text-Based Games",
+    category: "Games",
     technologies: "Python",
     latex_description: `
     \\resumeItemListStart

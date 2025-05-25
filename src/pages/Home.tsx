@@ -140,10 +140,6 @@ const Home = () => {
               <span className="stat-number">10+</span>
               <span className="stat-label">Projects</span>
             </div>
-            <div>
-              <span className="stat-number">5+</span>
-              <span className="stat-label">Certifications</span>
-            </div>
           </div>
         </div>
       </div>

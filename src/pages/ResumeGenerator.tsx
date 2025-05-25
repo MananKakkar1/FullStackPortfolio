@@ -257,7 +257,7 @@ const ResumeGenerator = () => {
         onClick={handleDownload}
         disabled={selectedProjects.length === 0}
       >
-        Download LaTeX (.tex)
+        Download LaTeX (.tex) File
       </button>
       <p className="latex-info" style={{ marginTop: 24 }}>
         You can compile the downloaded <code>.tex</code> file using Overleaf or
