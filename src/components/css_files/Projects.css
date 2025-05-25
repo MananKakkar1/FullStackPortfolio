@@ -91,3 +91,11 @@
     background: var(--button-text);
     color: var(--button-bg);
 }
+
+.category-filter {
+    margin-top: 32px;   
+}
+
+.category-select {
+    font: inherit;
+}

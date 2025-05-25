@@ -70,3 +70,7 @@
     background-color: var(--button-bg);
     color: var(--button-text, #ffd600);
 }
+
+.category-select {
+    font: inherit;
+}

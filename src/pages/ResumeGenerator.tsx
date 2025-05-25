@@ -197,7 +197,7 @@ const ResumeGenerator = () => {
       <h2>Click on Projects to Include in Resume</h2>
       <label className="category-filter">
         Filter by category:{" "}
-        <select value={selected} onChange={(e) => setSelected(e.target.value)}>
+        <select value={selected} onChange={(e) => setSelected(e.target.value)} className="category-select">
           {(categories as string[]).map((cat) => (
             <option key={cat}>{cat}</option>
           ))}

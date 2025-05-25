@@ -10,6 +10,7 @@ import shellImg from "../assets/shell.png";
 import extractorImg from "../assets/extractor.png";
 import pokemonImg from "../assets/pokemon.png";
 import systemOverlayImg from "../assets/system-overlay.png";
+import { useState } from "react";
 
 
 export type Project = {
@@ -226,25 +227,48 @@ const projectsList: Project[] = [
   },
 ];
 
-const Projects = () => (
-  <div className="projects-page-background">
-    <h1>My Projects</h1>
-    <div className="projects-list">
-      {projectsList.map((project) => (
-        <a
-          key={project.id}
-          className="project-entry"
-          href={`/projects/${project.id}`}
-          style={{ textDecoration: "none", color: "inherit" }}
-        >
-          <img src={project.image} alt={project.title} />
-          <h3>{project.title}</h3>
-          <p>{project.description}</p>
-        </a>
-      ))}
+const getCategories = () => {
+  const cats = Array.from(
+    new Set(projectsList.map((p: Project) => p.category))
+  );
+  return ["All", ...cats];
+};
+
+const Projects = () => {
+  const [selected, setSelected] = useState("All");
+  const categories = getCategories();
+
+  const filteredProjects =
+    selected === "All"
+      ? projectsList
+      : projectsList.filter((p: Project) => p.category === selected);
+
+  return (
+    <div className="projects-page-background">
+      <h1>Projects</h1>
+      <label className="category-filter">
+        Filter by category:{" "}
+        <select value={selected} onChange={(e) => setSelected(e.target.value)} className="category-select">
+          {(categories as string[]).map((cat) => (
+            <option key={cat}>{cat}</option>
+          ))}
+        </select>
+      </label>
+      <div className="projects-list">
+        {filteredProjects.map((project: Project) => (
+          <div key={project.id} className="project-entry">
+            <img src={project.image} alt={project.title} />
+            <h3>{project.title}</h3>
+            <p>{project.description}</p>
+            <p>
+              <strong>Technologies:</strong> {project.technologies}
+            </p>
+          </div>
+        ))}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default Projects;
 export { projectsList };
