@@ -1,13 +1,10 @@
 import nodemailer from "nodemailer";
-const express = require("express");
-const cors = require("cors");
 
-const app = express();
-app.use(cors());
-app.use(express.json());
+export default async function handler(req, res) {
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
+  }
 
-
-app.post("/api/contact", async (req, res) => {
   const { name, email, message } = req.body;
 
   const transporter = nodemailer.createTransport({
@@ -17,6 +14,7 @@ app.post("/api/contact", async (req, res) => {
       pass: process.env.EMAIL_PASS,
     },
   });
+
   try {
     await transporter.sendMail({
       from: `"${name}" <${email}>`,
@@ -29,4 +27,4 @@ app.post("/api/contact", async (req, res) => {
     res.status(500).json({ success: false, error: error.message });
     console.error("Error sending email:", error);
   }
-});
+}
