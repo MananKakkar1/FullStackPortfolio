@@ -192,6 +192,7 @@ body {
   align-items: center;
   max-width: 900px;
   width: 100%;
+  border: var(--text) 4px solid;
 }
 
 .about-creative-img-wrapper {
