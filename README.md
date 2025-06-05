@@ -1,54 +1,37 @@
-# React + TypeScript + Vite
+# 🌐 Full Stack Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 📝 Project Overview
 
-Currently, two official plugins are available:
+This project is a **modern, full-stack developer portfolio** built with **React**, **TypeScript**, and **Vite** on the frontend, and a **Node.js** backend for handling contact form submissions. 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features Implemented
 
-## Expanding the ESLint configuration
+- **Interactive UI** 🎨  
+  Utilizes React components to create an engaging and dynamic user interface.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Type Safety** 🔐  
+  Implements TypeScript for type safety, reducing bugs and enhancing code maintainability.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- **Fast Development Build** ⚡  
+  Employs Vite for rapid development and hot module replacement, streamlining the development process.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- **Contact Form with Backend Integration** 📬  
+  Features a contact form that sends messages through a Node.js backend, facilitating direct communication.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🔧 How It Works
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+1. **Frontend**:
+   - Built with React and TypeScript, providing a component-based architecture.
+   - Styled using CSS for a clean and modern look.
+   - Vite serves as the build tool, offering fast compilation and hot reloading.
+
+2. **Backend**:
+   - A Node.js server handles POST requests from the contact form.
+   - Processes and sends the form data to a specified email address or stores it as needed.
+
+3. **Deployment**:
+   - Deployed on Vercel under the domain manankakkar.com.
+
+---
+
+Feel free to explore the repository to see the implementation details and customize it to fit your personal portfolio needs! 😊
