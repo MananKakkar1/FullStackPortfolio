@@ -38,31 +38,32 @@ const projectsList: Project[] = [
     technologies: "JavaScript + HTML + CSS + Python (Flask)",
     funFacts: [
       "Features 4 AI difficulty modes.",
-      "Integrates Stockfish and GPT-based chess engine.", 
+      "Integrates Stockfish and GPT-based chess engine.",
       "Has 15+ JavaScript unit tests.",
-      "Async communication reduces AI response time by ~30%."
-    ]
+      "Async communication reduces AI response time by ~30%.",
+    ],
   },
   {
     id: "portfolio-website",
-    title: "Portfolio Website", 
+    title: "Portfolio Website",
     description:
       "A personal portfolio website built using React, TypeScript, and modern web technologies to showcase my skills and projects.",
     image: portfolioImg,
     sourceUrl: "https://github.com/MananKakkar1/FullStackPortfolio",
     category: "Website",
-    technologies: "React + TypeScript + Vite + Node.js + Express.js + Nodemailer",
+    technologies:
+      "React + TypeScript + Vite + Node.js + Express.js + Nodemailer",
     funFacts: [
       "Responsive and interactive design.",
       "Dynamic email sending from the Contact Me page.",
       "Lightweight Node.js + Express.js backend.",
-      "Utilizes Git for version control."
-    ]
+      "Utilizes Git for version control.",
+    ],
   },
   {
     id: "file-system-tree-visualizer",
     title: "File System Tree Visualizer",
-    description: 
+    description:
       "A visualizer for file system trees, built with Python and Pygame, to help users understand the structure of their file systems.",
     image: fileSystemImg,
     sourceUrl: "https://github.com/MananKakkar1/File-System-Tree-Visualizer",
@@ -72,15 +73,15 @@ const projectsList: Project[] = [
       "Interactive visualization of file systems.",
       "Real-time parsing and rendering.",
       "Intuitive expand/collapse features.",
-      "Visualizes CSV data as a file tree."
-    ]
+      "Visualizes CSV data as a file tree.",
+    ],
   },
   {
     id: "system-overlay-python-script",
     title: "System Overlay Python Script",
     description:
       "A Python script that overlays system information on the screen, providing real-time updates on system performance.",
-    image: systemOverlayImg, 
+    image: systemOverlayImg,
     sourceUrl: "https://github.com/MananKakkar1/System-Overlay-Python-Script",
     category: "Data Extraction",
     technologies: "Python + OpenHardwareMonitor + Python's Tkinter",
@@ -88,8 +89,8 @@ const projectsList: Project[] = [
       "Overlays real-time system information on the screen.",
       "Cross-platform compatibility.",
       "Efficient polling and update mechanisms.",
-      "Customizable display options."
-    ]
+      "Customizable display options.",
+    ],
   },
   {
     id: "ai-paint-desktop-app",
@@ -97,15 +98,15 @@ const projectsList: Project[] = [
     description:
       "AI-Paint is a desktop application inspired by Microsoft Paint, allowing users to draw freely as well as generate AI-created images using text prompts.",
     image: aiPaintImg,
-    sourceUrl: "https://github.com/MananKakkar1/AI_Paint_Application", 
+    sourceUrl: "https://github.com/MananKakkar1/AI_Paint_Application",
     category: "Desktop Applications",
     technologies: "Java + JavaFX + Llama3",
     funFacts: [
       "Desktop drawing application inspired by Microsoft Paint.",
       "AI-generated images from text prompts.",
       "Responsive and intuitive user experience.",
-      "Features brush selection, color palettes, and image export."
-    ]
+      "Features brush selection, color palettes, and image export.",
+    ],
   },
   {
     id: "custom-linux-shell",
@@ -120,8 +121,8 @@ const projectsList: Project[] = [
       "Engineered a Linux shell from scratch in C.",
       "Supports custom commands and dynamic environment variables.",
       "Advanced functionalities like background processing and command piping.",
-      "TCP socket-based communication module for server-client interactions."
-    ]
+      "TCP socket-based communication module for server-client interactions.",
+    ],
   },
   {
     id: "maze-runner-game",
@@ -136,8 +137,8 @@ const projectsList: Project[] = [
       "Interactive maze runner game using Python Pygame.",
       "Collision detection and player movement implemented.",
       "Multiple maze layouts and increasing difficulty levels.",
-      "Optimized game performance and user controls."
-    ]
+      "Optimized game performance and user controls.",
+    ],
   },
   {
     id: "sokoban-game",
@@ -146,14 +147,14 @@ const projectsList: Project[] = [
       "A Sokoban game built with risc-v assembly, where players push boxes to designated locations on a board.",
     image: sokobanImg,
     sourceUrl: "https://github.com/MananKakkar1/Sokoban",
-    category: "Games", 
+    category: "Games",
     technologies: "RISC-V Assembly",
     funFacts: [
       "Classic Sokoban puzzle game in RISC-V Assembly.",
       "Box-pushing mechanics and win conditions designed.",
       "Optimized memory usage and performance.",
-      "Simple text-based interface for user interaction."
-    ]
+      "Simple text-based interface for user interaction.",
+    ],
   },
   {
     id: "paint-like-desktop-app",
@@ -168,8 +169,8 @@ const projectsList: Project[] = [
       "Desktop drawing application inspired by Microsoft Paint.",
       "Core features like freehand drawing and shape tools.",
       "Save and export artwork in various image formats.",
-      "Intuitive and responsive user interface."
-    ]
+      "Intuitive and responsive user interface.",
+    ],
   },
   {
     id: "world-population-data-extractor",
@@ -177,15 +178,16 @@ const projectsList: Project[] = [
     description:
       "A Python script that extracts and organizes world population data from various sources in a csv file, providing insights into global demographics.",
     image: extractorImg,
-    sourceUrl: "https://github.com/MananKakkar1/world_population_data_extractor",
+    sourceUrl:
+      "https://github.com/MananKakkar1/world_population_data_extractor",
     category: "Data Extraction",
     technologies: "Python + CSV",
     funFacts: [
       "Extracts and organizes world population data.",
       "Automates data aggregation and transformation.",
       "Ensures accuracy and reliability of insights.",
-      "Facilitates analysis and visualization of population trends."
-    ]
+      "Facilitates analysis and visualization of population trends.",
+    ],
   },
   {
     id: "pokemon-game",
@@ -200,9 +202,9 @@ const projectsList: Project[] = [
       "Text-based Pokemon adventure game in Python.",
       "Branching narratives and character progression.",
       "Modular codebase for easy addition of storylines.",
-      "Multiple endings and decision points for replayability."
-    ]
-  }
+      "Multiple endings and decision points for replayability.",
+    ],
+  },
 ];
 
 const getCategories = () => {
@@ -228,28 +230,38 @@ const GitHubIcon = () => (
 );
 
 const Projects = () => {
-  const [selected, setSelected] = useState("All")
-  const categories = getCategories()
-  const filteredProjects = selected === "All" ? projectsList : projectsList.filter((p) => p.category === selected)
+  const [selected, setSelected] = useState("All");
+  const categories = getCategories();
+  const filteredProjects =
+    selected === "All"
+      ? projectsList
+      : projectsList.filter((p) => p.category === selected);
 
   // Track fun fact index for each project by id
-  const [funFactIndexes, setFunFactIndexes] = useState<{ [id: string]: number }>({})
+  const [funFactIndexes, setFunFactIndexes] = useState<{
+    [id: string]: number;
+  }>({});
 
-  // Handler to cycle fun facts
-  const handleDpad = (projectId: string, direction: "up" | "down" | "left" | "right") => {
+  // Handler to cycle fun facts (update to allow up/right = next, down/left = previous)
+  const handleDpad = (
+    projectId: string,
+    direction: "up" | "down" | "left" | "right"
+  ) => {
     setFunFactIndexes((prev) => {
-      const project = filteredProjects.find((p) => p.id === projectId)
-      if (!project || !project.funFacts || project.funFacts.length === 0) return prev
-      const current = prev[projectId] || 0
-      let next = current
-      if (direction === "right" || direction === "down") {
-        next = (current + 1) % project.funFacts.length
-      } else if (direction === "left" || direction === "up") {
-        next = (current - 1 + project.funFacts.length) % project.funFacts.length
+      const project = filteredProjects.find((p) => p.id === projectId);
+      if (!project || !project.funFacts || project.funFacts.length === 0)
+        return prev;
+      const current = prev[projectId] || 0;
+      let next = current;
+      if (direction === "right" || direction === "up") {
+        next = (current + 1) % project.funFacts.length;
+      } else if (direction === "left" || direction === "down") {
+        next =
+          (current - 1 + project.funFacts.length) % project.funFacts.length;
       }
-      return { ...prev, [projectId]: next }
-    })
-  }
+      return { ...prev, [projectId]: next };
+    });
+  };
 
   return (
     <div className="projects-page-background">
@@ -271,12 +283,18 @@ const Projects = () => {
       <div className="projects-list">
         {filteredProjects.map((project) => (
           <div key={project.id} className="project-entry">
+            <div className="gameboy-lines">
+              <div className="gameboy-line"></div>
+              <div className="gameboy-line"></div>
+              <div className="gameboy-line"></div>
+            </div>
             <div className="gameboy-screen">
-              <img src={project.image || "/placeholder.svg"} alt={project.title} />
+              <img
+                src={project.image || "/placeholder.svg"}
+                alt={project.title}
+              />
             </div>
             <h3>{project.title}</h3>
-            <p>{project.description}</p>
-
             <div className="gameboy-controls">
               <div className="tech-stack">
                 {parseTechnologies(project.technologies).map((tech, index) => (
@@ -291,14 +309,34 @@ const Projects = () => {
                   <div className="dpad-horizontal"></div>
                   <div className="dpad-vertical"></div>
                   <div className="dpad-center"></div>
-                  <div className="dpad-up" onClick={() => handleDpad(project.id, "up")} title="Previous Fun Fact"></div>
-                  <div className="dpad-down" onClick={() => handleDpad(project.id, "down")} title="Next Fun Fact"></div>
-                  <div className="dpad-left" onClick={() => handleDpad(project.id, "left")} title="Previous Fun Fact"></div>
-                  <div className="dpad-right" onClick={() => handleDpad(project.id, "right")} title="Next Fun Fact"></div>
+                  <div
+                    className="dpad-up"
+                    onClick={() => handleDpad(project.id, "up")}
+                    title="Previous Fun Fact"
+                  ></div>
+                  <div
+                    className="dpad-down"
+                    onClick={() => handleDpad(project.id, "down")}
+                    title="Next Fun Fact"
+                  ></div>
+                  <div
+                    className="dpad-left"
+                    onClick={() => handleDpad(project.id, "left")}
+                    title="Previous Fun Fact"
+                  ></div>
+                  <div
+                    className="dpad-right"
+                    onClick={() => handleDpad(project.id, "right")}
+                    title="Next Fun Fact"
+                  ></div>
                 </div>
 
                 <div className="action-buttons">
-                  <a href={`/projects/${project.id}`} className="action-button" title="View Project Details">
+                  <a
+                    href={`/projects/${project.id}`}
+                    className="action-button"
+                    title="View Project Details"
+                  >
                     INFO
                   </a>
                   <a

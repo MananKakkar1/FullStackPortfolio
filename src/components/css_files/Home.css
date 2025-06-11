@@ -253,7 +253,7 @@ h1 {
 }
 
 .gameboy-screen {
-  background: var(--card-bg);
+  background: transparent;
   border: 3px solid var(--card-border);
   border-radius: 8px;
   padding: 8px;
@@ -262,6 +262,26 @@ h1 {
   box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.8), inset -1px -1px 2px rgba(255, 255, 255, 0.1);
   position: relative;
   transition: transform 0.7s cubic-bezier(0.19, 1, 0.22, 1), box-shadow 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+  width: 240px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.gameboy-screen img {
+  max-width: 90%;
+  max-height: 90%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
 }
 
 .project-entry img {
@@ -269,7 +289,7 @@ h1 {
   height: 180px;
   object-fit: cover;
   border-radius: 4px;
-  background: var(--card-bg);
+  background: transparent;
   border: none;
   transition: transform 0.7s cubic-bezier(0.19, 1, 0.22, 1);
   will-change: transform;
@@ -1085,4 +1105,98 @@ h1 {
   100% {
     opacity: 0;
   }
+}
+
+.tech-stack-grid-wrapper {
+  width: 100%;
+  margin: 0 auto 64px auto;
+  padding: 0 16px;
+  margin-bottom: 550px;
+}
+
+.tech-stack-label {
+  color: var(--text);
+  margin-bottom: 100px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.tech-stack-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 100px 100px; /* Increased gap for better spacing */
+  justify-items: center;
+  align-items: center;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.tech-stack-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Remove gap and column direction since only icon is shown */
+}
+
+.tech-stack-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tech-stack-icon img {
+  width: 200px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+.tech-stack-item svg {
+  width: 36px;
+  height: 36px;
+  display: block;
+}
+
+.tech-stack-name {
+  display: none;
+}
+
+.tech-img-wrapper {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.tech-img-wrapper img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Add this for the yellow "gameboy" lines above the screen */
+.project-entry .gameboy-lines {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+  margin-top: 2px;
+  justify-content: flex-start;
+  width: 100%;
+  padding-left: 8px;
+}
+
+.project-entry .gameboy-line {
+  width: 18px;
+  height: 6px;
+  border-radius: 2px;
+  background: var(--card-border);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+  opacity: 1;
 }

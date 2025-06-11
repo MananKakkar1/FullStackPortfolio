@@ -50,6 +50,14 @@ body.theme-animated {
     background: var(--bg-gradient);
 }
 
+.theme-animated, .theme-starwars {
+  background: var(--bg-gradient);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  image-rendering: auto; /* or try 'smooth' or 'high-quality' for some browsers */
+}
+
 .theme-selector-modal-overlay {
     position: fixed;
     top: 0;
@@ -166,4 +174,10 @@ body.theme-animated {
 .change-theme-btn:hover {
     background: var(--button-text);
     color: var(--button-bg);
+}
+
+@media (max-width: 800px) {
+  .theme-animated {
+    --bg-gradient: url("../../assets/animated-background-mobile.gif") center center/cover no-repeat fixed;
+  }
 }

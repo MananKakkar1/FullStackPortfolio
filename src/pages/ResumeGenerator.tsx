@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { projectsList } from "./Projects"
-import type { Project } from "./Projects"
-import "../components/css_files/Projects.css"
-import "../components/css_files/ResumeGenerator.css"
+import { useState } from "react";
+import { projectsList } from "./Projects";
+import type { Project } from "./Projects";
+import "../components/css_files/Projects.css";
+import "../components/css_files/ResumeGenerator.css";
 
 const latexTemplate = (projects: typeof projectsList) => `
 %-------------------------
@@ -149,65 +149,83 @@ ${projects
   .map(
     (p: Project) => `    \\resumeProjectHeading
         {\\textbf{${p.title}} $|$ \\emph{${p.technologies || "Tech"}}}
-        ${p.latex_description}`,
+        ${p.latex_description}`
   )
   .join("\n")}
   \\resumeSubHeadingListEnd
 
 \\end{document}
-`
+`;
 
 const getCategories = () => {
-  const cats = Array.from(new Set(projectsList.map((p: Project) => p.category)))
-  return ["All", ...cats]
-}
+  const cats = Array.from(
+    new Set(projectsList.map((p: Project) => p.category))
+  );
+  return ["All", ...cats];
+};
 
 const parseTechnologies = (techString: string): string[] => {
   return techString
     .split("+")
     .map((tech) => tech.trim())
-    .filter((tech) => tech.length > 0)
-}
+    .filter((tech) => tech.length > 0);
+};
 
 const AddIcon = () => (
-  <svg className="action-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <svg
+    className="action-icon"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z" />
   </svg>
-)
+);
 
 const RemoveIcon = () => (
-  <svg className="action-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <svg
+    className="action-icon"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11H7v-2h10v2z" />
   </svg>
-)
+);
 
 const ResumeGenerator = () => {
-  const [selected, setSelected] = useState("All")
-  const [selectedProjects, setSelectedProjects] = useState<string[]>([])
-  const categories = getCategories()
+  const [selected, setSelected] = useState("All");
+  const [selectedProjects, setSelectedProjects] = useState<string[]>([]);
+  const categories = getCategories();
 
   const filteredProjects =
-    selected === "All" ? projectsList : projectsList.filter((p: Project) => p.category === selected)
+    selected === "All"
+      ? projectsList
+      : projectsList.filter((p: Project) => p.category === selected);
 
   const handleProjectToggle = (id: string) => {
-    setSelectedProjects((prev) => (prev.includes(id) ? prev.filter((pid) => pid !== id) : [...prev, id]))
-  }
+    setSelectedProjects((prev) =>
+      prev.includes(id) ? prev.filter((pid) => pid !== id) : [...prev, id]
+    );
+  };
 
   const handleDownload = () => {
-    const latex = latexTemplate(projectsList.filter((p: Project) => selectedProjects.includes(p.id)))
-    const blob = new Blob([latex], { type: "text/x-tex" })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement("a")
-    a.href = url
-    a.download = "resume.tex"
-    a.click()
-    URL.revokeObjectURL(url)
-  }
+    const latex = latexTemplate(
+      projectsList.filter((p: Project) => selectedProjects.includes(p.id))
+    );
+    const blob = new Blob([latex], { type: "text/x-tex" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "resume.tex";
+    a.click();
+    URL.revokeObjectURL(url);
+  };
 
   return (
     <div className="projects-page-background">
       <h1>Dynamic Resume Generator</h1>
-      <h2 style={{ color: "var(--text)", marginBottom: "20px" }}>Click ADD to Include Projects in Resume</h2>
+      <h2 style={{ color: "var(--text)", marginBottom: "20px" }}>
+        Click ADD to Include Projects in Resume
+      </h2>
 
       <div className="category-filter">
         <span className="filter-label">Filter by category:</span>
@@ -228,14 +246,23 @@ const ResumeGenerator = () => {
         {filteredProjects.map((project: Project) => (
           <div
             key={project.id}
-            className={`project-entry resume-project ${selectedProjects.includes(project.id) ? "selected" : ""}`}
+            className={`project-entry resume-project ${
+              selectedProjects.includes(project.id) ? "selected" : ""
+            }`}
           >
+            {/* Add the yellow lines above the screen */}
+            <div className="gameboy-lines">
+              <div className="gameboy-line"></div>
+              <div className="gameboy-line"></div>
+              <div className="gameboy-line"></div>
+            </div>
             <div className="gameboy-screen">
-              <img src={project.image || "/placeholder.svg"} alt={project.title} />
+              <img
+                src={project.image || "/placeholder.svg"}
+                alt={project.title}
+              />
             </div>
             <h3>{project.title}</h3>
-            <p>{project.description}</p>
-
             <div className="gameboy-controls">
               <div className="tech-stack">
                 {parseTechnologies(project.technologies).map((tech, index) => (
@@ -249,22 +276,51 @@ const ResumeGenerator = () => {
                 <div className="dpad">
                   <div className="dpad-horizontal"></div>
                   <div className="dpad-vertical"></div>
-                  <div className="dpad-center" onClick={() => console.log("Center pressed")}></div>
-
-                  {/* Clickable directional buttons */}
-                  <div className="dpad-up" onClick={() => console.log("Up pressed")} title="Navigate Up"></div>
-                  <div className="dpad-down" onClick={() => console.log("Down pressed")} title="Navigate Down"></div>
-                  <div className="dpad-left" onClick={() => console.log("Left pressed")} title="Navigate Left"></div>
-                  <div className="dpad-right" onClick={() => console.log("Right pressed")} title="Navigate Right"></div>
+                  <div
+                    className="dpad-center"
+                    onClick={() => console.log("Center pressed")}
+                  ></div>
+                  <div
+                    className="dpad-up"
+                    onClick={() => console.log("Up pressed")}
+                    title="Navigate Up"
+                  ></div>
+                  <div
+                    className="dpad-down"
+                    onClick={() => console.log("Down pressed")}
+                    title="Navigate Down"
+                  ></div>
+                  <div
+                    className="dpad-left"
+                    onClick={() => console.log("Left pressed")}
+                    title="Navigate Left"
+                  ></div>
+                  <div
+                    className="dpad-right"
+                    onClick={() => console.log("Right pressed")}
+                    title="Navigate Right"
+                  ></div>
                 </div>
 
                 <div className="action-buttons">
                   <button
-                    className={`action-button resume-action ${selectedProjects.includes(project.id) ? "remove-btn" : "add-btn"}`}
+                    className={`action-button resume-action ${
+                      selectedProjects.includes(project.id)
+                        ? "remove-btn"
+                        : "add-btn"
+                    }`}
                     onClick={() => handleProjectToggle(project.id)}
-                    title={selectedProjects.includes(project.id) ? "Remove from Resume" : "Add to Resume"}
+                    title={
+                      selectedProjects.includes(project.id)
+                        ? "Remove from Resume"
+                        : "Add to Resume"
+                    }
                   >
-                    {selectedProjects.includes(project.id) ? <RemoveIcon /> : <AddIcon />}
+                    {selectedProjects.includes(project.id) ? (
+                      <RemoveIcon />
+                    ) : (
+                      <AddIcon />
+                    )}
                   </button>
                 </div>
               </div>
@@ -281,14 +337,27 @@ const ResumeGenerator = () => {
       </div>
 
       <div className="resume-section">
-        <h2 style={{ color: "var(--text)", marginTop: "60px", marginBottom: "30px" }}>
+        <h2
+          style={{
+            color: "var(--text)",
+            marginTop: "60px",
+            marginBottom: "30px",
+          }}
+        >
           Projects in Resume ({selectedProjects.length})
         </h2>
 
         {selectedProjects.length === 0 ? (
           <div className="empty-state">
-            <p style={{ color: "var(--label-color)", fontSize: "1.2rem", textAlign: "center" }}>
-              No projects selected yet. Click ADD on projects above to include them in your resume!
+            <p
+              style={{
+                color: "var(--label-color)",
+                fontSize: "1.2rem",
+                textAlign: "center",
+              }}
+            >
+              No projects selected yet. Click ADD on projects above to include
+              them in your resume!
             </p>
           </div>
         ) : (
@@ -296,13 +365,14 @@ const ResumeGenerator = () => {
             {projectsList
               .filter((p: Project) => selectedProjects.includes(p.id))
               .map((p: Project) => (
-                <div key={p.id} className="project-entry resume-project selected">
+                <div
+                  key={p.id}
+                  className="project-entry resume-project selected"
+                >
                   <div className="gameboy-screen">
                     <img src={p.image || "/placeholder.svg"} alt={p.title} />
                   </div>
                   <h3>{p.title}</h3>
-                  <p>{p.description}</p>
-
                   <div className="gameboy-controls">
                     <div className="tech-stack">
                       {parseTechnologies(p.technologies).map((tech, index) => (
@@ -340,19 +410,24 @@ const ResumeGenerator = () => {
         )}
 
         <div className="download-section">
-          <button className="download-btn" onClick={handleDownload} disabled={selectedProjects.length === 0}>
+          <button
+            className="download-btn"
+            onClick={handleDownload}
+            disabled={selectedProjects.length === 0}
+          >
             {selectedProjects.length === 0
               ? "Select Projects to Download"
               : `Download LaTeX Resume (${selectedProjects.length} projects)`}
           </button>
 
           <p className="latex-info">
-            You can compile the downloaded <code>.tex</code> file using Overleaf or your local LaTeX installation.
+            You can compile the downloaded <code>.tex</code> file using Overleaf
+            or your local LaTeX installation.
           </p>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ResumeGenerator
+export default ResumeGenerator;
