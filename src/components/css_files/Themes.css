@@ -180,4 +180,7 @@ body.theme-animated {
   .theme-animated {
     --bg-gradient: url("../../assets/animated-background-mobile.gif") center center/cover no-repeat fixed;
   }
+  .theme-starwars {
+    --bg-gradient: url("../../assets/venator-and-kamino.1920x1080.gif") center center/cover no-repeat fixed;
+  }
 }
