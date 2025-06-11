@@ -8,6 +8,7 @@
     --button-text: #000;
     --label-color: #00fff7;
     --filter: #00fff7;
+    --timeline: yellow;
 }
 
 .theme-red {
@@ -20,6 +21,7 @@
     --button-text: #ffffff;
     --label-color: #ffffff;
     --filter: white;
+    --timeline: red;
 }
 
 .theme-animated {
@@ -32,6 +34,7 @@
     --button-text: #000;
     --label-color: #fff700;
     --filter: #fff700;
+    --timeline: orange;
 }
 
 .theme-starwars {
@@ -44,6 +47,7 @@
     --button-text: #000;
     --label-color: #fff700;
     --filter: #fff700;
+    --timeline: #00fff7;
 }
 
 body.theme-animated {

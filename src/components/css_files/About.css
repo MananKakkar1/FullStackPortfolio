@@ -191,75 +191,465 @@ body {
   flex-direction: column;
   align-items: center;
   max-width: 900px;
-  width: 100%;
+  width: 100%;  
   border: var(--text) 4px solid;
 }
 
-.about-creative-img-wrapper {
-  margin-bottom: 32px;
-  border-radius: 50%;
+.about-creative-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 32px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.about-creative-header {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.about-creative-img-wrapper {
+  flex-shrink: 0;
 }
 
 .about-creative-img {
-  width: 180px;
-  height: 180px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   object-fit: cover;
+  border: 3px solid #00fff7;
+}
+
+.about-creative-intro {
+  flex: 1;
+  min-width: 220px;
 }
 
 .about-creative-title {
-  color: var(--label-color);
-  font-size: 2.8rem;
-  font-weight: 800;
-  margin-bottom: 24px;
-  text-align: center;
-}
-
-.about-creative-description {
-  color: var(--text);
-  font-size: 1.25rem;
-  text-align: center;
-  margin-bottom: 32px;
-  font-family: 'Poppins', sans-serif;
-}
-
-.about-creative-description p {
-  margin-bottom: 18px;
-}
-
-.about-creative-highlight {
-  color: var(--text);
-  font-weight: 700;
+  margin: 0 0 8px 0;
 }
 
 .about-creative-socials {
-  display: flex;
-  gap: 32px;
-  justify-content: center;
   margin-top: 12px;
+  display: flex;
+  gap: 16px;
 }
 
 .about-creative-social-btn {
-  background: var(--button-bg);
-  color: var(--button-text);
-  border: none;
-  border-radius: 50%;
+  color: #00fff7;
+  transition: color 0.2s;
+}
+.about-creative-social-btn:hover {
+  color: #fff700;
+}
+
+.about-creative-section {
+  margin-top: 16px;
+}
+
+.about-creative-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 8px;
+}
+
+.about-creative-timeline-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.about-creative-timeline-date {
+  font-weight: bold;
+  color: #00fff7;
+  min-width: 110px;
+  flex-shrink: 0;
+}
+
+.about-creative-timeline-content h3 {
+  margin: 0 0 2px 0;
+  font-size: 1.1em;
+}
+
+.about-creative-techstack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 8px;
+}
+
+.about-creative-techstack-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80px;
+  gap: 6px;
+}
+
+.about-creative-tech-img img {
   width: 48px;
   height: 48px;
+  object-fit: contain;
+}
+
+.about-creative-tech-name {
+  font-size: 0.95em;
+  color: #00fff7;
+  text-align: center;
+  word-break: break-word;
+}
+
+@media (max-width: 600px) {
+  .about-creative-header {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .about-creative-img {
+    width: 90px;
+    height: 90px;
+  }
+  .about-creative-techstack {
+    justify-content: center;
+    gap: 12px;
+  }
+  .about-creative-techstack-item {
+    width: 60px;
+  }
+  .about-creative-tech-img img {
+    width: 36px;
+    height: 36px;
+  }
+  .about-creative-timeline-date {
+    min-width: 80px;
+    font-size: 0.98em;
+  }
+}
+
+/* --- Fix timeline card alignment --- */
+.timeline-vertical {
+  position: relative;
+  margin: 40px 0 0 0;
+  padding: 0 0 40px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--card-border);
+  transform: translateX(-50%);
+  z-index: 0;
+  border-radius: 2px;
+}
+
+.timeline-item {
+  position: relative;
+  width: 100%;
+  padding: 24px 32px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-start;
+  z-index: 1;
+  transition: transform 0.25s cubic-bezier(.4,2,.6,1), box-shadow 0.25s;
+}
+
+.timeline-item:hover .timeline-content {
+  box-shadow: 0 8px 32px 0 rgba(0,255,247,0.25), 0 0 0 4px #00fff733;
+  border-color: var(--timeline);
+  background: rgba(0,0,0,0.95);
+  transform: scale(1.04);
+}
+
+.timeline-item:hover::before {
+  background: var(--timeline);
+  box-shadow: 0 0 0 6px #fff70033;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.timeline-item.left {
+  left: 0;
+  justify-content: flex-end;
+  /* Align right edge of card to center line */
+  margin-right: 100%;
+}
+
+.timeline-item.right {
+  left: 50%;
+  justify-content: flex-start;
+  /* Align left edge of card to center line */
+  margin-right: 0%;
+}
+
+.timeline-item.left:hover
+.timeline-item.right:hover {
+  transform: translateY(-50px);
+}
+
+.timeline-content {
+  background: rgba(0,0,0,0.85);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px 0 rgba(0,255,247,0.10);
+  padding: 24px 28px;
+  min-width: 240px;
+  max-width: 340px;
+  color: var(--text);
+  border: 2px solid var(--card-border);
+  position: relative;
+}
+
+.timeline-date {
+  font-weight: bold;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.timeline-title {
+  font-size: 1.15em;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.timeline-org {
+  font-weight: 500;
+  color: var(--timeline);
+  margin-bottom: 8px;
+}
+
+.timeline-desc {
+  font-size: 1em;
+  color: #e0e0e0;
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  top: 32px;
+  width: 18px;
+  height: 18px;
+  background: var(--card-border);
+  border-radius: 50%;
+  z-index: 2;
+  border: 3px solid #111;
+}
+
+.timeline-item.left::before {
+  right: -9px;
+}
+
+.timeline-item.right::before {
+  left: -9px;
+}
+
+@media (max-width: 900px) {
+  .timeline-item,
+  .timeline-item.left,
+  .timeline-item.right {
+    width: 100%;
+    left: 0;
+    justify-content: center;
+    margin: 0 !important;
+    padding: 18px 0;
+  }
+  .timeline-content {
+    min-width: 0;
+    max-width: 98vw;
+    width: 95vw;
+  }
+  .timeline-line {
+    left: 24px;
+  }
+  .timeline-item::before {
+    left: 12px !important;
+    right: auto !important;
+  }
+}
+
+/* --- Gameboy Tech Stack Card Styling (match Home.css) --- */
+.gameboy-techstack-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.gameboy-tech-card {
+  background: var(--card-bg, #18181b);
+  border-radius: 20px;
+  border: 4px solid var(--card-border, #00fff7);
+  box-shadow: inset 2px 2px 4px rgba(255,255,255,0.3), inset -2px -2px 4px rgba(0,0,0,0.3), 8px 8px 16px rgba(0,0,0,0.4);
+  color: var(--text);
+  padding: 20px;
+  width: 100%;
+  max-width: 320px;
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+  position: relative;
+  overflow: hidden;
+  will-change: transform, box-shadow, border-color;
+}
+
+.gameboy-tech-card:hover {
+  transform: translateY(-15px) scale(1.05) rotate(0deg) !important;
+  box-shadow: inset 2px 2px 4px rgba(255,255,255,0.4), inset -2px -2px 4px rgba(0,0,0,0.4), 15px 15px 30px rgba(0,0,0,0.6);
+  border-color: var(--label-color);
+  z-index: 10;
+  animation: none !important;
+  transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.gameboy-lines {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+  margin-top: 2px;
+  justify-content: flex-start;
+  width: 100%;
+  padding-left: 8px;
+}
+
+.gameboy-line {
+  width: 18px;
+  height: 6px;
+  border-radius: 2px;
+  background: var(--card-border, #ffe600);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+  opacity: 1;
+}
+
+.gameboy-screen {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.7rem;
-  transition: background 0.2s, color 0.2s, transform 0.2s;
-  box-shadow: 0 2px 12px rgba(0,230,255,0.12);
-  cursor: pointer;
+  background: transparent;
+  border: 3px solid var(--card-border, #00fff7);
+  border-radius: 8px;
+  padding: 8px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  box-shadow: inset 2px 2px 4px rgba(0,0,0,0.8), inset -1px -1px 2px rgba(255,255,255,0.1);
+  position: relative;
+  transition: transform 0.7s cubic-bezier(0.19, 1, 0.22, 1), box-shadow 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+  width: 120px;
+  height: 90px;
+  overflow: hidden;
 }
 
-.about-creative-social-btn:hover {
-  background: var(--button-text);
-  color: var(--button-bg);
-  transform: scale(1.08);
+.gameboy-screen img {
+  max-width: 90%;
+  max-height: 90%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+.gameboy-tech-title {
+  color: #00fff7;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
+  word-break: break-word;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 900px) {
+  .gameboy-techstack-list {
+    gap: 16px;
+  }
+  .gameboy-tech-card {
+    max-width: 180px;
+    min-height: 180px;
+    padding: 12px 4px 10px 4px;
+  }
+  .gameboy-screen {
+    width: 60px;
+    height: 45px;
+  }
+  .gameboy-screen img {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* --- Gameboy Tech Stack Card Layout Fix --- */
+.home-projects-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 48px;
+  margin-bottom: 48px;
+  width: 100%;
+}
+
+.home-projects-list > h2 {
+  color: #ffe600;
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin-bottom: 32px;
+  text-align: center;
+  width: 100%;
+}
+
+.gameboy-cards-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 40px;
+  width: 100%;
+}
+
+.project-flip-container {
+  /* Remove any absolute/fixed positioning if present */
+  position: relative;
+  width: 340px;
+  max-width: 95vw;
+  min-width: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+@media (max-width: 1100px) {
+  .gameboy-cards-row {
+    gap: 18px;
+  }
+  .project-flip-container {
+    width: 260px;
+    min-width: 160px;
+  }
+}
+
+@media (max-width: 900px) {
+  .gameboy-cards-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+  .project-flip-container {
+    width: 90vw;
+    min-width: 0;
+    max-width: 98vw;
+  }
 }
