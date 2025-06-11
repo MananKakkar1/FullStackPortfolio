@@ -1068,3 +1068,21 @@ h1 {
     transition: all 0.3s ease;
   }
 }
+
+.typing-cursor {
+  display: inline-block;
+  width: 1ch;
+  animation: blink 1s steps(1) infinite;
+  color: var(--text); /* Use your main text color variable */
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
