@@ -1,34 +1,35 @@
-import { useState } from "react";
-import "../components/css_files/Projects.css";
-import chessImg from "../assets/chess-pic.png";
-import portfolioImg from "../assets/portfolio2.png";
-import fileSystemImg from "../assets/file-system-tree.png";
-import paintLikeImg from "../assets/paint-like.png";
-import aiPaintImg from "../assets/ai-paint.png";
-import sokobanImg from "../assets/sokoban.png";
-import mazeRunnerImg from "../assets/maze-game.png";
-import shellImg from "../assets/shell.png";
-import extractorImg from "../assets/extractor.png";
-import pokemonImg from "../assets/pokemon.png";
-import systemOverlayImg from "../assets/system-overlay.png";
+"use client"
+
+import { useState } from "react"
+import "../components/css_files/Projects.css"
+import chessImg from "../assets/chess-pic.png"
+import portfolioImg from "../assets/portfolio2.png"
+import fileSystemImg from "../assets/file-system-tree.png"
+import paintLikeImg from "../assets/paint-like.png"
+import aiPaintImg from "../assets/ai-paint.png"
+import sokobanImg from "../assets/sokoban.png"
+import mazeRunnerImg from "../assets/maze-game.png"
+import shellImg from "../assets/shell.png"
+import extractorImg from "../assets/extractor.png"
+import pokemonImg from "../assets/pokemon.png"
+import systemOverlayImg from "../assets/system-overlay.png"
 
 export type Project = {
-  id: string;
-  title: string;
-  description: string;
-  image: string;
-  sourceUrl: string;
-  category: string;
-  technologies: string;
-  latex_description?: string;
-};
+  id: string
+  title: string
+  description: string
+  image: string
+  sourceUrl: string
+  category: string
+  technologies: string
+  latex_description?: string
+}
 
 const projectsList: Project[] = [
   {
     id: "chess-game",
     title: "Chess Game",
-    description:
-      "A simple chess game built with HTML, CSS, JavaScript, and Python.",
+    description: "A simple chess game built with HTML, CSS, JavaScript, and Python.",
     image: chessImg,
     sourceUrl: "https://github.com/MananKakkar1/Chess_Game",
     category: "Website",
@@ -50,8 +51,7 @@ const projectsList: Project[] = [
     image: portfolioImg,
     sourceUrl: "https://github.com/MananKakkar1/FullStackPortfolio",
     category: "Website",
-    technologies:
-      "React + TypeScript + Vite + Node.js + Express.js + Nodemailer",
+    technologies: "React + TypeScript + Vite + Node.js + Express.js + Nodemailer",
     latex_description: `
     \\resumeItemListStart
     \\resumeItem{Developed a responsive and interactive personal portfolio website using \\textbf{React} with \\textbf{TypeScript}, leveraging \\textbf{Vite} for efficient bundling and development workflow.}
@@ -194,8 +194,7 @@ const projectsList: Project[] = [
     description:
       "A Python script that extracts and organizes world population data from various sources in a csv file, providing insights into global demographics.",
     image: extractorImg,
-    sourceUrl:
-      "https://github.com/MananKakkar1/world_population_data_extractor",
+    sourceUrl: "https://github.com/MananKakkar1/world_population_data_extractor",
     category: "Data Extraction",
     technologies: "Python + CSV",
     latex_description: `
@@ -225,32 +224,38 @@ const projectsList: Project[] = [
     \\resumeItemListEnd
   `,
   },
-];
+]
 
 const getCategories = () => {
-  const cats = Array.from(new Set(projectsList.map((p) => p.category)));
-  return ["All", ...cats];
-};
+  const cats = Array.from(new Set(projectsList.map((p) => p.category)))
+  return ["All", ...cats]
+}
+
+const parseTechnologies = (techString: string): string[] => {
+  return techString
+    .split("+")
+    .map((tech) => tech.trim())
+    .filter((tech) => tech.length > 0)
+}
+
+const GitHubIcon = () => (
+  <svg className="github-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+  </svg>
+)
 
 const Projects = () => {
-  const [selected, setSelected] = useState("All");
-  const categories = getCategories();
+  const [selected, setSelected] = useState("All")
+  const categories = getCategories()
 
-  const filteredProjects =
-    selected === "All"
-      ? projectsList
-      : projectsList.filter((p) => p.category === selected);
+  const filteredProjects = selected === "All" ? projectsList : projectsList.filter((p) => p.category === selected)
 
   return (
     <div className="projects-page-background">
       <h1>My Projects</h1>
       <label className="category-filter">
         Filter by category:{" "}
-        <select
-          value={selected}
-          onChange={(e) => setSelected(e.target.value)}
-          className="category-select"
-        >
+        <select value={selected} onChange={(e) => setSelected(e.target.value)} className="category-select">
           {categories.map((cat) => (
             <option key={cat}>{cat}</option>
           ))}
@@ -258,21 +263,57 @@ const Projects = () => {
       </label>
       <div className="projects-list">
         {filteredProjects.map((project) => (
-          <a
-            key={project.id}
-            className="project-entry"
-            href={`/projects/${project.id}`}
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
-            <img src={project.image} alt={project.title} />
+          <div key={project.id} className="project-entry">
+            <div className="gameboy-screen">
+              <img src={project.image || "/placeholder.svg"} alt={project.title} />
+            </div>
             <h3>{project.title}</h3>
             <p>{project.description}</p>
-          </a>
+
+            <div className="gameboy-controls">
+              <div className="tech-stack">
+                {parseTechnologies(project.technologies).map((tech, index) => (
+                  <button key={index} className="tech-badge" title={tech}>
+                    {tech}
+                  </button>
+                ))}
+              </div>
+
+              <div className="gameboy-dpad">
+                <div className="dpad">
+                  <div className="dpad-horizontal"></div>
+                  <div className="dpad-vertical"></div>
+                  <div className="dpad-center" onClick={() => console.log("Center pressed")}></div>
+
+                  {/* Clickable directional buttons */}
+                  <div className="dpad-up" onClick={() => console.log("Up pressed")} title="Navigate Up"></div>
+                  <div className="dpad-down" onClick={() => console.log("Down pressed")} title="Navigate Down"></div>
+                  <div className="dpad-left" onClick={() => console.log("Left pressed")} title="Navigate Left"></div>
+                  <div className="dpad-right" onClick={() => console.log("Right pressed")} title="Navigate Right"></div>
+                </div>
+
+                <div className="action-buttons">
+                  <a href={`/projects/${project.id}`} className="action-button" title="View Project Details">
+                    INFO
+                  </a>
+                  <a
+                    href={project.sourceUrl}
+                    className="action-button"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="View Source Code"
+                  >
+                    <GitHubIcon />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Projects;
-export { projectsList };
+export default Projects
+export { projectsList }
