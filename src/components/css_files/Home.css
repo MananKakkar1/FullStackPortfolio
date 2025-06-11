@@ -194,6 +194,7 @@ h1 {
 
 .featured-projects {
   min-height: 95vh;
+  margin-bottom: 200px;
 }
 
 .featured-projects h1 {
