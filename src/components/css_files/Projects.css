@@ -42,57 +42,43 @@
   overflow: hidden;
   transform-origin: center;
   will-change: transform, box-shadow, border-color;
+  animation: project-float 3s ease-in-out infinite;
 }
 
-/* Creative staggered positioning */
-.project-entry:nth-child(3n + 1) {
-  transform: rotate(-1deg) translateY(-10px);
-}
-
-.project-entry:nth-child(3n + 2) {
-  transform: rotate(0.5deg) translateY(5px);
-}
-
-.project-entry:nth-child(3n + 3) {
-  transform: rotate(-0.5deg) translateY(-5px);
-}
-
-.project-entry:nth-child(4n + 1) {
-  animation: float 6s ease-in-out infinite;
-}
-
-.project-entry:nth-child(4n + 2) {
-  animation: float 6s ease-in-out infinite 1.5s;
-}
-
-.project-entry:nth-child(4n + 3) {
-  animation: float 6s ease-in-out infinite 3s;
-}
-
-.project-entry:nth-child(4n + 4) {
-  animation: float 6s ease-in-out infinite 4.5s;
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px) rotate(var(--rotation, 0deg));
+/* Up and down animation for project cards (no slant) */
+@keyframes project-float {
+  0% {
+    transform: translateY(0);
   }
   50% {
-    transform: translateY(-8px) rotate(var(--rotation, 0deg));
+    transform: translateY(-12px);
+  }
+  100% {
+    transform: translateY(0);
   }
 }
 
-.project-entry:nth-child(3n + 1) {
-  --rotation: -1deg;
-}
-
-.project-entry:nth-child(3n + 2) {
-  --rotation: 0.5deg;
-}
-
+/* Remove any slant/rotation for all cards */
+.project-entry,
+.project-entry:nth-child(3n + 1),
+.project-entry:nth-child(3n + 2),
 .project-entry:nth-child(3n + 3) {
-  --rotation: -0.5deg;
+  --rotation: 0deg !important;
+  /* No rotate here, just up/down animation */
+}
+
+/* On hover, override with scale and upward movement, but no slant */
+.project-entry:hover {
+  transform: translateY(-15px) scale(1.05) !important;
+  animation: none !important;
+}
+
+/* Remove float animation for project cards */
+.project-entry:nth-child(4n + 1),
+.project-entry:nth-child(4n + 2),
+.project-entry:nth-child(4n + 3),
+.project-entry:nth-child(4n + 4) {
+  animation: none !important;
 }
 
 .project-entry::after {
@@ -108,7 +94,7 @@
 }
 
 .project-entry:hover {
-  transform: translateY(-15px) scale(1.05) rotate(0deg) !important;
+  transform: translateY(-15px) scale(1.05) !important;
   box-shadow: inset 2px 2px 4px rgba(255, 255, 255, 0.4), inset -2px -2px 4px rgba(0, 0, 0, 0.4), 15px 15px 30px
     rgba(0, 0, 0, 0.6);
   border-color: var(--label-color);
@@ -789,26 +775,68 @@
 
 .category-filter {
   margin-top: 32px;
+  margin-bottom: 32px;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.filter-label {
+  font-size: 1.1rem;
+  font-weight: 600;
   color: var(--text);
 }
 
+.filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+}
+
+.filter-btn {
+  background: var(--button-bg);
+  color: var(--button-text);
+  border: 2px solid var(--card-border);
+  border-radius: 24px;
+  padding: 12px 32px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+  box-shadow: none;
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  min-width: 100px;
+  text-align: center;
+}
+
+.filter-btn:hover,
+.filter-btn.active,
+.filter-btn.active:hover {
+  background: var(--button-text);
+  color: var(--button-bg);
+  border-color: var(--card-border);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.filter-btn:active {
+  background: var(--button-bg);
+  color: var(--button-text);
+  border-color: var(--card-border);
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* Remove old category-select styles */
 .category-select {
-  font: inherit;
-  background: var(--card-bg);
-  color: var(--text);
-  border: 3px solid var(--card-border);
-  border-radius: 8px;
-  padding: 8px 16px;
-  margin-left: 12px;
-  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-  box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.3), inset -1px -1px 2px rgba(0, 0, 0, 0.3);
-}
-
-.category-select:focus {
-  outline: none;
-  box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.4), inset -1px -1px 2px rgba(255, 255, 255, 0.2), 0 0 0 3px
-    rgba(155, 188, 15, 0.3);
-  transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  display: none;
 }
 
 /* Hover state transition delay for staggered animation */

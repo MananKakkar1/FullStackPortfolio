@@ -1025,7 +1025,7 @@ h1 {
 
 /* Fixed CSS for the lean-right middle card */
 .project-flip-container.lean-right .project-entry {
-  transform: rotate(1deg) translateY(-5px);
+  transform: rotate(0deg) translateY(-5px);
   animation: float-right 6s ease-in-out infinite 1.5s;
 }
 
@@ -1038,10 +1038,10 @@ h1 {
 @keyframes float-right {
   0%,
   100% {
-    transform: translateY(0px) rotate(1deg);
+    transform: translateY(0px) rotate(0deg);
   }
   50% {
-    transform: translateY(-8px) rotate(1deg);
+    transform: translateY(-8px) rotate(0deg);
   }
 }
 

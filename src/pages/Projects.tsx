@@ -253,14 +253,20 @@ const Projects = () => {
   return (
     <div className="projects-page-background">
       <h1>My Projects</h1>
-      <label className="category-filter">
-        Filter by category:{" "}
-        <select value={selected} onChange={(e) => setSelected(e.target.value)} className="category-select">
+      <div className="category-filter">
+        <span className="filter-label">Filter by category:</span>
+        <div className="filter-buttons">
           {categories.map((cat) => (
-            <option key={cat}>{cat}</option>
+            <button
+              key={cat}
+              className={`filter-btn ${selected === cat ? "active" : ""}`}
+              onClick={() => setSelected(cat)}
+            >
+              {cat}
+            </button>
           ))}
-        </select>
-      </label>
+        </div>
+      </div>
       <div className="projects-list">
         {filteredProjects.map((project) => (
           <div key={project.id} className="project-entry">

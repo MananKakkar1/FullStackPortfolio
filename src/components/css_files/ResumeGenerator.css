@@ -1,76 +1,740 @@
+/* Resume Generator Specific Styles */
+.resume-project {
+  user-select: none;
+  position: relative;
+  transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* Remove slanted styling and bring back up/down animation for resume project cards */
+@keyframes resume-float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.resume-project {
+  animation: resume-float 3s ease-in-out infinite;
+  transform: none !important;
+  --rotation: 0deg !important;
+}
+
+/* Remove float/slant overrides for nth-child */
+.resume-project:nth-child(4n + 1),
+.resume-project:nth-child(4n + 2),
+.resume-project:nth-child(4n + 3),
+.resume-project:nth-child(4n + 4) {
+  animation: resume-float 3s ease-in-out infinite;
+}
+
+/* Remove float animation for resume project cards */
+.resume-project:nth-child(4n + 1),
+.resume-project:nth-child(4n + 2),
+.resume-project:nth-child(4n + 3),
+.resume-project:nth-child(4n + 4) {
+  animation: none !important;
+}
+
+/* Creative staggered positioning for resume projects */
+.resume-project:nth-child(3n + 1) {
+  transform: rotate(-1deg) translateY(-10px);
+}
+
+.resume-project:nth-child(3n + 2) {
+  transform: rotate(0.5deg) translateY(5px);
+}
+
+.resume-project:nth-child(3n + 3) {
+  transform: rotate(-0.5deg) translateY(-5px);
+}
+
+.resume-project:nth-child(4n + 1) {
+  animation: float 6s ease-in-out infinite;
+}
+
+.resume-project:nth-child(4n + 2) {
+  animation: float 6s ease-in-out infinite 1.5s;
+}
+
+.resume-project:nth-child(4n + 3) {
+  animation: float 6s ease-in-out infinite 3s;
+}
+
+.resume-project:nth-child(4n + 4) {
+  animation: float 6s ease-in-out infinite 4.5s;
+}
+
+.resume-project:nth-child(3n + 1) {
+  --rotation: -1deg;
+}
+
+.resume-project:nth-child(3n + 2) {
+  --rotation: 0.5deg;
+}
+
+.resume-project:nth-child(3n + 3) {
+  --rotation: -0.5deg;
+}
+
+.resume-project:hover {
+  transform: translateY(-15px) scale(1.05) !important;
+  animation: none !important;
+  box-shadow: inset 2px 2px 4px rgba(255, 255, 255, 0.4), inset -2px -2px 4px rgba(0, 0, 0, 0.4), 15px 15px 30px
+    rgba(0, 0, 0, 0.6);
+  border-color: var(--label-color);
+  z-index: 10;
+  transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* Selection states */
+.resume-project.selected {
+  border-color: #22c55e !important;
+  box-shadow:
+    inset 2px 2px 4px rgba(255, 255, 255, 0.3), inset -2px -2px 4px rgba(0, 0, 0, 0.3), 8px 8px 16px
+    rgba(0, 0, 0, 0.4), 0 0 20px rgba(34, 197, 148, 0.3);
+  background: linear-gradient(145deg, var(--card-bg), rgba(34, 197, 148, 0.05));
+}
+
+.resume-project.selected:hover {
+  border-color: #16a34a !important;
+  box-shadow:
+    inset 2px 2px 4px rgba(255, 255, 255, 0.4), inset -2px -2px 4px rgba(0, 0, 0, 0.4), 15px 15px 30px
+    rgba(0, 0, 0, 0.6), 0 0 25px rgba(34, 197, 148, 0.4);
+}
+
+/* Selection overlay */
+.selection-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(34, 197, 148, 0.1);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.resume-project.selected .selection-overlay {
+  opacity: 1;
+}
+
+.selection-checkmark {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 30px;
+  height: 30px;
+  background: #22c55e;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  box-shadow: 0 2px 8px rgba(34, 197, 148, 0.4);
+  animation: checkmark-bounce 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes checkmark-bounce {
+  0% {
+    transform: scale(0) rotate(0deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2) rotate(180deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(360deg);
+    opacity: 1;
+  }
+}
+
+/* Resume action buttons */
+.resume-action {
+  position: relative;
+  overflow: hidden;
+}
+
+.resume-action::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s ease;
+  border-radius: 50%;
+}
+
+.resume-action::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  pointer-events: none;
+}
+
+.resume-action:hover::before {
+  left: 100%;
+}
+
+.resume-action:hover::after {
+  width: 40px;
+  height: 40px;
+}
+
+/* Add button styling */
+.add-btn {
+  background: linear-gradient(145deg, #22c55e, #16a34a);
+  border-color: #15803d;
+  color: white;
+}
+
+.add-btn:hover {
+  background: linear-gradient(145deg, #16a34a, #22c55e);
+  border-color: rgba(34, 197, 148, 0.8);
+  box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.4), inset -1px -1px 2px rgba(0, 0, 0, 0.4), 4px 4px 12px
+    rgba(34, 197, 148, 0.4);
+}
+
+.add-btn::after {
+  background: radial-gradient(circle, rgba(34, 197, 148, 0.3) 0%, transparent 70%);
+}
+
+.add-btn:hover::after {
+  background: radial-gradient(circle, rgba(34, 197, 148, 0.5) 0%, transparent 70%);
+}
+
+/* Remove button styling */
+.remove-btn {
+  background: linear-gradient(145deg, #ef4444, #dc2626);
+  border-color: #b91c1c;
+  color: white;
+}
+
+.remove-btn:hover {
+  background: linear-gradient(145deg, #dc2626, #ef4444);
+  border-color: rgba(239, 68, 68, 0.8);
+  box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.4), inset -1px -1px 2px rgba(0, 0, 0, 0.4), 4px 4px 12px
+    rgba(239, 68, 68, 0.4);
+}
+
+.remove-btn::after {
+  background: radial-gradient(circle, rgba(239, 68, 68, 0.3) 0%, transparent 70%);
+}
+
+.remove-btn:hover::after {
+  background: radial-gradient(circle, rgba(239, 68, 68, 0.5) 0%, transparent 70%);
+}
+
+/* Action icon styling */
+.action-icon {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  position: relative;
+  z-index: 2;
+}
+
+.resume-action:hover .action-icon {
+  transform: scale(1.2) rotate(5deg);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.resume-action:active .action-icon {
+  transform: scale(1.1) rotate(0deg);
+}
+
+/* Selection status in action buttons */
+.selection-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  min-width: 60px;
+  text-align: center;
+}
+
+.status-available {
+  color: #3b82f6;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.status-selected {
+  color: #22c55e;
+  background: rgba(34, 197, 148, 0.1);
+  border: 1px solid rgba(34, 197, 148, 0.3);
+}
+
+.status-remove {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.resume-project:hover .selection-status {
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Resume section styling */
+.resume-section {
+  width: 100%;
+  max-width: 1400px;
+  margin-top: 40px;
+}
+
+.selected-projects-list {
+  margin-bottom: 40px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  background: var(--card-bg);
+  border: 3px dashed var(--card-border);
+  border-radius: 20px;
+  margin: 20px 0;
+  transition: all 0.3s ease;
+}
+
+.empty-state:hover {
+  border-color: var(--label-color);
+  background: rgba(var(--card-bg), 0.8);
+}
+
+/* Download section */
+.download-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 48px;
+  padding: 40px;
+  background: var(--card-bg);
+  border: 4px solid var(--card-border);
+  border-radius: 20px;
+  box-shadow: inset 2px 2px 4px rgba(255, 255, 255, 0.3), inset -2px -2px 4px rgba(0, 0, 0, 0.3), 8px 8px 16px
+    rgba(0, 0, 0, 0.4);
+}
+
 .download-btn {
-    margin-top: 48px;
-    background: var(--button-bg);
-    color: var(--button-text);
-    padding: 16px 32px;
-    border-radius: 8px;
-    font-size: 1.2rem;
-    font-weight: 600;
-    border-color: var(--card-border);
-    text-decoration: none;
-    transition: all 0.3s ease-in-out;
+  background: var(--button-bg);
+  color: var(--button-text);
+  padding: 16px 32px;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border: 3px solid var(--card-border);
+  text-decoration: none;
+  transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  min-width: 280px;
+  text-align: center;
+  box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.3), inset -1px -1px 2px rgba(0, 0, 0, 0.3), 4px 4px 8px
+    rgba(0, 0, 0, 0.3);
+}
+
+.download-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s ease;
 }
 
 .download-btn:hover {
-    background: var(--button-text);
-    color: var(--button-bg);
-    transform: scale(1.05);
+  background: var(--button-text);
+  color: var(--button-bg);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.4), inset -1px -1px 2px rgba(0, 0, 0, 0.4), 8px 8px 20px
+    rgba(0, 0, 0, 0.5);
+  border-color: var(--label-color);
+}
+
+.download-btn:hover::before {
+  left: 100%;
+}
+
+.download-btn:active {
+  transform: translateY(-1px) scale(1.02);
+  transition: all 0.2s ease;
 }
 
 .download-btn:disabled {
-  background: #ccc;
-  color: #888;
+  background: #666;
+  color: #999;
   cursor: not-allowed;
   opacity: 0.6;
+  transform: none;
+  box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.3), inset -1px -1px 2px rgba(255, 255, 255, 0.1);
+}
+
+.download-btn:disabled:hover {
+  background: #666;
+  color: #999;
+  transform: none;
+  border-color: var(--card-border);
+}
+
+.download-btn:disabled::before {
+  display: none;
 }
 
 .latex-info {
-    font-size: 1rem;
-    color: var(--text, #222);
-    margin-top: 16px;
-    text-align: left;
-    line-height: 1.6;
+  font-size: 1rem;
+  color: var(--label-color);
+  margin-top: 20px;
+  text-align: center;
+  line-height: 1.6;
+  max-width: 500px;
 }
 
+.latex-info code {
+  background: rgba(0, 255, 247, 0.1);
+  color: #00fff7;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: "Courier New", monospace;
+  font-weight: bold;
+}
+
+/* Enhanced category filter styling for Resume Generator */
 .category-filter {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 24px;
-    font-size: 1.1rem;
-    color: var(--filter);
+  margin-top: 32px;
+  margin-bottom: 32px;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
 }
 
-.category-filter select {
-    padding: 6px 12px;
-    border-radius: 6px;
-    border: 1px solid var(--card-bg, #388e3c);
-    font-size: 1rem;
-    background: transparent;
-    color: var(--button-bg, #388e3c);
-    transition: border 0.2s;
+.filter-label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
 }
 
-.category-filter select:focus {
-    outline: none;
-    border-color: var(--card-bg);
+.filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
 }
 
-.category-filter select:hover {
-    border-color: var(--card-bg);
+.filter-btn {
+  background: var(--button-bg);
+  color: var(--button-text);
+  border: 2px solid var(--card-border);
+  border-radius: 24px;
+  padding: 12px 32px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+  box-shadow: none;
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  min-width: 100px;
+  text-align: center;
 }
 
-.category-filter select,
-.category-filter select option {
-    background: var(--button-bg, #388e3c);
-    color: var(--button-text, #388e3c);
+.filter-btn:hover,
+.filter-btn.active,
+.filter-btn.active:hover {
+  background: var(--button-text);
+  color: var(--button-bg);
+  border-color: var(--card-border);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-.category-filter select option {
-    background-color: var(--button-bg);
-    color: var(--button-text, #ffd600);
+.filter-btn:active {
+  background: var(--button-bg);
+  color: var(--button-text);
+  border-color: var(--card-border);
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
+/* Remove old category-select styles */
 .category-select {
-    font: inherit;
+  display: none;
+}
+
+/* Pulse animation for active filter */
+.filter-btn.active {
+  animation: filter-pulse 3s infinite;
+}
+
+@keyframes filter-pulse {
+  0% {
+    box-shadow:
+      inset 1px 1px 2px rgba(255, 255, 255, 0.4), inset -1px -1px 2px rgba(0, 0, 0, 0.2), 0 0 20px rgba(
+        0,
+        255,
+        247,
+        0.4
+      ), 4px 4px 12px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(0, 255, 247, 0.4);
+  }
+  70% {
+    box-shadow:
+      inset 1px 1px 2px rgba(255, 255, 255, 0.4), inset -1px -1px 2px rgba(0, 0, 0, 0.2), 0 0 20px rgba(
+        0,
+        255,
+        247,
+        0.4
+      ), 4px 4px 12px rgba(0, 0, 0, 0.3), 0 0 0 8px rgba(0, 255, 247, 0);
+  }
+  100% {
+    box-shadow:
+      inset 1px 1px 2px rgba(255, 255, 255, 0.4), inset -1px -1px 2px rgba(0, 0, 0, 0.2), 0 0 20px rgba(
+        0,
+        255,
+        247,
+        0.4
+      ), 4px 4px 12px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(0, 255, 247, 0);
+  }
+}
+
+/* Pulse animation for add/remove buttons */
+.resume-project:hover .add-btn {
+  animation: button-pulse-add 2s infinite;
+}
+
+.resume-project:hover .remove-btn {
+  animation: button-pulse-remove 2s infinite;
+}
+
+@keyframes button-pulse-add {
+  0% {
+    box-shadow:
+      inset 1px 1px 2px rgba(255, 255, 255, 0.3), inset -1px -1px 2px rgba(0, 0, 0, 0.3), 2px 2px 4px
+      rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(34, 197, 148, 0.4);
+  }
+  70% {
+    box-shadow:
+      inset 1px 1px 2px rgba(255, 255, 255, 0.3), inset -1px -1px 2px rgba(0, 0, 0, 0.3), 2px 2px 4px
+      rgba(0, 0, 0, 0.3), 0 0 0 8px rgba(34, 197, 148, 0);
+  }
+  100% {
+    box-shadow:
+      inset 1px 1px 2px rgba(255, 255, 255, 0.3), inset -1px -1px 2px rgba(0, 0, 0, 0.3), 2px 2px 4px
+      rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(34, 197, 148, 0);
+  }
+}
+
+@keyframes button-pulse-remove {
+  0% {
+    box-shadow:
+      inset 1px 1px 2px rgba(255, 255, 255, 0.3), inset -1px -1px 2px rgba(0, 0, 0, 0.3), 2px 2px 4px
+      rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(239, 68, 68, 0.4);
+  }
+  70% {
+    box-shadow:
+      inset 1px 1px 2px rgba(255, 255, 255, 0.3), inset -1px -1px 2px rgba(0, 0, 0, 0.3), 2px 2px 4px
+      rgba(0, 0, 0, 0.3), 0 0 0 8px rgba(239, 68, 68, 0);
+  }
+  100% {
+    box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.3), inset -1px -1px 2px rgba(0, 0, 0, 0.3), 2px 2px 4px
+      rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(239, 68, 68, 0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .download-section {
+    padding: 20px;
+    margin-top: 30px;
+  }
+
+  .download-btn {
+    min-width: 240px;
+    font-size: 1.1rem;
+    padding: 14px 28px;
+  }
+
+  .category-filter {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .category-select {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .selection-checkmark {
+    width: 25px;
+    height: 25px;
+    font-size: 1rem;
+    top: 10px;
+    right: 10px;
+  }
+
+  .resume-project:nth-child(3n + 1),
+  .resume-project:nth-child(3n + 2),
+  .resume-project:nth-child(3n + 3) {
+    transform: rotate(0deg) translateY(0px);
+  }
+
+  .resume-project:hover {
+    transform: translateY(-10px) scale(1.02) rotate(0deg) !important;
+  }
+}
+
+/* Pulse animation for selected projects */
+.resume-project.selected::after {
+  animation: selected-pulse 3s infinite;
+}
+
+@keyframes selected-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 148, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(34, 197, 148, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 148, 0.4);
+  }
+}
+
+/* Smooth entrance animations */
+.resume-project {
+  animation: project-entrance 0.6s cubic-bezier(0.4, 0, 0.2, 1) backwards;
+}
+
+.resume-project:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.resume-project:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.resume-project:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.resume-project:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.resume-project:nth-child(5) {
+  animation-delay: 0.5s;
+}
+.resume-project:nth-child(6) {
+  animation-delay: 0.6s;
+}
+
+@keyframes project-entrance {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .resume-project,
+  .download-btn,
+  .category-select,
+  .selection-overlay,
+  .selection-checkmark,
+  .resume-action {
+    transition: all 0.3s ease;
+    animation: none;
+  }
+
+  .resume-project:hover {
+    transition: all 0.3s ease;
+  }
+
+  .resume-project:nth-child(4n + 1),
+  .resume-project:nth-child(4n + 2),
+  .resume-project:nth-child(4n + 3),
+  .resume-project:nth-child(4n + 4) {
+    animation: none;
+  }
+}
+
+@keyframes float {
+  0% {
+    box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
+    transform: translateY(0px);
+  }
+  50% {
+    box-shadow: 0 25px 15px 0px rgba(0, 0, 0, 0.2);
+    transform: translateY(-20px);
+  }
+  100% {
+    box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
+    transform: translateY(0px);
+  }
+}
+
+/* Responsive adjustments for filter buttons in Resume Generator */
+@media (max-width: 768px) {
+  .category-filter {
+    margin-top: 24px;
+    margin-bottom: 24px;
+  }
+
+  .filter-buttons {
+    gap: 8px;
+  }
+
+  .filter-btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    min-width: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .filter-buttons {
+    gap: 6px;
+  }
+
+  .filter-btn {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+    min-width: 70px;
+  }
 }
