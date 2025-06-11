@@ -913,3 +913,13 @@
     transition: all 0.3s ease;
   }
 }
+
+.fun-fact {
+  margin-top: 10px;
+  font-size: 0.95rem;
+  color: var(--label-color);
+  background: rgba(255,255,255,0.07);
+  border-radius: 6px;
+  padding: 6px 12px;
+  text-align: center;
+}
