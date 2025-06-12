@@ -295,7 +295,7 @@ const Home = () => {
         setFlipping(false);
         setFlipCount((c) => c + 1);
       }, FLIP_DURATION);
-    }, 15000);
+    }, 10000);
 
     return () => clearInterval(interval);
   }, [projectsList, displayed]);
