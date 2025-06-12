@@ -75,6 +75,8 @@ h3 {
   object-fit: cover;
   border: 6px solid var(--text);
   box-shadow: 0 4px 32px rgba(0, 255, 247, 0.15);
+  /* Move the image content to the right inside the circle */
+  object-position: 60% 50%; /* Increase % to move image further right */
 }
 
 .badge {
