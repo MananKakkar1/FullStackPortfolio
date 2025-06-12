@@ -408,7 +408,9 @@ const Home = () => {
         </div>
         <div className="hero-right">
           <h1>
-            <span className="highlight">{typed}</span>
+            <span className="highlight" style={{ display: "inline" }}>
+              {typed}
+            </span>
             <span className="typing-cursor">|</span>
           </h1>
           <p>

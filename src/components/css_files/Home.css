@@ -32,7 +32,6 @@ h3 {
 
 .highlight {
   color: var(--text);
-  display: block;
   margin-bottom: 0.2em;
 }
 
