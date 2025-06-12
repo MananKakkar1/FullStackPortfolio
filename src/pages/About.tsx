@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "../components/css_files/About.css";
+import "../components/css_files/Home.css";
 import tempImg from "../assets/photo.jpg";
 
 // Import tech stack images (same as Home)
@@ -249,81 +250,83 @@ const About = () => {
         </div>
       </div>
 
-      {/* --- 3 Gameboy-style tech cards --- */}
-      <div className="home-projects-list">
+      {/* --- Tech Stack Section --- */}
+      <div className="about-creative-section">
         <h2>Tech Stack</h2>
-        <div className="gameboy-cards-row">
-          {displayedTechs.map((techIdx, idx) => {
-            const tech = techStack[techIdx];
-            return (
-              <div key={idx} className="project-flip-container">
-                <div className="project-flip-inner">
-                  <div className="project-flip-front">
-                    <div className="project-entry">
-                      <div className="gameboy-lines">
-                        <div className="gameboy-line"></div>
-                        <div className="gameboy-line"></div>
-                        <div className="gameboy-line"></div>
-                      </div>
-                      <div className="gameboy-screen">{tech.icon}</div>
-                      <h3>{tech.name}</h3>
-                      <div className="gameboy-controls">
-                        <div className="tech-stack">
-                          <a
-                            href={tech.link}
-                            className="tech-badge"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            title={tech.name}
-                          >
-                            {tech.name}
-                          </a>
+        <div className="home-projects-list">
+          <div className="gameboy-cards-row">
+            {displayedTechs.map((techIdx, idx) => {
+              const tech = techStack[techIdx];
+              return (
+                <div key={idx} className="project-flip-container">
+                  <div className="project-flip-inner">
+                    <div className="project-flip-front">
+                      <div className="project-entry">
+                        <div className="gameboy-lines">
+                          <div className="gameboy-line"></div>
+                          <div className="gameboy-line"></div>
+                          <div className="gameboy-line"></div>
                         </div>
-                        <div className="gameboy-dpad">
-                          <div className="dpad">
-                            <div className="dpad-horizontal"></div>
-                            <div className="dpad-vertical"></div>
-                            <div className="dpad-center"></div>
-                            <div
-                              className="dpad-up"
-                              onClick={() => handleTechDpad(idx, "next")}
-                              title="Next Tech"
-                            ></div>
-                            <div
-                              className="dpad-down"
-                              onClick={() => handleTechDpad(idx, "prev")}
-                              title="Previous Tech"
-                            ></div>
-                            <div
-                              className="dpad-left"
-                              onClick={() => handleTechDpad(idx, "prev")}
-                              title="Previous Tech"
-                            ></div>
-                            <div
-                              className="dpad-right"
-                              onClick={() => handleTechDpad(idx, "next")}
-                              title="Next Tech"
-                            ></div>
-                          </div>
-                          <div className="action-buttons">
+                        <div className="gameboy-screen">{tech.icon}</div>
+                        <h3>{tech.name}</h3>
+                        <div className="gameboy-controls">
+                          <div className="tech-stack">
                             <a
                               href={tech.link}
-                              className="action-button"
+                              className="tech-badge"
                               target="_blank"
                               rel="noopener noreferrer"
-                              title="Tech Info"
+                              title={tech.name}
                             >
-                              INFO
+                              {tech.name}
                             </a>
+                          </div>
+                          <div className="gameboy-dpad">
+                            <div className="dpad">
+                              <div className="dpad-horizontal"></div>
+                              <div className="dpad-vertical"></div>
+                              <div className="dpad-center"></div>
+                              <div
+                                className="dpad-up"
+                                onClick={() => handleTechDpad(idx, "next")}
+                                title="Next Tech"
+                              ></div>
+                              <div
+                                className="dpad-down"
+                                onClick={() => handleTechDpad(idx, "prev")}
+                                title="Previous Tech"
+                              ></div>
+                              <div
+                                className="dpad-left"
+                                onClick={() => handleTechDpad(idx, "prev")}
+                                title="Previous Tech"
+                              ></div>
+                              <div
+                                className="dpad-right"
+                                onClick={() => handleTechDpad(idx, "next")}
+                                title="Next Tech"
+                              ></div>
+                            </div>
+                            <div className="action-buttons">
+                              <a
+                                href={tech.link}
+                                className="action-button"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                title="Tech Info"
+                              >
+                                INFO
+                              </a>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
 

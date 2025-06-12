@@ -208,14 +208,11 @@ h1 {
 
 .home-projects-list {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: stretch;
-  gap: 32px;
-  margin: 16px 0 48px 0;
+  flex-direction: column;
+  align-items: center;
+  margin: 32px 0 48px 0;
   width: 100%;
   background: transparent;
-  flex-wrap: wrap;
   padding-bottom: 32px;
 }
 
@@ -1066,6 +1063,51 @@ h1 {
   }
 }
 
+/* --- Tech Stack Gameboy Cards: Horizontal Row & Responsive --- */
+.home-projects-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 32px 0 48px 0;
+  width: 100%;
+  background: transparent;
+  padding-bottom: 32px;
+}
+
+.gameboy-cards-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  gap: 32px;
+  width: 100%;
+  flex-wrap: nowrap;
+}
+
+@media (max-width: 1100px) {
+  .gameboy-cards-row {
+    gap: 18px;
+  }
+  .project-flip-container {
+    width: 260px;
+    min-width: 160px;
+  }
+}
+
+@media (max-width: 900px) {
+  .gameboy-cards-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    width: 100%;
+  }
+  .project-flip-container {
+    width: 90vw;
+    min-width: 0;
+    max-width: 98vw;
+  }
+}
+
 /* Reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
   .project-entry,
@@ -1200,4 +1242,55 @@ h1 {
   background: var(--card-border);
   box-shadow: 0 1px 2px rgba(0,0,0,0.08);
   opacity: 1;
+}
+
+/* --- Tech Stack Gameboy Cards & Featured Projects: Horizontal Row & Responsive --- */
+
+/* Shared horizontal row for both featured projects and tech stack cards */
+.home-projects-list,
+.gameboy-cards-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  gap: 32px;
+  width: 100%;
+  flex-wrap: nowrap;
+}
+
+/* Make sure .home-projects-list is not column on desktop */
+.featured-projects .home-projects-list {
+  flex-direction: row;
+  gap: 32px;
+  width: 100%;
+  align-items: stretch;
+}
+
+/* Responsive: stack vertically on mobile */
+@media (max-width: 1100px) {
+  .gameboy-cards-row,
+  .home-projects-list,
+  .featured-projects .home-projects-list {
+    gap: 18px;
+  }
+  .project-flip-container {
+    width: 260px;
+    min-width: 160px;
+  }
+}
+
+@media (max-width: 900px) {
+  .gameboy-cards-row,
+  .home-projects-list,
+  .featured-projects .home-projects-list {
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    width: 100%;
+  }
+  .project-flip-container {
+    width: 90vw;
+    min-width: 0;
+    max-width: 98vw;
+  }
 }
