@@ -42,6 +42,7 @@ interface Project {
   description: string;
   image: string;
   technologies?: string;
+  sourceUrl?: string;
 }
 
 function getRandomProjects(
@@ -504,7 +505,7 @@ const Home = () => {
                             INFO
                           </a>
                           <a
-                            href={`https://github.com/MananKakkar1/${project.id}`}
+                            href={project.sourceUrl || ``}
                             className="action-button"
                             target="_blank"
                             rel="noopener noreferrer"
