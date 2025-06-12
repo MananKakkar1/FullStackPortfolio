@@ -187,10 +187,11 @@ const About = () => {
         <div className="about-creative-intro">
           <h1 className="about-creative-title">About Me</h1>
           <p>
-            Hi, I'm Manan Kakkar, a Computer Science student at the University
-            of Toronto Mississauga. I'm passionate about building impactful
-            software, exploring new technologies, and collaborating with others
-            to solve real-world problems.
+            Hi! I’m Manan Kakkar, a Computer Science student at the University
+            of Toronto. I love building software that makes a real
+            difference, diving into new technologies, and working with others to
+            bring creative ideas to life. I’m always excited to learn, grow, and
+            take on challenges that push me to think outside the box.
           </p>
           <div className="about-creative-socials">
             <a
@@ -228,6 +229,20 @@ const About = () => {
           </div>
         </div>
       </div>
+      {/* Goals Section */}
+      <div className="about-creative-section">
+        <h2 className="goals-header">My Story</h2>
+        <p className="goals-text">
+          I got into coding during the pandemic when I started learning Python and built simple games like Tic Tac Toe.
+          That experience sparked my passion for programming it felt like solving puzzles, and I really enjoyed figuring things out piece by piece.
+          <br /><br />
+          Since then, I’ve pushed myself to grow, earning a spot in both the Computer Science Specialist and co-op programs at UofT.
+          One of my favorite experiences so far was participating in a hackathon, where my team built a retro-style app in just nine hours.
+          It was intense but incredibly fun, and it showed me how much I enjoy collaborating, thinking on my feet, and building under pressure.
+          <br /><br />
+          Now, I’m looking to take on new challenges and gain real-world experience, especially in areas like generative AI, web development, and secure digital systems.<br />
+        </p>
+      </div>
 
       {/* Timeline Section */}
       <div className="about-creative-section">
@@ -253,6 +268,7 @@ const About = () => {
       {/* --- Tech Stack Section --- */}
       <div className="about-creative-section">
         <h2>Tech Stack</h2>
+        <h3>(Use D-pad to navigate through my tech stack!)</h3>
         <div className="home-projects-list">
           <div className="gameboy-cards-row">
             {displayedTechs.map((techIdx, idx) => {
@@ -328,18 +344,6 @@ const About = () => {
             })}
           </div>
         </div>
-      </div>
-
-      {/* Goals Section */}
-      <div className="about-creative-section">
-        <h2>Goals</h2>
-        <p>
-          My goal is to contribute to projects that solve real-world problems
-          while delivering exceptional user experiences. I am eager to continue
-          learning and growing as a developer, exploring emerging technologies
-          like AI and cloud computing, and collaborating with teams to create
-          scalable and efficient solutions.
-        </p>
       </div>
     </div>
   );
