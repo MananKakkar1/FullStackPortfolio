@@ -9,6 +9,7 @@
   justify-content: flex-start;
   padding-top: 40px;
   box-sizing: border-box;
+  overflow-x: hidden !important;
 }
 
 .projects-list {

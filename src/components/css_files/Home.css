@@ -1,4 +1,17 @@
 body,
+html {
+  overflow-x: hidden;
+  width: 100vw;
+  box-sizing: border-box;
+}
+
+.header {
+  width: 100%;
+  max-width: 100vw;
+  box-sizing: border-box;
+}
+
+body,
 .hero-section,
 .hero-left,
 .hero-right {
