@@ -1,12 +1,22 @@
 import { useState } from "react";
 import { useTheme } from "./ThemeContext";
-import './css_files/Themes.css';
+import "./css_files/Themes.css";
 
-const themePreviews: Record<'theme-dark' | 'theme-red' | 'theme-animated' | 'theme-starwars', string> = {
-    "theme-dark": "Dark Theme",
-    "theme-red": "Red Theme",
-    "theme-animated": "Animated Theme",
-    "theme-starwars": "Star Wars Theme",
+const themePreviews: Record<
+  | "theme-dark"
+  | "theme-red"
+  | "theme-animated"
+  | "theme-starwars"
+  | "theme-light"
+  | "theme-darkmode",
+  string
+> = {
+  "theme-dark": "Dark Theme",
+  "theme-red": "Red Theme",
+  "theme-animated": "Animated Theme",
+  "theme-starwars": "Star Wars Theme",
+  "theme-light": "Light Theme",
+  "theme-darkmode": "Dark Mode",
 };
 
 const ThemeSelector = () => {
@@ -19,14 +29,22 @@ const ThemeSelector = () => {
         Change Theme
       </button>
       {open && (
-        <div className="theme-selector-modal-overlay" onClick={() => setOpen(false)}>
-          <div className="theme-selector-modal" onClick={e => e.stopPropagation()}>
+        <div
+          className="theme-selector-modal-overlay"
+          onClick={() => setOpen(false)}
+        >
+          <div
+            className="theme-selector-modal"
+            onClick={(e) => e.stopPropagation()}
+          >
             <h3>Select a Theme</h3>
             <div className="theme-selector-options">
               {themes.map((t) => (
                 <button
                   key={t}
-                  className={`theme-selector-option${theme === t ? " selected" : ""}`}
+                  className={`theme-selector-option${
+                    theme === t ? " selected" : ""
+                  }`}
                   onClick={() => {
                     setTheme(t);
                     setOpen(false);
@@ -37,7 +55,10 @@ const ThemeSelector = () => {
                 </button>
               ))}
             </div>
-            <button className="theme-selector-close" onClick={() => setOpen(false)}>
+            <button
+              className="theme-selector-close"
+              onClick={() => setOpen(false)}
+            >
               Close
             </button>
           </div>
@@ -47,4 +68,4 @@ const ThemeSelector = () => {
   );
 };
 
-export default ThemeSelector
+export default ThemeSelector;

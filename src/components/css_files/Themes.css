@@ -50,6 +50,35 @@
     --timeline: #00fff7;
 }
 
+.theme-light {
+    --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    --text: #22223b;
+    --card-bg: rgba(255,255,255,0.92);
+    --card-border: #18181b;
+    --card-shadow: 0 4px 32px rgba(160,174,192,0.13);
+    --button-bg: #18181b;
+    --button-text: #e0e0e0;
+    --label-color: #22223b;
+    --filter: #161620;
+    --timeline: #4f46e5;
+    --timeline-text: #e0e0e0;
+}
+
+.theme-darkmode {
+    --bg-gradient: linear-gradient(135deg, #18181b 0%, #27272a 100%);
+    --text: #e0e0e0;
+    --card-bg: rgba(24,24,27,0.96);
+    --card-border: #e0e0e0;
+    --card-shadow: 0 4px 32px rgba(99,102,241,0.13);
+    --button-bg: #e0e0e0;
+    --button-text: #18181b;
+    --label-color: #e0e0e0;
+    --filter: #e0e0e0;
+    --timeline: #e0e0e0;
+    --timeline-text: #e0e0e0;
+}
+
+
 body.theme-animated {
     background: var(--bg-gradient);
 }
@@ -187,4 +216,12 @@ body.theme-animated {
   .theme-starwars {
     --bg-gradient: url("../../assets/venator-and-kamino.1920x1080.gif") center center/cover no-repeat fixed;
   }
+}
+
+/* Optional: theme previews for selector */
+.theme-preview-theme-light {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+}
+.theme-preview-theme-darkmode {
+    background: linear-gradient(135deg, #18181b 0%, #27272a 100%);
 }

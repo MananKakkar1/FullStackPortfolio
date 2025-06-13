@@ -467,7 +467,7 @@ body {
 
 .timeline-date {
   font-weight: bold;
-  color: var(--text);
+  color: var(--timeline-text);
   margin-bottom: 4px;
 }
 
@@ -475,11 +475,12 @@ body {
   font-size: 1.15em;
   font-weight: 600;
   margin-bottom: 2px;
+  color: var(--timeline-text);
 }
 
 .timeline-org {
   font-weight: 500;
-  color: var(--timeline);
+  color: var(--timeline-text);
   margin-bottom: 8px;
 }
 
