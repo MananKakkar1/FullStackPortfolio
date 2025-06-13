@@ -357,7 +357,7 @@ const ResumeGenerator = () => {
               }}
             >
               No projects selected yet. Click ADD on projects above to include
-              them in your resume!
+              them in your version of my resume!
             </p>
           </div>
         ) : (
