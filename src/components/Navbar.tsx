@@ -50,7 +50,7 @@ const Navbar = () => {
             Contact Me
           </a>
           <Link to="/resume" onClick={handleNavScrollTop}>
-            Resume Generator
+            Resume
           </Link>
         </nav>
         <ThemeSelector />
