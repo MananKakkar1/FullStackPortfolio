@@ -13,6 +13,7 @@ import shellImg from "../assets/shell.png";
 import extractorImg from "../assets/extractor.png";
 import pokemonImg from "../assets/pokemon.png";
 import systemOverlayImg from "../assets/system-overlay.png";
+import othelloImg from "../assets/Othello.png";
 
 export type Project = {
   id: string;
@@ -204,6 +205,22 @@ const projectsList: Project[] = [
       "Modular codebase for easy addition of storylines.",
       "Multiple endings and decision points for replayability.",
     ],
+  },
+  {
+    id: "othello-game",
+    title: "Othello",
+    description:
+      "A simple terminal based Othello game built with Java, where players can play against each other or against a computer AI.",
+    image: othelloImg,
+    sourceUrl: "https://github.com/MananKakkar1/Othello",
+    category: "Games",
+    technologies: "Java",
+    funFacts: [
+      "Terminal-based Othello implementation.",
+      "Features AI opponent with basic strategy.",
+      "Supports two-player mode.",
+      "Includes move validation and scoring system."
+    ]
   },
 ];
 
