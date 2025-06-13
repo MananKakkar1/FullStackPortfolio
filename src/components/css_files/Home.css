@@ -1267,18 +1267,6 @@ h1 {
   align-items: stretch;
 }
 
-/* Responsive: stack vertically on mobile */
-@media (max-width: 1100px) {
-  .gameboy-cards-row,
-  .home-projects-list,
-  .featured-projects .home-projects-list {
-    gap: 18px;
-  }
-  .project-flip-container {
-    width: 260px;
-    min-width: 160px;
-  }
-}
 
 @media (max-width: 900px) {
   .gameboy-cards-row,
@@ -1286,7 +1274,7 @@ h1 {
   .featured-projects .home-projects-list {
     flex-direction: column;
     align-items: center;
-    gap: 32px;
+    gap: 200px;
     width: 100%;
   }
   .project-flip-container {
