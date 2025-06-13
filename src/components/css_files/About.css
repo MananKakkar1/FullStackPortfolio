@@ -520,11 +520,12 @@ body {
   }
   .timeline-content {
     min-width: 0;
-    max-width: 98vw;
-    width: 95vw;
+    max-width: 85vw;
+    width: 90vw;
+    margin-left: 40px;
   }
   .timeline-line {
-    left: 24px;
+    left: 22px;
   }
   .timeline-item::before {
     left: 12px !important;
