@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Navbar from "./components/Navbar";
 import "./index.css";
 import Home from "./pages/Home";
@@ -14,6 +15,14 @@ import {
 import { ThemeProvider } from "./components/ThemeContext";
 
 const App = () => {
+  useEffect(() => {
+    const clearStorage = () => {
+      localStorage.clear();
+    };
+    window.addEventListener("beforeunload", clearStorage);
+    return () => window.removeEventListener("beforeunload", clearStorage);
+  }, []);
+
   return (
     <ThemeProvider>
       <Router>
