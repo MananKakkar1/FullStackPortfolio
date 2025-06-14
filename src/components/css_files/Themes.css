@@ -193,20 +193,41 @@ body.theme-animated {
 }
 
 .change-theme-btn {
-    background: var(--button-bg);
-    color: var(--button-text);
-    border: none;
-    border-radius: 8px;
-    padding: 8px 18px;
-    cursor: pointer;
-    font-weight: 700;
-    font-size: 1rem;
-    transition: background 0.2s, color 0.2s;
+  background: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: 8px;
+  padding: 8px 18px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: background 0.2s, color 0.2s;
+  margin-left: 0;
+  display: flex;
+  align-items: center;
 }
 
 .change-theme-btn:hover {
-    background: var(--button-text);
-    color: var(--button-bg);
+  background: var(--button-text);
+  color: var(--button-bg);
+}
+
+.theme-toggle-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 22px;
+  margin-right: 0;
+  vertical-align: middle;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.theme-selector-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 @media (max-width: 800px) {
