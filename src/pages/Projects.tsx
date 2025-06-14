@@ -35,7 +35,7 @@ const projectsList: Project[] = [
       "A simple chess game built with HTML, CSS, JavaScript, and Python.",
     image: chessImg,
     sourceUrl: "https://github.com/MananKakkar1/Chess_Game",
-    category: "Website",
+    category: "Websites",
     technologies: "JavaScript + HTML + CSS + Python (Flask)",
     funFacts: [
       "Features 4 AI difficulty modes.",
@@ -51,7 +51,7 @@ const projectsList: Project[] = [
       "A personal portfolio website built using React, TypeScript, and modern web technologies to showcase my skills and projects.",
     image: portfolioImg,
     sourceUrl: "https://github.com/MananKakkar1/FullStackPortfolio",
-    category: "Website",
+    category: "Websites",
     technologies:
       "React + TypeScript + Vite + Node.js + Express.js + Nodemailer",
     funFacts: [
@@ -68,7 +68,7 @@ const projectsList: Project[] = [
       "A visualizer for file system trees, built with Python and Pygame, to help users understand the structure of their file systems.",
     image: fileSystemImg,
     sourceUrl: "https://github.com/MananKakkar1/File-System-Tree-Visualizer",
-    category: "Data Extraction",
+    category: "Data Analysis",
     technologies: "Python + Pygame",
     funFacts: [
       "Interactive visualization of file systems.",
@@ -84,7 +84,7 @@ const projectsList: Project[] = [
       "A Python script that overlays system information on the screen, providing real-time updates on system performance.",
     image: systemOverlayImg,
     sourceUrl: "https://github.com/MananKakkar1/System-Overlay-Python-Script",
-    category: "Data Extraction",
+    category: "Data Analysis",
     technologies: "Python + OpenHardwareMonitor + Python's Tkinter",
     funFacts: [
       "Overlays real-time system information on the screen.",
@@ -116,7 +116,7 @@ const projectsList: Project[] = [
       "A custom Linux shell built using C, designed to provide a unique command-line interface and support for various shell features.",
     image: shellImg,
     sourceUrl: "https://github.com/MananKakkar1/Custom-Linux-Shell",
-    category: "Custom Shell",
+    category: "System Tools",
     technologies: "C + Unix Sockets + Process Management",
     funFacts: [
       "Engineered a Linux shell from scratch in C.",
@@ -181,7 +181,7 @@ const projectsList: Project[] = [
     image: extractorImg,
     sourceUrl:
       "https://github.com/MananKakkar1/world_population_data_extractor",
-    category: "Data Extraction",
+    category: "Data Analysis",
     technologies: "Python + CSV",
     funFacts: [
       "Extracts and organizes world population data.",
