@@ -2,6 +2,39 @@ import { useState } from "react";
 import { useTheme } from "./ThemeContext";
 import "./css_files/Themes.css";
 
+// Chatbot button as a simple inline button
+const ChatBotButton = ({ onClick }: { onClick: () => void }) => (
+  <button
+    className="chatbot-fab-inline"
+    onClick={onClick}
+    aria-label="Open AI Chatbot"
+  >
+    <svg width="22" height="22" viewBox="0 0 28 28" fill="none">
+      <circle
+        cx="14"
+        cy="14"
+        r="13"
+        stroke="#4f46e5"
+        strokeWidth="2"
+        fill="#fff"
+      />
+      <path
+        d="M9 12a5 5 0 1 1 10 0c0 2.5-2.5 4-5 4s-5-1.5-5-4z"
+        fill="#4f46e5"
+      />
+      <ellipse cx="12" cy="13" rx="1" ry="1.5" fill="#fff" />
+      <ellipse cx="16" cy="13" rx="1" ry="1.5" fill="#fff" />
+      <path
+        d="M12 17c.5.5 1.5.5 2 0"
+        stroke="#4f46e5"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+    </svg>
+    <span style={{ marginLeft: 6 }}>AI Chat</span>
+  </button>
+);
+
 const themePreviews: Record<
   "theme-dark" | "theme-red" | "theme-animated" | "theme-starwars",
   string
@@ -15,6 +48,7 @@ const themePreviews: Record<
 const ThemeSelector = () => {
   const { theme, setTheme, themes } = useTheme();
   const [open, setOpen] = useState(false);
+  const [chatOpen, setChatOpen] = useState(false);
 
   // Only show non-light/darkmode themes in the modal
   const otherThemes = themes.filter(
@@ -23,6 +57,8 @@ const ThemeSelector = () => {
 
   // Sun/Moon toggle logic
   const isLight = theme === "theme-light";
+  const isDarkMode = theme === "theme-darkmode";
+  const showToggle = isLight || isDarkMode;
   const toggleLightDark = () =>
     setTheme(isLight ? "theme-darkmode" : "theme-light");
 
@@ -35,6 +71,10 @@ const ThemeSelector = () => {
         className="theme-toggle-btn"
         aria-label={isLight ? "Switch to dark mode" : "Switch to light mode"}
         onClick={toggleLightDark}
+        style={{
+          opacity: showToggle ? 1 : 0.5,
+          pointerEvents: showToggle ? "auto" : "none",
+        }}
       >
         {isLight ? (
           <svg
@@ -45,11 +85,8 @@ const ThemeSelector = () => {
             style={{ display: "block" }}
           >
             <path
-              d="
-                M20 14
-                a8 8 0 1 1 -8 -8
-                a6 6 0 1 0 8 8
-              "
+              d="M19 14.5A7.5 7.5 0 1 1 13.5 5
+                 A6 6 0 1 0 19 14.5Z"
               fill="none"
               stroke={iconColor}
               strokeWidth="2.2"
@@ -86,6 +123,7 @@ const ThemeSelector = () => {
           </svg>
         )}
       </button>
+      <ChatBotButton onClick={() => setChatOpen(true)} />
       <button className="change-theme-btn" onClick={() => setOpen(true)}>
         Change Theme
       </button>
@@ -122,6 +160,29 @@ const ThemeSelector = () => {
             >
               Close
             </button>
+          </div>
+        </div>
+      )}
+      {chatOpen && (
+        <div
+          className="chatbot-modal-overlay"
+          onClick={() => setChatOpen(false)}
+        >
+          <div className="chatbot-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="chatbot-modal-header">
+              <span>AI Chatbot Assistant</span>
+              <button
+                className="chatbot-close-btn"
+                onClick={() => setChatOpen(false)}
+              >
+                &times;
+              </button>
+            </div>
+            {/* You can import and use your PortfolioChatBot component here instead */}
+            <div style={{ padding: 16, color: "var(--text)" }}>
+              {/* Place your chatbot UI here */}
+              <strong>Chatbot goes here!</strong>
+            </div>
           </div>
         </div>
       )}
