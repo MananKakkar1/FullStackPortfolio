@@ -130,11 +130,26 @@ const techStack = [
 
 const timeline = [
   {
+    date: "June 2025",
+    title: "SpurHacks Participant",
+    org: "SpurHacks",
+    description:
+      "Participating in SpurHacks, a hackathon based in Waterloo, focused on building innovative solutions, enhancing skills in teamwork and rapid development.",
+
+  },
+  {
     date: "2023 – Present",
     title: "Computer Science Undergraduate",
     org: "University of Toronto",
     description:
       "Specializing in Computer Science with a focus on software development, data structures, and algorithms.",
+  },
+  {
+    date: "2023",
+    title: "Hack the Ridge",
+    org: "Iroquois Ridge High School",
+    description:
+      "Participated in a 9-hour hackathon, building a retro-style app with a team, enhancing skills in collaboration and rapid development.",
   },
   {
     date: "2019 – 2023",
