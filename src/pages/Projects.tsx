@@ -15,6 +15,8 @@ import pokemonImg from "../assets/pokemon.png";
 import systemOverlayImg from "../assets/system-overlay.png";
 import othelloImg from "../assets/Othello.png";
 import tempImg from "../assets/temp.jpg";
+import netlyImg from "../assets/netly.png";
+import githubDiscordBotImg from "../assets/github-discord-bot.png";
 
 export type Project = {
   id: string;
@@ -249,7 +251,7 @@ const projectsList: Project[] = [
     title: "Netly",
     description:
       "A local basketball analytics tool that uses YOLO and OpenCV to detect players, track ball possession, and flag violations in real time. Features live overlays, video analysis, and a React + Flask interface, all running locally.",
-    image: tempImg, // Placeholder image
+    image: netlyImg, 
     sourceUrl: "https://github.com/MananKakkar1/Netly",
     category: "System Tools",
     technologies: "Python + React + Node.js + Flask + YOLO + OpenCV",
@@ -266,7 +268,7 @@ const projectsList: Project[] = [
     title: "GitHub Discord Bot",
     description:
       "A Discord bot that tracks and displays the total number of commits for a given GitHub repository. Useful for teams and communities to monitor project activity directly from Discord.",
-    image: tempImg, // Placeholder image
+    image: githubDiscordBotImg, 
     sourceUrl: "https://github.com/MananKakkar1/github-discord-bot",
     category: "Bots",
     technologies: "Node.js + Discord.js + GitHub API",
