@@ -226,7 +226,8 @@ const projectsList: Project[] = [
   {
     id: "reeldeal",
     title: "ReelDeal",
-    description: `ReelDeal is an ambitious full-stack movie recommendation web application designed to help users discover, search, and save their favorite movies. Integrating with The Movie Database (TMDB) API for real-time movie data, ReelDeal supports secure user authentication using JWT and offers a fast, modern user experience powered by Vite and React. Users can search and explore movies, filter by genre, rating, and popularity, save favorites to a personal list, and receive smart recommendations based on their preferences. The backend is built with Node.js, Express, and MongoDB, following a RESTful API structure for scalability. ReelDeal aims to go beyond standard features, with plans for advanced recommendation algorithms, social sharing, watchlists, and more to create the ultimate movie discovery platform.`,
+    description:
+      "A full-stack movie recommendation app with JWT authentication, TMDB integration, smart recommendations, and a fast React + Vite frontend. Users can search, filter, and save favorite movies, with plans for advanced social and discovery features.",
     image: tempImg, // Placeholder image
     sourceUrl: "https://github.com/MananKakkar1/ReelDeal",
     category: "Websites",
@@ -246,7 +247,8 @@ const projectsList: Project[] = [
   {
     id: "netly",
     title: "Netly",
-    description: `Netly is a local basketball analytics tool that uses your webcam and leverages YOLO object detection and pose estimation to analyze live basketball gameplay. It can detect players and basketballs in real time, track ball possession, flag potential traveling violations, and display live visual overlays (bounding boxes, keypoints, and stats) using OpenCV. Netly also features a video analysis mode for uploaded basketball clips, automatically detecting passes, interceptions, traveling violations, and double dribbles, with each event timestamped and logged for easy review. The lightweight React frontend triggers a Flask backend, which launches a desktop window running the computer vision pipeline. The entire experience runs locally and is designed to be easy to set up and use.`,
+    description:
+      "A local basketball analytics tool that uses YOLO and OpenCV to detect players, track ball possession, and flag violations in real time. Features live overlays, video analysis, and a React + Flask interface, all running locally.",
     image: tempImg, // Placeholder image
     sourceUrl: "https://github.com/MananKakkar1/Netly",
     category: "System Tools",
@@ -277,7 +279,7 @@ const projectsList: Project[] = [
     id: "algorithm-visualizer",
     title: "Algorithm Visualizer",
     description:
-      "A comprehensive web application for visualizing a variety of computer science algorithms, including sorting, searching, and graph algorithms. Users can interactively step through algorithm execution, adjust input data, and observe how different algorithms operate under the hood. Designed as an educational tool for students and enthusiasts to better understand algorithmic concepts through dynamic, animated visualizations.",
+      "A web app for visualizing sorting, searching, and graph algorithms. Users can step through algorithm execution, adjust data, and learn core concepts interactively through animated visualizations.",
     image: tempImg, // Placeholder image
     sourceUrl: "https://github.com/MananKakkar1/Algorithm-Visualizer",
     category: "Websites",
