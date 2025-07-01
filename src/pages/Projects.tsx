@@ -253,7 +253,7 @@ const projectsList: Project[] = [
       "A local basketball analytics tool that uses YOLO and OpenCV to detect players, track ball possession, and flag violations in real time. Features live overlays, video analysis, and a React + Flask interface, all running locally.",
     image: netlyImg, 
     sourceUrl: "https://github.com/MananKakkar1/Netly",
-    category: "System Tools",
+    category: "Data Analysis", 
     technologies: "Python + React + Node.js + Flask + YOLO + OpenCV",
     funFacts: [
       "Real-time player and basketball detection using YOLO and pose estimation.",
