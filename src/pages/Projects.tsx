@@ -14,6 +14,7 @@ import extractorImg from "../assets/extractor.png";
 import pokemonImg from "../assets/pokemon.png";
 import systemOverlayImg from "../assets/system-overlay.png";
 import othelloImg from "../assets/Othello.png";
+import tempImg from "../assets/temp.png";
 
 export type Project = {
   id: string;
@@ -219,8 +220,73 @@ const projectsList: Project[] = [
       "Terminal-based Othello implementation.",
       "Features AI opponent with basic strategy.",
       "Supports two-player mode.",
-      "Includes move validation and scoring system."
-    ]
+      "Includes move validation and scoring system.",
+    ],
+  },
+  {
+    id: "reeldeal",
+    title: "ReelDeal",
+    description: `ReelDeal is an ambitious full-stack movie recommendation web application designed to help users discover, search, and save their favorite movies. Integrating with The Movie Database (TMDB) API for real-time movie data, ReelDeal supports secure user authentication using JWT and offers a fast, modern user experience powered by Vite and React. Users can search and explore movies, filter by genre, rating, and popularity, save favorites to a personal list, and receive smart recommendations based on their preferences. The backend is built with Node.js, Express, and MongoDB, following a RESTful API structure for scalability. ReelDeal aims to go beyond standard features, with plans for advanced recommendation algorithms, social sharing, watchlists, and more to create the ultimate movie discovery platform.`,
+    image: tempImg, // Placeholder image
+    sourceUrl: "https://github.com/MananKakkar1/ReelDeal",
+    category: "Websites",
+    technologies:
+      "React + Vite + Axios + Node.js + Express.js + MongoDB + Mongoose + JWT + TMDB API",
+    funFacts: [
+      "User authentication with JWT (Register/Login)",
+      "Search and explore movies via TMDB API",
+      "Filter movies by genre, rating, popularity, and more",
+      "Save favorite movies to a personal list",
+      "Smart movie recommendations based on user preferences",
+      "Super-fast frontend using Vite + React",
+      "RESTful API structure for scalable development",
+      "Aims to add social features, advanced recommendations, and more.",
+    ],
+  },
+  {
+    id: "netly",
+    title: "Netly (Fork)",
+    description: `Netly is a local basketball analytics tool that uses your webcam and leverages YOLO object detection and pose estimation to analyze live basketball gameplay. It can detect players and basketballs in real time, track ball possession, flag potential traveling violations, and display live visual overlays (bounding boxes, keypoints, and stats) using OpenCV. Netly also features a video analysis mode for uploaded basketball clips, automatically detecting passes, interceptions, traveling violations, and double dribbles, with each event timestamped and logged for easy review. The lightweight React frontend triggers a Flask backend, which launches a desktop window running the computer vision pipeline. The entire experience runs locally and is designed to be easy to set up and use.`,
+    image: tempImg, // Placeholder image
+    sourceUrl: "https://github.com/MananKakkar1/Netly",
+    category: "System Tools",
+    technologies: "Python + React + Node.js + Flask + YOLO + OpenCV",
+    funFacts: [
+      "Real-time player and basketball detection using YOLO and pose estimation.",
+      "Tracks ball possession and flags traveling violations live.",
+      "Video analysis mode detects passes, interceptions, traveling, and double dribbles with timestamps.",
+      "Live overlays with bounding boxes, keypoints, and stats using OpenCV.",
+      "Easy-to-use React frontend and Flask backend, runs entirely locally.",
+    ],
+  },
+  {
+    id: "github-discord-bot",
+    title: "GitHub Discord Bot",
+    description:
+      "A Discord bot that tracks and displays the total number of commits for a given GitHub repository. Useful for teams and communities to monitor project activity directly from Discord.",
+    image: tempImg, // Placeholder image
+    sourceUrl: "https://github.com/MananKakkar1/github-discord-bot",
+    category: "Bots",
+    technologies: "Node.js + Discord.js + GitHub API",
+    funFacts: [
+      "Tracks GitHub repository commits in real-time.",
+      "Integrates seamlessly with Discord servers.",
+    ],
+  },
+  {
+    id: "algorithm-visualizer",
+    title: "Algorithm Visualizer",
+    description:
+      "A comprehensive web application for visualizing a variety of computer science algorithms, including sorting, searching, and graph algorithms. Users can interactively step through algorithm execution, adjust input data, and observe how different algorithms operate under the hood. Designed as an educational tool for students and enthusiasts to better understand algorithmic concepts through dynamic, animated visualizations.",
+    image: tempImg, // Placeholder image
+    sourceUrl: "https://github.com/MananKakkar1/Algorithm-Visualizer",
+    category: "Websites",
+    technologies: "JavaScript + HTML + CSS",
+    funFacts: [
+      "Visualizes sorting, searching, and graph algorithms.",
+      "Interactive controls for step-by-step execution and data adjustment.",
+      "Educational tool for learning algorithm fundamentals.",
+    ],
   },
 ];
 
