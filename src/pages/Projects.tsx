@@ -14,7 +14,7 @@ import extractorImg from "../assets/extractor.png";
 import pokemonImg from "../assets/pokemon.png";
 import systemOverlayImg from "../assets/system-overlay.png";
 import othelloImg from "../assets/Othello.png";
-import tempImg from "../assets/temp.png";
+import tempImg from "../assets/temp.jpg";
 
 export type Project = {
   id: string;
