@@ -245,7 +245,7 @@ const projectsList: Project[] = [
   },
   {
     id: "netly",
-    title: "Netly (Fork)",
+    title: "Netly",
     description: `Netly is a local basketball analytics tool that uses your webcam and leverages YOLO object detection and pose estimation to analyze live basketball gameplay. It can detect players and basketballs in real time, track ball possession, flag potential traveling violations, and display live visual overlays (bounding boxes, keypoints, and stats) using OpenCV. Netly also features a video analysis mode for uploaded basketball clips, automatically detecting passes, interceptions, traveling violations, and double dribbles, with each event timestamped and logged for easy review. The lightweight React frontend triggers a Flask backend, which launches a desktop window running the computer vision pipeline. The entire experience runs locally and is designed to be easy to set up and use.`,
     image: tempImg, // Placeholder image
     sourceUrl: "https://github.com/MananKakkar1/Netly",
