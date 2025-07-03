@@ -404,7 +404,6 @@ const Home = () => {
               alt="Profile"
               className="profile-img"
             />
-            <span className="badge badge-experience">2+ Years Experience</span>
           </div>
         </div>
         <div className="hero-right">
