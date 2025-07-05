@@ -1,4 +1,5 @@
-:root {
+/* Remove hardcoded theme variables - they should come from the theme context */
+/* :root {
     --bg-gradient: radial-gradient(circle, #000000 0%, #017d81 100%);
     --text: #b2ffff;
     --card-bg: rgba(0, 0, 0, 0.88);
@@ -7,150 +8,156 @@
     --label-color: #00fff7;
     --button-bg: #017d81;
     --button-text: #000000;
-}
+} */
 
 .project-detail-container {
-    min-height: 100vh;
-    width: 100vw;
-    background: var(--bg-gradient);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
+  min-height: 100vh;
+  width: 100vw;
+  background: var(--bg-gradient);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
 }
 
 .project-detail-title {
-    font-size: 3rem;
-    font-weight: 900;
-    color: var(--text);
-    text-align: center;
-    margin-bottom: 32px;
-    line-height: 1.1;
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--text);
+  text-align: center;
+  margin-bottom: 32px;
+  line-height: 1.1;
 }
 
 .project-browser-window {
-    background: var(--card-border);
-    border-radius: 12px;
-    box-shadow: 0 4px 32px rgba(0,0,0,0.18);
-    padding: 0;
-    margin-bottom: 32px;
-    border: 4px solid var(--card-border);
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    width: 480px;
-    max-width: 90vw;
+  background: var(--card-border);
+  border-radius: 12px;
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.18);
+  padding: 0;
+  margin-bottom: 32px;
+  border: 4px solid var(--card-border);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 480px;
+  max-width: 90vw;
 }
 
 .project-browser-bar {
-    height: 28px;
-    background: var(--card-border);
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
-    display: flex;
-    align-items: center;
-    padding: 0 12px;
-    gap: 6px;
+  height: 28px;
+  background: var(--card-border);
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 6px;
 }
 
 .project-browser-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
 }
-.project-browser-dot.red { background: #ff5f56; }
-.project-browser-dot.yellow { background: #ffbd2e; }
-.project-browser-dot.green { background: #27c93f; }
+.project-browser-dot.red {
+  background: #ff5f56;
+}
+.project-browser-dot.yellow {
+  background: #ffbd2e;
+}
+.project-browser-dot.green {
+  background: #27c93f;
+}
 
 .project-detail-img-area {
-    width: 100%;
-    height: 260px;
-    background: #222;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-bottom-left-radius: 12px;
-    border-bottom-right-radius: 12px;
-    overflow: hidden;
-    position: relative;
+  width: 100%;
+  height: 260px;
+  background: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  overflow: hidden;
+  position: relative;
 }
 
 .project-detail-img-area img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    border-radius: 0;
-    border: none;
-    margin: 0;
-    display: block;
-    background: #222;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 0;
+  border: none;
+  margin: 0;
+  display: block;
+  background: #222;
 }
 
 .project-detail-card {
-    background: var(--card-bg);
-    border: 2px solid var(--card-border);
-    border-radius: 18px;
-    box-shadow: var(--card-shadow);
-    color: var(--text);
-    padding: 24px 20px 20px 20px;
-    max-width: 450px;
-    min-width: 260px;
-    min-height: 420px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: transform 0.2s, box-shadow 0.2s;
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: 18px;
+  box-shadow: var(--card-shadow);
+  color: var(--text);
+  padding: 24px 20px 20px 20px;
+  max-width: 450px;
+  min-width: 260px;
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .project-detail-card h2 {
-    color: var(--label-color);
-    margin-bottom: 18px;
-    text-align: center;
-    font-size: 1.5rem;
-    font-weight: 700;
+  color: var(--label-color);
+  margin-bottom: 18px;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
 }
 
 .project-detail-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 0;
-    border: none;
-    margin: 0;
-    display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  border: none;
+  margin: 0;
+  display: block;
 }
 
 .project-detail-description {
-    color: var(--text);
-    font-size: 1.3rem;
-    text-align: center;
-    margin: 36px 0 0 0;
-    font-weight: 500;
-    max-width: 600px;
+  color: var(--text);
+  font-size: 1.3rem;
+  text-align: center;
+  margin: 36px 0 0 0;
+  font-weight: 500;
+  max-width: 600px;
 }
 
 .source-btn {
-    background: var(--button-bg);
-    color: var(--button-text);
-    border: none;
-    border-radius: 10px;
-    padding: 18px 36px;
-    font-weight: 700;
-    text-decoration: none;
-    transition: background 0.2s, color 0.2s;
-    text-align: center;
-    margin-top: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    gap: 10px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  background: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: 10px;
+  padding: 18px 36px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+  text-align: center;
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  gap: 10px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
 .source-btn:hover {
-    background: var(--button-text);
-    color: var(--button-bg);
+  background: var(--button-text);
+  color: var(--button-bg);
 }

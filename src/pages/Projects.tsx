@@ -430,7 +430,6 @@ const Projects = () => {
                     href={project.sourceUrl}
                     className="action-button"
                     target="_blank"
-                    rel="noopener noreferrer"
                     title="View Source Code"
                   >
                     <GitHubIcon />

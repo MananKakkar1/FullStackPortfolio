@@ -2,11 +2,25 @@ import { useParams } from "react-router-dom";
 import { projectsList } from "./Projects.tsx";
 import type { Project } from "./Projects.tsx";
 import "../components/css_files/ProjectDetail.css";
+import "../components/css_files/Themes.css";
+import { useTheme } from "../components/ThemeContext";
+import { useEffect } from "react";
 
 const ProjectDetail = () => {
   console.log("ProjectDetail component rendered");
   const { projectId } = useParams<{ projectId: string }>();
+  const { theme } = useTheme();
   const project = projectsList.find((p: Project) => p.id === projectId);
+
+  console.log("Current theme:", theme);
+
+  useEffect(() => {
+    console.log(
+      "ProjectDetail mounted, body classes:",
+      document.body.className
+    );
+    console.log("Current theme from context:", theme);
+  }, [theme]);
 
   if (!project)
     return (
@@ -16,7 +30,7 @@ const ProjectDetail = () => {
     );
 
   return (
-    <div className="project-detail-container">
+    <div className={`project-detail-container ${theme}`}>
       <h1 className="project-detail-title">{project.title}</h1>
       <div className="project-browser-window">
         <div className="project-browser-bar">
@@ -28,9 +42,7 @@ const ProjectDetail = () => {
           <img src={project.image} alt={project.title} />
         </div>
       </div>
-      <div className="project-detail-description">
-        {project.description}
-      </div>
+      <div className="project-detail-description">{project.description}</div>
       {project.sourceUrl && (
         <a
           href={project.sourceUrl}

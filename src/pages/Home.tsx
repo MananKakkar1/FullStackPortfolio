@@ -28,6 +28,7 @@ import pygameImg from "../assets/pygame_logo.png";
 import riscvImg from "../assets/riscv.jpg";
 import vercelImg from "../assets/vercel.png";
 import gitImg from "../assets/GitHub-Logo.svg";
+import tempImg from "../assets/temp.jpg";
 
 const FLIP_DURATION = 600;
 const TYPING_TEXT = "Hi, I'm Manan";
@@ -268,6 +269,87 @@ const techStack = [
       </span>
     ),
     link: "https://vercel.com/",
+  },
+  {
+    name: "Redux Toolkit",
+    icon: (
+      <span className="tech-img-wrapper">
+        <img src={tempImg} alt="Redux Toolkit" />
+      </span>
+    ),
+    link: "https://redux-toolkit.js.org/",
+  },
+  {
+    name: "Emotion",
+    icon: (
+      <span className="tech-img-wrapper">
+        <img src={tempImg} alt="Emotion" />
+      </span>
+    ),
+    link: "https://emotion.sh/",
+  },
+  {
+    name: "Tailwind CSS",
+    icon: (
+      <span className="tech-img-wrapper">
+        <img src={tempImg} alt="Tailwind CSS" />
+      </span>
+    ),
+    link: "https://tailwindcss.com/",
+  },
+  {
+    name: "Go",
+    icon: (
+      <span className="tech-img-wrapper">
+        <img src={tempImg} alt="Go" />
+      </span>
+    ),
+    link: "https://go.dev/",
+  },
+  {
+    name: "SQLite",
+    icon: (
+      <span className="tech-img-wrapper">
+        <img src={tempImg} alt="SQLite" />
+      </span>
+    ),
+    link: "https://www.sqlite.org/index.html",
+  },
+  {
+    name: "SQL",
+    icon: (
+      <span className="tech-img-wrapper">
+        <img src={tempImg} alt="SQL" />
+      </span>
+    ),
+    link: "https://www.mysql.com/",
+  },
+  {
+    name: "JWT",
+    icon: (
+      <span className="tech-img-wrapper">
+        <img src={tempImg} alt="JWT" />
+      </span>
+    ),
+    link: "https://jwt.io/",
+  },
+  {
+    name: "YOLOV8",
+    icon: (
+      <span className="tech-img-wrapper">
+        <img src={tempImg} alt="YOLOV8" />
+      </span>
+    ),
+    link: "https://github.com/ultralytics/ultralytics",
+  },
+  {
+    name: "OpenCV",
+    icon: (
+      <span className="tech-img-wrapper">
+        <img src={tempImg} alt="OpenCV" />
+      </span>
+    ),
+    link: "https://opencv.org/",
   },
   // ...add more as needed
 ];
