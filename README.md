@@ -4,6 +4,8 @@
 
 This project is a **modern, full-stack developer portfolio** built with **React**, **TypeScript**, and **Vite** on the frontend, and a **Node.js** backend for handling contact form submissions. 
 
+The project is deployed at: manankakkar.com
+
 ## 🚀 Features Implemented
 
 - **Interactive UI** 🎨  
