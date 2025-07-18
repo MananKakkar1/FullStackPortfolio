@@ -130,11 +130,18 @@ const techStack = [
 
 const timeline = [
   {
+    date: "May 2025 - Present",
+    title: "Software Engineer Intern",
+    org: "Flymingos Inc",
+    description: 
+    "Built secure backend systems and AI moderation tools for a B2B platform, enhancing user safety and reducing content review time from hours to just 2 minutes.",
+  },
+  {
     date: "June 2025",
     title: "SpurHacks Participant",
     org: "SpurHacks",
     description:
-      "Participating in SpurHacks, a hackathon based in Waterloo, focused on building innovative solutions, enhancing skills in teamwork and rapid development.",
+      "Built Netly, an AI-powered basketball analytics tool using YOLO, pose estimation, and OpenCV at SpurHacks 2025, enabling real-time and video-based detection of possessions, passes, and rule violations.",
 
   },
   {
@@ -142,14 +149,14 @@ const timeline = [
     title: "Computer Science Undergraduate",
     org: "University of Toronto",
     description:
-      "Specializing in Computer Science with a focus on software development, data structures, and algorithms.",
+      "Specializing in Computer Science with a focus on software development.",
   },
   {
     date: "2023",
     title: "Hack the Ridge",
     org: "Iroquois Ridge High School",
     description:
-      "Participated in a 9-hour hackathon, building a retro-style app with a team, enhancing skills in collaboration and rapid development.",
+      "Participated in a 9-hour hackathon where I collaborated with a team to build a retro-style ski resort planning app, helping users organize trips and explore resort details, sharpened skills in collaboration and rapid development.",
   },
   {
     date: "2019 – 2023",
