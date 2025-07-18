@@ -151,7 +151,7 @@ const projectsList: Project[] = [
     image: tempImg,
     sourceUrl: "https://github.com/MananKakkar1/ReelDeal",
     category: "Websites",
-    technologies: "React, Node.js, MongoDB, TMDB API, JWT, Google OAuth",
+    technologies: "React + Node.js + MongoDB + TMDB API + JWT + Google OAuth",
     funFacts: [
       "Browse trending, popular, top-rated, and upcoming movies with advanced search and filtering.",
       "Personalized watchlists, favorites, and AI-powered movie recommendations based on your viewing history.",
