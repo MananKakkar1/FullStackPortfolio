@@ -258,7 +258,7 @@ const About = () => {
           My journey into coding took a major leap when I partnered with Flymingos Inc as a Software Engineer, helping them build and grow their business from the ground up.
           This hands-on collaboration allowed me to apply my programming knowledge to real-world challenges, work closely with the founding team, and contribute directly to the company’s vision and technical direction.
           <br /><br />
-          Working with Flymingos, I learned the importance of writing clean, efficient code and gained exposure to the full software development lifecycle—from brainstorming ideas to deploying features that made a tangible impact.
+          Working with Flymingos, I learned the importance of writing clean, efficient code and gained exposure to the full software development lifecycle, from brainstorming ideas to deploying features that made a tangible impact.
           One of the highlights was collaborating on an AI-Moderation and Appeal System feature that required me to quickly adapt, communicate effectively, and solve problems in a fast-paced remote environment.
           <br /><br />
           This experience not only strengthened my technical skills but also fueled my passion for building impactful technology and supporting innovative businesses.
