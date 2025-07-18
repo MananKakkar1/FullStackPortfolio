@@ -98,7 +98,7 @@ const projectsList: Project[] = [
   },
   {
     id: "ai-paint-desktop-app",
-    title: "AI-Paint Desktop App",
+    title: "SmartPaint",
     description:
       "AI-Paint is a desktop application inspired by Microsoft Paint, allowing users to draw freely as well as generate AI-created images using text prompts.",
     image: aiPaintImg,
@@ -145,6 +145,21 @@ const projectsList: Project[] = [
     ],
   },
   {
+    id: "reeldeal-movie-app",
+    title: "ReelDeal",
+    description: "A full-stack movie discovery and recommendation platform inspired by IMDb and Letterboxd, built with React, Node.js, and MongoDB, integrating TMDB API for rich movie data and featuring personalized AI-powered recommendations.",
+    image: tempImg,
+    sourceUrl: "https://github.com/MananKakkar1/ReelDeal",
+    category: "Websites",
+    technologies: "React, Node.js, MongoDB, TMDB API, JWT, Google OAuth",
+    funFacts: [
+      "Browse trending, popular, top-rated, and upcoming movies with advanced search and filtering.",
+      "Personalized watchlists, favorites, and AI-powered movie recommendations based on your viewing history.",
+      "Social features include following users, liking/disliking reviews, and commenting.",
+      "Built with a responsive, mobile-first design supporting dark/light mode and real-time updates."
+    ]
+  },
+  {
     id: "sokoban-game",
     title: "Sokoban Game",
     description:
@@ -162,7 +177,7 @@ const projectsList: Project[] = [
   },
   {
     id: "paint-like-desktop-app",
-    title: "Paint-Like Desktop App",
+    title: "Paintly",
     description:
       "A desktop application inspired by Microsoft Paint, allowing users to draw freely and create digital art.",
     image: paintLikeImg,
@@ -247,13 +262,29 @@ const projectsList: Project[] = [
     ],
   },
   {
+    id: "sales-admin-dashboard",
+    title: "SalesBoard",
+    description:
+      "A full-stack web application for managing customers, products, and sales orders, complete with authentication, form validation, search, and pagination.",
+    image: tempImg,
+    sourceUrl: "https://github.com/MananKakkar1/SalesBoard",
+    category: "Websites",
+    technologies: "React + Redux Toolkit + Go + SQLite + Emotion",
+    funFacts: [
+      "Full-stack sales dashboard managing customers, products, and orders with React and Go.",
+      "Implements secure authentication with JWT and protects write routes via middleware.",
+      "Features include searchable lists, pagination, full CRUD, and real-time form validation.",
+      "Backend uses SQLite for lightweight data persistence with Go REST API support.",
+    ],
+  },
+  {
     id: "netly",
     title: "Netly",
     description:
       "A local basketball analytics tool that uses YOLO and OpenCV to detect players, track ball possession, and flag violations in real time. Features live overlays, video analysis, and a React + Flask interface, all running locally.",
-    image: netlyImg, 
+    image: netlyImg,
     sourceUrl: "https://github.com/MananKakkar1/Netly",
-    category: "Data Analysis", 
+    category: "Data Analysis",
     technologies: "Python + React + Node.js + Flask + YOLO + OpenCV",
     funFacts: [
       "Real-time player and basketball detection using YOLO and pose estimation.",
@@ -268,7 +299,7 @@ const projectsList: Project[] = [
     title: "GitHub Discord Bot",
     description:
       "A Discord bot that tracks and displays the total number of commits for a given GitHub repository. Useful for teams and communities to monitor project activity directly from Discord.",
-    image: githubDiscordBotImg, 
+    image: githubDiscordBotImg,
     sourceUrl: "https://github.com/MananKakkar1/github-discord-bot",
     category: "Bots",
     technologies: "Node.js + Discord.js + GitHub API",
