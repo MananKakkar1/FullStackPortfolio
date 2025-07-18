@@ -255,14 +255,14 @@ const About = () => {
       <div className="about-creative-section">
         <h2 className="goals-header">My Story</h2>
         <p className="goals-text">
-          I got into coding during the pandemic when I started learning Python and built simple games like Tic Tac Toe.
-          That experience sparked my passion for programming it felt like solving puzzles, and I really enjoyed figuring things out piece by piece.
+          My journey into coding took a major leap when I partnered with Flymingos Inc as a Software Engineer, helping them build and grow their business from the ground up.
+          This hands-on collaboration allowed me to apply my programming knowledge to real-world challenges, work closely with the founding team, and contribute directly to the company’s vision and technical direction.
           <br /><br />
-          Since then, I’ve pushed myself to grow, earning a spot in both the Computer Science Specialist and co-op programs at UofT.
-          One of my favorite experiences so far was participating in a hackathon, where my team built a retro-style app in just nine hours.
-          It was intense but incredibly fun, and it showed me how much I enjoy collaborating, thinking on my feet, and building under pressure.
+          Working with Flymingos, I learned the importance of writing clean, efficient code and gained exposure to the full software development lifecycle—from brainstorming ideas to deploying features that made a tangible impact.
+          One of the highlights was collaborating on an AI-Moderation and Appeal System feature that required me to quickly adapt, communicate effectively, and solve problems in a fast-paced remote environment.
           <br /><br />
-          Now, I’m looking to take on new challenges and gain real-world experience, especially in areas like generative AI, web development, and secure digital systems.<br />
+          This experience not only strengthened my technical skills but also fueled my passion for building impactful technology and supporting innovative businesses.
+          Now, I’m eager to embrace new challenges and continue my growth by working on large-scale software projects and developing solutions that make a real difference, especially through co-op placements and internships.<br />
         </p>
       </div>
 
