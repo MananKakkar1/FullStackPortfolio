@@ -145,21 +145,6 @@ const projectsList: Project[] = [
     ],
   },
   {
-    id: "reeldeal-movie-app",
-    title: "ReelDeal",
-    description: "A full-stack movie discovery and recommendation platform inspired by IMDb and Letterboxd, built with React, Node.js, and MongoDB, integrating TMDB API for rich movie data and featuring personalized AI-powered recommendations.",
-    image: tempImg,
-    sourceUrl: "https://github.com/MananKakkar1/ReelDeal",
-    category: "Websites",
-    technologies: "React + Node.js + MongoDB + TMDB API + JWT + Google OAuth",
-    funFacts: [
-      "Browse trending, popular, top-rated, and upcoming movies with advanced search and filtering.",
-      "Personalized watchlists, favorites, and AI-powered movie recommendations based on your viewing history.",
-      "Social features include following users, liking/disliking reviews, and commenting.",
-      "Built with a responsive, mobile-first design supporting dark/light mode and real-time updates."
-    ]
-  },
-  {
     id: "sokoban-game",
     title: "Sokoban Game",
     description:
