@@ -281,7 +281,7 @@ const projectsList: Project[] = [
   },
   {
     id: "github-discord-bot",
-    title: "GitHub Discord Bot",
+    title: "Commit Tracker Bot",
     description:
       "A Discord bot that tracks and displays the total number of commits for a given GitHub repository. Useful for teams and communities to monitor project activity directly from Discord.",
     image: githubDiscordBotImg,
