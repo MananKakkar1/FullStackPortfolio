@@ -6,6 +6,27 @@ import type { Project } from "./Projects";
 import "../components/css_files/Projects.css";
 import "../components/css_files/ResumeGenerator.css";
 
+// Improved LaTeX escaper
+function escapeLatex(str: string): string {
+  if (!str) return "";
+  return str
+    .replace(/\\/g, '\\textbackslash{}')
+    .replace(/%/g, '\\%')
+    .replace(/#/g, '\\#')
+    .replace(/&/g, '\\&')
+    .replace(/_/g, '\\_')
+    .replace(/{/g, '\\{')
+    .replace(/}/g, '\\}')
+    .replace(/\$/g, '\\$')
+    .replace(/\^/g, '\\^{}')
+    .replace(/~/g, '\\textasciitilde{}')
+    .replace(/\|/g, '\\textbar{}')
+    .replace(/</g, '\\textless{}')
+    .replace(/>/g, '\\textgreater{}')
+    .replace(/"/g, "''")
+    .replace(/\r?\n|\r/g, ' ');
+}
+
 const latexTemplate = (projects: typeof projectsList) => `
 %-------------------------
 % Resume in Latex
@@ -26,45 +47,25 @@ const latexTemplate = (projects: typeof projectsList) => `
 \\usepackage{fancyhdr}
 \\usepackage[english]{babel}
 \\usepackage{tabularx}
-\\input{glyphtounicode}
-
-%----------FONT OPTIONS----------
-% sans-serif
-% \\usepackage[sfdefault]{FiraSans}
-% \\usepackage[sfdefault]{roboto}
-% \\usepackage[sfdefault]{noto-sans}
-% \\usepackage[default]{sourcesanspro}
-
-% serif
-% \\usepackage{CormorantGaramond}
-% \\usepackage{charter}
 
 \\pagestyle{fancy}
-\\fancyhf{} % clear all header and footer fields
+\\fancyhf{}
 \\fancyfoot{}
 \\renewcommand{\\headrulewidth}{0pt}
 \\renewcommand{\\footrulewidth}{0pt}
-
-% Adjust margins
 \\addtolength{\\oddsidemargin}{-0.5in}
 \\addtolength{\\evensidemargin}{-0.5in}
 \\addtolength{\\textwidth}{1in}
 \\addtolength{\\topmargin}{-.5in}
 \\addtolength{\\textheight}{1.0in}
-
 \\urlstyle{same}
-
 \\raggedbottom
 \\raggedright
 \\setlength{\\tabcolsep}{0in}
 
-% Sections formatting
 \\titleformat{\\section}{
   \\vspace{-4pt}\\scshape\\raggedright\\large
 }{}{0em}{}[\\color{black}\\titlerule \\vspace{-5pt}]
-
-% Ensure that generate pdf is machine readable/ATS parsable
-\\pdfgentounicode=1
 
 %-------------------------
 % Custom commands
@@ -95,7 +96,6 @@ const latexTemplate = (projects: typeof projectsList) => `
 }
 
 \\newcommand{\\resumeSubItem}[1]{\\resumeItem{#1}\\vspace{-4pt}}
-
 \\renewcommand\\labelitemii{$\\vcenter{\\hbox{\\tiny$\\bullet$}}$}
 
 \\newcommand{\\resumeSubHeadingListStart}{\\begin{itemize}[leftmargin=0.15in, label={}]}
@@ -103,56 +103,70 @@ const latexTemplate = (projects: typeof projectsList) => `
 \\newcommand{\\resumeItemListStart}{\\begin{itemize}}
 \\newcommand{\\resumeItemListEnd}{\\end{itemize}\\vspace{-5pt}}
 
-%-------------------------------------------
-%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \\begin{document}
 
 %----------HEADING----------
+
 \\begin{center}
     \\textbf{\\Huge \\scshape Manan Kakkar} \\\\ \\vspace{1pt}
-    \\small \\href{mailto:manan.kakkar.2005@outlook.com}{manan.kakkar.2005@outlook.com} $|$ 416-705-7631 $|$ Oakville, Ontario, Canada \\\\
-    \\href{https://www.linkedin.com/in/manankakkar11}{\\underline{LinkedIn}}
-    \\href{https://github.com/MananKakkar1}{\\underline{GitHub}} \\\\
+    \\small \\href{mailto:manan.kakkar.2005@outlook.com}{manan.kakkar.2005@outlook.com} $|$
+    \\href{https://www.linkedin.com/in/manankakkar11}{linkedin.com/in/manankakkar11} $|$
+    \\href{https://github.com/MananKakkar1}{github.com/MananKakkar1} $|$
+    416-705-7631\\\\
 \\end{center}
 
 %-----------EDUCATION-----------
 \\section{Education}
   \\resumeSubHeadingListStart
     \\resumeSubheading
-      {University of Toronto Mississauga}
-      {Mississauga, Ontario}
-      {Honours Bachelor of Science: Computer Science Specialist}
-      {Expected June 2028}
+      {University of Toronto Mississauga}{Mississauga, Ontario}
+      {Honours Bachelor of Science: Computer Science Specialist}{Expected June 2028}
           \\resumeItemListStart
             \\resumeItem{Enrolled in the UTMCIP Co-op Program}
+            \\resumeItem{\\textbf{Relevant Coursework:} Computer Organization, Software Design, Introduction to Theory of Computation, Software Tools and Systems Programming, Data Structures \\& Analysis, Probability and Statistics 1, Calculus of Several Variables, Linear Algebra, Introduction to Software Engineering}
           \\resumeItemListEnd
   \\resumeSubHeadingListEnd
+
+%-----------EXPERIENCE-----------
+\\section{Experience}
+  \\resumeSubHeadingListStart
+    \\resumeSubheading
+      {Flymingos}{May 2025 - Present}
+      {Software Engineer Intern}{Remote}
+      \\resumeItemListStart
+        \\resumeItem{Built and maintained a robust CI/CD pipeline using GitHub Actions to automate testing and deployment.}
+        \\resumeItem{Developed scalable \\textbf{REST APIs} using \\textbf{Node.js}, \\textbf{Express}, and \\textbf{Flask} for various backend services.}
+        \\resumeItem{Integrated \\textbf{Firebase} for authentication and role-based access, managing user and subscription data.}
+        \\resumeItem{Collaborated across teams using \\textbf{Jira} and \\textbf{Discord} to manage tasks and sprint priorities.}
+        \\resumeItem{Created an AI-driven moderation and appeal system with \\textbf{GPT-4o}, reducing review time to under \\textbf{2 minutes}.}
+      \\resumeItemListEnd
+  \\resumeSubHeadingListEnd
+
+%-----------PROJECTS-----------
+\\section{Projects}
+
+    \\resumeSubHeadingListStart
+${projects.map((p) =>
+`    \\resumeProjectHeading
+        {\\textbf{${escapeLatex(p.title)}} $|$ ${escapeLatex(p.technologies || "Tech")}}{}
+      \\resumeItemListStart
+        \\resumeItem{${escapeLatex((p.latex_description || p.description || ""))}}
+      \\resumeItemListEnd
+`).join('\n')}
+    \\resumeSubHeadingListEnd
 
 %-----------TECHNICAL SKILLS-----------
 \\section{Technical Skills}
 \\begin{itemize}[leftmargin=0.15in, label={}]
-
     \\small{\\item{
-        \\textbf{Languages}{: Python, Java, JavaScript, TypeScript, C/C++, CSS, HTML, Bash, Assembly (RISC-V)} \\\\
-        \\textbf{Frameworks \\& Libraries}{: JavaFX, Tkinter, Flask (Python), React, OpenAI API, Node.js, Express.js, Nodemailer} \\\\
-        \\textbf{Tools \\& Environments}{: Vite, Git, GitHub, VS Code, IntelliJ, PyCharm, Vim, OpenHardwareMonitor} \\\\
-        \\textbf{Systems \\& Networking}{: Linux/Unix, Shell Scripting, File I/O, Process Management, TCP/IP Networking} \\\\
-        \\textbf{Software Concepts}{: Object-Oriented Programming, MVC Architecture, Design Patterns, Unit Testing, Game Logic, State Machines} 
+        \\textbf{Languages:} Python, Java, JavaScript, TypeScript, C, SQL, Bash, HTML, CSS, Go, Assembly (RISC-V) \\\\
+        \\textbf{Frameworks \\& Libraries:} JavaFX, Tkinter, Flask (Python), React, OpenAI API, Node.js, Express.js, Nodemailer \\\\
+        \\textbf{Tools \\& Environments:} Vite, Git, GitHub, VS Code, IntelliJ, PyCharm, Vim, Figma, Jira, Vercel, Render \\\\
+        \\textbf{Systems \\& Networking:} Linux/Unix, Shell Scripting, File I/O, Process Management, TCP/IP Networking \\\\
+        \\textbf{Databases \\& DevOps:} Firebase, Render, Vercel, GitHub Actions, CI/CD, REST APIs \\\\
+        \\textbf{Portfolio Website:} {\\href{https://manankakkar.com}{https://manankakkar.com}}
     }}
 \\end{itemize}
-
-%-----------PROJECTS-----------
-\\section{Projects}
-  \\resumeSubHeadingListStart
-${projects
-  .map(
-    (p: Project) => `    \\resumeProjectHeading
-        {\\textbf{${p.title}} $|$ \\emph{${p.technologies || "Tech"}}}
-        ${p.latex_description}`
-  )
-  .join("\n")}
-  \\resumeSubHeadingListEnd
 
 \\end{document}
 `;
@@ -172,21 +186,13 @@ const parseTechnologies = (techString: string): string[] => {
 };
 
 const AddIcon = () => (
-  <svg
-    className="action-icon"
-    viewBox="0 0 24 24"
-    xmlns="http://www.w3.org/2000/svg"
-  >
+  <svg className="action-icon" viewBox="0 0 24 24">
     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z" />
   </svg>
 );
 
 const RemoveIcon = () => (
-  <svg
-    className="action-icon"
-    viewBox="0 0 24 24"
-    xmlns="http://www.w3.org/2000/svg"
-  >
+  <svg className="action-icon" viewBox="0 0 24 24">
     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11H7v-2h10v2z" />
   </svg>
 );
@@ -194,6 +200,9 @@ const RemoveIcon = () => (
 const ResumeGenerator = () => {
   const [selected, setSelected] = useState("All");
   const [selectedProjects, setSelectedProjects] = useState<string[]>([]);
+  const [showModal, setShowModal] = useState(false);
+  const [pdfUrl, setPdfUrl] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const categories = getCategories();
 
   const filteredProjects =
@@ -207,15 +216,86 @@ const ResumeGenerator = () => {
     );
   };
 
-  const handleDownload = () => {
+  const handlePreview = async () => {
+    setIsLoading(true);
+    setPdfUrl(null);
+
     const latex = latexTemplate(
       projectsList.filter((p: Project) => selectedProjects.includes(p.id))
     );
-    const blob = new Blob([latex], { type: "text/x-tex" });
+
+    const response = await fetch("https://latex.ytotech.com/builds/sync", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        compiler: "xelatex",
+        resources: [
+          {
+            main: true,
+            content: latex,
+          },
+        ],
+      }),
+    });
+
+    setIsLoading(false);
+
+    if (!response.ok) {
+      alert("Error generating PDF! Please check your LaTeX input.");
+      return;
+    }
+
+    const blob = await response.blob();
+    const url = URL.createObjectURL(blob);
+    setPdfUrl(url);
+    setShowModal(true);
+  };
+
+  // For download from the modal
+  const handleModalDownload = () => {
+    if (!pdfUrl) return;
+    const a = document.createElement("a");
+    a.href = pdfUrl;
+    a.download = "resume.pdf";
+    a.click();
+  };
+
+  // Modal cleanup on close
+  const handleModalClose = () => {
+    if (pdfUrl) URL.revokeObjectURL(pdfUrl);
+    setShowModal(false);
+    setPdfUrl(null);
+  };
+
+  const handleDownload = async () => {
+    const latex = latexTemplate(
+      projectsList.filter((p: Project) => selectedProjects.includes(p.id))
+    );
+
+    const response = await fetch("https://latex.ytotech.com/builds/sync", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        compiler: "xelatex",
+        resources: [
+          {
+            main: true,
+            content: latex,
+          },
+        ],
+      }),
+    });
+
+    if (!response.ok) {
+      alert("Error generating PDF! Please check your LaTeX input.");
+      return;
+    }
+
+    const blob = await response.blob();
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "resume.tex";
+    a.download = "Manan Kakkar -- Resume.pdf";
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -250,7 +330,6 @@ const ResumeGenerator = () => {
               selectedProjects.includes(project.id) ? "selected" : ""
             }`}
           >
-            {/* Add the yellow lines above the screen */}
             <div className="gameboy-lines">
               <div className="gameboy-line"></div>
               <div className="gameboy-line"></div>
@@ -326,7 +405,6 @@ const ResumeGenerator = () => {
               </div>
             </div>
 
-            {/* Selection indicator overlay */}
             {selectedProjects.includes(project.id) && (
               <div className="selection-overlay">
                 <div className="selection-checkmark">✓</div>
@@ -409,7 +487,7 @@ const ResumeGenerator = () => {
           </div>
         )}
 
-        <div className="download-section">
+        <div className="download-section" style={{ display: "flex", gap: "1rem" }}>
           <button
             className="download-btn"
             onClick={handleDownload}
@@ -419,13 +497,98 @@ const ResumeGenerator = () => {
               ? "Select Projects to Download"
               : `Download LaTeX Resume (${selectedProjects.length} projects)`}
           </button>
-
-          <p className="latex-info">
-            You can compile the downloaded <code>.tex</code> file using Overleaf
-            or your local LaTeX installation.
-          </p>
+          <button
+            className="download-btn"
+            onClick={handlePreview}
+            disabled={selectedProjects.length === 0 || isLoading}
+          >
+            {isLoading
+              ? "Generating..."
+              : selectedProjects.length === 0
+              ? "Select Projects to Preview"
+              : `Preview Resume (${selectedProjects.length} projects)`}
+          </button>
         </div>
       </div>
+
+      {/* PDF Preview Modal */}
+      {showModal && pdfUrl && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            zIndex: 1000,
+            width: "100vw",
+            height: "100vh",
+            background: "rgba(0,0,0,0.7)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+          onClick={handleModalClose}
+        >
+          <div
+            style={{
+              background: "#fff",
+              padding: "1.5rem",
+              borderRadius: "12px",
+              boxShadow: "0 0 24px #2226",
+              maxWidth: "80vw",
+              maxHeight: "80vh",
+              position: "relative",
+              overflow: "auto",
+              display: "flex",
+              flexDirection: "column",
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h2 style={{ margin: 0 }}>Resume Preview</h2>
+            <iframe
+              src={pdfUrl}
+              title="Resume PDF Preview"
+              style={{
+                width: "60vw",
+                height: "70vh",
+                border: "none",
+                margin: "1rem 0",
+                background: "#fafbfc",
+              }}
+            />
+            <div style={{ textAlign: "right" }}>
+              <button
+                onClick={handleModalDownload}
+                style={{
+                  marginRight: "1rem",
+                  padding: "0.5em 1.2em",
+                  fontWeight: 600,
+                  borderRadius: "6px",
+                  background: "#2274d3",
+                  color: "#fff",
+                  border: "none",
+                  cursor: "pointer",
+                }}
+              >
+                Download PDF
+              </button>
+              <button
+                onClick={handleModalClose}
+                style={{
+                  padding: "0.5em 1.2em",
+                  fontWeight: 600,
+                  borderRadius: "6px",
+                  background: "#e34b3c",
+                  color: "#fff",
+                  border: "none",
+                  cursor: "pointer",
+                }}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

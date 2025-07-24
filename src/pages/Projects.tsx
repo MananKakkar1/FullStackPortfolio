@@ -36,6 +36,8 @@ const projectsList: Project[] = [
     title: "Chess Game",
     description:
       "A simple chess game built with HTML, CSS, JavaScript, and Python.",
+    latex_description:
+      "Built a browser-based chess game with 4 AI difficulty modes, Stockfish and GPT integration, and async communication to reduce AI response time by 30%.",
     image: chessImg,
     sourceUrl: "https://github.com/MananKakkar1/Chess_Game",
     category: "Websites",
@@ -52,6 +54,8 @@ const projectsList: Project[] = [
     title: "Portfolio Website",
     description:
       "A personal portfolio website built using React, TypeScript, and modern web technologies to showcase my skills and projects.",
+    latex_description:
+      "Developed a modern React and TypeScript portfolio site with dynamic contact forms, responsive design, and a custom Node.js backend for email delivery.",
     image: portfolioImg,
     sourceUrl: "https://github.com/MananKakkar1/FullStackPortfolio",
     category: "Websites",
@@ -69,6 +73,8 @@ const projectsList: Project[] = [
     title: "File System Tree Visualizer",
     description:
       "A visualizer for file system trees, built with Python and Pygame, to help users understand the structure of their file systems.",
+    latex_description:
+      "Visualized hierarchical file system structures in Python using Pygame; supports real-time rendering, CSV data parsing, and interactive exploration.",
     image: fileSystemImg,
     sourceUrl: "https://github.com/MananKakkar1/File-System-Tree-Visualizer",
     category: "Data Analysis",
@@ -85,6 +91,8 @@ const projectsList: Project[] = [
     title: "System Overlay Python Script",
     description:
       "A Python script that overlays system information on the screen, providing real-time updates on system performance.",
+    latex_description:
+      "Created a cross-platform Python GUI to overlay live CPU/GPU and system performance metrics using OpenHardwareMonitor and Tkinter.",
     image: systemOverlayImg,
     sourceUrl: "https://github.com/MananKakkar1/System-Overlay-Python-Script",
     category: "Data Analysis",
@@ -101,6 +109,8 @@ const projectsList: Project[] = [
     title: "SmartPaint",
     description:
       "AI-Paint is a desktop application inspired by Microsoft Paint, allowing users to draw freely as well as generate AI-created images using text prompts.",
+    latex_description:
+      "Built a JavaFX desktop paint app supporting freehand drawing, brush selection, and AI image generation from text prompts using Llama3.",
     image: aiPaintImg,
     sourceUrl: "https://github.com/MananKakkar1/AI_Paint_Application",
     category: "Desktop Applications",
@@ -117,6 +127,8 @@ const projectsList: Project[] = [
     title: "Custom Linux Shell",
     description:
       "A custom Linux shell built using C, designed to provide a unique command-line interface and support for various shell features.",
+    latex_description:
+      "Engineered a feature-rich Linux shell in C with custom commands, dynamic environment variables, background processing, piping, and TCP socket module.",
     image: shellImg,
     sourceUrl: "https://github.com/MananKakkar1/Custom-Linux-Shell",
     category: "System Tools",
@@ -133,6 +145,8 @@ const projectsList: Project[] = [
     title: "Maze Runner Game",
     description:
       "A maze runner game built with python's pygame, where players navigate through a randomly generated maze to reach the finish line.",
+    latex_description:
+      "Developed a maze runner game in Python using Pygame, featuring randomized levels, collision detection, and progressively challenging layouts.",
     image: mazeRunnerImg,
     sourceUrl: "https://github.com/MananKakkar1/MazeRunnerGame",
     category: "Games",
@@ -149,6 +163,8 @@ const projectsList: Project[] = [
     title: "Sokoban Game",
     description:
       "A Sokoban game built with risc-v assembly, where players push boxes to designated locations on a board.",
+    latex_description:
+      "Implemented a classic Sokoban puzzle game in RISC-V Assembly, focusing on box-pushing mechanics and optimized memory/performance.",
     image: sokobanImg,
     sourceUrl: "https://github.com/MananKakkar1/Sokoban",
     category: "Games",
@@ -165,6 +181,8 @@ const projectsList: Project[] = [
     title: "Paintly",
     description:
       "A desktop application inspired by Microsoft Paint, allowing users to draw freely and create digital art.",
+    latex_description:
+      "Created a JavaFX desktop paint clone with shape tools, freehand drawing, image export, and responsive UI for digital art.",
     image: paintLikeImg,
     sourceUrl: "https://github.com/MananKakkar1/Paint_Like_Application",
     category: "Desktop Applications",
@@ -181,9 +199,10 @@ const projectsList: Project[] = [
     title: "World Population Data Extractor",
     description:
       "A Python script that extracts and organizes world population data from various sources in a csv file, providing insights into global demographics.",
+    latex_description:
+      "Developed a Python tool for extracting, aggregating, and organizing world population data into CSV for analysis and visualization.",
     image: extractorImg,
-    sourceUrl:
-      "https://github.com/MananKakkar1/world_population_data_extractor",
+    sourceUrl: "https://github.com/MananKakkar1/world_population_data_extractor",
     category: "Data Analysis",
     technologies: "Python + CSV",
     funFacts: [
@@ -198,6 +217,8 @@ const projectsList: Project[] = [
     title: "Pokemon Game",
     description:
       "A Text based Pokemon game built with Python, where players can play through a story driven by user choices.",
+    latex_description:
+      "Built a text-based Pokemon adventure game in Python, featuring branching narratives, modular storylines, and replayable endings.",
     image: pokemonImg,
     sourceUrl: "https://github.com/MananKakkar1/Pokemon",
     category: "Games",
@@ -214,6 +235,8 @@ const projectsList: Project[] = [
     title: "Othello",
     description:
       "A simple terminal based Othello game built with Java, where players can play against each other or against a computer AI.",
+    latex_description:
+      "Designed a terminal-based Othello game in Java with player-vs-player and AI opponent modes, move validation, and a scoring system.",
     image: othelloImg,
     sourceUrl: "https://github.com/MananKakkar1/Othello",
     category: "Games",
@@ -230,7 +253,9 @@ const projectsList: Project[] = [
     title: "ReelDeal",
     description:
       "A full-stack movie recommendation app with JWT authentication, TMDB integration, smart recommendations, and a fast React + Vite frontend. Users can search, filter, and save favorite movies, with plans for advanced social and discovery features.",
-    image: tempImg, // Placeholder image
+    latex_description:
+      "Created a full-stack movie discovery app with JWT auth, TMDB integration, user recommendations, and a blazing-fast React + Vite frontend.",
+    image: tempImg,
     sourceUrl: "https://github.com/MananKakkar1/ReelDeal",
     category: "Websites",
     technologies:
@@ -251,6 +276,8 @@ const projectsList: Project[] = [
     title: "SalesBoard",
     description:
       "A full-stack web application for managing customers, products, and sales orders, complete with authentication, form validation, search, and pagination.",
+    latex_description:
+      "Built a full-stack sales admin dashboard with React and Go, JWT-secured auth, CRUD, live search, validation, and SQLite persistence.",
     image: tempImg,
     sourceUrl: "https://github.com/MananKakkar1/SalesBoard",
     category: "Websites",
@@ -267,6 +294,8 @@ const projectsList: Project[] = [
     title: "Netly",
     description:
       "A local basketball analytics tool that uses YOLO and OpenCV to detect players, track ball possession, and flag violations in real time. Features live overlays, video analysis, and a React + Flask interface, all running locally.",
+    latex_description:
+      "Developed a real-time basketball analytics tool with YOLO, OpenCV, and React/Flask stack; live overlays, player tracking, and event detection.",
     image: netlyImg,
     sourceUrl: "https://github.com/MananKakkar1/Netly",
     category: "Data Analysis",
@@ -284,6 +313,8 @@ const projectsList: Project[] = [
     title: "Commit Tracker Bot",
     description:
       "A Discord bot that tracks and displays the total number of commits for a given GitHub repository. Useful for teams and communities to monitor project activity directly from Discord.",
+    latex_description:
+      "Built a Discord bot using Node.js to track and display real-time commit counts for any GitHub repository in Discord servers.",
     image: githubDiscordBotImg,
     sourceUrl: "https://github.com/MananKakkar1/github-discord-bot",
     category: "Bots",
@@ -298,7 +329,9 @@ const projectsList: Project[] = [
     title: "Algorithm Visualizer",
     description:
       "A web app for visualizing sorting, searching, and graph algorithms. Users can step through algorithm execution, adjust data, and learn core concepts interactively through animated visualizations.",
-    image: tempImg, // Placeholder image
+    latex_description:
+      "Created an interactive algorithm visualizer for sorting, searching, and graph algorithms with step-by-step controls and educational UI.",
+    image: tempImg,
     sourceUrl: "https://github.com/MananKakkar1/Algorithm-Visualizer",
     category: "Websites",
     technologies: "JavaScript + HTML + CSS",
@@ -309,6 +342,7 @@ const projectsList: Project[] = [
     ],
   },
 ];
+
 
 const getCategories = () => {
   const cats = Array.from(new Set(projectsList.map((p) => p.category)));
