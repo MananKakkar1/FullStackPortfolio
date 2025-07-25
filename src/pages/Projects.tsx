@@ -110,7 +110,7 @@ const projectsList: Project[] = [
     description:
       "AI-Paint is a desktop application inspired by Microsoft Paint, allowing users to draw freely as well as generate AI-created images using text prompts.",
     latex_description:
-      "Built a JavaFX desktop paint app supporting freehand drawing, brush selection, and AI image generation from text prompts using Llama3.",
+      "\\resumeProjectHeading\n  {\\textbf{SmartPaint} \\$|\\$ \\emph{Java, JavaFX, Llama3}}{}\n  \\resumeItemListStart\n    \\resumeItem{Built a desktop paint app with \\textbf{JavaFX} using \\textbf{Agile} practices, supporting shape drawing, and erasing tools.}\n    \\resumeItem{Implemented agentic AI workflow with \\textbf{Llama3} for shape generation based on natural language prompts.}\n    \\resumeItem{Designed a \\textbf{finite state machine} to manage user interaction modes, improving UI modularity and responsiveness.}\n    \\resumeItem{Implemented a custom file parser and serializer with \\textbf{unit tests} to ensure reliable save/load functionality.}\n  \\resumeItemListEnd",
     image: aiPaintImg,
     sourceUrl: "https://github.com/MananKakkar1/AI_Paint_Application",
     category: "Desktop Applications",
@@ -128,7 +128,7 @@ const projectsList: Project[] = [
     description:
       "A custom Linux shell built using C, designed to provide a unique command-line interface and support for various shell features.",
     latex_description:
-      "Engineered a feature-rich Linux shell in C with custom commands, dynamic environment variables, background processing, piping, and TCP socket module.",
+      "\\resumeProjectHeading\n  {\\textbf{Custom Linux Shell} \\$|\\$ \\emph{C, Unix Sockets, Process Management}}{}\n  \\resumeItemListStart\n    \\resumeItem{Engineered a feature-rich Linux shell supporting \\textbf{20+} commands with support for environment variables.}\n    \\resumeItem{Added support for recursive traversal and advanced navigation (e.g., \\texttt{cd ...}) to improve usability.}\n    \\resumeItem{Enabled multitasking by implementing \\textbf{background job execution} and \\textbf{command piping}.}\n    \\resumeItem{Developed a TCP socket module to support reliable \\textbf{client-server communication} with concurrent connections and sub-\\textbf{100ms} latency in LAN environments.}\n  \\resumeItemListEnd",
     image: shellImg,
     sourceUrl: "https://github.com/MananKakkar1/Custom-Linux-Shell",
     category: "System Tools",
@@ -276,8 +276,7 @@ const projectsList: Project[] = [
     title: "SalesBoard",
     description:
       "A full-stack web application for managing customers, products, and sales orders, complete with authentication, form validation, search, and pagination.",
-    latex_description:
-      "Built a full-stack sales admin dashboard with React and Go, JWT-secured auth, CRUD, live search, validation, and SQLite persistence.",
+    latex_description: "\\resumeProjectHeading\n  {\\textbf{SalesBoard} \\hfill \\emph{React, Go, SQLite, SQL, JWT}}{}\n  \\resumeItemListStart\n    \\resumeItem{Built a full-stack sales dashboard using \\textbf{React + Redux Toolkit} and a \\textbf{Go backend} with REST APIs to manage customers, products, and orders.}\n    \\resumeItem{Designed and queried a \\textbf{SQLite} database using raw \\textbf{SQL} for structured data storage and retrieval.}\n    \\resumeItem{Implemented secure \\textbf{JWT authentication}, middleware-protected routes, and Redux-based token management.}\n    \\resumeItem{Developed full \\textbf{CRUD}, \\textbf{search}, \\textbf{pagination}, and \\textbf{validation} functionalities for all modules on both frontend and backend.}\n  \\resumeItemListEnd",
     image: tempImg,
     sourceUrl: "https://github.com/MananKakkar1/SalesBoard",
     category: "Websites",
@@ -295,7 +294,7 @@ const projectsList: Project[] = [
     description:
       "A local basketball analytics tool that uses YOLO and OpenCV to detect players, track ball possession, and flag violations in real time. Features live overlays, video analysis, and a React + Flask interface, all running locally.",
     latex_description:
-      "Developed a real-time basketball analytics tool with YOLO, OpenCV, and React/Flask stack; live overlays, player tracking, and event detection.",
+      "\\resumeProjectHeading\n  {\\textbf{Netly} \\$|\\$ React, Flask, OpenCV, YOLOv5, MongoDB, Python}{SpurHacks Hackathon}\n  \\resumeItemListStart\n    \\resumeItem{Developed an \\textbf{AI}-powered basketball analysis system during SpurHacks to detect traveling violations and track ball possession in \\textbf{real-time} from live and recorded footage.}\n    \\resumeItem{Used \\textbf{YOLOv5} and OpenCV to track players, estimate poses, and detect basketball movement.}\n    \\resumeItem{Built a web interface with React and Flask to visualize analysis overlays and session results.}\n    \\resumeItem{Implemented a \\textbf{MongoDB + JWT}-based login system with session and role management.}\n  \\resumeItemListEnd",
     image: netlyImg,
     sourceUrl: "https://github.com/MananKakkar1/Netly",
     category: "Data Analysis",
