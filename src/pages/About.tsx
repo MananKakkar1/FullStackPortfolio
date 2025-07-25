@@ -252,7 +252,7 @@ const About = () => {
         </div>
       </div>
       {/* Goals Section */}
-      <div className="about-creative-section">
+      {/* <div className="about-creative-section">
         <h2 className="goals-header">My Story</h2>
         <p className="goals-text">
           My journey into coding took a major leap when I partnered with Flymingos Inc as a Software Engineer, helping them build and grow their business from the ground up.
@@ -264,7 +264,7 @@ const About = () => {
           This experience not only strengthened my technical skills but also fueled my passion for building impactful technology and supporting innovative businesses.
           Now, I’m eager to embrace new challenges and continue my growth by working on large-scale software projects and developing solutions that make a real difference, especially through co-op placements and internships.<br />
         </p>
-      </div>
+      </div> */}
 
       {/* Timeline Section */}
       <div className="about-creative-section">
