@@ -304,7 +304,7 @@ const ResumeGenerator = () => {
     <div className="projects-page-background">
       <h1>Dynamic Resume Generator</h1>
       <h2 style={{ color: "var(--text)", marginBottom: "20px" }}>
-        Click the green "+" button to Include Projects in Resume
+        Add or Remove Projects to include in your version of my resume!
       </h2>
 
       <div className="category-filter">
