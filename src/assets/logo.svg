@@ -1,0 +1,161 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 252 124" role="img" aria-label="MK gamer monogram logo">
+  <defs>
+    <linearGradient id="mkGrad" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#00E5FF"/>
+      <stop offset="100%" stop-color="#7C3AED"/>
+    </linearGradient>
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <style>
+      :root {
+        --mk-fill: url(#mkGrad);
+        --mk-edge-outer: #FFFFFF; /* outer halo */
+        --mk-edge-inner: #000000; /* inner keyline */
+        --mk-dpad: #FFFFFF;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --mk-dpad: #0A0A0A;
+        }
+      }
+      .outline1 rect {
+        fill: none;
+        stroke: var(--mk-edge-outer);
+        stroke-width: 12.0px;
+        shape-rendering: crispEdges;
+      }
+      .outline2 rect {
+        fill: none;
+        stroke: var(--mk-edge-inner);
+        stroke-width: 7.2px;
+        shape-rendering: crispEdges;
+      }
+      .fill rect.pix {
+        fill: var(--mk-fill);
+        filter: url(#softGlow);
+        shape-rendering: crispEdges;
+      }
+      .fill rect.dpad {
+        fill: var(--mk-dpad);
+        opacity: 0.95;
+        shape-rendering: crispEdges;
+      }
+    </style>
+  </defs>
+  <g class="outline1">
+      <rect class="pix" x="6.00" y="6.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="102.00" y="6.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="6.00" y="22.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="22.00" y="22.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="86.00" y="22.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="102.00" y="22.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="6.00" y="38.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="38.00" y="38.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="70.00" y="38.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="102.00" y="38.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="6.00" y="54.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="54.00" y="54.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="102.00" y="54.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="6.00" y="70.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="102.00" y="70.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="6.00" y="86.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="102.00" y="86.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="6.00" y="102.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="102.00" y="102.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="134.00" y="6.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="198.00" y="6.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="134.00" y="22.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="182.00" y="22.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="134.00" y="38.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="166.00" y="38.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="134.00" y="54.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="150.00" y="54.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="134.00" y="70.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="166.00" y="70.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="134.00" y="86.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="182.00" y="86.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="134.00" y="102.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="198.00" y="102.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="dpad" x="120.40" y="58.80" width="11.20" height="6.40" rx="2" ry="2"/>
+      <rect class="dpad" x="122.80" y="56.40" width="6.40" height="11.20" rx="2" ry="2"/>
+  </g>
+  <g class="outline2">
+      <rect class="pix" x="6.00" y="6.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="102.00" y="6.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="6.00" y="22.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="22.00" y="22.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="86.00" y="22.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="102.00" y="22.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="6.00" y="38.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="38.00" y="38.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="70.00" y="38.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="102.00" y="38.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="6.00" y="54.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="54.00" y="54.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="102.00" y="54.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="6.00" y="70.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="102.00" y="70.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="6.00" y="86.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="102.00" y="86.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="6.00" y="102.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="102.00" y="102.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="134.00" y="6.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="198.00" y="6.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="134.00" y="22.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="182.00" y="22.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="134.00" y="38.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="166.00" y="38.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="134.00" y="54.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="150.00" y="54.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="134.00" y="70.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="166.00" y="70.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="134.00" y="86.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="182.00" y="86.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="134.00" y="102.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="198.00" y="102.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="dpad" x="120.40" y="58.80" width="11.20" height="6.40" rx="2" ry="2"/>
+      <rect class="dpad" x="122.80" y="56.40" width="6.40" height="11.20" rx="2" ry="2"/>
+  </g>
+  <g class="fill">
+      <rect class="pix" x="6.00" y="6.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="102.00" y="6.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="6.00" y="22.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="22.00" y="22.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="86.00" y="22.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="102.00" y="22.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="6.00" y="38.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="38.00" y="38.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="70.00" y="38.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="102.00" y="38.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="6.00" y="54.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="54.00" y="54.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="102.00" y="54.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="6.00" y="70.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="102.00" y="70.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="6.00" y="86.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="102.00" y="86.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="6.00" y="102.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="102.00" y="102.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="134.00" y="6.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="198.00" y="6.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="134.00" y="22.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="182.00" y="22.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="134.00" y="38.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="166.00" y="38.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="134.00" y="54.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="150.00" y="54.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="134.00" y="70.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="166.00" y="70.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="134.00" y="86.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="182.00" y="86.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="134.00" y="102.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="pix" x="198.00" y="102.00" width="16.00" height="16.00" rx="2" ry="2"/>
+      <rect class="dpad" x="120.40" y="58.80" width="11.20" height="6.40" rx="2" ry="2"/>
+      <rect class="dpad" x="122.80" y="56.40" width="6.40" height="11.20" rx="2" ry="2"/>
+  </g>
+</svg>
