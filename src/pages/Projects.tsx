@@ -162,7 +162,7 @@ const projectsList: Project[] = [
     id: "sokoban-game",
     title: "Sokoban Game",
     description:
-      "A Sokoban game built with risc-v assembly, where players push boxes to designated locations on a board.",
+      "A Sokoban game built with RISC-V assembly, where players push boxes to designated locations on a board.",
     latex_description:
       "Implemented a classic Sokoban puzzle game in RISC-V Assembly, focusing on box-pushing mechanics and optimized memory/performance.",
     image: sokobanImg,
@@ -340,6 +340,21 @@ const projectsList: Project[] = [
       "Educational tool for learning algorithm fundamentals.",
     ],
   },
+  {
+    id: "eta",
+    title: "ETA",
+    description: "Won my first hackathon at EmberHacks for building ETA, an AI-driven teaching assistant leveraging Gemini and ElevenLabs to deliver personalized voice-based learning assistance.",
+    latex_description: "Won my first hackathon at EmberHacks for building ETA, an AI-driven teaching assistant leveraging Gemini and ElevenLabs to deliver personalized voice-based learning assistance.",
+    image: tempImg,
+    sourceUrl: "https://github.com/MananKakkar1/ETA",
+    category: "Websites",
+    technologies: "React + Flask + DynamoDB + Gemini API + ElevenLabs",
+    funFacts: [
+      "First Hackathon Win 🏆",
+      "Custom Animations",
+      "AI Voice Assistant"
+    ]
+  }
 ];
 
 

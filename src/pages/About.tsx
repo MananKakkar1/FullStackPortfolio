@@ -130,15 +130,21 @@ const techStack = [
 
 const timeline = [
   {
+    date: "October 2025",
+    title: "EmberHacks Hackathon",
+    org: "EmberHacks",
+    description: "Earned my first hackathon win at EmberHacks for developing ETA, an AI-powered electronic teaching assistant that helps students better understand complex course material."
+  },
+  {
     date: "May 2025 - Present",
     title: "Software Engineer Intern",
-    org: "Flymingos Inc",
+    org: "Munafah.AI",
     description: 
     "Built secure backend systems and AI moderation tools for a B2B platform, enhancing user safety and reducing content review time from hours to just 2 minutes.",
   },
   {
     date: "June 2025",
-    title: "SpurHacks Participant",
+    title: "SpurHacks Hackathon",
     org: "SpurHacks",
     description:
       "Built Netly, an AI-powered basketball analytics tool using YOLO, pose estimation, and OpenCV at SpurHacks 2025, enabling real-time and video-based detection of possessions, passes, and rule violations.",
