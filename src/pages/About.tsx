@@ -130,6 +130,12 @@ const techStack = [
 
 const timeline = [
   {
+    date: "May 2026 - August 2027",
+    title: "Software Development Engineer Intern",
+    org: "AMD",
+    description: "Incoming AMD Full Stack Software Development Engineer Intern for Summer 2026",
+  },
+  {
     date: "October 2025",
     title: "EmberHacks Hackathon",
     org: "EmberHacks",
