@@ -142,7 +142,7 @@ const timeline = [
     description: "Earned my first hackathon win at EmberHacks for developing ETA, an AI-powered electronic teaching assistant that helps students better understand complex course material."
   },
   {
-    date: "May 2025 - Present",
+    date: "May 2025 - August 2025",
     title: "Software Engineer Intern",
     org: "Munafah.AI",
     description: 
