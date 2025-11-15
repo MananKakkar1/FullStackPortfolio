@@ -20,6 +20,7 @@ import githubDiscordBotImg from "../assets/discord.png";
 import etaImg from '../assets/ETA.png';
 import algoImg from '../assets/AlgoVisualize.png';
 import salesImg from '../assets/SalesBoard.png';
+import reelImg from '../assets/ReelDeal.png';
 
 export type Project = {
   id: string;
@@ -258,7 +259,7 @@ const projectsList: Project[] = [
       "A full-stack movie recommendation app with JWT authentication, TMDB integration, smart recommendations, and a fast React + Vite frontend. Users can search, filter, and save favorite movies, with plans for advanced social and discovery features.",
     latex_description:
       "Created a full-stack movie discovery app with JWT auth, TMDB integration, user recommendations, and a blazing-fast React + Vite frontend.",
-    image: tempImg,
+    image: reelImg,
     sourceUrl: "https://github.com/MananKakkar1/ReelDeal",
     category: "Websites",
     technologies:
