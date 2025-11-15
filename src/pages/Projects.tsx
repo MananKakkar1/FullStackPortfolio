@@ -17,6 +17,9 @@ import othelloImg from "../assets/Othello.png";
 import tempImg from "../assets/temp.jpg";
 import netlyImg from "../assets/Netly.png";
 import githubDiscordBotImg from "../assets/discord.png";
+import etaImg from '../assets/ETA.png';
+import algoImg from '../assets/AlgoVisualize.png';
+import salesImg from '../assets/SalesBoard.png';
 
 export type Project = {
   id: string;
@@ -277,7 +280,7 @@ const projectsList: Project[] = [
     description:
       "A full-stack web application for managing customers, products, and sales orders, complete with authentication, form validation, search, and pagination.",
       latex_description: "\\resumeProjectHeading\n  {\\textbf{SalesBoard} \\hfill \\emph{React, Go, SQLite, SQL, JWT}}{}\n  \\resumeItemListStart\n    \\resumeItem{Built a full-stack sales dashboard using \\textbf{React + Redux Toolkit} and a \\textbf{Go backend} with REST APIs to manage customers, products, and orders.}\n    \\resumeItem{Designed and queried a \\textbf{SQLite} database using raw \\textbf{SQL} for structured data storage and retrieval.}\n    \\resumeItem{Implemented secure \\textbf{JWT authentication}, middleware-protected routes, and Redux-based token management.}\n    \\resumeItem{Developed full \\textbf{CRUD}, \\textbf{search}, \\textbf{pagination}, and \\textbf{validation} functionalities for all modules on both frontend and backend.}\n  \\resumeItemListEnd",
-    image: tempImg,
+    image: salesImg,
     sourceUrl: "https://github.com/MananKakkar1/SalesBoard",
     category: "Websites",
     technologies: "React + Redux Toolkit + Go + SQLite + Emotion",
@@ -330,7 +333,7 @@ const projectsList: Project[] = [
       "A web app for visualizing sorting, searching, and graph algorithms. Users can step through algorithm execution, adjust data, and learn core concepts interactively through animated visualizations.",
     latex_description:
       "Created an interactive algorithm visualizer for sorting, searching, and graph algorithms with step-by-step controls and educational UI.",
-    image: tempImg,
+    image: algoImg,
     sourceUrl: "https://github.com/MananKakkar1/Algorithm-Visualizer",
     category: "Websites",
     technologies: "JavaScript + HTML + CSS",
@@ -345,7 +348,7 @@ const projectsList: Project[] = [
     title: "ETA",
     description: "Won my first hackathon at EmberHacks for building ETA, an AI-driven teaching assistant leveraging Gemini and ElevenLabs to deliver personalized voice-based learning assistance.",
     latex_description: "Won my first hackathon at EmberHacks for building ETA, an AI-driven teaching assistant leveraging Gemini and ElevenLabs to deliver personalized voice-based learning assistance.",
-    image: tempImg,
+    image: etaImg,
     sourceUrl: "https://github.com/MananKakkar1/ETA",
     category: "Websites",
     technologies: "React + Flask + DynamoDB + Gemini API + ElevenLabs",
