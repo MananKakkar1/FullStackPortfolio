@@ -14,7 +14,6 @@ import extractorImg from "../assets/extractor.png";
 import pokemonImg from "../assets/pokemon.png";
 import systemOverlayImg from "../assets/system-overlay.png";
 import othelloImg from "../assets/Othello.png";
-import tempImg from "../assets/temp.jpg";
 import netlyImg from "../assets/Netly.png";
 import githubDiscordBotImg from "../assets/discord.png";
 import etaImg from '../assets/ETA.png';
