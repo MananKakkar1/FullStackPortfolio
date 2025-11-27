@@ -131,22 +131,24 @@ const techStack = [
 const timeline = [
   {
     date: "May 2026 - August 2027",
-    title: "Software Development Engineer Intern",
+    title: "Software Engineer Intern",
     org: "AMD",
-    description: "Incoming AMD Full Stack Software Development Engineer Intern for Summer 2026",
+    description:
+      "Incoming AMD Full Stack Software Development Engineer Intern for Summer 2026",
   },
   {
     date: "October 2025",
     title: "EmberHacks Hackathon",
     org: "EmberHacks",
-    description: "Earned my first hackathon win at EmberHacks for developing ETA, an AI-powered electronic teaching assistant that helps students better understand complex course material."
+    description:
+      "Earned my first hackathon win at EmberHacks for developing ETA, an AI-powered electronic teaching assistant that helps students better understand complex course material.",
   },
   {
     date: "May 2025 - August 2025",
     title: "Software Engineer Intern",
     org: "Munafah.AI",
-    description: 
-    "Built secure backend systems and AI moderation tools for a B2B platform, enhancing user safety and reducing content review time from hours to just 2 minutes.",
+    description:
+      "Built secure backend systems and AI moderation tools for a B2B platform, enhancing user safety and reducing content review time from hours to just 2 minutes.",
   },
   {
     date: "June 2025",
@@ -154,7 +156,6 @@ const timeline = [
     org: "SpurHacks",
     description:
       "Built Netly, an AI-powered basketball analytics tool using YOLO, pose estimation, and OpenCV at SpurHacks 2025, enabling real-time and video-based detection of possessions, passes, and rule violations.",
-
   },
   {
     date: "2023 – Present",
@@ -222,10 +223,10 @@ const About = () => {
           <h1 className="about-creative-title">About Me</h1>
           <p>
             Hi! I’m Manan Kakkar, a Computer Science student at the University
-            of Toronto. I love building software that makes a real
-            difference, diving into new technologies, and working with others to
-            bring creative ideas to life. I’m always excited to learn, grow, and
-            take on challenges that push me to think outside the box.
+            of Toronto. I love building software that makes a real difference,
+            diving into new technologies, and working with others to bring
+            creative ideas to life. I’m always excited to learn, grow, and take
+            on challenges that push me to think outside the box.
           </p>
           <div className="about-creative-socials">
             <a
