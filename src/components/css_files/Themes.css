@@ -8,7 +8,7 @@
     --button-text: #000;
     --label-color: #00fff7;
     --filter: #00fff7;
-    --timeline: yellow;
+    --timeline: #000;
 }
 
 .theme-red {
@@ -34,7 +34,7 @@
     --button-text: #000;
     --label-color: #fff700;
     --filter: #fff700;
-    --timeline: orange;
+    --timeline: #000;
 }
 
 .theme-starwars {
@@ -47,7 +47,7 @@
     --button-text: #000;
     --label-color: #fff700;
     --filter: #fff700;
-    --timeline: #00fff7;
+    --timeline: #000;
 }
 
 .theme-light {
@@ -60,7 +60,7 @@
     --button-text: #e0e0e0;
     --label-color: #22223b;
     --filter: #161620;
-    --timeline: #e0e0e0;
+    --timeline: linear-gradient(135deg, #18181b 0%, #27272a 100%);
     --timeline-text: #e0e0e0;
 }
 
@@ -74,7 +74,7 @@
     --button-text: #18181b;
     --label-color: #e0e0e0;
     --filter: #e0e0e0;
-    --timeline: #18181b;
+    --timeline: linear-gradient(135deg, #18181b 0%, #27272a 100%);
     --timeline-text: #e0e0e0;
 }
 

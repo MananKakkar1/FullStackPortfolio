@@ -1,33 +1,33 @@
 h1 {
-    color: var(--label-color);
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    text-align: center;
-    width: 100%;
-    margin: 0 auto 32px auto; /* space below */
-    padding-top: 24px;        /* space above */
+  color: var(--label-color);
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+  margin: 0 auto 32px auto; /* space below */
+  padding-top: 24px; /* space above */
 }
 
 h2 {
-    color: var(--label-color);
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 2rem;
-    text-align: center;
-    width: 100%;
-    margin: 0 auto 32px auto; /* space below */
-    padding-top: 24px;        /* space above */
+  color: var(--label-color);
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 2rem;
+  text-align: center;
+  width: 100%;
+  margin: 0 auto 32px auto; /* space below */
+  padding-top: 24px; /* space above */
 }
 
 body {
-    background: var(--bg-gradient);
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    color: var(--text);
+  background: var(--bg-gradient);
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: var(--text);
 }
 
 .about-container {
@@ -50,11 +50,11 @@ body {
 }
 
 .profile-card {
-    padding: 75px; /* Increased padding for a larger card */
-    border-radius: 16px;
-    text-align: center;
-    width: 500px; /* Increased width for a larger card */
-    height: auto; /* Allow height to adjust dynamically */
+  padding: 75px; /* Increased padding for a larger card */
+  border-radius: 16px;
+  text-align: center;
+  width: 500px; /* Increased width for a larger card */
+  height: auto; /* Allow height to adjust dynamically */
 }
 
 .profile-img {
@@ -87,21 +87,21 @@ body {
 }
 
 .about-content {
-    max-width: 800px;
-    width: 90%;
-    padding: 36px 32px 28px 32px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: var(--text)
+  max-width: 800px;
+  width: 90%;
+  padding: 36px 32px 28px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--text);
 }
 
 .about-intro {
-    margin-bottom: 24px;
-    font-size: 1.5rem;
-    justify-content: center;
-    align-items: center;
-    display: flex;
+  margin-bottom: 24px;
+  font-size: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
 
 .about-description {
@@ -113,41 +113,39 @@ body {
 }
 
 .about-goals {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .linkedin-btn {
-    background: var(--button-bg);
-    color: var(--button-text);
-    border: none;
-    font-size: 1.05rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition:
-        background 0.3s ease,
-        transform 0.3s ease;
-    margin: 20px auto 0; /* Center the button on the card */
-    width: auto;
+  background: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  font-size: 1.05rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+  margin: 20px auto 0; /* Center the button on the card */
+  width: auto;
 }
 
 .linkedin-btn:hover {
-    background: var(--button-text);
-    color: var(--button-bg);
+  background: var(--button-text);
+  color: var(--button-bg);
 }
 
 .linkedin-icon {
-    margin-right: 8px;
-    width: 28px;
-    height: 28px;
-    display: inline-block;
-    background: transparent;
-    object-fit: contain;
-    transition: fill 0.3s ease; /* Smooth color transition */
+  margin-right: 8px;
+  width: 28px;
+  height: 28px;
+  display: inline-block;
+  background: transparent;
+  object-fit: contain;
+  transition: fill 0.3s ease; /* Smooth color transition */
 }
 
 .social-links {
@@ -190,15 +188,15 @@ body {
 }
 
 .about-creative-card {
-  background: rgba(0,0,0,0.10);
+  background: rgba(0, 0, 0, 0.1);
   border-radius: 32px;
-  box-shadow: 0 8px 40px 0 rgba(0,0,0,0.18);
+  box-shadow: 0 8px 40px 0 rgba(0, 0, 0, 0.18);
   padding: 48px 48px 32px 48px;
   display: flex;
   flex-direction: column;
   align-items: center;
   max-width: 900px;
-  width: 100%;  
+  width: 100%;
   border: var(--text) 4px solid;
 }
 
@@ -247,9 +245,9 @@ body {
   font-weight: bold;
   width: 100%;
   margin: 0 auto 32px auto; /* space below */
-  padding-top: 24px;        /* space above */
-  text-align: center;       /* Center the title to the page */
-  margin-right: 0;          /* Remove any right margin */
+  padding-top: 24px; /* space above */
+  text-align: center; /* Center the title to the page */
+  margin-right: 0; /* Remove any right margin */
 }
 
 .about-creative-socials {
@@ -268,9 +266,7 @@ body {
 
 .about-creative-social-btn {
   color: var(--text);
-  transition: 
-    color 0.2s,
-    box-shadow 0.5s cubic-bezier(0.19, 1, 0.22, 1),
+  transition: color 0.2s, box-shadow 0.5s cubic-bezier(0.19, 1, 0.22, 1),
     background 0.5s cubic-bezier(0.19, 1, 0.22, 1),
     border-color 0.5s cubic-bezier(0.19, 1, 0.22, 1),
     transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
@@ -282,7 +278,7 @@ body {
 .about-creative-social-btn:hover {
   color: #fff700;
   background: linear-gradient(145deg, #6366f1, #8b5cf6);
-  box-shadow: 0 0 16px 4px rgba(99,102,241,0.25), 0 0 0 4px #fff70033;
+  box-shadow: 0 0 16px 4px rgba(99, 102, 241, 0.25), 0 0 0 4px #fff70033;
   border-color: rgba(99, 102, 241, 0.8);
   transform: translateY(-2px) scale(1.1);
 }
@@ -294,7 +290,12 @@ body {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
   transition: left 0.6s ease;
   border-radius: 50%;
   z-index: 1;
@@ -418,13 +419,13 @@ body {
   display: flex;
   align-items: flex-start;
   z-index: 1;
-  transition: transform 0.25s cubic-bezier(.4,2,.6,1), box-shadow 0.25s;
+  transition: transform 0.25s cubic-bezier(0.4, 2, 0.6, 1), box-shadow 0.25s;
 }
 
 .timeline-item:hover .timeline-content {
-  box-shadow: 0 8px 32px 0 rgba(0,255,247,0.25), 0 0 0 4px #00fff733;
+  box-shadow: 0 8px 32px 0 rgba(0, 255, 247, 0.25), 0 0 0 4px #00fff733;
   border-color: var(--timeline);
-  background: rgba(0,0,0,0.95);
+  background: rgba(0, 0, 0, 0.95);
   transform: scale(1.04);
 }
 
@@ -448,15 +449,14 @@ body {
   margin-right: 0%;
 }
 
-.timeline-item.left:hover
-.timeline-item.right:hover {
+.timeline-item.left:hover .timeline-item.right:hover {
   transform: translateY(-50px);
 }
 
 .timeline-content {
-  background: rgba(0,0,0,0.85);
+  background: var(--timeline);
   border-radius: 16px;
-  box-shadow: 0 4px 24px 0 rgba(0,255,247,0.10);
+  box-shadow: 0 4px 24px 0 rgba(0, 255, 247, 0.1);
   padding: 24px 28px;
   min-width: 240px;
   max-width: 340px;
@@ -536,16 +536,16 @@ body {
 
 /* For sections like Tech Stack, Experience, Education */
 .section-title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 2rem;
-    color: var(--label-color);
-    text-align: center;
-    width: 100%;
-    margin: 0 auto 32px auto;
-    padding-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 2rem;
+  color: var(--label-color);
+  text-align: center;
+  width: 100%;
+  margin: 0 auto 32px auto;
+  padding-top: 24px;
 }
 
 /* Example usage in JSX:
@@ -558,24 +558,24 @@ body {
 .gameboy-cards-row + h2,
 .home-projects-list > h2,
 .timeline-vertical > h2 {
-    margin-bottom: 32px;
-    margin-top: 0;
-    text-align: center;
-    width: 100%;
+  margin-bottom: 32px;
+  margin-top: 0;
+  text-align: center;
+  width: 100%;
 }
 
 .goals-text {
-    font-size: 1.18rem;
-    line-height: 1.7;
-    margin-bottom: 20px;
-    text-align: left;
-    max-width: 900px;
-    width: 100%;
-    padding: 0 24px;
-    background: transparent;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
-    white-space: pre-line;
+  font-size: 1.18rem;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  text-align: left;
+  max-width: 900px;
+  width: 100%;
+  padding: 0 24px;
+  background: transparent;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+  white-space: pre-line;
 }
