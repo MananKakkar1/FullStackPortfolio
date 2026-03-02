@@ -16,10 +16,12 @@ import systemOverlayImg from "../assets/system-overlay.png";
 import othelloImg from "../assets/Othello.png";
 import netlyImg from "../assets/Netly.png";
 import githubDiscordBotImg from "../assets/discord.png";
-import etaImg from '../assets/ETA.png';
-import algoImg from '../assets/AlgoVisualize.png';
-import salesImg from '../assets/SalesBoard.png';
-import reelImg from '../assets/ReelDeal.png';
+import etaImg from "../assets/ETA.png";
+import algoImg from "../assets/AlgoVisualize.png";
+import salesImg from "../assets/SalesBoard.png";
+import reelImg from "../assets/ReelDeal.png";
+import clImg from "../assets/cl.png";
+import airaImg from "../assets/aira.png";
 
 export type Project = {
   id: string;
@@ -205,7 +207,8 @@ const projectsList: Project[] = [
     latex_description:
       "Developed a Python tool for extracting, aggregating, and organizing world population data into CSV for analysis and visualization.",
     image: extractorImg,
-    sourceUrl: "https://github.com/MananKakkar1/world_population_data_extractor",
+    sourceUrl:
+      "https://github.com/MananKakkar1/world_population_data_extractor",
     category: "Data Analysis",
     technologies: "Python + CSV",
     funFacts: [
@@ -279,7 +282,8 @@ const projectsList: Project[] = [
     title: "SalesBoard",
     description:
       "A full-stack web application for managing customers, products, and sales orders, complete with authentication, form validation, search, and pagination.",
-      latex_description: "\\resumeProjectHeading\n  {\\textbf{SalesBoard} \\hfill \\emph{React, Go, SQLite, SQL, JWT}}{}\n  \\resumeItemListStart\n    \\resumeItem{Built a full-stack sales dashboard using \\textbf{React + Redux Toolkit} and a \\textbf{Go backend} with REST APIs to manage customers, products, and orders.}\n    \\resumeItem{Designed and queried a \\textbf{SQLite} database using raw \\textbf{SQL} for structured data storage and retrieval.}\n    \\resumeItem{Implemented secure \\textbf{JWT authentication}, middleware-protected routes, and Redux-based token management.}\n    \\resumeItem{Developed full \\textbf{CRUD}, \\textbf{search}, \\textbf{pagination}, and \\textbf{validation} functionalities for all modules on both frontend and backend.}\n  \\resumeItemListEnd",
+    latex_description:
+      "\\resumeProjectHeading\n  {\\textbf{SalesBoard} \\hfill \\emph{React, Go, SQLite, SQL, JWT}}{}\n  \\resumeItemListStart\n    \\resumeItem{Built a full-stack sales dashboard using \\textbf{React + Redux Toolkit} and a \\textbf{Go backend} with REST APIs to manage customers, products, and orders.}\n    \\resumeItem{Designed and queried a \\textbf{SQLite} database using raw \\textbf{SQL} for structured data storage and retrieval.}\n    \\resumeItem{Implemented secure \\textbf{JWT authentication}, middleware-protected routes, and Redux-based token management.}\n    \\resumeItem{Developed full \\textbf{CRUD}, \\textbf{search}, \\textbf{pagination}, and \\textbf{validation} functionalities for all modules on both frontend and backend.}\n  \\resumeItemListEnd",
     image: salesImg,
     sourceUrl: "https://github.com/MananKakkar1/SalesBoard",
     category: "Websites",
@@ -350,7 +354,7 @@ const projectsList: Project[] = [
       "A continuous learning platform focused on structured progress, content organization, and practical learning workflows.",
     latex_description:
       "Built a learning-focused application that supports organized educational workflows and iterative feature development.",
-    image: "/placeholder.svg",
+    image: clImg,
     sourceUrl: "https://github.com/MananKakkar1/ContinuLearn",
     category: "Websites",
     technologies: "JavaScript + HTML + CSS",
@@ -366,7 +370,7 @@ const projectsList: Project[] = [
       "An auto incident response assistant project built to support faster triage and operational incident handling workflows.",
     latex_description:
       "Developed an incident-response assistant to streamline detection, triage, and handling of operational issues.",
-    image: "/placeholder.svg",
+    image: airaImg,
     sourceUrl:
       "https://github.com/MananKakkar1/Auto-Incident-Response-Assistant",
     category: "System Tools",
@@ -411,8 +415,10 @@ const projectsList: Project[] = [
   {
     id: "eta",
     title: "ETA",
-    description: "Won my first hackathon at EmberHacks for building ETA, an AI-driven teaching assistant leveraging Gemini and ElevenLabs to deliver personalized voice-based learning assistance.",
-    latex_description: "Won my first hackathon at EmberHacks for building ETA, an AI-driven teaching assistant leveraging Gemini and ElevenLabs to deliver personalized voice-based learning assistance.",
+    description:
+      "Won my first hackathon at EmberHacks for building ETA, an AI-driven teaching assistant leveraging Gemini and ElevenLabs to deliver personalized voice-based learning assistance.",
+    latex_description:
+      "Won my first hackathon at EmberHacks for building ETA, an AI-driven teaching assistant leveraging Gemini and ElevenLabs to deliver personalized voice-based learning assistance.",
     image: etaImg,
     sourceUrl: "https://github.com/MananKakkar1/ETA",
     category: "Websites",
@@ -420,11 +426,10 @@ const projectsList: Project[] = [
     funFacts: [
       "First Hackathon Win 🏆",
       "Custom Animations",
-      "AI Voice Assistant"
-    ]
-  }
+      "AI Voice Assistant",
+    ],
+  },
 ];
-
 
 const getCategories = () => {
   const cats = Array.from(new Set(projectsList.map((p) => p.category)));
@@ -464,7 +469,7 @@ const Projects = () => {
   // Handler to cycle fun facts (update to allow up/right = next, down/left = previous)
   const handleDpad = (
     projectId: string,
-    direction: "up" | "down" | "left" | "right"
+    direction: "up" | "down" | "left" | "right",
   ) => {
     setFunFactIndexes((prev) => {
       const project = filteredProjects.find((p) => p.id === projectId);
