@@ -344,6 +344,71 @@ const projectsList: Project[] = [
     ],
   },
   {
+    id: "continulearn",
+    title: "ContinuLearn",
+    description:
+      "A continuous learning platform focused on structured progress, content organization, and practical learning workflows.",
+    latex_description:
+      "Built a learning-focused application that supports organized educational workflows and iterative feature development.",
+    image: "/placeholder.svg",
+    sourceUrl: "https://github.com/MananKakkar1/ContinuLearn",
+    category: "Websites",
+    technologies: "JavaScript + HTML + CSS",
+    funFacts: [
+      "Designed around ongoing, structured learning workflows.",
+      "Represents a dedicated education-focused repository on your profile.",
+    ],
+  },
+  {
+    id: "aira",
+    title: "AIRA",
+    description:
+      "An auto incident response assistant project built to support faster triage and operational incident handling workflows.",
+    latex_description:
+      "Developed an incident-response assistant to streamline detection, triage, and handling of operational issues.",
+    image: "/placeholder.svg",
+    sourceUrl:
+      "https://github.com/MananKakkar1/Auto-Incident-Response-Assistant",
+    category: "System Tools",
+    technologies: "Python + Automation",
+    funFacts: [
+      "Targets faster incident-response workflows.",
+      "Mapped to your Auto-Incident-Response-Assistant repository.",
+    ],
+  },
+  {
+    id: "leetcode-problems",
+    title: "Leetcode Problems",
+    description:
+      "A collection of algorithm and data structure practice problems with code solutions.",
+    latex_description:
+      "Maintained a problem-solving repository with LeetCode-style solutions focused on algorithmic reasoning and coding fluency.",
+    image: "/placeholder.svg",
+    sourceUrl: "https://github.com/MananKakkar1/Leetcode_Problems",
+    category: "System Tools",
+    technologies: "Python",
+    funFacts: [
+      "Contains coding interview style practice solutions.",
+      "Focuses on algorithmic problem solving and consistency.",
+    ],
+  },
+  {
+    id: "medilens",
+    title: "MediLens",
+    description:
+      "A healthcare-focused application repository on your profile (fork), centered on accessibility and user support workflows.",
+    latex_description:
+      "Collaborated on a healthcare-oriented project focused on practical user-facing workflows and rapid iteration.",
+    image: "/placeholder.svg",
+    sourceUrl: "https://github.com/MananKakkar1/MediLens",
+    category: "Websites",
+    technologies: "JavaScript + HTML + CSS",
+    funFacts: [
+      "This repository appears as a fork on your GitHub profile.",
+      "Represents collaboration on a healthcare-oriented project.",
+    ],
+  },
+  {
     id: "eta",
     title: "ETA",
     description: "Won my first hackathon at EmberHacks for building ETA, an AI-driven teaching assistant leveraging Gemini and ElevenLabs to deliver personalized voice-based learning assistance.",
