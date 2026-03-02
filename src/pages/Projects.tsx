@@ -351,7 +351,7 @@ const projectsList: Project[] = [
     id: "continulearn",
     title: "ContinuLearn",
     description:
-      "A continuous learning platform focused on structured progress, content organization, and practical learning workflows.",
+      "A continuous learning platform focused on structured progress, content organization, and practical learning workflows. You can visit the platform on: https://continu-learn.vercel.app",
     latex_description:
       "Built a learning-focused application that supports organized educational workflows and iterative feature development.",
     image: clImg,
