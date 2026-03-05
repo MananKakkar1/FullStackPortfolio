@@ -32,10 +32,10 @@ import tempImg from "../assets/temp.jpg";
 
 const FLIP_DURATION = 600;
 const TYPING_TEXT = "Hi, I'm Manan";
-const TYPING_SPEED = 100; // ms per character
-const DELETING_SPEED = 50; // ms per character
-const PAUSE_BEFORE_DELETE = 1500; // ms
-const PAUSE_BEFORE_TYPE = 800; // ms
+const TYPING_SPEED = 100;
+const DELETING_SPEED = 50;
+const PAUSE_BEFORE_DELETE = 1500;
+const PAUSE_BEFORE_TYPE = 800;
 
 interface Project {
   id: string | number;
@@ -90,270 +90,341 @@ const GitHubIcon = () => (
 );
 
 const techStack = [
-  {
-    name: "React",
-    icon: (
-      <span className="tech-img-wrapper">
-        <img src={reactImg} alt="React" />
-      </span>
-    ),
-    link: "https://react.dev/",
-  },
-  {
-    name: "TypeScript",
-    icon: (
-      <span className="tech-img-wrapper">
-        <img src={tsImg} alt="TypeScript" />
-      </span>
-    ),
-    link: "https://www.typescriptlang.org/",
-  },
-  {
-    name: "Node.js",
-    icon: (
-      <span className="tech-img-wrapper">
-        <img src={nodeImg} alt="Node.js" />
-      </span>
-    ),
-    link: "https://nodejs.org/",
-  },
-  {
-    name: "Express.js",
-    icon: (
-      <span className="tech-img-wrapper">
-        <img src={expressImg} alt="Express.js" />
-      </span>
-    ),
-    link: "https://expressjs.com/",
-  },
-  {
-    name: "MongoDB",
-    icon: (
-      <span className="tech-img-wrapper">
-        <img src={mongoImg} alt="MongoDB" />
-      </span>
-    ),
-    link: "https://www.mongodb.com/",
-  },
-  {
-    name: "Firebase",
-    icon: (
-      <span className="tech-img-wrapper">
-        <img src={firebaseImg} alt="Firebase" />
-      </span>
-    ),
-    link: "https://firebase.google.com/",
-  },
-  {
-    name: "Flask",
-    icon: (
-      <span className="tech-img-wrapper">
-        <img src={flaskImg} alt="Flask" />
-      </span>
-    ),
-    link: "https://flask.palletsprojects.com/",
-  },
-  {
-    name: "Python",
-    icon: (
-      <span className="tech-img-wrapper">
-        <img src={pythonImg} alt="Python" />
-      </span>
-    ),
-    link: "https://www.python.org/",
-  },
-  {
-    name: "Java",
-    icon: (
-      <span className="tech-img-wrapper">
-        <img src={javaImg} alt="Java" />
-      </span>
-    ),
-    link: "https://www.java.com/",
-  },
-  {
-    name: "JavaFX",
-    icon: (
-      <span className="tech-img-wrapper">
-        <img src={javafxImg} alt="JavaFX" />
-      </span>
-    ),
-    link: "https://openjfx.io/",
-  },
-  {
-    name: "C",
-    icon: (
-      <span className="tech-img-wrapper">
-        <img src={cImg} alt="C" />
-      </span>
-    ),
-    link: "https://en.wikipedia.org/wiki/C_(programming_language)",
-  },
-  {
-    name: "HTML5",
-    icon: (
-      <span className="tech-img-wrapper">
-        <img src={htmlImg} alt="HTML5" />
-      </span>
-    ),
-    link: "https://developer.mozilla.org/en-US/docs/Web/HTML",
-  },
-  {
-    name: "CSS3",
-    icon: (
-      <span className="tech-img-wrapper">
-        <img src={cssImg} alt="CSS3" />
-      </span>
-    ),
-    link: "https://developer.mozilla.org/en-US/docs/Web/CSS",
-  },
-  {
-    name: "Git",
-    icon: (
-      <span className="tech-img-wrapper">
-        <img src={gitImg} alt="GitHub" />
-      </span>
-    ),
-    link: "https://git-scm.com/",
-  },
-  {
-    name: "Bash",
-    icon: (
-      <span className="tech-img-wrapper">
-        <img src={bashImg} alt="Bash" />
-      </span>
-    ),
-    link: "https://www.gnu.org/software/bash/",
-  },
-  {
-    name: "Linux",
-    icon: (
-      <span className="tech-img-wrapper">
-        <img src={linuxImg} alt="Linux" />
-      </span>
-    ),
-    link: "https://www.linux.org/",
-  },
-  {
-    name: "Windows",
-    icon: (
-      <span className="tech-img-wrapper">
-        <img src={windowsImg} alt="Windows" />
-      </span>
-    ),
-    link: "https://www.microsoft.com/en-us/windows",
-  },
-  {
-    name: "Pygame",
-    icon: (
-      <span className="tech-img-wrapper">
-        <img src={pygameImg} alt="Pygame" />
-      </span>
-    ),
-    link: "https://www.pygame.org/",
-  },
-  {
-    name: "RISC-V",
-    icon: (
-      <span className="tech-img-wrapper">
-        <img src={riscvImg} alt="RISC-V" />
-      </span>
-    ),
-    link: "https://riscv.org/",
-  },
-  {
-    name: "Vercel",
-    icon: (
-      <span className="tech-img-wrapper">
-        <img src={vercelImg} alt="Vercel" />
-      </span>
-    ),
-    link: "https://vercel.com/",
-  },
-  {
-    name: "Redux Toolkit",
-    icon: (
-      <span className="tech-img-wrapper">
-        <img src={tempImg} alt="Redux Toolkit" />
-      </span>
-    ),
-    link: "https://redux-toolkit.js.org/",
-  },
-  {
-    name: "Emotion",
-    icon: (
-      <span className="tech-img-wrapper">
-        <img src={tempImg} alt="Emotion" />
-      </span>
-    ),
-    link: "https://emotion.sh/",
-  },
-  {
-    name: "Tailwind CSS",
-    icon: (
-      <span className="tech-img-wrapper">
-        <img src={tempImg} alt="Tailwind CSS" />
-      </span>
-    ),
-    link: "https://tailwindcss.com/",
-  },
-  {
-    name: "Go",
-    icon: (
-      <span className="tech-img-wrapper">
-        <img src={tempImg} alt="Go" />
-      </span>
-    ),
-    link: "https://go.dev/",
-  },
-  {
-    name: "SQLite",
-    icon: (
-      <span className="tech-img-wrapper">
-        <img src={tempImg} alt="SQLite" />
-      </span>
-    ),
-    link: "https://www.sqlite.org/index.html",
-  },
-  {
-    name: "SQL",
-    icon: (
-      <span className="tech-img-wrapper">
-        <img src={tempImg} alt="SQL" />
-      </span>
-    ),
-    link: "https://www.mysql.com/",
-  },
-  {
-    name: "JWT",
-    icon: (
-      <span className="tech-img-wrapper">
-        <img src={tempImg} alt="JWT" />
-      </span>
-    ),
-    link: "https://jwt.io/",
-  },
-  {
-    name: "YOLOV8",
-    icon: (
-      <span className="tech-img-wrapper">
-        <img src={tempImg} alt="YOLOV8" />
-      </span>
-    ),
-    link: "https://github.com/ultralytics/ultralytics",
-  },
-  {
-    name: "OpenCV",
-    icon: (
-      <span className="tech-img-wrapper">
-        <img src={tempImg} alt="OpenCV" />
-      </span>
-    ),
-    link: "https://opencv.org/",
-  },
-  // ...add more as needed
+  { name: "React", icon: (<span className="tech-img-wrapper"><img src={reactImg} alt="React" /></span>), link: "https://react.dev/" },
+  { name: "TypeScript", icon: (<span className="tech-img-wrapper"><img src={tsImg} alt="TypeScript" /></span>), link: "https://www.typescriptlang.org/" },
+  { name: "Node.js", icon: (<span className="tech-img-wrapper"><img src={nodeImg} alt="Node.js" /></span>), link: "https://nodejs.org/" },
+  { name: "Express.js", icon: (<span className="tech-img-wrapper"><img src={expressImg} alt="Express.js" /></span>), link: "https://expressjs.com/" },
+  { name: "MongoDB", icon: (<span className="tech-img-wrapper"><img src={mongoImg} alt="MongoDB" /></span>), link: "https://www.mongodb.com/" },
+  { name: "Firebase", icon: (<span className="tech-img-wrapper"><img src={firebaseImg} alt="Firebase" /></span>), link: "https://firebase.google.com/" },
+  { name: "Flask", icon: (<span className="tech-img-wrapper"><img src={flaskImg} alt="Flask" /></span>), link: "https://flask.palletsprojects.com/" },
+  { name: "Python", icon: (<span className="tech-img-wrapper"><img src={pythonImg} alt="Python" /></span>), link: "https://www.python.org/" },
+  { name: "Java", icon: (<span className="tech-img-wrapper"><img src={javaImg} alt="Java" /></span>), link: "https://www.java.com/" },
+  { name: "JavaFX", icon: (<span className="tech-img-wrapper"><img src={javafxImg} alt="JavaFX" /></span>), link: "https://openjfx.io/" },
+  { name: "C", icon: (<span className="tech-img-wrapper"><img src={cImg} alt="C" /></span>), link: "https://en.wikipedia.org/wiki/C_(programming_language)" },
+  { name: "HTML5", icon: (<span className="tech-img-wrapper"><img src={htmlImg} alt="HTML5" /></span>), link: "https://developer.mozilla.org/en-US/docs/Web/HTML" },
+  { name: "CSS3", icon: (<span className="tech-img-wrapper"><img src={cssImg} alt="CSS3" /></span>), link: "https://developer.mozilla.org/en-US/docs/Web/CSS" },
+  { name: "Git", icon: (<span className="tech-img-wrapper"><img src={gitImg} alt="GitHub" /></span>), link: "https://git-scm.com/" },
+  { name: "Bash", icon: (<span className="tech-img-wrapper"><img src={bashImg} alt="Bash" /></span>), link: "https://www.gnu.org/software/bash/" },
+  { name: "Linux", icon: (<span className="tech-img-wrapper"><img src={linuxImg} alt="Linux" /></span>), link: "https://www.linux.org/" },
+  { name: "Windows", icon: (<span className="tech-img-wrapper"><img src={windowsImg} alt="Windows" /></span>), link: "https://www.microsoft.com/en-us/windows" },
+  { name: "Pygame", icon: (<span className="tech-img-wrapper"><img src={pygameImg} alt="Pygame" /></span>), link: "https://www.pygame.org/" },
+  { name: "RISC-V", icon: (<span className="tech-img-wrapper"><img src={riscvImg} alt="RISC-V" /></span>), link: "https://riscv.org/" },
+  { name: "Vercel", icon: (<span className="tech-img-wrapper"><img src={vercelImg} alt="Vercel" /></span>), link: "https://vercel.com/" },
+  { name: "Redux Toolkit", icon: (<span className="tech-img-wrapper"><img src={tempImg} alt="Redux Toolkit" /></span>), link: "https://redux-toolkit.js.org/" },
+  { name: "Emotion", icon: (<span className="tech-img-wrapper"><img src={tempImg} alt="Emotion" /></span>), link: "https://emotion.sh/" },
+  { name: "Tailwind CSS", icon: (<span className="tech-img-wrapper"><img src={tempImg} alt="Tailwind CSS" /></span>), link: "https://tailwindcss.com/" },
+  { name: "Go", icon: (<span className="tech-img-wrapper"><img src={tempImg} alt="Go" /></span>), link: "https://go.dev/" },
+  { name: "SQLite", icon: (<span className="tech-img-wrapper"><img src={tempImg} alt="SQLite" /></span>), link: "https://www.sqlite.org/index.html" },
+  { name: "SQL", icon: (<span className="tech-img-wrapper"><img src={tempImg} alt="SQL" /></span>), link: "https://www.mysql.com/" },
+  { name: "JWT", icon: (<span className="tech-img-wrapper"><img src={tempImg} alt="JWT" /></span>), link: "https://jwt.io/" },
+  { name: "YOLOV8", icon: (<span className="tech-img-wrapper"><img src={tempImg} alt="YOLOV8" /></span>), link: "https://github.com/ultralytics/ultralytics" },
+  { name: "OpenCV", icon: (<span className="tech-img-wrapper"><img src={tempImg} alt="OpenCV" /></span>), link: "https://opencv.org/" },
 ];
 
+/* =============================================
+   SUB-COMPONENTS
+   ============================================= */
+
+const HeroSection = ({
+  typed,
+}: {
+  typed: string;
+}) => (
+  <section className="hero-section">
+    <div className="hero-left">
+      <div className="profile-img-wrapper">
+        <img
+          src={photoImg || "/placeholder.svg"}
+          alt="Manan Kakkar - Developer"
+          className="profile-img"
+        />
+      </div>
+    </div>
+    <div className="hero-right">
+      <h1>
+        <span className="highlight">{typed}</span>
+        <span className="typing-cursor">|</span>
+      </h1>
+      <p>
+        A passionate developer dedicated to crafting professional, functional,
+        and modern applications that make a difference.
+      </p>
+      <div className="hero-buttons">
+        <a href="/projects" className="cta-btn">
+          View My Work
+        </a>
+        <a href="/about" className="cta-btn cta-btn-secondary">
+          About Me
+        </a>
+      </div>
+    </div>
+  </section>
+);
+
+const GameboyProjectCard = ({
+  project,
+}: {
+  project: Project;
+}) => (
+  <div className="project-entry">
+    <div className="gameboy-lines">
+      <div className="gameboy-line" />
+      <div className="gameboy-line" />
+      <div className="gameboy-line" />
+    </div>
+    <div className="gameboy-screen">
+      <img src={project.image || "/placeholder.svg"} alt={project.title} />
+    </div>
+    <h3>{project.title}</h3>
+    <div className="gameboy-controls">
+      <div className="tech-stack">
+        {project.technologies &&
+          parseTechnologies(project.technologies).map((tech, index) => (
+            <span key={index} className="tech-badge" title={tech}>
+              {tech}
+            </span>
+          ))}
+      </div>
+      <div className="gameboy-dpad">
+        <div className="dpad">
+          <div className="dpad-horizontal" />
+          <div className="dpad-vertical" />
+          <div className="dpad-center" />
+          <div className="dpad-up" title="Navigate Up" />
+          <div className="dpad-down" title="Navigate Down" />
+          <div className="dpad-left" title="Navigate Left" />
+          <div className="dpad-right" title="Navigate Right" />
+        </div>
+        <div className="action-buttons">
+          <a
+            href={`/projects/${project.id}`}
+            className="action-button"
+            title="View Project Details"
+          >
+            INFO
+          </a>
+          <a
+            href={project.sourceUrl || "#"}
+            className="action-button"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="View Source Code"
+          >
+            <GitHubIcon />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+const FeaturedProjectsSection = ({
+  displayed,
+  nextDisplayed,
+  flipping,
+  flipCount,
+}: {
+  displayed: Project[];
+  nextDisplayed: Project[];
+  flipping: boolean;
+  flipCount: number;
+}) => (
+  <section className="featured-projects">
+    <div className="section-header">
+      <h1>Featured Projects</h1>
+      <p>Shuffles every 10 seconds -- or browse them all</p>
+    </div>
+    <div className="home-projects-list">
+      {displayed.map((project, idx) => (
+        <div
+          key={`${flipCount}-${idx}`}
+          className={`project-flip-container${flipping ? " flipping" : ""}${
+            idx === 1 ? " lean-right" : ""
+          }`}
+        >
+          <div className="project-flip-inner">
+            <div className="project-flip-front">
+              <GameboyProjectCard project={project} />
+            </div>
+            <div className="project-flip-back">
+              {nextDisplayed[idx] && (
+                <GameboyProjectCard project={nextDisplayed[idx]} />
+              )}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+);
+
+const TechStackCard = ({
+  tech,
+  onNext,
+  onPrev,
+}: {
+  tech: (typeof techStack)[0];
+  onNext: () => void;
+  onPrev: () => void;
+}) => (
+  <div className="project-flip-container">
+    <div className="project-flip-inner">
+      <div className="project-flip-front">
+        <div className="project-entry">
+          <div className="gameboy-lines">
+            <div className="gameboy-line" />
+            <div className="gameboy-line" />
+            <div className="gameboy-line" />
+          </div>
+          <div className="gameboy-screen">{tech.icon}</div>
+          <h3>{tech.name}</h3>
+          <div className="gameboy-controls">
+            <div className="tech-stack">
+              <a
+                href={tech.link}
+                className="tech-badge"
+                target="_blank"
+                rel="noopener noreferrer"
+                title={tech.name}
+              >
+                {tech.name}
+              </a>
+            </div>
+            <div className="gameboy-dpad">
+              <div className="dpad">
+                <div className="dpad-horizontal" />
+                <div className="dpad-vertical" />
+                <div className="dpad-center" />
+                <div className="dpad-up" onClick={onNext} title="Next Tech" />
+                <div className="dpad-down" onClick={onPrev} title="Previous Tech" />
+                <div className="dpad-left" onClick={onPrev} title="Previous Tech" />
+                <div className="dpad-right" onClick={onNext} title="Next Tech" />
+              </div>
+              <div className="action-buttons">
+                <a
+                  href={tech.link}
+                  className="action-button"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Tech Info"
+                >
+                  INFO
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+const TechStackSection = ({
+  displayedTechs,
+  handleTechDpad,
+}: {
+  displayedTechs: number[];
+  handleTechDpad: (cardIdx: number, direction: "next" | "prev") => void;
+}) => (
+  <section className="tech-stack-grid-wrapper">
+    <div className="tech-stack-label">
+      <h1>Tech Stack</h1>
+      <h3>Use the D-pad to navigate through my skills</h3>
+    </div>
+    <div className="home-projects-list">
+      <div className="gameboy-cards-row">
+        {displayedTechs.map((techIdx, idx) => (
+          <TechStackCard
+            key={idx}
+            tech={techStack[techIdx]}
+            onNext={() => handleTechDpad(idx, "next")}
+            onPrev={() => handleTechDpad(idx, "prev")}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+const ContactSection = ({
+  form,
+  status,
+  handleChange,
+  handleSubmit,
+}: {
+  form: { name: string; email: string; subject: string; message: string };
+  status: string;
+  handleChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+  handleSubmit: (e: React.FormEvent) => void;
+}) => (
+  <section className="contact-section" id="contact-sec">
+    <div className="section-header">
+      <h1>Contact Me</h1>
+      <p>{"Send me a message -- I'd love to hear from you"}</p>
+    </div>
+    <div className="contact-gameboy">
+      <div className="contact-gameboy-lines">
+        <div className="gameboy-line" />
+        <div className="gameboy-line" />
+        <div className="gameboy-line" />
+      </div>
+      <div className="contact-screen">
+        <div className="contact-screen-title">New Message</div>
+        <form className="contact-form" onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            required
+            value={form.name}
+            onChange={handleChange}
+            autoComplete="name"
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Your Email"
+            required
+            value={form.email}
+            onChange={handleChange}
+            autoComplete="email"
+          />
+          <input
+            type="text"
+            name="subject"
+            placeholder="Subject"
+            required
+            value={form.subject}
+            onChange={handleChange}
+          />
+          <textarea
+            name="message"
+            placeholder="Your Message"
+            required
+            value={form.message}
+            onChange={handleChange}
+            rows={5}
+          />
+          <div className="contact-controls">
+            <div className="dpad" style={{ opacity: 0.4 }}>
+              <div className="dpad-horizontal" />
+              <div className="dpad-vertical" />
+              <div className="dpad-center" />
+            </div>
+            <button type="submit">Send Message</button>
+          </div>
+        </form>
+      </div>
+      {status && <div className="contact-status">{status}</div>}
+    </div>
+  </section>
+);
+
+/* =============================================
+   MAIN HOME COMPONENT
+   ============================================= */
 const Home = () => {
   const location = useLocation();
 
@@ -365,9 +436,9 @@ const Home = () => {
   const [flipCount, setFlipCount] = useState(0);
   const [typed, setTyped] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
-
   const [displayedTechs, setDisplayedTechs] = useState([0, 1, 2]);
 
+  // Flip projects every 10 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       const next = getRandomProjects(projectsList, 3, displayed);
@@ -379,10 +450,10 @@ const Home = () => {
         setFlipCount((c) => c + 1);
       }, FLIP_DURATION);
     }, 10000);
-
     return () => clearInterval(interval);
-  }, [projectsList, displayed]);
+  }, [displayed]);
 
+  // Contact form state
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -391,6 +462,7 @@ const Home = () => {
   });
   const [status, setStatus] = useState("");
 
+  // Scroll to contact section on hash
   useEffect(() => {
     if (location.hash === "#contact-sec") {
       const contactSection = document.getElementById("contact-sec");
@@ -400,6 +472,7 @@ const Home = () => {
     }
   }, [location]);
 
+  // Typing effect
   useEffect(() => {
     let timeout: NodeJS.Timeout;
     if (!isDeleting && typed.length < TYPING_TEXT.length) {
@@ -450,26 +523,18 @@ const Home = () => {
     }
   };
 
-  // D-pad for tech cards: next/prev, no duplicates
   const handleTechDpad = (cardIdx: number, direction: "next" | "prev") => {
     setDisplayedTechs((prev) => {
       const updated = [...prev];
       if (direction === "next") {
         updated[cardIdx] = (prev[cardIdx] + 1) % techStack.length;
-        // Prevent duplicate techs showing at the same time
-        if (
-          updated.filter((_, i) => i !== cardIdx).includes(updated[cardIdx])
-        ) {
+        if (updated.filter((_, i) => i !== cardIdx).includes(updated[cardIdx])) {
           updated[cardIdx] = (updated[cardIdx] + 1) % techStack.length;
         }
       } else {
-        updated[cardIdx] =
-          (prev[cardIdx] - 1 + techStack.length) % techStack.length;
-        if (
-          updated.filter((_, i) => i !== cardIdx).includes(updated[cardIdx])
-        ) {
-          updated[cardIdx] =
-            (updated[cardIdx] - 1 + techStack.length) % techStack.length;
+        updated[cardIdx] = (prev[cardIdx] - 1 + techStack.length) % techStack.length;
+        if (updated.filter((_, i) => i !== cardIdx).includes(updated[cardIdx])) {
+          updated[cardIdx] = (updated[cardIdx] - 1 + techStack.length) % techStack.length;
         }
       }
       return updated;
@@ -478,311 +543,23 @@ const Home = () => {
 
   return (
     <div className="home-page-root">
-      <div className="hero-section">
-        <div className="hero-left">
-          <div className="profile-img-wrapper">
-            <img
-              src={photoImg || "/placeholder.svg"}
-              alt="Profile"
-              className="profile-img"
-            />
-          </div>
-        </div>
-        <div className="hero-right">
-          <h1>
-            <span className="highlight" style={{ display: "inline" }}>
-              {typed}
-            </span>
-            <span className="typing-cursor">|</span>
-          </h1>
-          <p>
-            A passionate developer dedicated to crafting professional,
-            functional, and modern applications that make a difference.
-          </p>
-          <a href="/projects" className="cta-btn">
-            View My Work
-          </a>
-        </div>
-      </div>
-      <div className="featured-projects">
-        <h1>Featured Projects</h1>
-        <div className="home-projects-list">
-          {displayed.map((project, idx) => (
-            <div
-              key={`${flipCount}-${idx}`}
-              className={`project-flip-container${flipping ? " flipping" : ""}${
-                idx === 1 ? " lean-right" : ""
-              }`}
-            >
-              <div className="project-flip-inner">
-                <div className="project-flip-front">
-                  <div className="project-entry">
-                    <div className="gameboy-lines">
-                      <div className="gameboy-line"></div>
-                      <div className="gameboy-line"></div>
-                      <div className="gameboy-line"></div>
-                    </div>
-                    <div className="gameboy-screen">
-                      <img
-                        src={project.image || "/placeholder.svg"}
-                        alt={project.title}
-                      />
-                    </div>
-                    <h3>{project.title}</h3>
-                    <div className="gameboy-controls">
-                      <div className="tech-stack">
-                        {project.technologies &&
-                          parseTechnologies(project.technologies).map(
-                            (tech, index) => (
-                              <button
-                                key={index}
-                                className="tech-badge"
-                                title={tech}
-                              >
-                                {tech}
-                              </button>
-                            )
-                          )}
-                      </div>
-
-                      <div className="gameboy-dpad">
-                        <div className="dpad">
-                          <div className="dpad-horizontal"></div>
-                          <div className="dpad-vertical"></div>
-                          <div
-                            className="dpad-center"
-                            onClick={() => console.log("Center pressed")}
-                          ></div>
-
-                          {/* Clickable directional buttons */}
-                          <div
-                            className="dpad-up"
-                            onClick={() => console.log("Up pressed")}
-                            title="Navigate Up"
-                          ></div>
-                          <div
-                            className="dpad-down"
-                            onClick={() => console.log("Down pressed")}
-                            title="Navigate Down"
-                          ></div>
-                          <div
-                            className="dpad-left"
-                            onClick={() => console.log("Left pressed")}
-                            title="Navigate Left"
-                          ></div>
-                          <div
-                            className="dpad-right"
-                            onClick={() => console.log("Right pressed")}
-                            title="Navigate Right"
-                          ></div>
-                        </div>
-
-                        <div className="action-buttons">
-                          <a
-                            href={`/projects/${project.id}`}
-                            className="action-button"
-                            title="View Project Details"
-                          >
-                            INFO
-                          </a>
-                          <a
-                            href={project.sourceUrl || ``}
-                            className="action-button"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            title="View Source Code"
-                          >
-                            <GitHubIcon />
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="project-flip-back">
-                  {nextDisplayed[idx] && (
-                    <div className="project-entry">
-                      <div className="gameboy-screen">
-                        <img
-                          src={nextDisplayed[idx].image || "/placeholder.svg"}
-                          alt={nextDisplayed[idx].title}
-                        />
-                      </div>
-                      <h3>{nextDisplayed[idx].title}</h3>
-
-                      <div className="gameboy-controls">
-                        <div className="tech-stack">
-                          {nextDisplayed[idx].technologies &&
-                            parseTechnologies(
-                              nextDisplayed[idx].technologies
-                            ).map((tech, index) => (
-                              <button
-                                key={index}
-                                className="tech-badge"
-                                title={tech}
-                              >
-                                {tech}
-                              </button>
-                            ))}
-                        </div>
-
-                        <div className="gameboy-dpad">
-                          <div className="dpad">
-                            <div className="dpad-horizontal"></div>
-                            <div className="dpad-vertical"></div>
-                            <div className="dpad-center"></div>
-                          </div>
-
-                          <div className="action-buttons">
-                            <a
-                              href={`/projects/${nextDisplayed[idx].id}`}
-                              className="action-button"
-                              title="View Project Details"
-                            >
-                              INFO
-                            </a>
-                            <a
-                              href={`https://github.com/MananKakkar1/${nextDisplayed[idx].id}`}
-                              className="action-button"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              title="View Source Code"
-                            >
-                              <GitHubIcon />
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="tech-stack-grid-wrapper">
-        <div className="tech-stack-label">
-          <h1>Tech Stack</h1>
-          <h3>(Use the D-pad to see more!)</h3>
-        </div>
-
-        {/* --- 3 Gameboy-style tech cards --- */}
-        <div className="home-projects-list">
-          {displayedTechs.map((techIdx, idx) => {
-            const tech = techStack[techIdx];
-            return (
-              <div key={idx} className="project-flip-container">
-                <div className="project-flip-inner">
-                  <div className="project-flip-front">
-                    <div className="project-entry">
-                      <div className="gameboy-lines">
-                        <div className="gameboy-line"></div>
-                        <div className="gameboy-line"></div>
-                        <div className="gameboy-line"></div>
-                      </div>
-                      <div className="gameboy-screen">{tech.icon}</div>
-                      <h3>{tech.name}</h3>
-                      <div className="gameboy-controls">
-                        <div className="tech-stack">
-                          <a
-                            href={tech.link}
-                            className="tech-badge"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            title={tech.name}
-                          >
-                            {tech.name}
-                          </a>
-                        </div>
-                        <div className="gameboy-dpad">
-                          <div className="dpad">
-                            <div className="dpad-horizontal"></div>
-                            <div className="dpad-vertical"></div>
-                            <div className="dpad-center"></div>
-                            <div
-                              className="dpad-up"
-                              onClick={() => handleTechDpad(idx, "next")}
-                              title="Next Tech"
-                            ></div>
-                            <div
-                              className="dpad-down"
-                              onClick={() => handleTechDpad(idx, "prev")}
-                              title="Previous Tech"
-                            ></div>
-                            <div
-                              className="dpad-left"
-                              onClick={() => handleTechDpad(idx, "prev")}
-                              title="Previous Tech"
-                            ></div>
-                            <div
-                              className="dpad-right"
-                              onClick={() => handleTechDpad(idx, "next")}
-                              title="Next Tech"
-                            ></div>
-                          </div>
-                          <div className="action-buttons">
-                            <a
-                              href={tech.link}
-                              className="action-button"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              title="Tech Info"
-                            >
-                              INFO
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-        {/* --- End Gameboy-style tech cards --- */}
-      </div>
-      <div className="contact-section" id="contact-sec">
-        <h1>Contact Me</h1>
-        <form className="contact-form" onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="name"
-            placeholder="Your Name"
-            required
-            value={form.name}
-            onChange={handleChange}
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="Your Email"
-            required
-            value={form.email}
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            name="subject"
-            placeholder="Subject"
-            required
-            value={form.subject}
-            onChange={handleChange}
-          />
-          <textarea
-            name="message"
-            placeholder="Your Message"
-            required
-            value={form.message}
-            onChange={handleChange}
-          />
-          <button type="submit">Send</button>
-        </form>
-        {status && (
-          <div style={{ marginTop: "16px", color: "#00fff7" }}>{status}</div>
-        )}
-      </div>
+      <HeroSection typed={typed} />
+      <FeaturedProjectsSection
+        displayed={displayed}
+        nextDisplayed={nextDisplayed}
+        flipping={flipping}
+        flipCount={flipCount}
+      />
+      <TechStackSection
+        displayedTechs={displayedTechs}
+        handleTechDpad={handleTechDpad}
+      />
+      <ContactSection
+        form={form}
+        status={status}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+      />
     </div>
   );
 };

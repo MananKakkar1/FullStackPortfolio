@@ -1,3 +1,6 @@
+/* =============================================
+   NAVBAR
+   ============================================= */
 body, html {
   overflow-x: hidden;
   width: 100vw;
@@ -9,171 +12,113 @@ body, html {
   top: 0;
   left: 0;
   width: 100%;
-  height: 70px;
-  padding: 8px 16px;
-  background: transparent;
+  height: 64px;
+  padding: 0 24px;
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   display: flex;
   justify-content: space-between;
   align-items: center;
   z-index: 100;
   box-sizing: border-box;
-  border-color: transparent;
-  transition: height 0.3s ease;
+  border-bottom: 2px solid var(--card-border);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
 }
 
 .logo {
-  height: 40px;
+  height: 36px;
   width: auto;
   margin-left: 0;
   font-size: 0;
   display: block;
   flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
 }
 
 .navbar {
   display: flex;
   flex-wrap: wrap;
-  margin-left: 80px;
+  margin-left: 48px;
   align-items: center;
+  gap: 4px;
 }
 
 .navbar a {
-  font-size: 20px;
+  font-size: 0.9rem;
   color: var(--text);
-  font-weight: 500;
-  margin-left: 40px;
+  font-weight: 600;
+  padding: 8px 16px;
   text-decoration: none;
   white-space: nowrap;
   position: relative;
-  transition: color 0.2s ease;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  letter-spacing: 0.3px;
 }
 
 .navbar a::after {
   content: "";
   position: absolute;
-  left: 0;
-  bottom: -4px;
-  width: 100%;
-  height: 3px;
-  background: var(--button-text);
-  opacity: 0.5;
+  left: 50%;
+  bottom: 2px;
+  width: 0%;
+  height: 2px;
+  background: var(--button-bg);
   border-radius: 2px;
-  transform: scaleX(0);
-  transition: 0.2s;
+  transform: translateX(-50%);
+  transition: width 0.3s ease;
 }
 
-.navbar a:hover::after,
-.navbar a:focus::after {
-  transform: scaleX(1);
+.navbar a:hover {
+  background: rgba(255, 255, 255, 0.05);
 }
 
-.h1 {
-  position: relative;
-  font-size: 30px;
-  color: var(--label-color);
-  font-weight: 500;
-  margin-left: 40px;
+.navbar a:hover::after {
+  width: 60%;
 }
 
-/* Tablet & Mobile breakpoint */
+/* =============================================
+   RESPONSIVE
+   ============================================= */
 @media (max-width: 900px) {
   .header {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8px 8vw;
-    min-width: 0;
-    width: 100vw;
-    box-sizing: border-box;
-    height: 56px; /* Reduce height for mobile */
-    overflow-x: auto;
+    height: 56px;
+    padding: 0 12px;
   }
 
   .logo {
-    margin-left: 0;
-    height: 32px;
-    max-width: 48px;
+    height: 28px;
   }
 
   .navbar {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    flex-wrap: nowrap;
     margin-left: 0;
-    gap: 18px; /* Increased gap for better separation */
-    width: auto;
-    overflow-x: visible; /* Remove horizontal scrollbar */
+    gap: 2px;
   }
 
   .navbar a {
-    font-size: 14px;
-    margin-left: 0; /* Remove margin, use gap instead */
-    margin-right: 0;
-    padding: 6px 12px; /* Slightly larger padding for touch targets */
-    white-space: nowrap;
-    min-width: 0;
-    max-width: 120px;
+    font-size: 0.8rem;
+    padding: 6px 10px;
     border-radius: 6px;
-    background: rgba(0,0,0,0.10); /* Optional: subtle background for distinction */
-    box-shadow: none;
   }
 
   .navbar a::after {
-    display: none !important; /* Remove the underline/slidebar effect */
+    display: none;
   }
 
-  .h1 {
-    font-size: 18px;
-    margin-left: 8px;
-  }
-
-  /* Make sure ThemeSelector stays in line and is small */
-  .header > .ThemeSelector,
-  .header > .theme-selector,
-  .navbar .ThemeSelector,
-  .navbar .theme-selector {
-    margin-left: 8px;
-    margin-right: 0;
-    align-self: center;
-    display: inline-flex;
-    min-width: 0;
-    max-width: 90px;
-    height: 32px !important;
-    font-size: 13px !important;
-    padding: 0 10px !important;
-    border-radius: 8px !important;
-    box-sizing: border-box;
-  }
-
-  /* If your theme button is a button element inside ThemeSelector */
-  .ThemeSelector button,
-  .theme-selector button {
-    font-size: 13px !important;
-    padding: 0 10px !important;
-    height: 32px !important;
-    border-radius: 8px !important;
-    min-width: 0;
-    max-width: 90px;
-    box-sizing: border-box;
-  }
-
-  /* Show the theme toggle button in mobile view */
   .theme-toggle-btn {
     display: flex !important;
     align-items: center;
     justify-content: center;
     height: 32px !important;
     width: 32px !important;
-    font-size: 22px !important;
-    margin-right: 0 !important;
+    font-size: 20px !important;
     padding: 0 !important;
-    margin-left: 20px !important;
-  }
-
-  /* Optional: If ThemeSelector is not the last child, target it directly */
-  .navbar .ThemeSelector,
-  .navbar .theme-selector {
-    margin-left: 50px !important;
+    margin-left: 8px !important;
   }
 }
