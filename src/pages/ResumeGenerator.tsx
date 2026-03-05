@@ -5,6 +5,7 @@ import { projectsList } from "./Projects";
 import type { Project } from "./Projects";
 import "../components/css_files/Projects.css";
 import "../components/css_files/ResumeGenerator.css";
+import tempImg from "../assets/temp.jpg";
 
 // Improved LaTeX escaper
 function escapeLatex(str: string): string {
@@ -27,148 +28,154 @@ function escapeLatex(str: string): string {
     .replace(/\r?\n|\r/g, ' ');
 }
 
-const latexTemplate = (projects: typeof projectsList) => `
-%-------------------------
-% Resume in Latex
-% Author : Sidratul Muntaha Ahmed
-% License : MIT
-%------------------------
+const latexTemplate = (projects: typeof projectsList) => String.raw`
+\documentclass[letterpaper,11pt]{article}
 
-\\documentclass[letterpaper,11pt]{article}
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\input{glyphtounicode}
 
-\\usepackage{latexsym}
-\\usepackage[empty]{fullpage}
-\\usepackage{titlesec}
-\\usepackage{marvosym}
-\\usepackage[usenames,dvipsnames]{color}
-\\usepackage{verbatim}
-\\usepackage{enumitem}
-\\usepackage[hidelinks]{hyperref}
-\\usepackage{fancyhdr}
-\\usepackage[english]{babel}
-\\usepackage{tabularx}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
 
-\\pagestyle{fancy}
-\\fancyhf{}
-\\fancyfoot{}
-\\renewcommand{\\headrulewidth}{0pt}
-\\renewcommand{\\footrulewidth}{0pt}
-\\addtolength{\\oddsidemargin}{-0.5in}
-\\addtolength{\\evensidemargin}{-0.5in}
-\\addtolength{\\textwidth}{1in}
-\\addtolength{\\topmargin}{-.5in}
-\\addtolength{\\textheight}{1.0in}
-\\urlstyle{same}
-\\raggedbottom
-\\raggedright
-\\setlength{\\tabcolsep}{0in}
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
 
-\\titleformat{\\section}{
-  \\vspace{-4pt}\\scshape\\raggedright\\large
-}{}{0em}{}[\\color{black}\\titlerule \\vspace{-5pt}]
+\pdfgentounicode=1
 
-%-------------------------
-% Custom commands
-\\newcommand{\\resumeItem}[1]{
-  \\item\\small{{#1 \\vspace{-2pt}}}
+\newcommand{\resumeItem}[1]{
+  \item\small{{#1 \vspace{-2pt}}}
 }
 
-\\newcommand{\\resumeSubheading}[4]{
-  \\vspace{-2pt}\\item
-    \\begin{tabular*}{0.97\\textwidth}[t]{l@{\\extracolsep{\\fill}}r}
-      \\textbf{#1} & #2 \\\\
-      \\textit{\\small#3} & \\textit{\\small #4} \\\\
-    \\end{tabular*}\\vspace{-7pt}
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
 }
 
-\\newcommand{\\resumeSubSubheading}[2]{
-    \\item
-    \\begin{tabular*}{0.97\\textwidth}{l@{\\extracolsep{\\fill}}r}
-      \\textit{\\small#1} & \\textit{\\small #2} \\\\
-    \\end{tabular*}\\vspace{-7pt}
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
 }
 
-\\newcommand{\\resumeProjectHeading}[2]{
-    \\item
-    \\begin{tabular*}{0.97\\textwidth}{l@{\\extracolsep{\\fill}}r}
-      \\small#1 & #2 \\\\
-    \\end{tabular*}\\vspace{-7pt}
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
 }
 
-\\newcommand{\\resumeSubItem}[1]{\\resumeItem{#1}\\vspace{-4pt}}
-\\renewcommand\\labelitemii{$\\vcenter{\\hbox{\\tiny$\\bullet$}}$}
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
 
-\\newcommand{\\resumeSubHeadingListStart}{\\begin{itemize}[leftmargin=0.15in, label={}]}
-\\newcommand{\\resumeSubHeadingListEnd}{\\end{itemize}}
-\\newcommand{\\resumeItemListStart}{\\begin{itemize}}
-\\newcommand{\\resumeItemListEnd}{\\end{itemize}\\vspace{-5pt}}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
 
-\\begin{document}
+\begin{document}
 
-%----------HEADING----------
+\begin{center}
+    \textbf{\Huge \scshape Manan Kakkar} \\ \vspace{1pt}
+    \small \href{mailto:manan.kakkar.2005@outlook.com}{manan.kakkar.2005@outlook.com} $|$
+    \href{https://www.linkedin.com/in/manankakkar11}{linkedin.com/in/manankakkar11} $|$
+    \href{https://github.com/MananKakkar1}{github.com/MananKakkar1} $|$
+    \href{https://manankakkar.com}{manankakkar.com} \\
+\end{center}
 
-\\begin{center}
-    \\textbf{\\Huge \\scshape Manan Kakkar} \\\\ \\vspace{1pt}
-    \\small \\href{mailto:manan.kakkar.2005@outlook.com}{manan.kakkar.2005@outlook.com} $|$
-    \\href{https://www.linkedin.com/in/manankakkar11}{linkedin.com/in/manankakkar11} $|$
-    \\href{https://github.com/MananKakkar1}{github.com/MananKakkar1} $|$
-    416-705-7631\\\\
-\\end{center}
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {University of Toronto}{Toronto, Ontario}
+      {Honours Bachelor of Science: Computer Science Specialist $|$ Co-op Program}{Expected 2028}
+      \resumeItemListStart
+        \resumeItem{\textbf{Relevant Coursework}: Operating Systems, Artificial Intelligence, Robotics, Networks \& Information Security, Data Structures \& Analysis, Systems Programming, Software Design, Software Engineering}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
 
-%-----------EDUCATION-----------
-\\section{Education}
-  \\resumeSubHeadingListStart
-    \\resumeSubheading
-      {University of Toronto Mississauga}{Mississauga, Ontario}
-      {Honours Bachelor of Science: Computer Science Specialist}{Expected June 2028}
-          \\resumeItemListStart
-            \\resumeItem{Enrolled in the UTMCIP Co-op Program}
-            \\resumeItem{\\textbf{Relevant Coursework:} Computer Organization, Software Design, Introduction to Theory of Computation, Software Tools and Systems Programming, Data Structures \\& Analysis, Probability and Statistics 1, Calculus of Several Variables, Linear Algebra, Introduction to Software Engineering}
-          \\resumeItemListEnd
-  \\resumeSubHeadingListEnd
-
-%-----------EXPERIENCE-----------
-\\section{Experience}
-  \\resumeSubHeadingListStart
-    \\resumeSubheading
-      {Flymingos}{May 2025 - Present}
+\section{Experience}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Munafah.AI}{May 2025 -- Aug 2025}
       {Software Engineer Intern}{Remote}
+      \resumeItemListStart
+        \resumeItem{Developed and deployed dual-backend REST APIs (\textbf{Node.js}, \textbf{Flask}) with Firestore, enabling secure authentication and data processing for a real-time \textbf{B2B} messaging platform serving \textbf{100+} active users across \textbf{25+} organizations.}
+        \resumeItem{Built an \textbf{AI-powered} moderation pipeline for a real-time messaging system, reducing manual triage by \textbf{60\%} and improving detection accuracy for harmful content.}
+        \resumeItem{Implemented \textbf{unit and integration tests}, achieving \textbf{90\%+ coverage}, ensuring stable production rollouts.}
+        \resumeItem{Engineered a \textbf{CI/CD} pipeline with branch protection and \textbf{Render} deployments, accelerating release cycles.}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+\section{Projects}
+  \resumeSubHeadingListStart
+${projects.map((p) => {
+  const projectLink = p.sourceUrl
+    ? `\\href{${p.sourceUrl}}{\\underline{Github}}`
+    : "";
+  return `    \\resumeProjectHeading
+      {\\textbf{${escapeLatex(p.title)}} $|$ \\emph{${escapeLatex(
+        p.technologies || "Tech"
+      )}}}{${projectLink}}
       \\resumeItemListStart
-        \\resumeItem{Built and maintained a robust CI/CD pipeline using GitHub Actions to automate testing and deployment.}
-        \\resumeItem{Developed scalable \\textbf{REST APIs} using \\textbf{Node.js}, \\textbf{Express}, and \\textbf{Flask} for various backend services.}
-        \\resumeItem{Integrated \\textbf{Firebase} for authentication and role-based access, managing user and subscription data.}
-        \\resumeItem{Collaborated across teams using \\textbf{Jira} and \\textbf{Discord} to manage tasks and sprint priorities.}
-        \\resumeItem{Created an AI-driven moderation and appeal system with \\textbf{GPT-4o}, reducing review time to under \\textbf{2 minutes}.}
-      \\resumeItemListEnd
-  \\resumeSubHeadingListEnd
+        \\resumeItem{${escapeLatex(p.latex_description || p.description || "")}}
+      \\resumeItemListEnd`;
+}).join("\n\n")}
+  \resumeSubHeadingListEnd
 
-%-----------PROJECTS-----------
-\\section{Projects}
+\section{Technical Skills}
+\begin{itemize}[leftmargin=0.15in, label={}]
+  \small{\item{
+    \textbf{Languages:} C, Python, Java, Bash, JavaScript/TypeScript, Go \\
+    \textbf{Systems \& Infra:} Linux, Git, Github Actions \\
+    \textbf{Frameworks/APIs:} Flask, Express.js, React, OpenCV, YOLOv5 \\
+    \textbf{Databases \& Auth:} PostgreSQL, SQLite, MongoDB, Firebase, JWT \\
+    \textbf{Testing:} GDB, Valgrind, PyTest, JUnit5, Jest \\
+  }}
+\end{itemize}
 
-    \\resumeSubHeadingListStart
-${projects.map((p) =>
-`    \\resumeProjectHeading
-        {\\textbf{${escapeLatex(p.title)}} $|$ ${escapeLatex(p.technologies || "Tech")}}{}
-      \\resumeItemListStart
-        \\resumeItem{${escapeLatex((p.latex_description || p.description || ""))}}
-      \\resumeItemListEnd
-`).join('\n')}
-    \\resumeSubHeadingListEnd
+\section{Extracurriculars}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {ETA}{2025}
+      {EmberHacks}{Mississauga, ON}
+      \resumeItemListStart
+        \resumeItem{\textbf{Won "Best Use of Auth0"} and achieved Top 4 at EmberHacks 2025 for building a personalized, interactive AI learning assistant.}
+      \resumeItemListEnd
+    \resumeSubheading
+      {Netly}{2025}
+      {SpurHacks}{Waterloo, ON}
+      \resumeItemListStart
+        \resumeItem{Built an \textbf{AI basketball referee} using \textbf{YOLOv5} and \textbf{OpenCV} to detect shots and movement at \textbf{30 FPS}.}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
 
-%-----------TECHNICAL SKILLS-----------
-\\section{Technical Skills}
-\\begin{itemize}[leftmargin=0.15in, label={}]
-    \\small{\\item{
-        \\textbf{Languages:} Python, Java, JavaScript, TypeScript, C, SQL, Bash, HTML, CSS, Go, Assembly (RISC-V) \\\\
-        \\textbf{Frameworks \\& Libraries:} JavaFX, Tkinter, Flask (Python), React, OpenAI API, Node.js, Express.js, Nodemailer \\\\
-        \\textbf{Tools \\& Environments:} Vite, Git, GitHub, VS Code, IntelliJ, PyCharm, Vim, Figma, Jira, Vercel, Render \\\\
-        \\textbf{Systems \\& Networking:} Linux/Unix, Shell Scripting, File I/O, Process Management, TCP/IP Networking \\\\
-        \\textbf{Databases \\& DevOps:} Firebase, Render, Vercel, GitHub Actions, CI/CD, REST APIs \\\\
-        \\textbf{Portfolio Website:} {\\href{https://manankakkar.com}{https://manankakkar.com}}
-    }}
-\\end{itemize}
-
-\\end{document}
+\end{document}
 `;
 
 const getCategories = () => {
@@ -337,7 +344,7 @@ const ResumeGenerator = () => {
             </div>
             <div className="gameboy-screen">
               <img
-                src={project.image || "/placeholder.svg"}
+                src={project.image || tempImg}
                 alt={project.title}
               />
             </div>
@@ -355,28 +362,21 @@ const ResumeGenerator = () => {
                 <div className="dpad">
                   <div className="dpad-horizontal"></div>
                   <div className="dpad-vertical"></div>
-                  <div
-                    className="dpad-center"
-                    onClick={() => console.log("Center pressed")}
-                  ></div>
+                  <div className="dpad-center"></div>
                   <div
                     className="dpad-up"
-                    onClick={() => console.log("Up pressed")}
                     title="Navigate Up"
                   ></div>
                   <div
                     className="dpad-down"
-                    onClick={() => console.log("Down pressed")}
                     title="Navigate Down"
                   ></div>
                   <div
                     className="dpad-left"
-                    onClick={() => console.log("Left pressed")}
                     title="Navigate Left"
                   ></div>
                   <div
                     className="dpad-right"
-                    onClick={() => console.log("Right pressed")}
                     title="Navigate Right"
                   ></div>
                 </div>
@@ -448,7 +448,7 @@ const ResumeGenerator = () => {
                   className="project-entry resume-project selected"
                 >
                   <div className="gameboy-screen">
-                    <img src={p.image || "/placeholder.svg"} alt={p.title} />
+                    <img src={p.image || tempImg} alt={p.title} />
                   </div>
                   <h3>{p.title}</h3>
                   <div className="gameboy-controls">
@@ -594,3 +594,4 @@ const ResumeGenerator = () => {
 };
 
 export default ResumeGenerator;
+

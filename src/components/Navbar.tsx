@@ -1,7 +1,6 @@
 import "./css_files/Navbar.css";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import ThemeSelector from "./ThemeSelector";
-import logo1 from "../assets/logo2.svg";
 
 const Navbar = () => {
   const location = useLocation();
@@ -9,7 +8,7 @@ const Navbar = () => {
 
   const handleContactClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    if (location.pathname !== "/") {
+    if (location.pathname !== "/Home") {
       navigate("/Home#contact-sec");
     } else {
       const contactSection = document.getElementById("contact-sec");
@@ -35,7 +34,9 @@ const Navbar = () => {
   return (
     <div>
       <header className="header">
-        <img src={logo1} alt="Logo" className="logo" />
+        <Link to="/Home" onClick={handleHomeClick} className="logo-brand brand-text-only">
+          <span className="logo-title">Manan Kakkar</span>
+        </Link>
         <nav className="navbar">
           <Link to="/Home" onClick={handleHomeClick}>
             Home

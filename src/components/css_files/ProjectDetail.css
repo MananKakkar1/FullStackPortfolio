@@ -1,163 +1,165 @@
-/* Remove hardcoded theme variables - they should come from the theme context */
-/* :root {
-    --bg-gradient: radial-gradient(circle, #000000 0%, #017d81 100%);
-    --text: #b2ffff;
-    --card-bg: rgba(0, 0, 0, 0.88);
-    --card-border: #00fff7;
-    --card-shadow: 0 4px 32px rgba(0,255,247,0.13);
-    --label-color: #00fff7;
-    --button-bg: #017d81;
-    --button-text: #000000;
-} */
-
 .project-detail-container {
   min-height: 100vh;
-  width: 100vw;
+  width: 100%;
   background: var(--bg-gradient);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
+  padding: 24px 0 58px;
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 14px;
+}
+
+.project-detail-head {
+  width: min(900px, calc(100% - 28px));
+  text-align: center;
+}
+
+.project-detail-kicker {
+  display: inline-flex;
+  margin-bottom: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--card-border) 46%, transparent);
+  background: color-mix(in srgb, var(--button-bg) 16%, transparent);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
 }
 
 .project-detail-title {
-  font-size: 3rem;
-  font-weight: 900;
-  color: var(--text);
-  text-align: center;
-  margin-bottom: 32px;
+  font-size: clamp(1.8rem, 4.6vw, 3rem);
   line-height: 1.1;
+  text-align: center;
+  color: var(--label-color);
+}
+
+.project-detail-meta {
+  margin-top: 8px;
+  color: color-mix(in srgb, var(--text) 86%, white);
+  font-size: 0.95rem;
 }
 
 .project-browser-window {
-  background: var(--card-border);
-  border-radius: 12px;
-  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.18);
-  padding: 0;
-  margin-bottom: 32px;
-  border: 4px solid var(--card-border);
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  width: 480px;
-  max-width: 90vw;
+  width: min(900px, calc(100% - 28px));
+  border-radius: 16px;
+  border: 1px solid color-mix(in srgb, var(--card-border) 56%, transparent);
+  background: color-mix(in srgb, var(--card-bg) 90%, transparent);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
 }
 
 .project-browser-bar {
-  height: 28px;
-  background: var(--card-border);
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
+  height: 38px;
+  padding: 0 12px;
+  border-bottom: 1px solid color-mix(in srgb, var(--card-border) 34%, transparent);
   display: flex;
   align-items: center;
-  padding: 0 12px;
-  gap: 6px;
+  gap: 7px;
 }
 
 .project-browser-dot {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  display: inline-block;
 }
+
 .project-browser-dot.red {
   background: #ff5f56;
 }
+
 .project-browser-dot.yellow {
   background: #ffbd2e;
 }
+
 .project-browser-dot.green {
   background: #27c93f;
 }
 
 .project-detail-img-area {
   width: 100%;
-  height: 260px;
-  background: #222;
+  height: min(58vw, 480px);
+  min-height: 230px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom-left-radius: 12px;
-  border-bottom-right-radius: 12px;
-  overflow: hidden;
-  position: relative;
+  background: color-mix(in srgb, var(--card-bg) 80%, black 16%);
 }
 
 .project-detail-img-area img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  border-radius: 0;
-  border: none;
-  margin: 0;
-  display: block;
-  background: #222;
-}
-
-.project-detail-card {
-  background: var(--card-bg);
-  border: 2px solid var(--card-border);
-  border-radius: 18px;
-  box-shadow: var(--card-shadow);
-  color: var(--text);
-  padding: 24px 20px 20px 20px;
-  max-width: 450px;
-  min-width: 260px;
-  min-height: 420px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.project-detail-card h2 {
-  color: var(--label-color);
-  margin-bottom: 18px;
-  text-align: center;
-  font-size: 1.5rem;
-  font-weight: 700;
-}
-
-.project-detail-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 0;
-  border: none;
-  margin: 0;
-  display: block;
 }
 
 .project-detail-description {
-  color: var(--text);
-  font-size: 1.3rem;
+  width: min(900px, calc(100% - 28px));
   text-align: center;
-  margin: 36px 0 0 0;
-  font-weight: 500;
-  max-width: 600px;
+  line-height: 1.7;
+  font-size: clamp(1rem, 2.1vw, 1.18rem);
+  color: color-mix(in srgb, var(--text) 90%, white);
+}
+
+.project-detail-tech {
+  width: min(900px, calc(100% - 28px));
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.project-tech-pill {
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--card-border) 44%, transparent);
+  background: color-mix(in srgb, var(--button-bg) 14%, transparent);
+  color: var(--text);
+  padding: 5px 10px;
+  font-size: 0.78rem;
+}
+
+.project-detail-actions {
+  width: min(900px, calc(100% - 28px));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.project-back-btn,
+.source-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 14px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--card-border) 56%, transparent);
+  background: color-mix(in srgb, var(--card-bg) 90%, transparent);
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 700;
+  transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.24s ease;
 }
 
 .source-btn {
   background: var(--button-bg);
   color: var(--button-text);
-  border: none;
-  border-radius: 10px;
-  padding: 18px 36px;
-  font-weight: 700;
-  text-decoration: none;
-  transition: background 0.2s, color 0.2s;
-  text-align: center;
-  margin-top: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  gap: 10px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
+.project-back-btn:hover,
 .source-btn:hover {
-  background: var(--button-text);
-  color: var(--button-bg);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.24);
+}
+
+.project-detail-card {
+  width: min(500px, calc(100% - 28px));
+  border-radius: 16px;
+  border: 1px solid color-mix(in srgb, var(--card-border) 56%, transparent);
+  background: color-mix(in srgb, var(--card-bg) 90%, transparent);
+  box-shadow: var(--card-shadow);
+  color: var(--text);
+  padding: 18px;
+  text-align: center;
 }

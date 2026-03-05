@@ -3,7 +3,6 @@ import "../components/css_files/About.css";
 import "../components/css_files/Home.css";
 import tempImg from "../assets/photo.jpg";
 
-// Import tech stack images (same as Home)
 import reactImg from "../assets/logo.png";
 import tsImg from "../assets/typescript.png";
 import nodeImg from "../assets/Node.js_logo.svg.png";
@@ -26,186 +25,110 @@ import vercelImg from "../assets/vercel.png";
 import gitImg from "../assets/GitHub-Logo.svg";
 
 const techStack = [
+  { name: "React", icon: <img src={reactImg} alt="React" />, link: "https://react.dev/" },
+  { name: "TypeScript", icon: <img src={tsImg} alt="TypeScript" />, link: "https://www.typescriptlang.org/" },
+  { name: "Node.js", icon: <img src={nodeImg} alt="Node.js" />, link: "https://nodejs.org/" },
+  { name: "Express.js", icon: <img src={expressImg} alt="Express.js" />, link: "https://expressjs.com/" },
+  { name: "MongoDB", icon: <img src={mongoImg} alt="MongoDB" />, link: "https://www.mongodb.com/" },
+  { name: "Firebase", icon: <img src={firebaseImg} alt="Firebase" />, link: "https://firebase.google.com/" },
+  { name: "Flask", icon: <img src={flaskImg} alt="Flask" />, link: "https://flask.palletsprojects.com/" },
+  { name: "Python", icon: <img src={pythonImg} alt="Python" />, link: "https://www.python.org/" },
+  { name: "Java", icon: <img src={javaImg} alt="Java" />, link: "https://www.java.com/" },
+  { name: "JavaFX", icon: <img src={javafxImg} alt="JavaFX" />, link: "https://openjfx.io/" },
+  { name: "C", icon: <img src={cImg} alt="C" />, link: "https://en.wikipedia.org/wiki/C_(programming_language)" },
+  { name: "HTML5", icon: <img src={htmlImg} alt="HTML5" />, link: "https://developer.mozilla.org/en-US/docs/Web/HTML" },
+  { name: "CSS3", icon: <img src={cssImg} alt="CSS3" />, link: "https://developer.mozilla.org/en-US/docs/Web/CSS" },
+  { name: "Git", icon: <img src={gitImg} alt="GitHub" />, link: "https://git-scm.com/" },
+  { name: "Bash", icon: <img src={bashImg} alt="Bash" />, link: "https://www.gnu.org/software/bash/" },
+  { name: "Linux", icon: <img src={linuxImg} alt="Linux" />, link: "https://www.linux.org/" },
+  { name: "Windows", icon: <img src={windowsImg} alt="Windows" />, link: "https://www.microsoft.com/en-us/windows" },
+  { name: "Pygame", icon: <img src={pygameImg} alt="Pygame" />, link: "https://www.pygame.org/" },
+  { name: "RISC-V", icon: <img src={riscvImg} alt="RISC-V" />, link: "https://riscv.org/" },
+  { name: "Vercel", icon: <img src={vercelImg} alt="Vercel" />, link: "https://vercel.com/" },
+];
+
+const highlights = [
   {
-    name: "React",
-    icon: <img src={reactImg} alt="React" />,
-    link: "https://react.dev/",
+    label: "Current Focus",
+    value: "Full-Stack Engineering",
+    detail:
+      "Right now I am focused on React + TypeScript frontends and Node/Flask backends, with strong attention to API reliability and testing.",
   },
   {
-    name: "TypeScript",
-    icon: <img src={tsImg} alt="TypeScript" />,
-    link: "https://www.typescriptlang.org/",
+    label: "Work Style",
+    value: "Iterative and practical",
+    detail:
+      "I usually break features into small milestones, ship fast, and validate with tests and feedback before expanding scope.",
   },
   {
-    name: "Node.js",
-    icon: <img src={nodeImg} alt="Node.js" />,
-    link: "https://nodejs.org/",
+    label: "Strengths",
+    value: "Backend + product mindset",
+    detail:
+      "I am strongest when I can own backend logic, data flow, and integration details while still keeping the UI clean and usable.",
   },
   {
-    name: "Express.js",
-    icon: <img src={expressImg} alt="Express.js" />,
-    link: "https://expressjs.com/",
-  },
-  {
-    name: "MongoDB",
-    icon: <img src={mongoImg} alt="MongoDB" />,
-    link: "https://www.mongodb.com/",
-  },
-  {
-    name: "Firebase",
-    icon: <img src={firebaseImg} alt="Firebase" />,
-    link: "https://firebase.google.com/",
-  },
-  {
-    name: "Flask",
-    icon: <img src={flaskImg} alt="Flask" />,
-    link: "https://flask.palletsprojects.com/",
-  },
-  {
-    name: "Python",
-    icon: <img src={pythonImg} alt="Python" />,
-    link: "https://www.python.org/",
-  },
-  {
-    name: "Java",
-    icon: <img src={javaImg} alt="Java" />,
-    link: "https://www.java.com/",
-  },
-  {
-    name: "JavaFX",
-    icon: <img src={javafxImg} alt="JavaFX" />,
-    link: "https://openjfx.io/",
-  },
-  {
-    name: "C",
-    icon: <img src={cImg} alt="C" />,
-    link: "https://en.wikipedia.org/wiki/C_(programming_language)",
-  },
-  {
-    name: "HTML5",
-    icon: <img src={htmlImg} alt="HTML5" />,
-    link: "https://developer.mozilla.org/en-US/docs/Web/HTML",
-  },
-  {
-    name: "CSS3",
-    icon: <img src={cssImg} alt="CSS3" />,
-    link: "https://developer.mozilla.org/en-US/docs/Web/CSS",
-  },
-  {
-    name: "Git",
-    icon: <img src={gitImg} alt="GitHub" />,
-    link: "https://git-scm.com/",
-  },
-  {
-    name: "Bash",
-    icon: <img src={bashImg} alt="Bash" />,
-    link: "https://www.gnu.org/software/bash/",
-  },
-  {
-    name: "Linux",
-    icon: <img src={linuxImg} alt="Linux" />,
-    link: "https://www.linux.org/",
-  },
-  {
-    name: "Windows",
-    icon: <img src={windowsImg} alt="Windows" />,
-    link: "https://www.microsoft.com/en-us/windows",
-  },
-  {
-    name: "Pygame",
-    icon: <img src={pygameImg} alt="Pygame" />,
-    link: "https://www.pygame.org/",
-  },
-  {
-    name: "RISC-V",
-    icon: <img src={riscvImg} alt="RISC-V" />,
-    link: "https://riscv.org/",
-  },
-  {
-    name: "Vercel",
-    icon: <img src={vercelImg} alt="Vercel" />,
-    link: "https://vercel.com/",
+    label: "Current Chapter",
+    value: "UofT CS, internships, hackathons",
+    detail:
+      "I am a CS student at UofT, completed a software internship at Munafah.AI, and built practical projects at SpurHacks and EmberHacks.",
   },
 ];
 
-const timeline = [
+const progressTimeline = [
   {
-    date: "May 2026 - August 2027",
-    title: "Software Engineer Intern",
-    org: "AMD",
-    description:
-      "Incoming AMD Full Stack Software Development Engineer Intern for Summer 2026",
-  },
-  {
-    date: "October 2025",
-    title: "EmberHacks Hackathon",
-    org: "EmberHacks",
-    description:
-      "Earned my first hackathon win at EmberHacks for developing ETA, an AI-powered electronic teaching assistant that helps students better understand complex course material.",
-  },
-  {
-    date: "May 2025 - August 2025",
-    title: "Software Engineer Intern",
-    org: "Munafah.AI",
-    description:
-      "Built secure backend systems and AI moderation tools for a B2B platform, enhancing user safety and reducing content review time from hours to just 2 minutes.",
-  },
-  {
-    date: "June 2025",
-    title: "SpurHacks Hackathon",
-    org: "SpurHacks",
-    description:
-      "Built Netly, an AI-powered basketball analytics tool using YOLO, pose estimation, and OpenCV at SpurHacks 2025, enabling real-time and video-based detection of possessions, passes, and rule violations.",
-  },
-  {
-    date: "2023 – Present",
-    title: "Computer Science Undergraduate",
-    org: "University of Toronto",
-    description:
-      "Specializing in Computer Science with a focus on software development.",
-  },
-  {
-    date: "2023",
-    title: "Hack the Ridge",
-    org: "Iroquois Ridge High School",
-    description:
-      "Participated in a 9-hour hackathon where I collaborated with a team to build a retro-style ski resort planning app, helping users organize trips and explore resort details, sharpened skills in collaboration and rapid development.",
-  },
-  {
-    date: "2019 – 2023",
+    period: "2019 - 2023",
     title: "High School Diploma",
-    org: "Iroquois Ridge High School",
-    description:
-      "Graduated with a focus on computer science, engineering and mathematics, achieving high academic standards.",
+    note: "Iroquois Ridge High School - focused on computer science, engineering, and mathematics with strong academic performance.",
+  },
+  {
+    period: "2023 - Present",
+    title: "Computer Science Undergraduate",
+    note: "University of Toronto - specializing in Computer Science with a focus on software development and systems engineering.",
+  },
+  {
+    period: "2023",
+    title: "Hack the Ridge",
+    note: "Collaborated in a 9-hour hackathon to build a retro-style ski resort planning app, strengthening teamwork and rapid prototyping.",
+  },
+  {
+    period: "May 2025 - August 2025",
+    title: "Software Engineer Intern - Munafah.AI",
+    note: "Built secure backend systems and AI moderation tools for a B2B platform, reducing content review time from hours to around 2 minutes.",
+  },
+  {
+    period: "June 2025",
+    title: "SpurHacks Hackathon - Netly",
+    note: "Built an AI-powered basketball analytics tool using YOLO, pose estimation, and OpenCV for real-time and video-based possession and rule-violation detection.",
+  },
+  {
+    period: "October 2025",
+    title: "EmberHacks Hackathon - ETA",
+    note: "Earned first hackathon win with ETA, an AI-powered teaching assistant designed to help students understand complex course material.",
+  },
+  {
+    period: "May 2026 - August 2027",
+    title: "Software Engineer Intern - AMD",
+    note: "Incoming full-stack software development engineering internship focused on production-scale internal tooling and systems.",
   },
 ];
 
-// --- Add missing state and handler for Gameboy tech stack cards ---
 const INITIAL_TECHS = [0, 1, 2];
 
 const About = () => {
   const [displayedTechs, setDisplayedTechs] = useState(INITIAL_TECHS);
 
-  // Same logic as Home.tsx for D-pad navigation
   const handleTechDpad = (cardIdx: number, direction: "next" | "prev") => {
     setDisplayedTechs((prev) => {
       const updated = [...prev];
       if (direction === "next") {
         updated[cardIdx] = (prev[cardIdx] + 1) % techStack.length;
-        // Prevent duplicate techs showing at the same time
-        if (
-          updated.filter((_, i) => i !== cardIdx).includes(updated[cardIdx])
-        ) {
+        if (updated.filter((_, i) => i !== cardIdx).includes(updated[cardIdx])) {
           updated[cardIdx] = (updated[cardIdx] + 1) % techStack.length;
         }
       } else {
-        updated[cardIdx] =
-          (prev[cardIdx] - 1 + techStack.length) % techStack.length;
-        if (
-          updated.filter((_, i) => i !== cardIdx).includes(updated[cardIdx])
-        ) {
-          updated[cardIdx] =
-            (updated[cardIdx] - 1 + techStack.length) % techStack.length;
+        updated[cardIdx] = (prev[cardIdx] - 1 + techStack.length) % techStack.length;
+        if (updated.filter((_, i) => i !== cardIdx).includes(updated[cardIdx])) {
+          updated[cardIdx] = (updated[cardIdx] - 1 + techStack.length) % techStack.length;
         }
       }
       return updated;
@@ -213,173 +136,134 @@ const About = () => {
   };
 
   return (
-    <div className="about-creative-container">
-      {/* Short Intro */}
-      <div className="about-creative-header">
-        <div className="about-creative-img-wrapper">
-          <img src={tempImg} alt="Profile" className="about-creative-img" />
-        </div>
-        <div className="about-creative-intro">
-          <h1 className="about-creative-title">About Me</h1>
-          <p>
-            Hi! I’m Manan Kakkar, a Computer Science student at the University
+    <div className="about-shell">
+      <section className="about-intro-split">
+        <div className="about-intro-left">
+          <p className="about-kicker">Profile</p>
+          <h1>Software builder focused on impact, speed, and clean execution.</h1>
+          <p className="about-lead">
+            Hi! I am Manan Kakkar, a Computer Science student at the University
             of Toronto. I love building software that makes a real difference,
             diving into new technologies, and working with others to bring
-            creative ideas to life. I’m always excited to learn, grow, and take
-            on challenges that push me to think outside the box.
+            creative ideas to life. I am always excited to learn, grow, and
+            take on challenges that push me to think outside the box.
           </p>
-          <div className="about-creative-socials">
+          <div className="about-socials">
             <a
               href="https://www.linkedin.com/in/manankakkar11/"
               target="_blank"
               rel="noopener noreferrer"
-              className="about-creative-social-btn"
-              aria-label="LinkedIn"
             >
-              <svg
-                width="32"
-                height="32"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11.75 20h-3v-11h3v11zm-1.5-12.27c-.97 0-1.75-.79-1.75-1.76 0-.97.78-1.76 1.75-1.76s1.75.79 1.75 1.76c0 .97-.78 1.76-1.75 1.76zm15.25 12.27h-3v-5.6c0-1.34-.03-3.07-1.87-3.07-1.87 0-2.16 1.46-2.16 2.97v5.7h-3v-11h2.88v1.5h.04c.4-.75 1.38-1.54 2.84-1.54 3.04 0 3.6 2 3.6 4.59v6.45z" />
-              </svg>
+              LinkedIn
             </a>
             <a
               href="https://github.com/manankakkar1"
               target="_blank"
               rel="noopener noreferrer"
-              className="about-creative-social-btn"
-              aria-label="GitHub"
             >
-              <svg
-                width="32"
-                height="32"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.084-.729.084-.729 1.205.084 1.84 1.236 1.84 1.236 1.07 1.834 2.809 1.304 3.495.997.108-.775.418-1.305.762-1.605-2.665-.305-5.466-1.334-5.466-5.93 0-1.31.47-2.38 1.236-3.22-.124-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.3 1.23.96-.267 1.98-.399 3-.404 1.02.005 2.04.137 3 .404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.873.118 3.176.77.84 1.235 1.91 1.235 3.22 0 4.61-2.803 5.624-5.475 5.921.43.372.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.218.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12z" />
-              </svg>
+              GitHub
             </a>
           </div>
         </div>
-      </div>
-      {/* Goals Section */}
-      {/* <div className="about-creative-section">
-        <h2 className="goals-header">My Story</h2>
-        <p className="goals-text">
-          My journey into coding took a major leap when I partnered with Flymingos Inc as a Software Engineer, helping them build and grow their business from the ground up.
-          This hands-on collaboration allowed me to apply my programming knowledge to real-world challenges, work closely with the founding team, and contribute directly to the company’s vision and technical direction.
-          <br /><br />
-          Working with Flymingos, I learned the importance of writing clean, efficient code and gained exposure to the full software development lifecycle, from brainstorming ideas to deploying features that made a tangible impact.
-          One of the highlights was collaborating on an AI-Moderation and Appeal System feature that required me to quickly adapt, communicate effectively, and solve problems in a fast-paced remote environment.
-          <br /><br />
-          This experience not only strengthened my technical skills but also fueled my passion for building impactful technology and supporting innovative businesses.
-          Now, I’m eager to embrace new challenges and continue my growth by working on large-scale software projects and developing solutions that make a real difference, especially through co-op placements and internships.<br />
-        </p>
-      </div> */}
-
-      {/* Timeline Section */}
-      <div className="about-creative-section">
-        <h2>Experience & Education</h2>
-        <div className="timeline-vertical">
-          {timeline.map((item, idx) => (
-            <div
-              className={`timeline-item ${idx % 2 === 0 ? "left" : "right"}`}
-              key={idx}
-            >
-              <div className="timeline-content">
-                <div className="timeline-date">{item.date}</div>
-                <div className="timeline-title">{item.title}</div>
-                <div className="timeline-org">{item.org}</div>
-                <div className="timeline-desc">{item.description}</div>
-              </div>
-            </div>
-          ))}
-          <div className="timeline-line"></div>
+        <div className="about-intro-right">
+          <img src={tempImg} alt="Manan Kakkar" className="about-hero-image" />
+          <div className="about-mini-tags">
+            <span>Full Stack</span>
+            <span>Systems</span>
+            <span>AI</span>
+          </div>
         </div>
-      </div>
+      </section>
 
-      {/* --- Tech Stack Section --- */}
-      <div className="about-creative-section">
-        <h2>Tech Stack</h2>
-        <h3>(Use D-pad to navigate through my tech stack!)</h3>
+      <section className="about-highlights-grid">
+        {highlights.map((fact) => (
+          <article key={fact.label} className="about-fact-card">
+            <p className="about-fact-label">{fact.label}</p>
+            <p className="about-fact-value">{fact.value}</p>
+            <p className="about-fact-detail">{fact.detail}</p>
+          </article>
+        ))}
+      </section>
+
+      <section className="about-progress-panel">
+        <div className="about-section-head">
+          <h2>Career Timeline</h2>
+          <p>Milestones across education, internships, and hackathon wins.</p>
+        </div>
+        <div className="progress-rail">
+          {progressTimeline.map((item) => (
+            <article key={item.period + item.title} className="progress-node">
+              <p className="progress-period">{item.period}</p>
+              <h3>{item.title}</h3>
+              <p>{item.note}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="about-tech-panel">
+        <div className="about-section-head">
+          <h2>Interactive Tech Stack</h2>
+          <p>Use each D-pad to rotate through technologies.</p>
+        </div>
         <div className="home-projects-list">
-          <div className="gameboy-cards-row">
-            {displayedTechs.map((techIdx, idx) => {
-              const tech = techStack[techIdx];
-              return (
-                <div key={idx} className="project-flip-container">
-                  <div className="project-flip-inner">
-                    <div className="project-flip-front">
-                      <div className="project-entry">
-                        <div className="gameboy-lines">
-                          <div className="gameboy-line"></div>
-                          <div className="gameboy-line"></div>
-                          <div className="gameboy-line"></div>
+          {displayedTechs.map((techIdx, idx) => {
+            const tech = techStack[techIdx];
+            return (
+              <div key={idx} className="project-flip-container">
+                <div className="project-flip-inner">
+                  <div className="project-flip-front">
+                    <div className="project-entry">
+                      <div className="gameboy-lines">
+                        <div className="gameboy-line"></div>
+                        <div className="gameboy-line"></div>
+                        <div className="gameboy-line"></div>
+                      </div>
+                      <div className="gameboy-screen">{tech.icon}</div>
+                      <h3>{tech.name}</h3>
+                      <div className="gameboy-controls">
+                        <div className="tech-stack">
+                          <a
+                            href={tech.link}
+                            className="tech-badge"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            title={tech.name}
+                          >
+                            {tech.name}
+                          </a>
                         </div>
-                        <div className="gameboy-screen">{tech.icon}</div>
-                        <h3>{tech.name}</h3>
-                        <div className="gameboy-controls">
-                          <div className="tech-stack">
+                        <div className="gameboy-dpad">
+                          <div className="dpad">
+                            <div className="dpad-horizontal"></div>
+                            <div className="dpad-vertical"></div>
+                            <div className="dpad-center"></div>
+                            <div className="dpad-up" onClick={() => handleTechDpad(idx, "next")} title="Next Tech"></div>
+                            <div className="dpad-down" onClick={() => handleTechDpad(idx, "prev")} title="Previous Tech"></div>
+                            <div className="dpad-left" onClick={() => handleTechDpad(idx, "prev")} title="Previous Tech"></div>
+                            <div className="dpad-right" onClick={() => handleTechDpad(idx, "next")} title="Next Tech"></div>
+                          </div>
+                          <div className="action-buttons">
                             <a
                               href={tech.link}
-                              className="tech-badge"
+                              className="action-button"
                               target="_blank"
                               rel="noopener noreferrer"
-                              title={tech.name}
+                              title="Tech Info"
                             >
-                              {tech.name}
+                              INFO
                             </a>
-                          </div>
-                          <div className="gameboy-dpad">
-                            <div className="dpad">
-                              <div className="dpad-horizontal"></div>
-                              <div className="dpad-vertical"></div>
-                              <div className="dpad-center"></div>
-                              <div
-                                className="dpad-up"
-                                onClick={() => handleTechDpad(idx, "next")}
-                                title="Next Tech"
-                              ></div>
-                              <div
-                                className="dpad-down"
-                                onClick={() => handleTechDpad(idx, "prev")}
-                                title="Previous Tech"
-                              ></div>
-                              <div
-                                className="dpad-left"
-                                onClick={() => handleTechDpad(idx, "prev")}
-                                title="Previous Tech"
-                              ></div>
-                              <div
-                                className="dpad-right"
-                                onClick={() => handleTechDpad(idx, "next")}
-                                title="Next Tech"
-                              ></div>
-                            </div>
-                            <div className="action-buttons">
-                              <a
-                                href={tech.link}
-                                className="action-button"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                title="Tech Info"
-                              >
-                                INFO
-                              </a>
-                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              );
-            })}
-          </div>
+              </div>
+            );
+          })}
         </div>
-      </div>
+      </section>
     </div>
   );
 };

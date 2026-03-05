@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import "../components/css_files/Projects.css";
+import { Link } from "react-router-dom";
 import chessImg from "../assets/chess-pic.png";
 import portfolioImg from "../assets/portfolio2.png";
 import fileSystemImg from "../assets/file-system-tree.png";
@@ -22,6 +23,7 @@ import salesImg from "../assets/SalesBoard.png";
 import reelImg from "../assets/ReelDeal.png";
 import clImg from "../assets/cl.png";
 import airaImg from "../assets/aira.png";
+import tempImg from "../assets/temp.jpg";
 
 export type Project = {
   id: string;
@@ -115,7 +117,7 @@ const projectsList: Project[] = [
     description:
       "AI-Paint is a desktop application inspired by Microsoft Paint, allowing users to draw freely as well as generate AI-created images using text prompts.",
     latex_description:
-      "\\resumeProjectHeading\n  {\\textbf{SmartPaint} $|$ \\emph{Java, JavaFX, Llama3}}{}\n  \\resumeItemListStart\n    \\resumeItem{Built a desktop paint app with \\textbf{JavaFX} using \\textbf{Agile} practices, supporting shape drawing, and erasing tools.}\n    \\resumeItem{Implemented agentic AI workflow with \\textbf{Llama3} for shape generation based on natural language prompts.}\n    \\resumeItem{Designed a \\textbf{finite state machine} to manage user interaction modes, improving UI modularity and responsiveness.}\n    \\resumeItem{Implemented a custom file parser and serializer with \\textbf{unit tests} to ensure reliable save/load functionality.}\n  \\resumeItemListEnd",
+      "Built a JavaFX paint application with shape tools, color controls, and structured JSON workflows; integrated Llama 3 and OpenAI models for intelligent prompt-to-drawing generation; implemented an FSM-based parser for high-volume command handling with strong JUnit5 test coverage.",
     image: aiPaintImg,
     sourceUrl: "https://github.com/MananKakkar1/AI_Paint_Application",
     category: "Desktop Applications",
@@ -133,7 +135,7 @@ const projectsList: Project[] = [
     description:
       "A custom Linux shell built using C, designed to provide a unique command-line interface and support for various shell features.",
     latex_description:
-      "\\resumeProjectHeading\n  {\\textbf{Custom Linux Shell} $|$ \\emph{C, Unix Sockets, Process Management}}{}\n  \\resumeItemListStart\n    \\resumeItem{Engineered a feature-rich Linux shell supporting \\textbf{20+} commands with support for environment variables.}\n    \\resumeItem{Added support for recursive traversal and advanced navigation (e.g., \\texttt{cd ...}) to improve usability.}\n    \\resumeItem{Enabled multitasking by implementing \\textbf{background job execution} and \\textbf{command piping}.}\n    \\resumeItem{Developed a TCP socket module to support reliable \\textbf{client-server communication} with concurrent connections and sub-\\textbf{100ms} latency in LAN environments.}\n  \\resumeItemListEnd",
+      "Built a Linux shell in C with parsing, pipelines, redirection, background jobs, and environment variable expansion; integrated an AI-powered CLI workflow for deterministic command support; engineered a built-in TCP chat server supporting 200+ clients and high-throughput messaging.",
     image: shellImg,
     sourceUrl: "https://github.com/MananKakkar1/Custom-Linux-Shell",
     category: "System Tools",
@@ -169,7 +171,7 @@ const projectsList: Project[] = [
     description:
       "A Sokoban game built with RISC-V assembly, where players push boxes to designated locations on a board.",
     latex_description:
-      "Implemented a classic Sokoban puzzle game in RISC-V Assembly, focusing on box-pushing mechanics and optimized memory/performance.",
+      "Built a Sokoban puzzle game in RISC-V assembly with multiplayer support and dynamic 127x127 grids; designed randomized board generation with solvable puzzles and efficient move storage; engineered restart and reset flows for consistent gameplay correctness.",
     image: sokobanImg,
     sourceUrl: "https://github.com/MananKakkar1/Sokoban",
     category: "Games",
@@ -283,7 +285,7 @@ const projectsList: Project[] = [
     description:
       "A full-stack web application for managing customers, products, and sales orders, complete with authentication, form validation, search, and pagination.",
     latex_description:
-      "\\resumeProjectHeading\n  {\\textbf{SalesBoard} \\hfill \\emph{React, Go, SQLite, SQL, JWT}}{}\n  \\resumeItemListStart\n    \\resumeItem{Built a full-stack sales dashboard using \\textbf{React + Redux Toolkit} and a \\textbf{Go backend} with REST APIs to manage customers, products, and orders.}\n    \\resumeItem{Designed and queried a \\textbf{SQLite} database using raw \\textbf{SQL} for structured data storage and retrieval.}\n    \\resumeItem{Implemented secure \\textbf{JWT authentication}, middleware-protected routes, and Redux-based token management.}\n    \\resumeItem{Developed full \\textbf{CRUD}, \\textbf{search}, \\textbf{pagination}, and \\textbf{validation} functionalities for all modules on both frontend and backend.}\n  \\resumeItemListEnd",
+      "Developed a real-time sales and inventory platform with Go APIs, React, and SQLite; integrated Server-Sent Events for live dashboard updates with filtering and pagination; implemented secure JWT authentication and full CRUD workflows across customers, products, and orders.",
     image: salesImg,
     sourceUrl: "https://github.com/MananKakkar1/SalesBoard",
     category: "Websites",
@@ -301,7 +303,7 @@ const projectsList: Project[] = [
     description:
       "A local basketball analytics tool that uses YOLO and OpenCV to detect players, track ball possession, and flag violations in real time. Features live overlays, video analysis, and a React + Flask interface, all running locally.",
     latex_description:
-      "\\resumeProjectHeading\n  {\\textbf{Netly} $|$ React, Flask, OpenCV, YOLOv5, MongoDB, Python}{SpurHacks Hackathon}\n  \\resumeItemListStart\n    \\resumeItem{Developed an \\textbf{AI}-powered basketball analysis system during SpurHacks to detect traveling violations and track ball possession in \\textbf{real-time} from live and recorded footage.}\n    \\resumeItem{Used \\textbf{YOLOv5} and OpenCV to track players, estimate poses, and detect basketball movement.}\n    \\resumeItem{Built a web interface with React and Flask to visualize analysis overlays and session results.}\n    \\resumeItem{Implemented a \\textbf{MongoDB + JWT}-based login system with session and role management.}\n  \\resumeItemListEnd",
+      "Built an AI-powered basketball analysis pipeline using YOLOv5 and OpenCV for real-time travel detection and possession tracking; implemented a React and Flask playback dashboard with timeline overlays; architected an extensible processing workflow with MongoDB and JWT authentication.",
     image: netlyImg,
     sourceUrl: "https://github.com/MananKakkar1/Netly",
     category: "Data Analysis",
@@ -353,11 +355,12 @@ const projectsList: Project[] = [
     description:
       "A continuous learning platform focused on structured progress, content organization, and practical learning workflows. You can visit the platform on: https://continu-learn.vercel.app",
     latex_description:
-      "Built a learning-focused application that supports organized educational workflows and iterative feature development.",
+      "Built a browser-based 3D continuum robot simulator with Unity WebGL embedded in a Next.js app; implemented constant-curvature modeling with real-time controls for bend angle, radius, and direction; integrated Gemini coaching and ElevenLabs voice feedback for interactive learning.",
     image: clImg,
     sourceUrl: "https://github.com/MananKakkar1/ContinuLearn",
     category: "Websites",
-    technologies: "JavaScript + HTML + CSS",
+    technologies:
+      "Next.js + Unity WebGL + C# + TypeScript + Gemini API + ElevenLabs + SQLite",
     funFacts: [
       "Designed around ongoing, structured learning workflows.",
       "Represents a dedicated education-focused repository on your profile.",
@@ -387,7 +390,7 @@ const projectsList: Project[] = [
       "A collection of algorithm and data structure practice problems with code solutions.",
     latex_description:
       "Maintained a problem-solving repository with LeetCode-style solutions focused on algorithmic reasoning and coding fluency.",
-    image: "/placeholder.svg",
+    image: tempImg,
     sourceUrl: "https://github.com/MananKakkar1/Leetcode_Problems",
     category: "System Tools",
     technologies: "Python",
@@ -403,7 +406,7 @@ const projectsList: Project[] = [
       "A healthcare-focused application repository on your profile (fork), centered on accessibility and user support workflows.",
     latex_description:
       "Collaborated on a healthcare-oriented project focused on practical user-facing workflows and rapid iteration.",
-    image: "/placeholder.svg",
+    image: tempImg,
     sourceUrl: "https://github.com/MananKakkar1/MediLens",
     category: "Websites",
     technologies: "JavaScript + HTML + CSS",
@@ -418,7 +421,7 @@ const projectsList: Project[] = [
     description:
       "Won my first hackathon at EmberHacks for building ETA, an AI-driven teaching assistant leveraging Gemini and ElevenLabs to deliver personalized voice-based learning assistance.",
     latex_description:
-      "Won my first hackathon at EmberHacks for building ETA, an AI-driven teaching assistant leveraging Gemini and ElevenLabs to deliver personalized voice-based learning assistance.",
+      "Won Best Use of Auth0 at EmberHacks for building an interactive AI learning assistant; integrated DynamoDB for persistent user context and multi-turn personalization; built a voice pipeline with Gemini and ElevenLabs plus AI-driven visual response flows.",
     image: etaImg,
     sourceUrl: "https://github.com/MananKakkar1/ETA",
     category: "Websites",
@@ -514,7 +517,7 @@ const Projects = () => {
             </div>
             <div className="gameboy-screen">
               <img
-                src={project.image || "/placeholder.svg"}
+                src={project.image || tempImg}
                 alt={project.title}
               />
             </div>
@@ -556,17 +559,18 @@ const Projects = () => {
                 </div>
 
                 <div className="action-buttons">
-                  <a
-                    href={`/projects/${project.id}`}
+                  <Link
+                    to={`/projects/${project.id}`}
                     className="action-button"
                     title="View Project Details"
                   >
                     INFO
-                  </a>
+                  </Link>
                   <a
                     href={project.sourceUrl}
                     className="action-button"
                     target="_blank"
+                    rel="noopener noreferrer"
                     title="View Source Code"
                   >
                     <GitHubIcon />
@@ -576,7 +580,7 @@ const Projects = () => {
               {/* Fun Fact Display */}
               {project.funFacts && project.funFacts.length > 0 && (
                 <div className="fun-fact">
-                  💡 {project.funFacts[funFactIndexes[project.id] || 0]}
+                  Fun fact: {project.funFacts[funFactIndexes[project.id] || 0]}
                 </div>
               )}
             </div>
@@ -589,3 +593,4 @@ const Projects = () => {
 
 export default Projects;
 export { projectsList };
+

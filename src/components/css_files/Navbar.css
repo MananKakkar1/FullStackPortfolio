@@ -1,179 +1,169 @@
-body, html {
-  overflow-x: hidden;
-  width: 100vw;
-  box-sizing: border-box;
+.app-shell {
+  margin-top: 86px;
 }
 
 .header {
   position: fixed;
   top: 0;
-  left: 0;
-  width: 100%;
-  height: 70px;
-  padding: 8px 16px;
-  background: transparent;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1160px, calc(100% - 24px));
+  height: 68px;
+  margin-top: 10px;
+  padding: 10px 16px;
+  border: 1px solid color-mix(in srgb, var(--card-border) 55%, transparent);
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--card-bg) 82%, transparent);
+  backdrop-filter: blur(10px);
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  z-index: 100;
-  box-sizing: border-box;
-  border-color: transparent;
-  transition: height 0.3s ease;
+  justify-content: space-between;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.24);
+  z-index: 1000;
+}
+
+.logo-brand {
+  text-decoration: none;
+  color: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex-shrink: 0;
+}
+
+.brand-text-only {
+  padding: 4px 2px;
+}
+
+.logo-badge {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--card-border) 50%, transparent);
+  background: color-mix(in srgb, var(--button-bg) 14%, transparent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.16);
+  transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.24s ease, background-color 0.24s ease;
 }
 
 .logo {
-  height: 40px;
-  width: auto;
-  margin-left: 0;
-  font-size: 0;
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
   display: block;
-  flex-shrink: 0;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.logo-title {
+  color: var(--label-color);
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.logo-subtitle {
+  color: color-mix(in srgb, var(--text) 84%, white);
+  font-size: 0.67rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.logo-brand:hover .logo-badge,
+.logo-brand:focus-visible .logo-badge {
+  transform: translateY(-2px) rotate(-2deg);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+  background: color-mix(in srgb, var(--button-bg) 24%, transparent);
+}
+
+.logo-brand:focus-visible {
+  outline: none;
 }
 
 .navbar {
   display: flex;
-  flex-wrap: wrap;
-  margin-left: 80px;
   align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-left: auto;
+  margin-right: 16px;
 }
 
 .navbar a {
-  font-size: 20px;
-  color: var(--text);
-  font-weight: 500;
-  margin-left: 40px;
   text-decoration: none;
-  white-space: nowrap;
-  position: relative;
-  transition: color 0.2s ease;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 0.96rem;
+  letter-spacing: 0.02em;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.24s ease, background-color 0.24s ease,
+    box-shadow 0.24s ease;
 }
 
-.navbar a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -4px;
-  width: 100%;
-  height: 3px;
-  background: var(--button-text);
-  opacity: 0.5;
-  border-radius: 2px;
-  transform: scaleX(0);
-  transition: 0.2s;
+.navbar a:hover,
+.navbar a:focus-visible {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--card-border) 56%, transparent);
+  background: color-mix(in srgb, var(--button-bg) 16%, transparent);
+  box-shadow: 0 10px 14px rgba(0, 0, 0, 0.16);
+  outline: none;
 }
 
-.navbar a:hover::after,
-.navbar a:focus::after {
-  transform: scaleX(1);
+.theme-selector-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.h1 {
-  position: relative;
-  font-size: 30px;
-  color: var(--label-color);
-  font-weight: 500;
-  margin-left: 40px;
-}
-
-/* Tablet & Mobile breakpoint */
-@media (max-width: 900px) {
-  .header {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8px 8vw;
-    min-width: 0;
-    width: 100vw;
-    box-sizing: border-box;
-    height: 56px; /* Reduce height for mobile */
-    overflow-x: auto;
+@media (max-width: 960px) {
+  .app-shell {
+    margin-top: 102px;
   }
 
-  .logo {
-    margin-left: 0;
-    height: 32px;
-    max-width: 48px;
+  .header {
+    height: auto;
+    min-height: 74px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .logo-title {
+    font-size: 0.86rem;
+  }
+
+  .logo-subtitle {
+    font-size: 0.62rem;
   }
 
   .navbar {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    flex-wrap: nowrap;
-    margin-left: 0;
-    gap: 18px; /* Increased gap for better separation */
-    width: auto;
-    overflow-x: visible; /* Remove horizontal scrollbar */
+    order: 3;
+    width: 100%;
+    margin: 2px 0 0;
+    padding-top: 8px;
+    border-top: 1px solid color-mix(in srgb, var(--card-border) 35%, transparent);
+    flex-wrap: wrap;
+    gap: 8px;
   }
 
   .navbar a {
-    font-size: 14px;
-    margin-left: 0; /* Remove margin, use gap instead */
-    margin-right: 0;
-    padding: 6px 12px; /* Slightly larger padding for touch targets */
-    white-space: nowrap;
-    min-width: 0;
-    max-width: 120px;
-    border-radius: 6px;
-    background: rgba(0,0,0,0.10); /* Optional: subtle background for distinction */
-    box-shadow: none;
-  }
-
-  .navbar a::after {
-    display: none !important; /* Remove the underline/slidebar effect */
-  }
-
-  .h1 {
-    font-size: 18px;
-    margin-left: 8px;
-  }
-
-  /* Make sure ThemeSelector stays in line and is small */
-  .header > .ThemeSelector,
-  .header > .theme-selector,
-  .navbar .ThemeSelector,
-  .navbar .theme-selector {
-    margin-left: 8px;
-    margin-right: 0;
-    align-self: center;
-    display: inline-flex;
-    min-width: 0;
-    max-width: 90px;
-    height: 32px !important;
-    font-size: 13px !important;
-    padding: 0 10px !important;
-    border-radius: 8px !important;
-    box-sizing: border-box;
-  }
-
-  /* If your theme button is a button element inside ThemeSelector */
-  .ThemeSelector button,
-  .theme-selector button {
-    font-size: 13px !important;
-    padding: 0 10px !important;
-    height: 32px !important;
-    border-radius: 8px !important;
-    min-width: 0;
-    max-width: 90px;
-    box-sizing: border-box;
-  }
-
-  /* Show the theme toggle button in mobile view */
-  .theme-toggle-btn {
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    height: 32px !important;
-    width: 32px !important;
-    font-size: 22px !important;
-    margin-right: 0 !important;
-    padding: 0 !important;
-    margin-left: 20px !important;
-  }
-
-  /* Optional: If ThemeSelector is not the last child, target it directly */
-  .navbar .ThemeSelector,
-  .navbar .theme-selector {
-    margin-left: 50px !important;
+    font-size: 0.88rem;
+    padding: 7px 10px;
   }
 }

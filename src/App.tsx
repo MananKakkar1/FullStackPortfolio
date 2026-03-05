@@ -27,7 +27,7 @@ const App = () => {
     <ThemeProvider>
       <Router>
         <Navbar />
-        <div style={{ marginTop: "70px" }}>
+        <div className="app-shell">
           <Routes>
             <Route path="/" element={<Navigate to="/Home" replace />} />
             <Route path="/Home" element={<Home />} />

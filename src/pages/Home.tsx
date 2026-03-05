@@ -4,7 +4,7 @@ import React from "react";
 import "../components/css_files/Home.css";
 import { projectsList } from "./Projects";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import photoImg from "../assets/photo.jpg";
 
 // Import images from assets
@@ -482,30 +482,39 @@ const Home = () => {
         <div className="hero-left">
           <div className="profile-img-wrapper">
             <img
-              src={photoImg || "/placeholder.svg"}
+              src={photoImg || tempImg}
               alt="Profile"
               className="profile-img"
             />
           </div>
         </div>
         <div className="hero-right">
+          <p className="hero-kicker">Full Stack Developer • UofT CS</p>
           <h1>
             <span className="highlight" style={{ display: "inline" }}>
               {typed}
             </span>
             <span className="typing-cursor">|</span>
           </h1>
-          <p>
+          <p className="hero-summary">
             A passionate developer dedicated to crafting professional,
             functional, and modern applications that make a difference.
           </p>
-          <a href="/projects" className="cta-btn">
+          <div className="hero-chip-row">
+            <span className="hero-chip">React + TypeScript</span>
+            <span className="hero-chip">Backend APIs</span>
+            <span className="hero-chip">AI Projects</span>
+          </div>
+          <Link to="/projects" className="cta-btn">
             View My Work
-          </a>
+          </Link>
         </div>
       </div>
       <div className="featured-projects">
-        <h1>Featured Projects</h1>
+        <div className="section-header">
+          <h1>Featured Projects</h1>
+          <p>Rotating highlights from my latest and favorite builds.</p>
+        </div>
         <div className="home-projects-list">
           {displayed.map((project, idx) => (
             <div
@@ -524,7 +533,7 @@ const Home = () => {
                     </div>
                     <div className="gameboy-screen">
                       <img
-                        src={project.image || "/placeholder.svg"}
+                        src={project.image || tempImg}
                         alt={project.title}
                       />
                     </div>
@@ -549,42 +558,35 @@ const Home = () => {
                         <div className="dpad">
                           <div className="dpad-horizontal"></div>
                           <div className="dpad-vertical"></div>
-                          <div
-                            className="dpad-center"
-                            onClick={() => console.log("Center pressed")}
-                          ></div>
+                          <div className="dpad-center"></div>
 
                           {/* Clickable directional buttons */}
                           <div
                             className="dpad-up"
-                            onClick={() => console.log("Up pressed")}
                             title="Navigate Up"
                           ></div>
                           <div
                             className="dpad-down"
-                            onClick={() => console.log("Down pressed")}
                             title="Navigate Down"
                           ></div>
                           <div
                             className="dpad-left"
-                            onClick={() => console.log("Left pressed")}
                             title="Navigate Left"
                           ></div>
                           <div
                             className="dpad-right"
-                            onClick={() => console.log("Right pressed")}
                             title="Navigate Right"
                           ></div>
                         </div>
 
                         <div className="action-buttons">
-                          <a
-                            href={`/projects/${project.id}`}
+                          <Link
+                            to={`/projects/${project.id}`}
                             className="action-button"
                             title="View Project Details"
                           >
                             INFO
-                          </a>
+                          </Link>
                           <a
                             href={project.sourceUrl || ``}
                             className="action-button"
@@ -604,7 +606,7 @@ const Home = () => {
                     <div className="project-entry">
                       <div className="gameboy-screen">
                         <img
-                          src={nextDisplayed[idx].image || "/placeholder.svg"}
+                          src={nextDisplayed[idx].image || tempImg}
                           alt={nextDisplayed[idx].title}
                         />
                       </div>
@@ -634,13 +636,13 @@ const Home = () => {
                           </div>
 
                           <div className="action-buttons">
-                            <a
-                              href={`/projects/${nextDisplayed[idx].id}`}
+                            <Link
+                              to={`/projects/${nextDisplayed[idx].id}`}
                               className="action-button"
                               title="View Project Details"
                             >
                               INFO
-                            </a>
+                            </Link>
                             <a
                               href={`https://github.com/MananKakkar1/${nextDisplayed[idx].id}`}
                               className="action-button"
@@ -662,9 +664,9 @@ const Home = () => {
         </div>
       </div>
       <div className="tech-stack-grid-wrapper">
-        <div className="tech-stack-label">
+        <div className="tech-stack-label section-header">
           <h1>Tech Stack</h1>
-          <h3>(Use the D-pad to see more!)</h3>
+          <h3>Use the D-pad to explore more technologies.</h3>
         </div>
 
         {/* --- 3 Gameboy-style tech cards --- */}
@@ -744,44 +746,47 @@ const Home = () => {
         {/* --- End Gameboy-style tech cards --- */}
       </div>
       <div className="contact-section" id="contact-sec">
-        <h1>Contact Me</h1>
-        <form className="contact-form" onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="name"
-            placeholder="Your Name"
-            required
-            value={form.name}
-            onChange={handleChange}
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="Your Email"
-            required
-            value={form.email}
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            name="subject"
-            placeholder="Subject"
-            required
-            value={form.subject}
-            onChange={handleChange}
-          />
-          <textarea
-            name="message"
-            placeholder="Your Message"
-            required
-            value={form.message}
-            onChange={handleChange}
-          />
-          <button type="submit">Send</button>
-        </form>
-        {status && (
-          <div style={{ marginTop: "16px", color: "#00fff7" }}>{status}</div>
-        )}
+        <div className="section-header">
+          <h1>Contact Me</h1>
+          <p>Tell me about your project, internship, or collaboration idea.</p>
+        </div>
+        <div className="contact-shell">
+          <form className="contact-form" onSubmit={handleSubmit}>
+            <input
+              type="text"
+              name="name"
+              placeholder="Your Name"
+              required
+              value={form.name}
+              onChange={handleChange}
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Your Email"
+              required
+              value={form.email}
+              onChange={handleChange}
+            />
+            <input
+              type="text"
+              name="subject"
+              placeholder="Subject"
+              required
+              value={form.subject}
+              onChange={handleChange}
+            />
+            <textarea
+              name="message"
+              placeholder="Your Message"
+              required
+              value={form.message}
+              onChange={handleChange}
+            />
+            <button type="submit">Send</button>
+          </form>
+          {status && <div className="contact-status">{status}</div>}
+        </div>
       </div>
     </div>
   );

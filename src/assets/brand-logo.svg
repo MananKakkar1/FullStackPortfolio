@@ -1,0 +1,23 @@
+<svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="14" y1="12" x2="82" y2="84" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2A3A53"/>
+      <stop offset="1" stop-color="#1C2738"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="8" y="8" width="80" height="80" rx="22" fill="url(#bg)"/>
+  <rect x="13" y="13" width="70" height="70" rx="18" stroke="#7DA2C4" stroke-opacity="0.45" stroke-width="2"/>
+  <circle cx="48" cy="48" r="24" stroke="#9BC2E6" stroke-opacity="0.55" stroke-width="2"/>
+
+  <text
+    x="48"
+    y="52"
+    text-anchor="middle"
+    font-family="Segoe UI, Arial, sans-serif"
+    font-size="20"
+    font-weight="700"
+    fill="#E8F2FF"
+    letter-spacing="0.8"
+  >MK</text>
+</svg>
