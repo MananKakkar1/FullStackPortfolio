@@ -84,6 +84,9 @@
 }
 
 .project-entry {
+  width: 100%;
+  max-width: 420px;
+  justify-self: center;
   min-height: 500px;
   border-radius: 18px;
   border: 1px solid color-mix(in srgb, var(--card-border) 56%, transparent);
@@ -154,12 +157,16 @@
 }
 
 .tech-badge {
+  max-width: 100%;
   border-radius: 999px;
   border: 1px solid color-mix(in srgb, var(--card-border) 40%, transparent);
   background: color-mix(in srgb, var(--button-bg) 15%, transparent);
   color: var(--text);
   padding: 4px 10px;
   font-size: 0.72rem;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  text-align: center;
   text-decoration: none;
   transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 0.24s ease, background-color 0.24s ease;
@@ -370,5 +377,50 @@
 @media (max-width: 800px) {
   .projects-list {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .projects-page-background {
+    padding: 14px 0 40px;
+  }
+
+  .projects-page-background > h1,
+  .category-filter,
+  .projects-list {
+    width: min(1180px, calc(100% - 20px));
+  }
+
+  .filter-buttons {
+    gap: 6px;
+  }
+
+  .filter-btn {
+    padding: 7px 11px;
+    font-size: 0.74rem;
+  }
+
+  .projects-list {
+    gap: 14px;
+  }
+
+  .project-entry {
+    min-height: 440px;
+    padding: 11px;
+    border-radius: 14px;
+  }
+
+  .gameboy-screen {
+    height: 165px;
+  }
+
+  .project-entry h3 {
+    margin-top: 10px;
+    font-size: 1.05rem;
+  }
+
+  .fun-fact {
+    font-size: 0.78rem;
+    padding: 8px;
   }
 }
