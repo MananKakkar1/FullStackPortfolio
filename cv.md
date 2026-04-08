@@ -9,7 +9,7 @@ Expected Graduation: 2028
 **Relevant Coursework:** Fundamentals of Robotics, Continuum Robotics, Artificial Intelligence, Operating Systems, Networks & Information Security, Data Structures & Analysis, Systems Programming, Software Design, Software Engineering
 
 ## Research Interests
-Robotics, continuum robotics, tendon-driven continuum robots, robot motion planning, robot learning, simulation systems for robotics education, human-robot interaction, real-time robotic control, and AI-assisted robotics development tools.
+Continuum robotics, tendon-driven continuum robots, robot kinematics, motion planning, robot control, simulation for robotics research and education, and real-time robotic systems.
 
 ## Technical Skills
 **Programming:** Python, C, Java, Bash, JavaScript, TypeScript, Go, C#  
@@ -23,17 +23,17 @@ Robotics, continuum robotics, tendon-driven continuum robots, robot motion plann
 
 ### CopyCadder
 **Robotic Handwriting System using a Franka Emika Panda**  
-- Designed and built a robotics pipeline that converts scanned handwritten characters into executable motion commands for a Franka Emika Panda robot arm.
-- Processed letterforms from scanned inputs and transformed them into smooth geometric writing trajectories for physical execution.
+- Designed and built a robotics pipeline that converts input characters into executable motion commands for a Franka Emika Panda robot arm.
+- Transformed character shapes into smooth geometric writing trajectories for physical execution.
 - Generated stable and efficient motion paths using Ruckig to improve trajectory smoothness and maintain safe real-time motion.
-- Executed writing tasks on real hardware, demonstrating end-to-end integration across perception, path generation, and robot control.
+- Executed writing tasks on real hardware, demonstrating end-to-end integration across path generation and robot control.
 
 ### ContinuLearn
 **Browser-Based Continuum Robotics Learning Platform**  
-- Built an interactive robotics learning platform featuring a browser-based 3D continuum robot simulator embedded through Unity WebGL in a Next.js application.
-- Implemented constant-curvature modeling and real-time user controls for bend angle, radius, and direction to support intuitive exploration of continuum robot behavior.
-- Integrated AI coaching and voice-based guidance using Gemini and ElevenLabs to create an educational robotics experience for learners.
-- Focused on simulation-first robotics development to make continuum robot concepts more accessible without hardware constraints.
+- Built a browser-based platform for real-time 3D simulation of continuum robot kinematics using Unity WebGL within a Next.js application.
+- Developed constant-curvature modeling and interactive controls for bend angle, radius, and direction to support exploration of continuum robot behavior.
+- Integrated AI-guided explanations and voice feedback using Gemini and ElevenLabs to support interactive learning of continuum robotics concepts.
+- Designed the platform to make continuum robot modeling and behavior more accessible without requiring physical hardware.
 
 ## Professional Experience
 
@@ -60,18 +60,19 @@ Remote | May 2025 - August 2025
 - Delivered a presenter group talk on **Model-based Control of Soft Robots**.
 - Studied papers that examined how to model tendon-driven continuum robots and how piecewise constant-curvature formulations are used in analysis and control.
 
-## Selected Technical Projects
+## Technical Projects
 
 ### AIRA
-- Built AI-assisted developer tooling for incident response, anomaly detection, and debugging workflows.
-- Applied machine learning and real-time analysis techniques to support faster investigation and decision-making.
+- Built a human-in-the-loop incident response assistant to support faster triage and investigation of cybersecurity alerts.
+- Applied machine learning and real-time analysis techniques to assist analyst decision-making and anomaly detection.
 
 ### Custom Linux Shell
-- Built a Linux shell in C with parsing, pipelines, redirection, background jobs, and environment variable expansion.
-- Integrated an AI-powered CLI workflow and engineered a built-in TCP chat server for real-time communication.
+- Built a Linux shell in C with support for parsing, pipelines, redirection, background jobs, and environment variable expansion.
+- Engineered a built-in TCP chat server and extended the shell with AI-assisted command workflow support.
 
 ### Netly
 - Built an AI basketball referee using YOLOv5 and OpenCV to detect shots and player movement in real time.
+- Applied computer vision techniques to analyze gameplay events and support automated decision-making.
 
 ## Awards and Hackathons
 
@@ -80,4 +81,3 @@ Remote | May 2025 - August 2025
 
 ## Additional Information
 - Strong interest in robotics research, robotics software infrastructure, simulation environments, and AI systems that support robotic learning and control.
-- Available for robotics research, software engineering, and simulation-focused development opportunities.
