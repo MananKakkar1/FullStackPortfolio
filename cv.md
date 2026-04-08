@@ -25,8 +25,6 @@ Continuum robotics, tendon-driven continuum robots, robot kinematics, motion pla
 **Robotic Handwriting System using a Franka Emika Panda**  
 - Designed and built a robotics pipeline that converts input characters into executable motion commands for a Franka Emika Panda robot arm.
 - Transformed character shapes into smooth geometric writing trajectories for physical execution.
-- Generated stable and efficient motion paths using Ruckig to improve trajectory smoothness and maintain safe real-time motion.
-- Executed writing tasks on real hardware, demonstrating end-to-end integration across path generation and robot control.
 
 ### ContinuLearn
 **Browser-Based Continuum Robotics Learning Platform**  
