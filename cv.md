@@ -12,7 +12,7 @@ Expected Graduation: 2028
 Continuum robotics, tendon-driven continuum robots, robot kinematics, motion planning, robot control, simulation for robotics research and education, and real-time robotic systems.
 
 ## Technical Skills
-**Programming:** Python, C, Java, Bash, JavaScript, TypeScript, Go, C#, C++
+**Programming:** Python, C, Java, Bash, JavaScript, TypeScript, Go, C#, C++    
 **Robotics / Simulation:** Unity, Unity WebGL, Franka Emika Panda, robot trajectory generation, inverse kinematics, constant-curvature modeling, real-time control, robotics visualization  
 **AI / Vision:** OpenCV, YOLOv5, Google Vision, Gemini API, ElevenLabs  
 **Systems / Infrastructure:** Linux, Git, GitHub Actions, Unix sockets, process management, CI/CD  
