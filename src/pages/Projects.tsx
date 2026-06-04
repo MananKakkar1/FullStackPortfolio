@@ -1,29 +1,23 @@
 "use client";
 
-import { useState } from "react";
-import "../components/css_files/Projects.css";
+import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
+import "../components/css_files/Projects.css";
+import { useScrollTypewriter } from "../hooks/useScrollTypewriter";
+
 import chessImg from "../assets/chess-pic.png";
 import portfolioImg from "../assets/portfolio2.png";
 import fileSystemImg from "../assets/file-system-tree.png";
-import paintLikeImg from "../assets/paint-like.png";
 import aiPaintImg from "../assets/ai-paint.png";
 import sokobanImg from "../assets/sokoban.png";
-import mazeRunnerImg from "../assets/maze-game.png";
-import shellImg from "../assets/shell.png";
-import extractorImg from "../assets/extractor.png";
-import pokemonImg from "../assets/pokemon.png";
-import systemOverlayImg from "../assets/system-overlay.png";
 import othelloImg from "../assets/Othello.png";
+import shellImg from "../assets/shell.png";
 import netlyImg from "../assets/Netly.png";
-import githubDiscordBotImg from "../assets/discord.png";
 import etaImg from "../assets/ETA.png";
 import algoImg from "../assets/AlgoVisualize.png";
 import salesImg from "../assets/SalesBoard.png";
 import reelImg from "../assets/ReelDeal.png";
 import clImg from "../assets/cl.png";
-import airaImg from "../assets/aira.png";
-import tempImg from "../assets/temp.jpg";
 
 export type Project = {
   id: string;
@@ -41,10 +35,8 @@ const projectsList: Project[] = [
   {
     id: "chess-game",
     title: "Chess Game",
-    description:
-      "A simple chess game built with HTML, CSS, JavaScript, and Python.",
-    latex_description:
-      "Built a browser-based chess game with 4 AI difficulty modes, Stockfish and GPT integration, and async communication to reduce AI response time by 30%.",
+    description: "A browser-based chess game with 4 AI difficulty modes, Stockfish and GPT integration, and async communication to reduce AI response time by 30%.",
+    latex_description: "Built a browser-based chess game with 4 AI difficulty modes, Stockfish and GPT integration, and async communication to reduce AI response time by 30%.",
     image: chessImg,
     sourceUrl: "https://github.com/MananKakkar1/Chess_Game",
     category: "Websites",
@@ -59,15 +51,12 @@ const projectsList: Project[] = [
   {
     id: "portfolio-website",
     title: "Portfolio Website",
-    description:
-      "A personal portfolio website built using React, TypeScript, and modern web technologies to showcase my skills and projects.",
-    latex_description:
-      "Developed a modern React and TypeScript portfolio site with dynamic contact forms, responsive design, and a custom Node.js backend for email delivery.",
+    description: "Modern React and TypeScript portfolio site with dynamic contact forms, responsive design, and a custom Node.js backend for email delivery.",
+    latex_description: "Developed a modern React and TypeScript portfolio site with dynamic contact forms, responsive design, and a custom Node.js backend for email delivery.",
     image: portfolioImg,
     sourceUrl: "https://github.com/MananKakkar1/FullStackPortfolio",
     category: "Websites",
-    technologies:
-      "React + TypeScript + Vite + Node.js + Express.js + Nodemailer",
+    technologies: "React + TypeScript + Vite + Node.js + Express.js + Nodemailer",
     funFacts: [
       "Responsive and interactive design.",
       "Dynamic email sending from the Contact Me page.",
@@ -76,216 +65,26 @@ const projectsList: Project[] = [
     ],
   },
   {
-    id: "file-system-tree-visualizer",
-    title: "File System Tree Visualizer",
-    description:
-      "A visualizer for file system trees, built with Python and Pygame, to help users understand the structure of their file systems.",
-    latex_description:
-      "Visualized hierarchical file system structures in Python using Pygame; supports real-time rendering, CSV data parsing, and interactive exploration.",
-    image: fileSystemImg,
-    sourceUrl: "https://github.com/MananKakkar1/File-System-Tree-Visualizer",
-    category: "Data Analysis",
-    technologies: "Python + Pygame",
-    funFacts: [
-      "Interactive visualization of file systems.",
-      "Real-time parsing and rendering.",
-      "Intuitive expand/collapse features.",
-      "Visualizes CSV data as a file tree.",
-    ],
-  },
-  {
-    id: "system-overlay-python-script",
-    title: "System Overlay Python Script",
-    description:
-      "A Python script that overlays system information on the screen, providing real-time updates on system performance.",
-    latex_description:
-      "Created a cross-platform Python GUI to overlay live CPU/GPU and system performance metrics using OpenHardwareMonitor and Tkinter.",
-    image: systemOverlayImg,
-    sourceUrl: "https://github.com/MananKakkar1/System-Overlay-Python-Script",
-    category: "Data Analysis",
-    technologies: "Python + OpenHardwareMonitor + Python's Tkinter",
-    funFacts: [
-      "Overlays real-time system information on the screen.",
-      "Cross-platform compatibility.",
-      "Efficient polling and update mechanisms.",
-      "Customizable display options.",
-    ],
-  },
-  {
-    id: "ai-paint-desktop-app",
-    title: "SmartPaint",
-    description:
-      "AI-Paint is a desktop application inspired by Microsoft Paint, allowing users to draw freely as well as generate AI-created images using text prompts.",
-    latex_description:
-      "Built a JavaFX paint application with shape tools, color controls, and structured JSON workflows; integrated Llama 3 and OpenAI models for intelligent prompt-to-drawing generation; implemented an FSM-based parser for high-volume command handling with strong JUnit5 test coverage.",
-    image: aiPaintImg,
-    sourceUrl: "https://github.com/MananKakkar1/AI_Paint_Application",
-    category: "Desktop Applications",
-    technologies: "Java + JavaFX + Llama3",
-    funFacts: [
-      "Desktop drawing application inspired by Microsoft Paint.",
-      "AI-generated images from text prompts.",
-      "Responsive and intuitive user experience.",
-      "Features brush selection, color palettes, and image export.",
-    ],
-  },
-  {
-    id: "custom-linux-shell",
-    title: "Custom Linux Shell",
-    description:
-      "A custom Linux shell built using C, designed to provide a unique command-line interface and support for various shell features.",
-    latex_description:
-      "Built a Linux shell in C with parsing, pipelines, redirection, background jobs, and environment variable expansion; integrated an AI-powered CLI workflow for deterministic command support; engineered a built-in TCP chat server supporting 200+ clients and high-throughput messaging.",
-    image: shellImg,
-    sourceUrl: "https://github.com/MananKakkar1/Custom-Linux-Shell",
-    category: "System Tools",
-    technologies: "C + Unix Sockets + Process Management",
-    funFacts: [
-      "Engineered a Linux shell from scratch in C.",
-      "Supports custom commands and dynamic environment variables.",
-      "Advanced functionalities like background processing and command piping.",
-      "TCP socket-based communication module for server-client interactions.",
-    ],
-  },
-  {
-    id: "maze-runner-game",
-    title: "Maze Runner Game",
-    description:
-      "A maze runner game built with python's pygame, where players navigate through a randomly generated maze to reach the finish line.",
-    latex_description:
-      "Developed a maze runner game in Python using Pygame, featuring randomized levels, collision detection, and progressively challenging layouts.",
-    image: mazeRunnerImg,
-    sourceUrl: "https://github.com/MananKakkar1/MazeRunnerGame",
-    category: "Games",
-    technologies: "Python + Pygame",
-    funFacts: [
-      "Interactive maze runner game using Python Pygame.",
-      "Collision detection and player movement implemented.",
-      "Multiple maze layouts and increasing difficulty levels.",
-      "Optimized game performance and user controls.",
-    ],
-  },
-  {
-    id: "sokoban-game",
-    title: "Sokoban Game",
-    description:
-      "A Sokoban game built with RISC-V assembly, where players push boxes to designated locations on a board.",
-    latex_description:
-      "Built a Sokoban puzzle game in RISC-V assembly with multiplayer support and dynamic 127x127 grids; designed randomized board generation with solvable puzzles and efficient move storage; engineered restart and reset flows for consistent gameplay correctness.",
-    image: sokobanImg,
-    sourceUrl: "https://github.com/MananKakkar1/Sokoban",
-    category: "Games",
-    technologies: "RISC-V Assembly",
-    funFacts: [
-      "Classic Sokoban puzzle game in RISC-V Assembly.",
-      "Box-pushing mechanics and win conditions designed.",
-      "Optimized memory usage and performance.",
-      "Simple text-based interface for user interaction.",
-    ],
-  },
-  {
-    id: "paint-like-desktop-app",
-    title: "Paintly",
-    description:
-      "A desktop application inspired by Microsoft Paint, allowing users to draw freely and create digital art.",
-    latex_description:
-      "Created a JavaFX desktop paint clone with shape tools, freehand drawing, image export, and responsive UI for digital art.",
-    image: paintLikeImg,
-    sourceUrl: "https://github.com/MananKakkar1/Paint_Like_Application",
-    category: "Desktop Applications",
-    technologies: "Java + JavaFX + CSS",
-    funFacts: [
-      "Desktop drawing application inspired by Microsoft Paint.",
-      "Core features like freehand drawing and shape tools.",
-      "Save and export artwork in various image formats.",
-      "Intuitive and responsive user interface.",
-    ],
-  },
-  {
-    id: "world-population-data-extractor",
-    title: "World Population Data Extractor",
-    description:
-      "A Python script that extracts and organizes world population data from various sources in a csv file, providing insights into global demographics.",
-    latex_description:
-      "Developed a Python tool for extracting, aggregating, and organizing world population data into CSV for analysis and visualization.",
-    image: extractorImg,
-    sourceUrl:
-      "https://github.com/MananKakkar1/world_population_data_extractor",
-    category: "Data Analysis",
-    technologies: "Python + CSV",
-    funFacts: [
-      "Extracts and organizes world population data.",
-      "Automates data aggregation and transformation.",
-      "Ensures accuracy and reliability of insights.",
-      "Facilitates analysis and visualization of population trends.",
-    ],
-  },
-  {
-    id: "pokemon-game",
-    title: "Pokemon Game",
-    description:
-      "A Text based Pokemon game built with Python, where players can play through a story driven by user choices.",
-    latex_description:
-      "Built a text-based Pokemon adventure game in Python, featuring branching narratives, modular storylines, and replayable endings.",
-    image: pokemonImg,
-    sourceUrl: "https://github.com/MananKakkar1/Pokemon",
-    category: "Games",
-    technologies: "Python",
-    funFacts: [
-      "Text-based Pokemon adventure game in Python.",
-      "Branching narratives and character progression.",
-      "Modular codebase for easy addition of storylines.",
-      "Multiple endings and decision points for replayability.",
-    ],
-  },
-  {
-    id: "othello-game",
-    title: "Othello",
-    description:
-      "A simple terminal based Othello game built with Java, where players can play against each other or against a computer AI.",
-    latex_description:
-      "Designed a terminal-based Othello game in Java with player-vs-player and AI opponent modes, move validation, and a scoring system.",
-    image: othelloImg,
-    sourceUrl: "https://github.com/MananKakkar1/Othello",
-    category: "Games",
-    technologies: "Java",
-    funFacts: [
-      "Terminal-based Othello implementation.",
-      "Features AI opponent with basic strategy.",
-      "Supports two-player mode.",
-      "Includes move validation and scoring system.",
-    ],
-  },
-  {
     id: "reeldeal",
     title: "ReelDeal",
-    description:
-      "A full-stack movie recommendation app with JWT authentication, TMDB integration, smart recommendations, and a fast React + Vite frontend. Users can search, filter, and save favorite movies, with plans for advanced social and discovery features.",
-    latex_description:
-      "Created a full-stack movie discovery app with JWT auth, TMDB integration, user recommendations, and a blazing-fast React + Vite frontend.",
+    description: "Full-stack movie discovery app with JWT auth, TMDB integration, user recommendations, and a blazing-fast React + Vite frontend.",
+    latex_description: "Created a full-stack movie discovery app with JWT auth, TMDB integration, user recommendations, and a blazing-fast React + Vite frontend.",
     image: reelImg,
     sourceUrl: "https://github.com/MananKakkar1/ReelDeal",
     category: "Websites",
-    technologies:
-      "React + Vite + Axios + Node.js + Express.js + MongoDB + Mongoose + JWT + TMDB API",
+    technologies: "React + Vite + Axios + Node.js + Express.js + MongoDB + Mongoose + JWT + TMDB API",
     funFacts: [
       "User authentication with JWT (Register/Login)",
       "Search and explore movies via TMDB API",
       "Filter movies by genre, rating, popularity, and more",
       "Save favorite movies to a personal list",
-      "Smart movie recommendations based on user preferences",
-      "Super-fast frontend using Vite + React",
-      "RESTful API structure for scalable development",
-      "Aims to add social features, advanced recommendations, and more.",
     ],
   },
   {
     id: "sales-admin-dashboard",
     title: "SalesBoard",
-    description:
-      "A full-stack web application for managing customers, products, and sales orders, complete with authentication, form validation, search, and pagination.",
-    latex_description:
-      "Developed a real-time sales and inventory platform with Go APIs, React, and SQLite; integrated Server-Sent Events for live dashboard updates with filtering and pagination; implemented secure JWT authentication and full CRUD workflows across customers, products, and orders.",
+    description: "Real-time sales and inventory platform with Go APIs, React, and SQLite; Server-Sent Events for live updates; JWT authentication and full CRUD workflows.",
+    latex_description: "Developed a real-time sales and inventory platform with Go APIs, React, and SQLite; integrated Server-Sent Events for live dashboard updates with filtering and pagination; implemented secure JWT authentication and full CRUD workflows across customers, products, and orders.",
     image: salesImg,
     sourceUrl: "https://github.com/MananKakkar1/SalesBoard",
     category: "Websites",
@@ -300,10 +99,8 @@ const projectsList: Project[] = [
   {
     id: "netly",
     title: "Netly",
-    description:
-      "A local basketball analytics tool that uses YOLO and OpenCV to detect players, track ball possession, and flag violations in real time. Features live overlays, video analysis, and a React + Flask interface, all running locally.",
-    latex_description:
-      "Built an AI-powered basketball analysis pipeline using YOLOv5 and OpenCV for real-time travel detection and possession tracking; implemented a React and Flask playback dashboard with timeline overlays; architected an extensible processing workflow with MongoDB and JWT authentication.",
+    description: "AI-powered basketball analytics pipeline using YOLOv5 and OpenCV for real-time travel detection and possession tracking, with a React and Flask playback dashboard.",
+    latex_description: "Built an AI-powered basketball analysis pipeline using YOLOv5 and OpenCV for real-time travel detection and possession tracking; implemented a React and Flask playback dashboard with timeline overlays; architected an extensible processing workflow with MongoDB and JWT authentication.",
     image: netlyImg,
     sourceUrl: "https://github.com/MananKakkar1/Netly",
     category: "Data Analysis",
@@ -312,33 +109,71 @@ const projectsList: Project[] = [
       "Real-time player and basketball detection using YOLO and pose estimation.",
       "Tracks ball possession and flags traveling violations live.",
       "Video analysis mode detects passes, interceptions, traveling, and double dribbles with timestamps.",
-      "Live overlays with bounding boxes, keypoints, and stats using OpenCV.",
       "Easy-to-use React frontend and Flask backend, runs entirely locally.",
     ],
   },
   {
-    id: "github-discord-bot",
-    title: "Commit Tracker Bot",
-    description:
-      "A Discord bot that tracks and displays the total number of commits for a given GitHub repository. Useful for teams and communities to monitor project activity directly from Discord.",
-    latex_description:
-      "Built a Discord bot using Node.js to track and display real-time commit counts for any GitHub repository in Discord servers.",
-    image: githubDiscordBotImg,
-    sourceUrl: "https://github.com/MananKakkar1/github-discord-bot",
-    category: "Bots",
-    technologies: "Node.js + Discord.js + GitHub API",
+    id: "eta",
+    title: "ETA",
+    description: "Won Best Use of Auth0 at EmberHacks — an interactive AI learning assistant with DynamoDB for persistent context, voice pipeline with Gemini and ElevenLabs.",
+    latex_description: "Won Best Use of Auth0 at EmberHacks for building an interactive AI learning assistant; integrated DynamoDB for persistent user context and multi-turn personalization; built a voice pipeline with Gemini and ElevenLabs plus AI-driven visual response flows.",
+    image: etaImg,
+    sourceUrl: "https://github.com/MananKakkar1/ETA",
+    category: "Websites",
+    technologies: "React + Flask + DynamoDB + Gemini API + ElevenLabs",
+    funFacts: ["First Hackathon Win", "Custom Animations", "AI Voice Assistant"],
+  },
+  {
+    id: "continulearn",
+    title: "ContinuLearn",
+    description: "Browser-based 3D continuum robot simulator with Unity WebGL in Next.js; real-time controls for bend angle and direction; Gemini coaching and ElevenLabs voice feedback.",
+    latex_description: "Built a browser-based 3D continuum robot simulator with Unity WebGL embedded in a Next.js app; implemented constant-curvature modeling with real-time controls for bend angle, radius, and direction; integrated Gemini coaching and ElevenLabs voice feedback for interactive learning.",
+    image: clImg,
+    sourceUrl: "https://github.com/MananKakkar1/ContinuLearn",
+    category: "Websites",
+    technologies: "Next.js + Unity WebGL + C# + TypeScript + Gemini API + ElevenLabs + SQLite",
     funFacts: [
-      "Tracks GitHub repository commits in real-time.",
-      "Integrates seamlessly with Discord servers.",
+      "Designed around ongoing, structured learning workflows.",
+      "Represents a dedicated education-focused repository on your profile.",
+    ],
+  },
+  {
+    id: "custom-linux-shell",
+    title: "Custom Linux Shell",
+    description: "Linux shell in C with parsing, pipelines, redirection, and background jobs; AI-powered CLI workflow; built-in TCP chat server supporting 200+ clients.",
+    latex_description: "Built a Linux shell in C with parsing, pipelines, redirection, background jobs, and environment variable expansion; integrated an AI-powered CLI workflow for deterministic command support; engineered a built-in TCP chat server supporting 200+ clients and high-throughput messaging.",
+    image: shellImg,
+    sourceUrl: "https://github.com/MananKakkar1/Custom-Linux-Shell",
+    category: "System Tools",
+    technologies: "C + Unix Sockets + Process Management",
+    funFacts: [
+      "Engineered a Linux shell from scratch in C.",
+      "Supports custom commands and dynamic environment variables.",
+      "Advanced functionalities like background processing and command piping.",
+      "TCP socket-based communication module for server-client interactions.",
+    ],
+  },
+  {
+    id: "ai-paint-desktop-app",
+    title: "SmartPaint",
+    description: "JavaFX paint application with shape tools and structured JSON workflows; integrated Llama 3 and OpenAI models for prompt-to-drawing; FSM-based parser with JUnit5 test coverage.",
+    latex_description: "Built a JavaFX paint application with shape tools, color controls, and structured JSON workflows; integrated Llama 3 and OpenAI models for intelligent prompt-to-drawing generation; implemented an FSM-based parser for high-volume command handling with strong JUnit5 test coverage.",
+    image: aiPaintImg,
+    sourceUrl: "https://github.com/MananKakkar1/AI_Paint_Application",
+    category: "Desktop Applications",
+    technologies: "Java + JavaFX + Llama3",
+    funFacts: [
+      "Desktop drawing application inspired by Microsoft Paint.",
+      "AI-generated images from text prompts.",
+      "Responsive and intuitive user experience.",
+      "Features brush selection, color palettes, and image export.",
     ],
   },
   {
     id: "algorithm-visualizer",
     title: "Algorithm Visualizer",
-    description:
-      "A web app for visualizing sorting, searching, and graph algorithms. Users can step through algorithm execution, adjust data, and learn core concepts interactively through animated visualizations.",
-    latex_description:
-      "Created an interactive algorithm visualizer for sorting, searching, and graph algorithms with step-by-step controls and educational UI.",
+    description: "Interactive algorithm visualizer for sorting, searching, and graph algorithms with step-by-step controls and educational UI.",
+    latex_description: "Created an interactive algorithm visualizer for sorting, searching, and graph algorithms with step-by-step controls and educational UI.",
     image: algoImg,
     sourceUrl: "https://github.com/MananKakkar1/Algorithm-Visualizer",
     category: "Websites",
@@ -350,241 +185,164 @@ const projectsList: Project[] = [
     ],
   },
   {
-    id: "continulearn",
-    title: "ContinuLearn",
-    description:
-      "A continuous learning platform focused on structured progress, content organization, and practical learning workflows. You can visit the platform on: https://continu-learn.vercel.app",
-    latex_description:
-      "Built a browser-based 3D continuum robot simulator with Unity WebGL embedded in a Next.js app; implemented constant-curvature modeling with real-time controls for bend angle, radius, and direction; integrated Gemini coaching and ElevenLabs voice feedback for interactive learning.",
-    image: clImg,
-    sourceUrl: "https://github.com/MananKakkar1/ContinuLearn",
-    category: "Websites",
-    technologies:
-      "Next.js + Unity WebGL + C# + TypeScript + Gemini API + ElevenLabs + SQLite",
+    id: "file-system-tree-visualizer",
+    title: "File System Tree Visualizer",
+    description: "Hierarchical file system visualizer in Python using Pygame; supports real-time rendering, CSV data parsing, and interactive exploration.",
+    latex_description: "Visualized hierarchical file system structures in Python using Pygame; supports real-time rendering, CSV data parsing, and interactive exploration.",
+    image: fileSystemImg,
+    sourceUrl: "https://github.com/MananKakkar1/File-System-Tree-Visualizer",
+    category: "Data Analysis",
+    technologies: "Python + Pygame",
     funFacts: [
-      "Designed around ongoing, structured learning workflows.",
-      "Represents a dedicated education-focused repository on your profile.",
+      "Interactive visualization of file systems.",
+      "Real-time parsing and rendering.",
+      "Intuitive expand/collapse features.",
+      "Visualizes CSV data as a file tree.",
     ],
   },
   {
-    id: "aira",
-    title: "AIRA",
-    description:
-      "An auto incident response assistant project built to support faster triage and operational incident handling workflows.",
-    latex_description:
-      "Developed an incident-response assistant to streamline detection, triage, and handling of operational issues.",
-    image: airaImg,
-    sourceUrl:
-      "https://github.com/MananKakkar1/Auto-Incident-Response-Assistant",
-    category: "System Tools",
-    technologies: "Python + Automation",
+    id: "sokoban-game",
+    title: "Sokoban",
+    description: "Sokoban puzzle game in RISC-V assembly with multiplayer support and dynamic 127x127 grids; randomized board generation with solvable puzzles.",
+    latex_description: "Built a Sokoban puzzle game in RISC-V assembly with multiplayer support and dynamic 127x127 grids; designed randomized board generation with solvable puzzles and efficient move storage; engineered restart and reset flows for consistent gameplay correctness.",
+    image: sokobanImg,
+    sourceUrl: "https://github.com/MananKakkar1/Sokoban",
+    category: "Games",
+    technologies: "RISC-V Assembly",
     funFacts: [
-      "Targets faster incident-response workflows.",
-      "Mapped to your Auto-Incident-Response-Assistant repository.",
+      "Classic Sokoban puzzle game in RISC-V Assembly.",
+      "Box-pushing mechanics and win conditions designed.",
+      "Optimized memory usage and performance.",
+      "Simple text-based interface for user interaction.",
     ],
   },
   {
-    id: "leetcode-problems",
-    title: "Leetcode Problems",
-    description:
-      "A collection of algorithm and data structure practice problems with code solutions.",
-    latex_description:
-      "Maintained a problem-solving repository with LeetCode-style solutions focused on algorithmic reasoning and coding fluency.",
-    image: tempImg,
-    sourceUrl: "https://github.com/MananKakkar1/Leetcode_Problems",
-    category: "System Tools",
-    technologies: "Python",
+    id: "othello-game",
+    title: "Othello",
+    description: "Terminal-based Othello game in Java with player-vs-player and AI opponent modes, move validation, and a scoring system.",
+    latex_description: "Designed a terminal-based Othello game in Java with player-vs-player and AI opponent modes, move validation, and a scoring system.",
+    image: othelloImg,
+    sourceUrl: "https://github.com/MananKakkar1/Othello",
+    category: "Games",
+    technologies: "Java",
     funFacts: [
-      "Contains coding interview style practice solutions.",
-      "Focuses on algorithmic problem solving and consistency.",
-    ],
-  },
-  {
-    id: "medilens",
-    title: "MediLens",
-    description:
-      "A healthcare-focused application repository on your profile (fork), centered on accessibility and user support workflows.",
-    latex_description:
-      "Collaborated on a healthcare-oriented project focused on practical user-facing workflows and rapid iteration.",
-    image: tempImg,
-    sourceUrl: "https://github.com/MananKakkar1/MediLens",
-    category: "Websites",
-    technologies: "JavaScript + HTML + CSS",
-    funFacts: [
-      "This repository appears as a fork on your GitHub profile.",
-      "Represents collaboration on a healthcare-oriented project.",
-    ],
-  },
-  {
-    id: "eta",
-    title: "ETA",
-    description:
-      "Won my first hackathon at EmberHacks for building ETA, an AI-driven teaching assistant leveraging Gemini and ElevenLabs to deliver personalized voice-based learning assistance.",
-    latex_description:
-      "Won Best Use of Auth0 at EmberHacks for building an interactive AI learning assistant; integrated DynamoDB for persistent user context and multi-turn personalization; built a voice pipeline with Gemini and ElevenLabs plus AI-driven visual response flows.",
-    image: etaImg,
-    sourceUrl: "https://github.com/MananKakkar1/ETA",
-    category: "Websites",
-    technologies: "React + Flask + DynamoDB + Gemini API + ElevenLabs",
-    funFacts: [
-      "First Hackathon Win 🏆",
-      "Custom Animations",
-      "AI Voice Assistant",
+      "Terminal-based Othello implementation.",
+      "Features AI opponent with basic strategy.",
+      "Supports two-player mode.",
+      "Includes move validation and scoring system.",
     ],
   },
 ];
 
-const getCategories = () => {
-  const cats = Array.from(new Set(projectsList.map((p) => p.category)));
-  return ["All", ...cats];
-};
+const CATEGORIES = ["All", "Websites", "Games", "System Tools", "Data Analysis", "Desktop Applications"];
 
-const parseTechnologies = (techString: string): string[] => {
-  return techString
+// Scrollytelling panel for one project
+const ProjectPanel = ({ project, index }: { project: Project; index: number }) => {
+  const panelRef = useRef<HTMLDivElement>(null);
+  const imgRef = useRef<HTMLDivElement>(null);
+  const { ref: titleRef, displayed: titleText } = useScrollTypewriter(project.title, 45);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          panelRef.current?.classList.add("panel-visible");
+          imgRef.current?.classList.add("img-visible");
+        }
+      },
+      { threshold: 0.15 }
+    );
+    if (panelRef.current) observer.observe(panelRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  const techList = project.technologies
     .split("+")
-    .map((tech) => tech.trim())
-    .filter((tech) => tech.length > 0);
-};
+    .map((t) => t.trim())
+    .filter(Boolean)
+    .join(", ");
 
-const GitHubIcon = () => (
-  <svg
-    className="github-icon"
-    viewBox="0 0 24 24"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-  </svg>
-);
+  return (
+    <div className="project-panel" ref={panelRef}>
+      <div className="panel-left">
+        <span className="panel-index">
+          {String(index + 1).padStart(2, "0")}
+        </span>
+        <h2
+          className="panel-title"
+          ref={titleRef as React.RefObject<HTMLHeadingElement>}
+        >
+          {titleText}
+          <span className="cursor" style={{ opacity: titleText.length > 0 && titleText.length < project.title.length ? 1 : 0 }} />
+        </h2>
+        <span className="panel-category">{project.category}</span>
+        <p className="panel-desc">{project.description}</p>
+        <p className="panel-tech">{techList}</p>
+        <div className="panel-links">
+          <Link to={`/projects/${project.id}`} className="panel-link">
+            Details →
+          </Link>
+          {project.sourceUrl && (
+            <a
+              href={project.sourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="panel-link"
+            >
+              GitHub →
+            </a>
+          )}
+        </div>
+      </div>
+      <div className="panel-divider" />
+      <div className="panel-right">
+        <div className="panel-img-wrap" ref={imgRef}>
+          <img src={project.image} alt={project.title} />
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const Projects = () => {
   const [selected, setSelected] = useState("All");
-  const categories = getCategories();
-  const filteredProjects =
+  const { ref: headRef, displayed: headText } = useScrollTypewriter("Projects.", 55);
+
+  const filtered =
     selected === "All"
       ? projectsList
       : projectsList.filter((p) => p.category === selected);
 
-  // Track fun fact index for each project by id
-  const [funFactIndexes, setFunFactIndexes] = useState<{
-    [id: string]: number;
-  }>({});
-
-  // Handler to cycle fun facts (update to allow up/right = next, down/left = previous)
-  const handleDpad = (
-    projectId: string,
-    direction: "up" | "down" | "left" | "right",
-  ) => {
-    setFunFactIndexes((prev) => {
-      const project = filteredProjects.find((p) => p.id === projectId);
-      if (!project || !project.funFacts || project.funFacts.length === 0)
-        return prev;
-      const current = prev[projectId] || 0;
-      let next = current;
-      if (direction === "right" || direction === "up") {
-        next = (current + 1) % project.funFacts.length;
-      } else if (direction === "left" || direction === "down") {
-        next =
-          (current - 1 + project.funFacts.length) % project.funFacts.length;
-      }
-      return { ...prev, [projectId]: next };
-    });
-  };
-
   return (
-    <div className="projects-page-background">
-      <h1>My Projects</h1>
-      <div className="category-filter">
-        <span className="filter-label">Filter by category:</span>
-        <div className="filter-buttons">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              className={`filter-btn ${selected === cat ? "active" : ""}`}
-              onClick={() => setSelected(cat)}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
+    <div className="projects-root">
+      <div className="projects-header">
+        <h1
+          className="projects-main-heading"
+          ref={headRef as React.RefObject<HTMLHeadingElement>}
+        >
+          {headText}
+          <span className="cursor" style={{ opacity: headText.length > 0 && headText.length < "Projects.".length ? 1 : 0 }} />
+        </h1>
+        <p className="projects-sub">
+          {projectsList.length} projects across full-stack, systems, AI, and games.
+        </p>
       </div>
-      <div className="projects-list">
-        {filteredProjects.map((project) => (
-          <div key={project.id} className="project-entry">
-            <div className="gameboy-lines">
-              <div className="gameboy-line"></div>
-              <div className="gameboy-line"></div>
-              <div className="gameboy-line"></div>
-            </div>
-            <div className="gameboy-screen">
-              <img
-                src={project.image || tempImg}
-                alt={project.title}
-              />
-            </div>
-            <h3>{project.title}</h3>
-            <div className="gameboy-controls">
-              <div className="tech-stack">
-                {parseTechnologies(project.technologies).map((tech, index) => (
-                  <button key={index} className="tech-badge" title={tech}>
-                    {tech}
-                  </button>
-                ))}
-              </div>
 
-              <div className="gameboy-dpad">
-                <div className="dpad">
-                  <div className="dpad-horizontal"></div>
-                  <div className="dpad-vertical"></div>
-                  <div className="dpad-center"></div>
-                  <div
-                    className="dpad-up"
-                    onClick={() => handleDpad(project.id, "up")}
-                    title="Previous Fun Fact"
-                  ></div>
-                  <div
-                    className="dpad-down"
-                    onClick={() => handleDpad(project.id, "down")}
-                    title="Next Fun Fact"
-                  ></div>
-                  <div
-                    className="dpad-left"
-                    onClick={() => handleDpad(project.id, "left")}
-                    title="Previous Fun Fact"
-                  ></div>
-                  <div
-                    className="dpad-right"
-                    onClick={() => handleDpad(project.id, "right")}
-                    title="Next Fun Fact"
-                  ></div>
-                </div>
+      <div className="category-tabs">
+        {CATEGORIES.map((cat) => (
+          <button
+            key={cat}
+            className={`cat-tab${selected === cat ? " active" : ""}`}
+            onClick={() => setSelected(cat)}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
 
-                <div className="action-buttons">
-                  <Link
-                    to={`/projects/${project.id}`}
-                    className="action-button"
-                    title="View Project Details"
-                  >
-                    INFO
-                  </Link>
-                  <a
-                    href={project.sourceUrl}
-                    className="action-button"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    title="View Source Code"
-                  >
-                    <GitHubIcon />
-                  </a>
-                </div>
-              </div>
-              {/* Fun Fact Display */}
-              {project.funFacts && project.funFacts.length > 0 && (
-                <div className="fun-fact">
-                  Fun fact: {project.funFacts[funFactIndexes[project.id] || 0]}
-                </div>
-              )}
-            </div>
-          </div>
+      <div className="projects-panels">
+        {filtered.map((p, i) => (
+          <ProjectPanel key={p.id} project={p} index={i} />
         ))}
       </div>
     </div>
@@ -593,4 +351,3 @@ const Projects = () => {
 
 export default Projects;
 export { projectsList };
-

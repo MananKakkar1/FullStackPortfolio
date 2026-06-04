@@ -1,7 +1,7 @@
-import { useState } from "react";
+import React, { useEffect, useRef } from "react";
 import "../components/css_files/About.css";
-import "../components/css_files/Home.css";
-import tempImg from "../assets/photo.jpg";
+import { useScrollTypewriter } from "../hooks/useScrollTypewriter";
+import photoImg from "../assets/photo.jpg";
 
 import reactImg from "../assets/logo.png";
 import tsImg from "../assets/typescript.png";
@@ -25,243 +25,208 @@ import vercelImg from "../assets/vercel.png";
 import gitImg from "../assets/GitHub-Logo.svg";
 
 const techStack = [
-  { name: "React", icon: <img src={reactImg} alt="React" />, link: "https://react.dev/" },
-  { name: "TypeScript", icon: <img src={tsImg} alt="TypeScript" />, link: "https://www.typescriptlang.org/" },
-  { name: "Node.js", icon: <img src={nodeImg} alt="Node.js" />, link: "https://nodejs.org/" },
-  { name: "Express.js", icon: <img src={expressImg} alt="Express.js" />, link: "https://expressjs.com/" },
-  { name: "MongoDB", icon: <img src={mongoImg} alt="MongoDB" />, link: "https://www.mongodb.com/" },
-  { name: "Firebase", icon: <img src={firebaseImg} alt="Firebase" />, link: "https://firebase.google.com/" },
-  { name: "Flask", icon: <img src={flaskImg} alt="Flask" />, link: "https://flask.palletsprojects.com/" },
-  { name: "Python", icon: <img src={pythonImg} alt="Python" />, link: "https://www.python.org/" },
-  { name: "Java", icon: <img src={javaImg} alt="Java" />, link: "https://www.java.com/" },
-  { name: "JavaFX", icon: <img src={javafxImg} alt="JavaFX" />, link: "https://openjfx.io/" },
-  { name: "C", icon: <img src={cImg} alt="C" />, link: "https://en.wikipedia.org/wiki/C_(programming_language)" },
-  { name: "HTML5", icon: <img src={htmlImg} alt="HTML5" />, link: "https://developer.mozilla.org/en-US/docs/Web/HTML" },
-  { name: "CSS3", icon: <img src={cssImg} alt="CSS3" />, link: "https://developer.mozilla.org/en-US/docs/Web/CSS" },
-  { name: "Git", icon: <img src={gitImg} alt="GitHub" />, link: "https://git-scm.com/" },
-  { name: "Bash", icon: <img src={bashImg} alt="Bash" />, link: "https://www.gnu.org/software/bash/" },
-  { name: "Linux", icon: <img src={linuxImg} alt="Linux" />, link: "https://www.linux.org/" },
-  { name: "Windows", icon: <img src={windowsImg} alt="Windows" />, link: "https://www.microsoft.com/en-us/windows" },
-  { name: "Pygame", icon: <img src={pygameImg} alt="Pygame" />, link: "https://www.pygame.org/" },
-  { name: "RISC-V", icon: <img src={riscvImg} alt="RISC-V" />, link: "https://riscv.org/" },
-  { name: "Vercel", icon: <img src={vercelImg} alt="Vercel" />, link: "https://vercel.com/" },
+  { name: "React", icon: reactImg },
+  { name: "TypeScript", icon: tsImg },
+  { name: "Node.js", icon: nodeImg },
+  { name: "Express.js", icon: expressImg },
+  { name: "MongoDB", icon: mongoImg },
+  { name: "Firebase", icon: firebaseImg },
+  { name: "Flask", icon: flaskImg },
+  { name: "Python", icon: pythonImg },
+  { name: "Java", icon: javaImg },
+  { name: "JavaFX", icon: javafxImg },
+  { name: "C", icon: cImg },
+  { name: "HTML5", icon: htmlImg },
+  { name: "CSS3", icon: cssImg },
+  { name: "Git", icon: gitImg },
+  { name: "Bash", icon: bashImg },
+  { name: "Linux", icon: linuxImg },
+  { name: "Windows", icon: windowsImg },
+  { name: "Pygame", icon: pygameImg },
+  { name: "RISC-V", icon: riscvImg },
+  { name: "Vercel", icon: vercelImg },
 ];
 
 const highlights = [
-  {
-    label: "Current Focus",
-    value: "Full-Stack Engineering",
-    detail:
-      "Right now I am focused on React + TypeScript frontends and Node/Flask backends, with strong attention to API reliability and testing.",
-  },
-  {
-    label: "Work Style",
-    value: "Iterative and practical",
-    detail:
-      "I usually break features into small milestones, ship fast, and validate with tests and feedback before expanding scope.",
-  },
-  {
-    label: "Strengths",
-    value: "Backend + product mindset",
-    detail:
-      "I am strongest when I can own backend logic, data flow, and integration details while still keeping the UI clean and usable.",
-  },
-  {
-    label: "Current Chapter",
-    value: "UofT CS, internships, hackathons",
-    detail:
-      "I am a CS student at UofT, completed a software internship at Munafah.AI, and built practical projects at SpurHacks and EmberHacks.",
-  },
+  { label: "Current Role", value: "Software Engineer Intern · AMD" },
+  { label: "Work Style", value: "Iterative and practical" },
+  { label: "Strengths", value: "Backend + product mindset" },
+  { label: "Current Chapter", value: "UofT CS + AMD internship" },
 ];
 
 const progressTimeline = [
   {
-    period: "2019 - 2023",
+    period: "2019 – 2023",
     title: "High School Diploma",
-    note: "Iroquois Ridge High School - focused on computer science, engineering, and mathematics with strong academic performance.",
+    note: "Iroquois Ridge High School — computer science, engineering, and mathematics.",
   },
   {
-    period: "2023 - Present",
+    period: "2023 – Present",
     title: "Computer Science Undergraduate",
-    note: "University of Toronto - specializing in Computer Science with a focus on software development and systems engineering.",
+    note: "University of Toronto — specializing in software development and systems engineering.",
   },
   {
     period: "2023",
     title: "Hack the Ridge",
-    note: "Collaborated in a 9-hour hackathon to build a retro-style ski resort planning app, strengthening teamwork and rapid prototyping.",
+    note: "Built a retro-style ski resort planning app in a 9-hour hackathon, strengthening teamwork and rapid prototyping.",
   },
   {
-    period: "May 2025 - August 2025",
-    title: "Software Engineer Intern - Munafah.AI",
-    note: "Built secure backend systems and AI moderation tools for a B2B platform, reducing content review time from hours to around 2 minutes.",
+    period: "May – Aug 2025",
+    title: "Software Engineer Intern · Munafah.AI",
+    note: "Built secure backend systems and AI moderation tools, reducing content review time from hours to ~2 minutes.",
   },
   {
     period: "June 2025",
-    title: "SpurHacks Hackathon - Netly",
-    note: "Built an AI-powered basketball analytics tool using YOLO, pose estimation, and OpenCV for real-time and video-based possession and rule-violation detection.",
+    title: "SpurHacks · Netly",
+    note: "AI-powered basketball analytics using YOLO and OpenCV for real-time possession and violation detection.",
   },
   {
     period: "October 2025",
-    title: "EmberHacks Hackathon - ETA",
-    note: "Earned first hackathon win with ETA, an AI-powered teaching assistant designed to help students understand complex course material.",
+    title: "EmberHacks · ETA — 1st Place",
+    note: "Won Best Use of Auth0 with ETA, an AI teaching assistant using Gemini and ElevenLabs.",
   },
   {
-    period: "May 2026 - August 2027",
-    title: "Software Engineer Intern - AMD",
-    note: "Incoming full-stack software development engineering internship focused on production-scale internal tooling and systems.",
+    period: "May 2026 – Aug 2027",
+    title: "Software Engineer Intern · AMD",
+    note: "Building production-scale internal tooling and systems across the full stack.",
   },
 ];
 
-const INITIAL_TECHS = [0, 1, 2];
-
 const About = () => {
-  const [displayedTechs, setDisplayedTechs] = useState(INITIAL_TECHS);
+  // Section headings typewriter
+  const { ref: introRef, displayed: introText } = useScrollTypewriter("Manan Kakkar.", 55);
+  const { ref: timelineRef, displayed: timelineText } = useScrollTypewriter("Career Timeline.", 50);
+  const { ref: techRef, displayed: techText } = useScrollTypewriter("Tech Stack.", 50);
 
-  const handleTechDpad = (cardIdx: number, direction: "next" | "prev") => {
-    setDisplayedTechs((prev) => {
-      const updated = [...prev];
-      if (direction === "next") {
-        updated[cardIdx] = (prev[cardIdx] + 1) % techStack.length;
-        if (updated.filter((_, i) => i !== cardIdx).includes(updated[cardIdx])) {
-          updated[cardIdx] = (updated[cardIdx] + 1) % techStack.length;
-        }
-      } else {
-        updated[cardIdx] = (prev[cardIdx] - 1 + techStack.length) % techStack.length;
-        if (updated.filter((_, i) => i !== cardIdx).includes(updated[cardIdx])) {
-          updated[cardIdx] = (updated[cardIdx] - 1 + techStack.length) % techStack.length;
-        }
-      }
-      return updated;
-    });
-  };
+  // Reveal refs
+  const revealRefs = useRef<(HTMLElement | null)[]>([]);
+  const timelineNodeRefs = useRef<(HTMLElement | null)[]>([]);
+
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      (entries) => entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add("visible"); }),
+      { threshold: 0.12 }
+    );
+    revealRefs.current.forEach((el) => el && obs.observe(el));
+    return () => obs.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            const i = Number((e.target as HTMLElement).dataset.i || 0);
+            setTimeout(() => e.target.classList.add("node-visible"), i * 120);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+    timelineNodeRefs.current.forEach((el) => el && obs.observe(el));
+    return () => obs.disconnect();
+  }, []);
+
+  const addReveal = (i: number) => (el: HTMLElement | null) => { revealRefs.current[i] = el; };
+  const addNode = (i: number) => (el: HTMLElement | null) => { timelineNodeRefs.current[i] = el; };
 
   return (
-    <div className="about-shell">
-      <section className="about-intro-split">
+    <div className="about-root">
+
+      {/* ── INTRO SPLIT ── */}
+      <section className="about-intro">
         <div className="about-intro-left">
           <p className="about-kicker">Profile</p>
-          <h1>Software builder focused on impact, speed, and clean execution.</h1>
-          <p className="about-lead">
-            Hi! I am Manan Kakkar, a Computer Science student at the University
-            of Toronto. I love building software that makes a real difference,
-            diving into new technologies, and working with others to bring
-            creative ideas to life. I am always excited to learn, grow, and
-            take on challenges that push me to think outside the box.
+          <h1
+            className="about-main-heading"
+            ref={introRef as React.RefObject<HTMLHeadingElement>}
+          >
+            {introText}
+            <span className="cursor" style={{ opacity: introText.length > 0 && introText.length < "Manan Kakkar.".length ? 1 : 0 }} />
+          </h1>
+          <p className="about-bio reveal" ref={addReveal(0)}>
+            Computer Science student at the University of Toronto. I build software
+            that makes a real difference — clean backends, fast frontends, and AI-powered
+            tools that ship.
           </p>
-          <div className="about-socials">
-            <a
-              href="https://www.linkedin.com/in/manankakkar11/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              LinkedIn
+          <p className="about-bio reveal" ref={addReveal(1)}>
+            Competed at SpurHacks and EmberHacks (1st place), interned at Munafah.AI,
+            and currently a Software Engineer Intern at AMD.
+          </p>
+          <div className="about-socials reveal" ref={addReveal(2)}>
+            <a href="https://www.linkedin.com/in/manankakkar11/" target="_blank" rel="noopener noreferrer">
+              LinkedIn ↗
             </a>
-            <a
-              href="https://github.com/manankakkar1"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              GitHub
+            <a href="https://github.com/manankakkar1" target="_blank" rel="noopener noreferrer">
+              GitHub ↗
             </a>
           </div>
         </div>
-        <div className="about-intro-right">
-          <img src={tempImg} alt="Manan Kakkar" className="about-hero-image" />
-          <div className="about-mini-tags">
-            <span>Full Stack</span>
-            <span>Systems</span>
-            <span>AI</span>
-          </div>
+        <div className="about-intro-right reveal" ref={addReveal(3)}>
+          <img src={photoImg} alt="Manan Kakkar" className="about-photo" />
         </div>
       </section>
 
-      <section className="about-highlights-grid">
-        {highlights.map((fact) => (
-          <article key={fact.label} className="about-fact-card">
-            <p className="about-fact-label">{fact.label}</p>
-            <p className="about-fact-value">{fact.value}</p>
-            <p className="about-fact-detail">{fact.detail}</p>
-          </article>
+      {/* ── HIGHLIGHTS ── */}
+      <section className="about-highlights">
+        {highlights.map((h, i) => (
+          <div className="highlight-row reveal" key={h.label} ref={addReveal(4 + i)}>
+            <span className="highlight-label">{h.label}</span>
+            <span className="highlight-dash">———</span>
+            <span className="highlight-value">{h.value}</span>
+          </div>
         ))}
       </section>
 
-      <section className="about-progress-panel">
-        <div className="about-section-head">
-          <h2>Career Timeline</h2>
-          <p>Milestones across education, internships, and hackathon wins.</p>
-        </div>
-        <div className="progress-rail">
-          {progressTimeline.map((item) => (
-            <article key={item.period + item.title} className="progress-node">
-              <p className="progress-period">{item.period}</p>
-              <h3>{item.title}</h3>
-              <p>{item.note}</p>
-            </article>
+      {/* ── TIMELINE ── */}
+      <section className="about-timeline-section">
+        <h2
+          className="about-section-heading"
+          ref={timelineRef as React.RefObject<HTMLHeadingElement>}
+        >
+          {timelineText}
+          <span className="cursor" style={{ opacity: timelineText.length > 0 && timelineText.length < "Career Timeline.".length ? 1 : 0 }} />
+        </h2>
+        <div className="timeline-rail">
+          {progressTimeline.map((item, i) => (
+            <div
+              className="timeline-node"
+              key={item.period + item.title}
+              ref={addNode(i)}
+              data-i={i}
+            >
+              <div className="timeline-left">
+                <span className="timeline-period">{item.period}</span>
+              </div>
+              <div className="timeline-dot-col">
+                <div className="timeline-dot" />
+                {i < progressTimeline.length - 1 && <div className="timeline-connector" />}
+              </div>
+              <div className="timeline-right">
+                <h3 className="timeline-title">{item.title}</h3>
+                <p className="timeline-note">{item.note}</p>
+              </div>
+            </div>
           ))}
         </div>
       </section>
 
-      <section className="about-tech-panel">
-        <div className="about-section-head">
-          <h2>Interactive Tech Stack</h2>
-          <p>Use each D-pad to rotate through technologies.</p>
-        </div>
-        <div className="home-projects-list">
-          {displayedTechs.map((techIdx, idx) => {
-            const tech = techStack[techIdx];
-            return (
-              <div key={idx} className="project-flip-container">
-                <div className="project-flip-inner">
-                  <div className="project-flip-front">
-                    <div className="project-entry">
-                      <div className="gameboy-lines">
-                        <div className="gameboy-line"></div>
-                        <div className="gameboy-line"></div>
-                        <div className="gameboy-line"></div>
-                      </div>
-                      <div className="gameboy-screen">{tech.icon}</div>
-                      <h3>{tech.name}</h3>
-                      <div className="gameboy-controls">
-                        <div className="tech-stack">
-                          <a
-                            href={tech.link}
-                            className="tech-badge"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            title={tech.name}
-                          >
-                            {tech.name}
-                          </a>
-                        </div>
-                        <div className="gameboy-dpad">
-                          <div className="dpad">
-                            <div className="dpad-horizontal"></div>
-                            <div className="dpad-vertical"></div>
-                            <div className="dpad-center"></div>
-                            <div className="dpad-up" onClick={() => handleTechDpad(idx, "next")} title="Next Tech"></div>
-                            <div className="dpad-down" onClick={() => handleTechDpad(idx, "prev")} title="Previous Tech"></div>
-                            <div className="dpad-left" onClick={() => handleTechDpad(idx, "prev")} title="Previous Tech"></div>
-                            <div className="dpad-right" onClick={() => handleTechDpad(idx, "next")} title="Next Tech"></div>
-                          </div>
-                          <div className="action-buttons">
-                            <a
-                              href={tech.link}
-                              className="action-button"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              title="Tech Info"
-                            >
-                              INFO
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+      {/* ── TECH STACK ── */}
+      <section className="about-tech-section">
+        <h2
+          className="about-section-heading"
+          ref={techRef as React.RefObject<HTMLHeadingElement>}
+        >
+          {techText}
+          <span className="cursor" style={{ opacity: techText.length > 0 && techText.length < "Tech Stack.".length ? 1 : 0 }} />
+        </h2>
+        <div className="tech-grid reveal" ref={addReveal(9)}>
+          {techStack.map((tech) => (
+            <div className="tech-cell" key={tech.name}>
+              <img src={tech.icon} alt={tech.name} />
+              <span>{tech.name}</span>
+            </div>
+          ))}
         </div>
       </section>
     </div>

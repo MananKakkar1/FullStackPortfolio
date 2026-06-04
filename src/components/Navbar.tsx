@@ -1,20 +1,24 @@
+import { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./css_files/Navbar.css";
-import { useLocation, useNavigate, Link } from "react-router-dom";
-import ThemeSelector from "./ThemeSelector";
 
 const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const handleContactClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     if (location.pathname !== "/Home") {
       navigate("/Home#contact-sec");
     } else {
-      const contactSection = document.getElementById("contact-sec");
-      if (contactSection) {
-        contactSection.scrollIntoView({ behavior: "smooth" });
-      }
+      document.getElementById("contact-sec")?.scrollIntoView({ behavior: "smooth" });
       window.history.replaceState(null, "", "#contact-sec");
     }
   };
@@ -27,36 +31,25 @@ const Navbar = () => {
     }
   };
 
-  const handleNavScrollTop = () => {
-    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-  };
+  const handleNavScrollTop = () => window.scrollTo({ top: 0, behavior: "auto" });
 
   return (
-    <div>
-      <header className="header">
-        <Link to="/Home" onClick={handleHomeClick} className="logo-brand brand-text-only">
-          <span className="logo-title">Manan Kakkar</span>
-        </Link>
-        <nav className="navbar">
-          <Link to="/Home" onClick={handleHomeClick}>
-            Home
-          </Link>
-          <Link to="/projects" onClick={handleNavScrollTop}>
-            Projects
-          </Link>
-          <Link to="/about" onClick={handleNavScrollTop}>
-            About Me
-          </Link>
-          <a href="/#contact-sec" onClick={handleContactClick}>
-            Contact Me
-          </a>
-          <Link to="/resume" onClick={handleNavScrollTop}>
-            Resume
-          </Link>
-        </nav>
-        <ThemeSelector />
-      </header>
-    </div>
+    <header className={`navbar-root${scrolled ? " scrolled" : ""}`}>
+      <Link to="/Home" onClick={handleHomeClick} className="navbar-brand">
+        <span className="navbar-monogram">MK</span>
+        <span className="navbar-name">Manan Kakkar</span>
+      </Link>
+
+      <nav className="navbar-links">
+        <Link to="/Home" onClick={handleHomeClick}>Home</Link>
+        <Link to="/projects" onClick={handleNavScrollTop}>Projects</Link>
+        <Link to="/about" onClick={handleNavScrollTop}>About</Link>
+      </nav>
+
+      <a href="#contact-sec" onClick={handleContactClick} className="navbar-cta">
+        Contact
+      </a>
+    </header>
   );
 };
 
