@@ -27,11 +27,13 @@ Continuum robotics, tendon-driven continuum robots, robot kinematics, motion pla
 - Transformed character shapes into smooth geometric writing trajectories for physical execution.
 
 ### ContinuLearn
-**Browser-Based Continuum Robotics Learning Platform**  
+**Browser-Based Continuum Robotics Learning Platform**
+  
 - Built a browser-based platform for real-time 3D simulation of continuum robot kinematics using Unity WebGL within a Next.js application.
 - Developed constant-curvature modeling and interactive controls for bend angle, radius, and direction to support exploration of continuum robot behavior.
 - Integrated AI-guided explanations and voice feedback using Gemini and ElevenLabs to support interactive learning of continuum robotics concepts.
 - Designed the platform to make continuum robot modeling and behavior more accessible without requiring physical hardware.
+- Live: [Live](https://continu-learn.vercel.app)
 
 ## Professional Experience
 
@@ -63,6 +65,7 @@ Remote | May 2025 - August 2025
 ### AIRA
 - Built a human-in-the-loop incident response assistant to support faster triage and investigation of cybersecurity alerts.
 - Applied machine learning and real-time analysis techniques to assist analyst decision-making and anomaly detection.
+- Repo: [Auto-Incident-Response-Assistant](https://github.com/MananKakkar1/Auto-Incident-Response-Assistant)
 
 ### Custom Linux Shell
 - Built a Linux shell in C with support for parsing, pipelines, redirection, background jobs, and environment variable expansion.

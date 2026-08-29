@@ -23,3 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 .env
+# Agent skills (installed via npx skills add) - local tooling, not project code
+.agents/
+.claude/
+skills-lock.json

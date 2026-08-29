@@ -1,47 +1,64 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Guidance for Claude Code when working in this repository.
 
 ## Commands
 
 ```bash
-# Frontend (root)
-npm run dev        # Start Vite dev server
-npm run build      # TypeScript check + Vite production build
+npm run dev        # Vite dev server
+npm run build      # TypeScript project build + Vite production build
 npm run lint       # ESLint
-npm run preview    # Preview production build locally
+npm run preview    # Preview the production build locally
 ```
 
 There are no automated tests.
 
 ## Architecture
 
-This is a full-stack personal portfolio deployed at **manankakkar.com** on Vercel.
+Single-page portfolio (React 19 + TypeScript + Vite) deployed at
+**manankakkar.com** on Vercel. `vercel.json` rewrites everything to the SPA
+`index.html` — there is no backend.
 
-### Frontend (`src/`)
-React 19 + TypeScript SPA built with Vite. Routing via `react-router-dom`:
+### Routing (`src/App.tsx`)
 
-- `/Home` — landing page
-- `/projects` — project gallery (project data lives in `src/pages/Projects.tsx` as `projectsList`)
-- `/projects/:projectId` — project detail
-- `/about` — about page
-- `/resume` — LaTeX resume generator (generates a `.tex` file client-side from `projectsList` using `pdftex.js`)
-
-**Component layout:**
-- `src/App.tsx` — router, `ThemeProvider` wrapper
-- `src/components/` — `Navbar`, `ThemeContext`, `ThemeSelector`, `Button`, CSS files
-- `src/pages/` — one file per route; pages import CSS from `src/components/css_files/`
-
-**Theming:** `ThemeContext` manages a CSS class on `<body>` (e.g. `theme-light`, `theme-dark`, `theme-starwars`). Theme classes are defined in `src/components/css_files/Themes.css`. Theme persists in `localStorage` within a session and is cleared on page unload.
-
-### Backend
-Two backend setups exist:
-
-1. **`api/index.js`** — Vercel serverless function (ES module). Handles `POST /api/*` contact form submissions via Nodemailer (Gmail). This is what runs in production. Requires `EMAIL_USER` and `EMAIL_PASS` env vars.
-
-2. **`contact-backend/`** — Express server (legacy/local dev alternative). Has its own `package.json` and dependencies; install separately with `npm install` inside that directory.
-
-**`vercel.json`** rewrites all `/api/*` traffic to the serverless function and everything else to the SPA index.
+- `/` — `pages/Home.tsx`, which stacks the sections in `src/sections/`
+  (`Hero`, `About`, `Experience`, `Work`, `Contact`). Nav links are hash
+  anchors; `pages/Home.tsx` handles scroll-to on load via `location.state`
+  or `location.hash`.
+- `/work/:id` — `pages/ProjectDetail.tsx`, looked up from `projects` in
+  `src/constants/index.ts`.
 
 ### Content source of truth
-Project data (titles, descriptions, tech stack, images) is defined as a `projectsList` array in `src/pages/Projects.tsx`. The `ResumeGenerator` imports this same list to build the LaTeX template, so changes to project data automatically propagate to the resume output.
+
+`src/constants/index.ts` holds `profile`, `socials`, `navLinks`, `stats`,
+`experience`, `skillGroups`, and `projects`. Edit content there. Project
+images are imported from `src/assets/`.
+
+### Design system
+
+- Tokens are CSS custom properties in `src/index.css` (`:root` and
+  `:root[data-theme="dark"]`), surfaced to Tailwind via `@theme inline`.
+  Use the semantic utilities: `bg-bg`, `bg-surface`, `text-ink`,
+  `text-muted`, `text-faint`, `border-border`, `text-accent`, etc.
+- Theme is a `data-theme` attribute on `<html>`, set pre-paint by an inline
+  script in `index.html` and toggled via `src/lib/theme.ts`. A
+  `@custom-variant dark` in `index.css` makes `dark:` utilities follow it.
+- Type: `--font-serif` (Newsreader) for headings, `--font-sans` (system SF
+  stack) for UI, `--font-mono` (JetBrains Mono) for meta / eyebrows.
+- Motion: animate only `transform` / `opacity`. Use `var(--ease-out)`.
+  Scroll reveals go through `components/Reveal.tsx` (IntersectionObserver,
+  `data-reveal` styles in `index.css`). Everything no-ops under
+  `prefers-reduced-motion` — keep it that way.
+
+### 3D
+
+`src/components/three/HeroScene.tsx` is the only 3D: a wireframe
+icosahedron with pointer parallax, React Three Fiber + drei. It is
+`React.lazy`-loaded, only mounted when `supportsWebGL()` passes, and
+freezes under reduced motion. Keep 3D scoped to an accent — not a
+centrepiece.
+
+### Contact
+
+`src/sections/Contact.tsx` uses `@emailjs/browser` with `VITE_EMAILJS_*`
+env vars (see `.env.example`). If unset, it renders a mailto fallback.

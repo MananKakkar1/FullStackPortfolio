@@ -1,39 +1,45 @@
-# 🌐 Full Stack Portfolio
+# Manan Kakkar — Portfolio
 
-## 📝 Project Overview
+Personal portfolio deployed at **manankakkar.com**.
 
-This project is a **modern, full-stack developer portfolio** built with **React**, **TypeScript**, and **Vite** on the frontend, and a **Node.js** backend for handling contact form submissions. 
+## Stack
 
-The project is deployed at: manankakkar.com
+- **React 19 + TypeScript + Vite**
+- **Tailwind CSS v4** (`@tailwindcss/vite`) — design tokens live in `src/index.css` under `@theme`
+- **React Three Fiber + drei + three** — one restrained wireframe accent in the hero (`src/components/three/HeroScene.tsx`), lazy-loaded and gated on WebGL support
+- **GSAP + @gsap/react** — hero entrance; scroll reveals use `IntersectionObserver` (`src/components/Reveal.tsx`)
+- **@emailjs/browser** — contact form (client-side, no backend)
 
-## 🚀 Features Implemented
+## Design language
 
-- **Interactive UI** 🎨  
-  Utilizes React components to create an engaging and dynamic user interface.
+Editorial minimalism with light/dark parity. One accent colour, editorial
+serif (Newsreader) for display type, system SF stack for UI, JetBrains Mono
+for meta. Motion is limited to `transform` / `opacity`, uses a single custom
+ease-out curve, and fully no-ops under `prefers-reduced-motion`.
 
-- **Type Safety** 🔐  
-  Implements TypeScript for type safety, reducing bugs and enhancing code maintainability.
+## Commands
 
-- **Fast Development Build** ⚡  
-  Employs Vite for rapid development and hot module replacement, streamlining the development process.
+```bash
+npm run dev        # Vite dev server
+npm run build      # tsc -b && vite build
+npm run lint       # ESLint
+npm run preview    # preview the production build
+```
 
-- **Contact Form with Backend Integration** 📬  
-  Features a contact form that sends messages through a Node.js backend, facilitating direct communication.
+## Contact form
 
-## 🔧 How It Works
+Copy `.env.example` to `.env` and fill in EmailJS credentials:
 
-1. **Frontend**:
-   - Built with React and TypeScript, providing a component-based architecture.
-   - Styled using CSS for a clean and modern look.
-   - Vite serves as the build tool, offering fast compilation and hot reloading.
+```
+VITE_EMAILJS_SERVICE_ID=
+VITE_EMAILJS_TEMPLATE_ID=
+VITE_EMAILJS_PUBLIC_KEY=
+```
 
-2. **Backend**:
-   - A Node.js server handles POST requests from the contact form.
-   - Processes and sends the form data to a specified email address or stores it as needed.
+The template should expose `from_name`, `reply_to`, and `message`. Without
+these, the contact section falls back to a mailto link.
 
-3. **Deployment**:
-   - Deployed on Vercel under the domain manankakkar.com.
+## Content
 
----
-
-Feel free to explore the repository to see the implementation details and customize it to fit your personal portfolio needs! 😊
+All copy, projects, experience, and skills live in `src/constants/index.ts`.
+Projects there also drive the `/work/:id` detail route.
