@@ -1,47 +1,47 @@
-import { useState } from "react";
-import Navbar from "./components/Navbar";
-import "./index.css";
-import Home from "./pages/Home";
-import Projects from "./pages/Projects";
-import ProjectDetail from "./pages/ProjectDetail";
-import About from "./pages/About";
-import ParticleBackground from "./components/ParticleBackground";
-import HyperspaceIntro from "./components/HyperspaceIntro";
-import { ParticlesProvider } from "@tsparticles/react";
-import type { Engine } from "@tsparticles/engine";
-import { loadSlim } from "@tsparticles/slim";
+import { useEffect } from "react";
 import {
-  BrowserRouter as Router,
-  Routes,
+  BrowserRouter,
   Route,
-  Navigate,
+  Routes,
+  useLocation,
 } from "react-router-dom";
+import { useLenis } from "lenis/react";
+import { IconContext } from "./lib/icons";
+import { ScrollTrigger } from "./lib/scroll";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import ProjectDetail from "./pages/ProjectDetail";
 
-const initParticles = async (engine: Engine) => {
-  await loadSlim(engine);
-};
+/** Keep pinned triggers and scroll position sane across client-side navigation. */
+function RouteEffects() {
+  const { pathname } = useLocation();
+  const lenis = useLenis();
 
-const App = () => {
-  const [introDone, setIntroDone] = useState(false);
+  useEffect(() => {
+    lenis?.scrollTo(0, { immediate: true });
+    const id = window.setTimeout(() => ScrollTrigger.refresh(), 60);
+    return () => window.clearTimeout(id);
+  }, [pathname, lenis]);
 
+  return null;
+}
+
+export default function App() {
   return (
-    <ParticlesProvider init={initParticles}>
-      {!introDone && <HyperspaceIntro onDone={() => setIntroDone(true)} />}
-      <ParticleBackground />
-      <Router>
+    <IconContext.Provider value={{ weight: "bold", size: 18, mirrored: false }}>
+      <BrowserRouter>
+        <RouteEffects />
         <Navbar />
-        <div className="app-shell">
+        <main>
           <Routes>
-            <Route path="/" element={<Navigate to="/Home" replace />} />
-            <Route path="/Home" element={<Home />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/projects/:projectId" element={<ProjectDetail />} />
-            <Route path="/about" element={<About />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/work/:id" element={<ProjectDetail />} />
+            <Route path="*" element={<ProjectDetail />} />
           </Routes>
-        </div>
-      </Router>
-    </ParticlesProvider>
+        </main>
+        <Footer />
+      </BrowserRouter>
+    </IconContext.Provider>
   );
-};
-
-export default App;
+}

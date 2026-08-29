@@ -1,74 +1,160 @@
+import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { projectsList } from "./Projects";
-import type { Project } from "./Projects";
-import "../components/css_files/ProjectDetail.css";
+import { projects, projectImage } from "../constants";
+import Reveal from "../components/Reveal";
+import ScrollProgress from "../components/ScrollProgress";
+import { ArrowLeft, ArrowRight } from "../lib/icons";
 
-const ProjectDetail = () => {
-  const { projectId } = useParams<{ projectId: string }>();
-  const project = projectsList.find((p: Project) => p.id === projectId);
-  const techList = project?.technologies
-    ? project.technologies.split("+").map((t) => t.trim()).filter(Boolean)
-    : [];
+export default function ProjectDetail() {
+  const { id } = useParams<{ id: string }>();
+  const index = projects.findIndex((p) => p.id === id);
+  const project = index >= 0 ? projects[index] : undefined;
+  const next = index >= 0 ? projects[(index + 1) % projects.length] : undefined;
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
 
   if (!project) {
     return (
-      <div className="detail-root">
-        <p className="detail-not-found">Project not found.</p>
+      <div className="shell flex min-h-[70vh] flex-col items-start justify-center gap-4 pt-[var(--nav-h)]">
+        <p className="type-meta">404</p>
+        <h1 className="type-display-l text-ink">That project doesn't exist.</h1>
+        <Link to="/#work" className="link-underline text-muted hover:text-ink">
+          Back to all work
+        </Link>
       </div>
     );
   }
 
   return (
-    <div className="detail-root">
-      <Link to="/projects" className="detail-back">← All Projects</Link>
+    <>
+      <ScrollProgress />
+      <article className="pt-[calc(var(--nav-h)+clamp(2rem,6vh,4rem))]">
+        <div className="shell">
+          <Link
+            to="/#work"
+            className="group inline-flex items-center gap-1.5 font-mono text-xs text-faint transition-colors hover:text-ink"
+          >
+            <ArrowLeft
+              size={13}
+              weight="bold"
+              className="transition-transform duration-200 group-hover:-translate-x-0.5"
+            />
+            Selected work
+          </Link>
 
-      <div className="detail-hero">
-        <img src={project.image} alt={project.title} />
-      </div>
+          <Reveal className="mt-8">
+            <p className="type-meta">
+              {project.category} · {project.year}
+            </p>
+            <h1 className="type-display-xl mt-4 max-w-[16ch] text-ink">
+              {project.title}
+            </h1>
+            <p className="type-lead mt-5 max-w-[52ch] text-muted">{project.summary}</p>
+          </Reveal>
 
-      <div className="detail-body">
-        <div className="detail-left">
-          <p className="detail-kicker">{project.category}</p>
-          <h1 className="detail-title">{project.title}</h1>
-          <p className="detail-desc">{project.description}</p>
-        </div>
+          <Reveal className="mt-12">
+            <figure className="overflow-hidden rounded-[var(--radius-card)] border border-border bg-surface-2">
+              <img
+                src={projectImage(project)}
+                alt={`${project.title} screenshot`}
+                className="w-full object-cover"
+              />
+            </figure>
+          </Reveal>
 
-        <div className="detail-right">
-          <div className="detail-tech-list">
-            <p className="detail-tech-label">Stack</p>
-            {techList.map((t) => (
-              <span key={t} className="detail-tech-item">{t}</span>
-            ))}
+          <div className="mt-14 grid gap-12 pb-8 md:grid-cols-[1.5fr_1fr] md:gap-16">
+            <Reveal className="type-lead space-y-5 text-muted">
+              <p>{project.description}</p>
+              <div className="flex flex-wrap gap-3 pt-2">
+                {project.liveUrl && (
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="pressable inline-flex min-h-11 items-center rounded-[var(--radius-input)] bg-ink px-4 text-sm font-medium text-bg hover:bg-ink/90"
+                  >
+                    Live site
+                  </a>
+                )}
+                {project.sourceUrl && (
+                  <a
+                    href={project.sourceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="pressable inline-flex min-h-11 items-center rounded-[var(--radius-input)] border border-border px-4 text-sm font-medium text-ink hover:border-border-strong"
+                  >
+                    Source
+                  </a>
+                )}
+              </div>
+            </Reveal>
+
+            <Reveal delay={80} className="space-y-8">
+              <div>
+                <h2 className="type-meta mb-3">Stack</h2>
+                <ul className="flex flex-wrap gap-x-3 gap-y-1.5">
+                  {project.stack.map((s) => (
+                    <li key={s} className="text-sm text-muted">
+                      {s}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h2 className="type-meta mb-3">Highlights</h2>
+                <ul className="space-y-2.5">
+                  {project.highlights.map((h) => (
+                    <li
+                      key={h}
+                      className="relative pl-5 text-sm text-muted before:absolute before:left-0 before:top-[0.62em] before:h-px before:w-3 before:bg-border-strong"
+                    >
+                      {h}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
           </div>
-
-          {project.sourceUrl && (
-            <a
-              href={project.sourceUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="detail-github-btn"
-            >
-              <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.084-.729.084-.729 1.205.084 1.84 1.236 1.84 1.236 1.07 1.834 2.809 1.304 3.495.997.108-.775.418-1.305.762-1.605-2.665-.305-5.466-1.334-5.466-5.93 0-1.31.47-2.38 1.236-3.22-.124-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.3 1.23.96-.267 1.98-.399 3-.404 1.02.005 2.04.137 3 .404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.873.118 3.176.77.84 1.235 1.91 1.235 3.22 0 4.61-2.803 5.624-5.475 5.921.43.372.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.218.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-              </svg>
-              View on GitHub
-            </a>
-          )}
         </div>
-      </div>
 
-      {project.funFacts && project.funFacts.length > 0 && (
-        <div className="detail-facts">
-          <p className="detail-facts-label">Key Highlights</p>
-          <ul className="detail-facts-list">
-            {project.funFacts.map((fact, i) => (
-              <li key={i}>{fact}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-    </div>
+        {next && (
+          <div className="border-t border-border">
+            <div className="shell py-12 md:py-16">
+              <p className="type-meta mb-6">Next project</p>
+              <Link
+                to={`/work/${next.id}`}
+                className="group grid gap-6 sm:grid-cols-[1.1fr_1fr] sm:items-center sm:gap-10"
+              >
+                <div className="relative aspect-[16/10] overflow-hidden rounded-[var(--radius-card)] border border-border bg-surface-2">
+                  <img
+                    src={projectImage(next)}
+                    alt=""
+                    loading="lazy"
+                    className="size-full object-cover transition-transform duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
+                  />
+                </div>
+                <div>
+                  <p className="type-meta">
+                    {next.category} · {next.year}
+                  </p>
+                  <h2 className="type-display-l mt-2 text-ink">{next.title}</h2>
+                  <p className="mt-3 max-w-[42ch] text-muted">{next.summary}</p>
+                  <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-ink">
+                    <span className="link-underline">View project</span>
+                    <ArrowRight
+                      size={15}
+                      weight="bold"
+                      className="transition-transform duration-200 group-hover:translate-x-1"
+                    />
+                  </span>
+                </div>
+              </Link>
+            </div>
+          </div>
+        )}
+      </article>
+    </>
   );
-};
-
-export default ProjectDetail;
+}
