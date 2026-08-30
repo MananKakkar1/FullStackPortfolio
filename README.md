@@ -1,45 +1,50 @@
-# Manan Kakkar — Portfolio
+# Portfolio
 
-Personal portfolio deployed at **manankakkar.com**.
+Source for my personal site, [manankakkar.com](https://manankakkar.com). A
+React single-page app built with Vite and TypeScript, plus a small serverless
+function that delivers the contact form.
 
 ## Stack
 
-- **React 19 + TypeScript + Vite**
-- **Tailwind CSS v4** (`@tailwindcss/vite`) — design tokens live in `src/index.css` under `@theme`
-- **React Three Fiber + drei + three** — one restrained wireframe accent in the hero (`src/components/three/HeroScene.tsx`), lazy-loaded and gated on WebGL support
-- **GSAP + @gsap/react** — hero entrance; scroll reveals use `IntersectionObserver` (`src/components/Reveal.tsx`)
-- **@emailjs/browser** — contact form (client-side, no backend)
+- React 19, React Router, `react-transition-group` for page transitions
+- Vite, TypeScript, Bootstrap 5
+- Vercel Analytics
+- Contact form: a Vercel serverless function (`api/index.js`) that sends mail
+  with Nodemailer; `contact-backend/` is the same handler as a standalone
+  Express server for local use
 
-## Design language
+## How the contact form works
 
-Editorial minimalism with light/dark parity. One accent colour, editorial
-serif (Newsreader) for display type, system SF stack for UI, JetBrains Mono
-for meta. Motion is limited to `transform` / `opacity`, uses a single custom
-ease-out curve, and fully no-ops under `prefers-reduced-motion`.
+```mermaid
+flowchart LR
+    F["Contact form (React)"] -->|"POST /api"| S["Serverless function"]
+    S -->|"Nodemailer / SMTP"| M["Inbox"]
+```
 
-## Commands
+## Develop
 
 ```bash
+npm install
 npm run dev        # Vite dev server
 npm run build      # tsc -b && vite build
-npm run lint       # ESLint
-npm run preview    # preview the production build
+npm run preview    # serve the production build
 ```
 
-## Contact form
+The frontend expects the contact endpoint at `/api`. To run it locally instead
+of on Vercel, start the standalone server:
 
-Copy `.env.example` to `.env` and fill in EmailJS credentials:
+```bash
+cd contact-backend
+npm install
+# set SMTP credentials in the environment, then:
+node index.js
+```
+
+## Layout
 
 ```
-VITE_EMAILJS_SERVICE_ID=
-VITE_EMAILJS_TEMPLATE_ID=
-VITE_EMAILJS_PUBLIC_KEY=
+src/            React app (pages, components, assets)
+api/index.js    Vercel serverless contact handler
+contact-backend/  same handler as a local Express server
+public/         static assets
 ```
-
-The template should expose `from_name`, `reply_to`, and `message`. Without
-these, the contact section falls back to a mailto link.
-
-## Content
-
-All copy, projects, experience, and skills live in `src/constants/index.ts`.
-Projects there also drive the `/work/:id` detail route.
