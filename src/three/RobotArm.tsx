@@ -14,7 +14,7 @@ import { useTheme } from "@/lib/theme";
  * cosines) + a wrist pitch that keeps the gripper level.
  *
  * Targets come from the DOM: `presentRef` marks where a held card is shown,
- * and each `[data-slot]` inside `pileRef` marks a pile slot's anchor (the
+ * and each `[data-pile-slot]` inside `pileRef` marks a pile slot's anchor (the
  * left-centre of that card). Screen anchors are ray-cast into the scene, so
  * the layout is CSS-driven and the arm adapts to any viewport.
  *
@@ -169,6 +169,8 @@ function Arm({ motion, cardRef, hudRef, presentRef, pileRef, onReady }: ArmProps
       basePt: new THREE.Vector3(),
       present: new THREE.Vector3(0.9, 0.9, 0.3),
       slots: [] as THREE.Vector3[],
+      // Slot anchors in stage pixels, so the held card can land exactly on its slot.
+      slotPx: [] as { x: number; y: number }[],
       slotRot: [] as number[],
       slotEls: [] as HTMLElement[],
       lastKey: "",
@@ -198,11 +200,14 @@ function Arm({ motion, cardRef, hudRef, presentRef, pileRef, onReady }: ArmProps
   const readAnchors = () => {
     const p = presentRef.current?.getBoundingClientRect();
     if (p) castLocal(p.left, p.top, PRESENT_DEPTH, s.present);
-    s.slotEls = Array.from(pileRef.current?.querySelectorAll<HTMLElement>("[data-slot]") ?? []);
+    // NB: not [data-slot] — every shadcn component sets data-slot too.
+    s.slotEls = Array.from(pileRef.current?.querySelectorAll<HTMLElement>("[data-pile-slot]") ?? []);
+    const stage = gl.domElement.getBoundingClientRect();
     s.slotEls.forEach((el, i) => {
       const r = el.getBoundingClientRect();
       s.slots[i] ??= new THREE.Vector3();
       castLocal(r.left, r.top, PILE_DEPTH, s.slots[i]);
+      s.slotPx[i] = { x: r.left - stage.left, y: r.top - stage.top };
       s.slotRot[i] = Number(el.dataset.rot ?? 0);
     });
   };
@@ -291,10 +296,19 @@ function Arm({ motion, cardRef, hudRef, presentRef, pileRef, onReady }: ArmProps
     // --- Pin the HTML card to the fingertips -------------------------------
     R.tip.getWorldPosition(s.tipW);
     s.tipNdc.copy(s.tipW).project(camera);
-    const x = ((s.tipNdc.x + 1) / 2) * size.width;
-    const y = ((1 - s.tipNdc.y) / 2) * size.height;
+    const tipX = ((s.tipNdc.x + 1) / 2) * size.width;
+    const tipY = ((1 - s.tipNdc.y) / 2) * size.height;
     // Scale/rotation blend from presented to exactly matching the target slot.
     const pileAmt = m.boot < 1 ? 1 : m.drop;
+    // At the pile, snap to the slot's measured anchor (not the IK estimate) so
+    // the pile card and the gripped card coincide to the pixel at handoff.
+    const pa = s.slotPx[from];
+    const pb = s.slotPx[to];
+    const anchorX = pa && pb ? THREE.MathUtils.lerp(pa.x, pb.x, m.travel) : tipX;
+    const anchorY = pa && pb ? THREE.MathUtils.lerp(pa.y, pb.y, m.travel) : tipY;
+    const snap = pileAmt * pileAmt * pileAmt; // only matters right at the pile
+    const x = THREE.MathUtils.lerp(tipX, anchorX, snap);
+    const y = THREE.MathUtils.lerp(tipY, anchorY, snap);
     const slotRot = THREE.MathUtils.lerp(s.slotRot[from] ?? 0, s.slotRot[to] ?? 0, m.travel);
     const sc = THREE.MathUtils.lerp(PRESENT_SCALE, SLOT_SCALE, pileAmt);
     const rot = slotRot * pileAmt;
@@ -310,6 +324,10 @@ function Arm({ motion, cardRef, hudRef, presentRef, pileRef, onReady }: ArmProps
       if (jaw) jaw.style.transform = `translateX(${((-m.grip * 22) / sc).toFixed(2)}px) scale(${(1 / sc).toFixed(4)})`;
       if (seat) seat.style.transform = `scale(${(1 / sc).toFixed(4)})`;
       card.style.pointerEvents = m.drop > 0.01 || m.hold < 1 ? "none" : "auto";
+      // Down at the pile the card sits in its slot's layer (neighbours overlap it);
+      // it only rises above the pile once it's lifted clear.
+      const layer = Math.round(THREE.MathUtils.lerp(from, to, m.travel));
+      card.style.zIndex = pileAmt > 0.82 ? String(layer) : "20";
     }
     // Pile: the held card's slot is empty while it's in the gripper.
     const held = Math.round(m.heldSlot);

@@ -326,7 +326,7 @@ export default function RobotShowcase() {
           {projects.map((p, i) => (
             <div
               key={p.id}
-              data-slot
+              data-pile-slot
               data-rot={SLOT_ROT[i % SLOT_ROT.length]}
               className="group absolute size-0"
               style={{
@@ -363,7 +363,7 @@ export default function RobotShowcase() {
         {/* The card the arm is holding (positioned every frame by RobotArm) */}
         <div
           ref={cardRef}
-          className={cn(cardWidth, "absolute top-0 left-0 z-20 origin-left opacity-0 will-change-transform")}
+          className={cn(cardWidth, "absolute top-0 left-0 origin-left opacity-0 will-change-transform")}
         >
           <span aria-hidden data-seat className="robot-grip-seat" />
           <span aria-hidden data-jaw className="robot-grip-jaw">
