@@ -1,29 +1,26 @@
 // Single source of truth for site content.
 // Projects also feed the /work/:id detail route.
 
-import chessImg from "../assets/chess-pic.png";
-import reelImg from "../assets/ReelDeal.png";
-import salesImg from "../assets/SalesBoard.png";
+import cadpilotImg from "../assets/cadpilot.webp";
+import copycadderImg from "../assets/copycadder.webp";
+import sportsdeckImg from "../assets/sportsdeck.webp";
 import netlyImg from "../assets/Netly.png";
 import etaImg from "../assets/ETA.png";
 import continuLearnImg from "../assets/cl.png";
 import shellImg from "../assets/shell.png";
-import smartPaintImg from "../assets/ai-paint.png";
-import algoImg from "../assets/AlgoVisualize.png";
-import fileTreeImg from "../assets/file-system-tree.png";
+import salesImg from "../assets/SalesBoard.png";
 import sokobanImg from "../assets/sokoban.png";
-import othelloImg from "../assets/Othello.png";
 
 export const profile = {
   name: "Manan Kakkar",
-  location: "Oakville, Ontario",
+  location: "Toronto, Ontario",
   email: "manan.kakkar.2005@outlook.com",
-  kicker: "Software Engineer Intern · AMD · UofT CS",
+  kicker: "SWE Intern · Research Assistant · University of Toronto CS Specialist",
   heroLine:
-    "CS student at the University of Toronto and Software Engineer Intern on AMD's Software Infrastructure team, building practical, impactful software across the full stack.",
+    "CS student at the University of Toronto, Software Engineer Intern at AMD, and Robotics Research Assistant at the Continuum Robotics Lab, building practical, impactful software from the browser down to the robot.",
   aboutBio: [
-    "Computer Science student at the University of Toronto. I build software that makes a real difference: clean backends, fast frontends, and AI-powered tools that ship.",
-    "Competed at SpurHacks and EmberHacks (1st place), interned at Munafah.AI, and currently a Software Engineer Intern on AMD's Software Infrastructure team.",
+    "Computer Science Specialist at the University of Toronto. I build software that makes a real difference: clean backends, fast frontends, AI-powered tools that ship, and increasingly, software that moves robots.",
+    "Currently a Software Engineer Intern at AMD and a Robotics Research Assistant at the Continuum Robotics Lab, and building Vullpine, a browser-based platform for designing, simulating, and testing robots. Before that I interned with Munafah.AI and won Best Use of Auth0 at EmberHacks.",
   ],
 };
 
@@ -45,51 +42,75 @@ export const navLinks = [
 ];
 
 export const facts = [
-  { label: "Current Role", value: "Software Engineer Intern · AMD Software Infrastructure" },
-  { label: "Work Style", value: "Iterative and practical" },
-  { label: "Strengths", value: "Backend + product mindset" },
-  { label: "Current Chapter", value: "UofT CS + AMD internship" },
+  {
+    label: "Current Roles",
+    value: "Software Engineer Intern at AMD · Robotics Research Assistant at the Continuum Robotics Lab",
+  },
+  { label: "Building", value: "Vullpine, a browser-based robotics development platform" },
+  {
+    label: "Research",
+    value: "Continuum robotics: tendon-driven robots, kinematics, motion planning, and control",
+  },
+  { label: "Education", value: "HBSc Computer Science Specialist, University of Toronto · 2028" },
 ];
 
-export const experience = [
+export type ExperienceItem = {
+  company: string;
+  role: string;
+  place: string;
+  period: string;
+  summary?: string;
+  points: string[];
+};
+
+export const experience: ExperienceItem[] = [
+  {
+    company: "Continuum Robotics Lab, University of Toronto",
+    role: "Robotics Research Assistant",
+    place: "Mississauga, Ontario",
+    period: "2026 - Present",
+    points: [],
+  },
   {
     company: "AMD",
-    role: "Software Engineer Intern, Software Infrastructure",
+    role: "Software Engineer Intern",
     place: "Markham, Ontario",
-    period: "May 2026 - Aug 2027",
-    summary: "Full-stack work on the Software Infrastructure team.",
+    period: "May 2026 - Present",
+    summary: "Full-stack and AI tooling on the Software Infrastructure team.",
     points: [
-      "Build full-stack features for internal engineering tools serving 2,600+ daily users with C#, .NET, Angular, and TypeScript.",
-      "Model relational data in SQL Server and build Power BI dashboards that surface engineering metrics to stakeholders.",
-      "Ship AI and LLM integrations and MCP servers on Azure, backed by unit and integration tests to cut regressions.",
+      "Developed full-stack features for a test management platform serving 2,600+ daily users using C# / .NET, Angular, and TypeScript.",
+      "Developed an AI agent harness from scratch and integrated MCP servers to enable LLM-powered workflows across internal engineering tools.",
+      "Led platform demos with 10+ engineering teams, helping developers understand workflows and adopt the platform for more effective test management.",
     ],
   },
   {
-    company: "Munafah.AI",
+    company: "Vullpine",
+    role: "Founder & Lead Architect",
+    place: "Remote",
+    period: "May 2026 - Present",
+    summary: "A full-stack robotics platform for designing, simulating, testing, and developing robots.",
+    points: [
+      "Building a full-stack robotics platform that lets engineers design, simulate, test, and develop robot projects through browser-based ROS 2 tools, interactive challenges, and organization workspaces.",
+      "Building and deploying production systems for in-browser robot simulation, asynchronous code judging, authentication, RBAC, community features, and enterprise workspaces.",
+      "Developing an agentic robotics development lifecycle spanning robot description, simulation, software testing, and deployment to physical hardware.",
+    ],
+  },
+  {
+    company: "The Linux Foundation",
+    role: "Open Source Contributor",
+    place: "Remote",
+    period: "2026 - Present",
+    points: [],
+  },
+  {
+    company: "University of Toronto × Munafah.AI",
     role: "Software Engineer Intern",
     place: "Remote",
     period: "May 2025 - Aug 2025",
-    summary:
-      "Backend and AI-moderation work for a real-time B2B messaging platform.",
+    summary: "Industry partnership: backend and AI moderation for a real-time B2B messaging platform.",
     points: [
-      "Built and deployed backend systems for a real-time B2B messaging platform using Node.js, Flask, and Firestore.",
-      "Developed AI-assisted moderation workflows for real-time communication, working with production AI pipelines.",
-      "Wrote unit and integration tests to support stable deployments and production reliability.",
-      "Set up CI/CD workflows and deployment processes that improved release quality and velocity.",
-    ],
-  },
-  {
-    company: "University of Toronto Mississauga",
-    role: "CSC476: Introduction to Continuum Robotics",
-    place: "Mississauga, Ontario",
-    period: "2025",
-    summary:
-      "Read and presented research on continuum robot kinematics, planning, and control.",
-    points: [
-      "Presented on the multi-solution inverse kinematics solver for 3-section constant-curvature robots, from an archaeology-focused angle.",
-      "Co-presented on improved state parametrization for soft robots with piecewise constant curvature and its use in model-based control.",
-      "Co-presented on model-based control of soft robots.",
-      "Studied how tendon-driven continuum robots are modelled and how piecewise constant-curvature formulations are used in analysis and control.",
+      "Built and deployed backend services (Node.js, Flask) with Firestore to support real-time messaging between businesses on a B2B platform.",
+      "Built an AI moderation pipeline that reduced manual message review time by 65%, and implemented automated testing with 100% test coverage to improve release reliability.",
     ],
   },
 ];
@@ -97,34 +118,41 @@ export const experience = [
 export const skillGroups = [
   {
     title: "Languages",
-    items: ["Python", "C", "C++", "Java", "C#", "Go", "TypeScript", "JavaScript", "Bash"],
+    items: ["C", "C++", "C#", "Python", "Java", "Bash", "JavaScript / TypeScript", "Go", "SQL"],
   },
   {
-    title: "Robotics & Simulation",
+    title: "Robotics",
     items: [
+      "ROS 2",
       "Franka Emika Panda",
-      "Inverse kinematics",
-      "Constant-curvature modeling",
-      "Trajectory generation",
-      "Real-time control",
-      "Unity / Unity WebGL",
+      "Ruckig",
+      "Constant-curvature kinematics",
+      "SE(3) trajectories",
+      "Robot simulation",
     ],
   },
   {
-    title: "AI & Vision",
-    items: ["OpenCV", "YOLOv5", "Google Vision", "Gemini API", "ElevenLabs"],
+    title: "Frameworks & APIs",
+    items: [".NET", "Angular", "React", "Next.js", "Express.js", "Flask", "Unity WebGL", "OpenCV"],
   },
   {
-    title: "Web & Backend",
-    items: ["Next.js", "React", "Flask", "Express.js", "REST APIs", "Firebase", "PostgreSQL", "MongoDB", "JWT"],
+    title: "Data & Systems",
+    items: [
+      "PostgreSQL",
+      "Prisma",
+      "SQL Server",
+      "Redis",
+      "Docker",
+      "Azure",
+      "Linux",
+      "Git",
+      "GDB",
+      "Valgrind",
+    ],
   },
   {
-    title: "Systems & Infra",
-    items: ["Linux", "Git", "GitHub Actions", "Unix sockets", "Process management", "CI/CD"],
-  },
-  {
-    title: "Testing & Debugging",
-    items: ["GDB", "Valgrind", "PyTest", "JUnit5", "Jest"],
+    title: "Testing & AI",
+    items: ["Playwright", "Jest", "PyTest", "LLM Evaluation", "Multi-Agent Systems", "MCP"],
   },
 ];
 
@@ -137,29 +165,31 @@ export type Project = {
   description: string;
   stack: string[];
   highlights: string[];
-  image?: string;
-  placeholderSeed?: string;
+  image: string;
   sourceUrl?: string;
   liveUrl?: string;
-  featured?: boolean;
 };
 
 export const projects: Project[] = [
   {
-    id: "copycadder",
-    title: "CopyCadder",
-    year: "2025",
-    category: "Robotics",
-    summary: "Robotic handwriting on a Franka Emika Panda arm.",
+    id: "cadpilot",
+    title: "CADPilot",
+    year: "2026",
+    category: "AI · CAD",
+    summary: "Agentic CAD that turns a design brief into a validated, editable OpenCascade BREP.",
     description:
-      "A robotics pipeline that turns input characters into executable motion commands for a Franka Emika Panda arm. Character shapes become smooth geometric writing trajectories that the arm physically executes.",
-    stack: ["Python", "Franka Emika Panda", "Trajectory generation", "Inverse kinematics"],
+      "CADPilot is an agentic CAD workbench that turns a design brief into a validated, editable OpenCascade BREP. Each project keeps the full engineering record around every result: the original prompt, structured intent, parametric plan, generated Replicad source, validation report, preview mesh, STEP and STL exports, an audit log, and the conversation that explains each revision. It is a Next.js 15 and React 19 app on PostgreSQL with Prisma, with CAD generation running in a separate Node.js worker and build events streamed live to the workbench over Server-Sent Events.",
+    stack: ["Next.js 15", "React 19", "TypeScript", "PostgreSQL", "Prisma", "Replicad", "OpenCascade", "Gemini", "Chili3D"],
     highlights: [
-      "Converts arbitrary input characters into robot motion commands.",
-      "Generates smooth geometric writing trajectories for physical execution.",
-      "End to end, from character shape to arm movement.",
+      "Agent pipeline: intent extraction in millimetres, parametric planning, and Replicad code generation against a verified API reference.",
+      "Generated code runs in a hardened Node VM with imports, networking, process access, timers, and dynamic evaluation blocked.",
+      "Deterministic validation of volume, part count, triangle budget, and disconnected parts, with a bounded two-attempt repair loop.",
+      "Numbered revisions with parent lineage; only validated revisions can be published.",
+      "One workbench for the conversation, run timeline, plan approval, artifacts, and an embedded Chili3D editor, updated live over SSE.",
+      "Ownership checks on every project mutation, build, event stream, and artifact download.",
     ],
-    placeholderSeed: "copycadder-panda-arm",
+    sourceUrl: "https://github.com/MananKakkar1/CadPilot",
+    image: cadpilotImg,
   },
   {
     id: "continulearn",
@@ -169,37 +199,51 @@ export const projects: Project[] = [
     summary: "Browser-based 3D continuum robot simulator.",
     description:
       "A browser 3D continuum robot simulator that embeds three Unity WebGL builds with Blender assets inside a Next.js app. It implements constant-curvature kinematics and a three-track roadmap unlocked by automated parameter checks, with KaTeX theory lessons and AI coaching over Gemini and ElevenLabs on a Turso and SQLite layer with Auth0 sessions.",
-    stack: ["Next.js", "Unity WebGL", "C#", "TypeScript", "Gemini", "ElevenLabs", "Turso", "SQLite", "Auth0"],
+    stack: ["Next.js", "Unity WebGL", "C#", "TypeScript", "Gemini", "ElevenLabs", "Turso", "SQLite"],
     highlights: [
       "Embeds three Unity WebGL builds with Blender assets in a Next.js app.",
-      "Constant-curvature kinematics with a three-track roadmap gated by automated parameter checks.",
+      "Constant-curvature kinematics with a three-track roadmap unlocked by automated parameter checks.",
       "KaTeX theory lessons alongside the simulator.",
-      "AI coaching over Gemini and ElevenLabs on a Turso and SQLite layer with Auth0 sessions.",
+      "AI coaching over Gemini and ElevenLabs on a Turso / SQLite layer with Auth0 sessions.",
     ],
     liveUrl: "https://continu-learn.vercel.app",
     sourceUrl: "https://github.com/MananKakkar1/ContinuLearn",
     image: continuLearnImg,
-    featured: true,
   },
   {
     id: "sportsdeck",
     title: "SportsDeck",
     year: "2025",
     category: "Full-stack",
-    summary: "Sports community platform with forums, polls, and a sentiment pipeline.",
+    summary: "Top project out of 200+ students: a sports community platform.",
     description:
-      "A sports community platform built with Next.js, PostgreSQL with Prisma, and Redis. It has forums, polls, follow graphs, admin moderation, and Cloudinary uploads, plus a Hugging Face sentiment pipeline running on cron jobs. The API is documented in OpenAPI and Postman, and it ships with Docker Compose and Jest. This project was given special distinction and rated the best in the class.",
+      "A sports community platform built with Next.js, PostgreSQL with Prisma, and Redis. It has forums, polls, follow graphs, admin moderation, and Cloudinary uploads, plus a Hugging Face sentiment pipeline running on cron jobs. The API is documented in OpenAPI and Postman, and it ships with Docker Compose and Jest. Recognized by the course professor as the top project out of 200+ students.",
     stack: ["Next.js", "React", "PostgreSQL", "Prisma", "Redis", "Docker", "Jest"],
     highlights: [
-      "Given special distinction and rated the best in the class.",
+      "Recognized by the course professor as the top project out of 200+ students.",
       "Forums, polls, follow graphs, and admin moderation with Cloudinary uploads.",
       "Hugging Face sentiment pipeline running on cron jobs.",
-      "API documented in OpenAPI and Postman.",
-      "Ships with Docker Compose and Jest.",
+      "API documented in OpenAPI and Postman; ships with Docker Compose and Jest.",
     ],
-    sourceUrl: "https://github.com/MananKakkar1/SportsDeck",
-    placeholderSeed: "sportsdeck-community",
-    featured: true,
+    sourceUrl: "https://github.com/MananKakkar1/Sportsdeck",
+    image: sportsdeckImg,
+  },
+  {
+    id: "copycadder",
+    title: "CopyCadder",
+    year: "2025",
+    category: "Robotics",
+    summary: "Text-to-motion handwriting on a Franka Emika Panda arm.",
+    description:
+      "A text-to-motion pipeline that extracts letter outlines from fonts, converts them into 2D drawing strokes, and generates trajectories for a Franka Emika Panda robot. The 2D strokes are transformed into full SE(3) end-effector trajectories, including pen lifts between strokes, so the arm can draw multi-letter text continuously.",
+    stack: ["Python", "Franka Emika Panda", "Ruckig", "SE(3) trajectories"],
+    highlights: [
+      "Extracts letter outlines from fonts and converts them into 2D drawing strokes.",
+      "Transforms strokes into full SE(3) end-effector trajectories.",
+      "Pen lifts between strokes for continuous multi-letter drawing.",
+      "Time-optimal trajectory generation with Ruckig.",
+    ],
+    image: copycadderImg,
   },
   {
     id: "custom-linux-shell",
@@ -216,26 +260,24 @@ export const projects: Project[] = [
       "AI-powered CLI over GPT 5.",
       "Built-in TCP chat server for real-time client messaging.",
     ],
-    sourceUrl: "https://github.com/MananKakkar1/Custom-Linux-Shell",
     image: shellImg,
-    featured: true,
   },
   {
-    id: "aira",
-    title: "AIRA",
+    id: "eta",
+    title: "ETA",
     year: "2025",
     category: "AI",
-    summary: "Human-in-the-loop incident response assistant.",
+    summary: "Best Use of Auth0 and Top 4 at EmberHacks: an AI teaching assistant.",
     description:
-      "An incident response assistant that speeds up triage and investigation of cybersecurity alerts. It uses machine learning and real-time analysis to support analyst decision-making and anomaly detection while keeping a human in the loop.",
-    stack: ["Python", "Machine learning", "Real-time analysis"],
+      "An AI teaching assistant that won Best Use of Auth0 and finished Top 4 at EmberHacks 2025. It pairs Gemini 2.5 Flash and ElevenLabs voice with a Three.js avatar, and keeps persistent user context for multi-turn personalization.",
+    stack: ["React", "Three.js", "Flask", "Gemini 2.5 Flash", "ElevenLabs", "Auth0"],
     highlights: [
-      "Faster triage and investigation of security alerts.",
-      "ML and real-time analysis assist analyst decisions.",
-      "Human-in-the-loop by design.",
+      "Won Best Use of Auth0, Top 4 overall at EmberHacks 2025.",
+      "Voice pipeline with Gemini 2.5 Flash and ElevenLabs.",
+      "Three.js avatar for AI-driven visual responses.",
     ],
-    sourceUrl: "https://github.com/MananKakkar1/Auto-Incident-Response-Assistant",
-    placeholderSeed: "aira-security-ops",
+    sourceUrl: "https://github.com/MananKakkar1/ETA",
+    image: etaImg,
   },
   {
     id: "netly",
@@ -244,33 +286,15 @@ export const projects: Project[] = [
     category: "AI",
     summary: "AI basketball review app that scores training sessions.",
     description:
-      "An AI basketball review app built with React, Flask, and OpenCV. It scores training sessions on visibility, focus, activity, and stability. Built at Spurhacks.",
+      "An AI basketball review application built with React, Flask, and OpenCV at SpurHacks 2025. It analyzes training sessions across visibility, focus, activity, and stability metrics.",
     stack: ["React", "Flask", "OpenCV", "Python"],
     highlights: [
       "Scores sessions on visibility, focus, activity, and stability.",
       "Computer vision analysis with OpenCV.",
-      "React and Flask app, built at Spurhacks.",
+      "React and Flask app, built at SpurHacks 2025.",
     ],
     sourceUrl: "https://github.com/MananKakkar1/Netly",
     image: netlyImg,
-    featured: true,
-  },
-  {
-    id: "eta",
-    title: "ETA",
-    year: "2025",
-    category: "AI",
-    summary: "Best Use of Auth0 winner. An interactive AI learning assistant.",
-    description:
-      "An interactive AI learning assistant that won Best Use of Auth0 and finished Top 4 at EmberHacks 2025. DynamoDB holds persistent user context for multi-turn personalization, with a voice pipeline built on Gemini and ElevenLabs plus AI-driven visual responses.",
-    stack: ["React", "Flask", "DynamoDB", "Gemini API", "ElevenLabs", "Auth0"],
-    highlights: [
-      "Won Best Use of Auth0, Top 4 overall at EmberHacks 2025.",
-      "DynamoDB-backed persistent context for multi-turn personalization.",
-      "Voice pipeline with Gemini and ElevenLabs.",
-    ],
-    sourceUrl: "https://github.com/MananKakkar1/ETA",
-    image: etaImg,
   },
   {
     id: "salesboard",
@@ -280,66 +304,14 @@ export const projects: Project[] = [
     summary: "Real-time sales and inventory platform with Go APIs.",
     description:
       "A real-time sales and inventory platform with Go APIs, React, and SQLite. Server-Sent Events drive live dashboard updates with filtering and pagination; JWT auth protects full CRUD workflows across customers, products, and orders.",
-    stack: ["React", "Redux Toolkit", "Go", "SQLite", "Emotion"],
+    stack: ["Go", "React", "Redux Toolkit", "SQLite"],
     highlights: [
       "Server-Sent Events for live dashboard updates.",
       "JWT auth with middleware-protected write routes.",
-      "Searchable lists, pagination, full CRUD, real-time validation.",
+      "Searchable lists, pagination, full CRUD, and real-time validation.",
     ],
     sourceUrl: "https://github.com/MananKakkar1/SalesBoard",
     image: salesImg,
-  },
-  {
-    id: "reeldeal",
-    title: "ReelDeal",
-    year: "2024",
-    category: "Full-stack",
-    summary: "Full-stack movie discovery app with JWT auth and TMDB.",
-    description:
-      "A movie discovery app with JWT authentication, TMDB integration, and user recommendations, on a React and Vite frontend backed by Node, Express, and MongoDB.",
-    stack: ["React", "Vite", "Node.js", "Express.js", "MongoDB", "JWT", "TMDB API"],
-    highlights: [
-      "JWT register and login flow.",
-      "Search and filter movies by genre, rating, and popularity.",
-      "Personal favorites list.",
-    ],
-    sourceUrl: "https://github.com/MananKakkar1/ReelDeal",
-    image: reelImg,
-  },
-  {
-    id: "chess-game",
-    title: "Chess Game",
-    year: "2023",
-    category: "Full-stack",
-    summary: "Browser chess with 4 AI modes, Stockfish, and GPT.",
-    description:
-      "A browser-based chess game with four AI difficulty modes, Stockfish and GPT integration, and async communication that cut AI response time by roughly 30 percent.",
-    stack: ["JavaScript", "HTML", "CSS", "Python", "Flask"],
-    highlights: [
-      "Four AI difficulty modes.",
-      "Stockfish and GPT-based engine.",
-      "Async communication reduces AI response time by about 30 percent.",
-      "15+ JavaScript unit tests.",
-    ],
-    sourceUrl: "https://github.com/MananKakkar1/Chess_Game",
-    image: chessImg,
-  },
-  {
-    id: "smartpaint",
-    title: "SmartPaint",
-    year: "2023",
-    category: "Desktop",
-    summary: "JavaFX paint app with prompt-to-drawing AI.",
-    description:
-      "A JavaFX paint application with shape tools, color controls, and structured JSON workflows. Llama 3 and OpenAI models drive prompt-to-drawing generation, and an FSM-based parser handles high-volume command input with JUnit5 coverage.",
-    stack: ["Java", "JavaFX", "Llama 3", "OpenAI"],
-    highlights: [
-      "Prompt-to-drawing generation with Llama 3 and OpenAI.",
-      "FSM-based command parser with strong JUnit5 coverage.",
-      "Brush selection, color palettes, and image export.",
-    ],
-    sourceUrl: "https://github.com/MananKakkar1/AI_Paint_Application",
-    image: smartPaintImg,
   },
   {
     id: "sokoban",
@@ -358,63 +330,4 @@ export const projects: Project[] = [
     sourceUrl: "https://github.com/MananKakkar1/Sokoban",
     image: sokobanImg,
   },
-  {
-    id: "algorithm-visualizer",
-    title: "Algorithm Visualizer",
-    year: "2023",
-    category: "Full-stack",
-    summary: "Step-by-step sorting, searching, and graph visualizer.",
-    description:
-      "An interactive visualizer for sorting, searching, and graph algorithms, with step-by-step controls and an education-focused UI.",
-    stack: ["JavaScript", "HTML", "CSS"],
-    highlights: [
-      "Sorting, searching, and graph algorithms.",
-      "Step-by-step execution and adjustable data.",
-    ],
-    sourceUrl: "https://github.com/MananKakkar1/Algorithm-Visualizer",
-    image: algoImg,
-  },
-  {
-    id: "file-system-tree-visualizer",
-    title: "File System Tree Visualizer",
-    year: "2023",
-    category: "Systems",
-    summary: "Hierarchical file system visualizer in Pygame.",
-    description:
-      "A Python and Pygame tool that renders hierarchical file system structures in real time, parsing CSV data and supporting interactive expand and collapse exploration.",
-    stack: ["Python", "Pygame"],
-    highlights: [
-      "Real-time parsing and rendering.",
-      "Interactive expand and collapse.",
-      "Visualizes CSV data as a file tree.",
-    ],
-    sourceUrl: "https://github.com/MananKakkar1/File-System-Tree-Visualizer",
-    image: fileTreeImg,
-  },
-  {
-    id: "othello",
-    title: "Othello",
-    year: "2023",
-    category: "Systems",
-    summary: "Terminal Othello in Java with an AI opponent.",
-    description:
-      "A terminal-based Othello game in Java with player-vs-player and AI opponent modes, move validation, and a scoring system.",
-    stack: ["Java"],
-    highlights: [
-      "AI opponent with basic strategy.",
-      "Two-player mode.",
-      "Move validation and scoring.",
-    ],
-    sourceUrl: "https://github.com/MananKakkar1/Othello",
-    image: othelloImg,
-  },
 ];
-
-export const featuredProjects = projects.filter((p) => p.featured);
-export const railProjects = projects.filter((p) => !p.featured);
-
-export function projectImage(p: Project): string {
-  if (p.image) return p.image;
-  const seed = p.placeholderSeed ?? p.id;
-  return `https://picsum.photos/seed/${seed}/1200/800?grayscale`;
-}

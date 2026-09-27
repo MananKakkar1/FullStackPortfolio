@@ -34,29 +34,56 @@ Single-page portfolio (React 19 + TypeScript + Vite) deployed at
 `experience`, `skillGroups`, and `projects`. Edit content there. Project
 images are imported from `src/assets/`.
 
+### Layout
+
+- `src/components/ui/` — **shadcn/ui only**. No custom components live in
+  `src/components`; compose shadcn primitives directly in sections/pages.
+- `src/sections/` (+ `sections/work/RobotShowcase.tsx`), `src/pages/`,
+  `src/layout/` (Navbar, Footer), `src/three/` (R3F scenes), `src/lib/`
+  (hooks, theme, smooth-scroll provider, reveal observer, icons).
+- Scroll reveals: add `data-reveal` (and `style={revealDelay(ms)}`) to any
+  element; each page calls `useRevealObserver()` from `src/lib/reveal.ts`.
+- Project thumbnails in `src/assets/*.webp` are real screenshots of each
+  project running locally; every project requires an `image`.
+
 ### Design system
 
+- UI primitives are **shadcn/ui** (new-york style, `components.json`) in
+  `src/components/ui/` — Button, Card, Badge, Input, Textarea, Label,
+  Separator, Sheet, Sonner, AspectRatio. Add more with
+  `npx shadcn@latest add <name>`, then fix the generated `cn` import to
+  `@/lib/utils` and swap any `lucide-react` icons for `@/lib/icons`
+  (Phosphor is the only icon family). Import via the `@/` alias.
 - Tokens are CSS custom properties in `src/index.css` (`:root` and
-  `:root[data-theme="dark"]`), surfaced to Tailwind via `@theme inline`.
-  Use the semantic utilities: `bg-bg`, `bg-surface`, `text-ink`,
-  `text-muted`, `text-faint`, `border-border`, `text-accent`, etc.
+  `:root[data-theme="dark"]`) following shadcn's contract, surfaced to
+  Tailwind via `@theme inline`: `bg-background`, `text-foreground`,
+  `bg-card`, `bg-muted`, `text-muted-foreground`, `border-border`,
+  `bg-primary`, plus project extras `text-faint`, `border-border-strong`,
+  `bg-brand` (the blue accent), `shadow-soft`. Keep values in hex — the 3D
+  scene reads `--muted-foreground` via `getComputedStyle`.
 - Theme is a `data-theme` attribute on `<html>`, set pre-paint by an inline
-  script in `index.html` and toggled via `src/lib/theme.ts`. A
+  script in `index.html` and toggled via `src/lib/theme.ts` (a `useSyncExternalStore` over the attribute, so the toggle and Sonner stay in sync). A
   `@custom-variant dark` in `index.css` makes `dark:` utilities follow it.
-- Type: `--font-serif` (Newsreader) for headings, `--font-sans` (system SF
+- Type: `--font-display` (Space Grotesk) for headings, `--font-sans` (system SF
   stack) for UI, `--font-mono` (JetBrains Mono) for meta / eyebrows.
 - Motion: animate only `transform` / `opacity`. Use `var(--ease-out)`.
-  Scroll reveals go through `components/Reveal.tsx` (IntersectionObserver,
-  `data-reveal` styles in `index.css`). Everything no-ops under
+  Scroll reveals use `data-reveal` + `useRevealObserver()` (styles in `index.css`). Everything no-ops under
   `prefers-reduced-motion` — keep it that way.
 
 ### 3D
 
-`src/components/three/HeroScene.tsx` is the only 3D: a wireframe
-icosahedron with pointer parallax, React Three Fiber + drei. It is
-`React.lazy`-loaded, only mounted when `supportsWebGL()` passes, and
-freezes under reduced motion. Keep 3D scoped to an accent — not a
-centrepiece.
+- `src/three/HeroScene.tsx`: wireframe icosahedron accent in the hero.
+- `src/three/RobotArm.tsx`: the Work section's centrepiece — a
+  procedural robot arm (primitives only, no model files) with closed-form IK
+  (base yaw + law-of-cosines shoulder/elbow + level wrist). It pins the HTML
+  project card to its gripper every frame and plays a pick-and-place swap
+  (`motion.drop` 0→1→0, tweened in `sections/work/RobotShowcase.tsx`) when
+  the scroll lands on a new project. It also writes the teach-pendant joint
+  readout via refs (no React re-render per frame).
+- Both are `React.lazy`-loaded and only mounted when `supportsWebGL()`
+  (`src/lib/webgl.ts`) passes. The showcase is desktop-only (≥1024px); smaller
+  screens get a grid of `ProjectCard`s. Under reduced motion the arm snaps
+  instead of animating.
 
 ### Contact
 

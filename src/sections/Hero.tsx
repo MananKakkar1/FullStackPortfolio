@@ -1,19 +1,17 @@
 import { Suspense, lazy, useRef } from "react";
-import { gsap, useGSAP, withMotion } from "../lib/scroll";
-import { profile } from "../constants";
-import { usePrefersReducedMotion } from "../lib/hooks";
-import Magnetic from "../components/Magnetic";
+import { gsap, useGSAP, withMotion } from "@/lib/scroll";
+import { profile } from "@/constants";
+import { usePrefersReducedMotion } from "@/lib/hooks";
+import { supportsWebGL } from "@/lib/webgl";
+import { Button } from "@/components/ui/button";
 
-const HeroScene = lazy(() => import("../components/three/HeroScene"));
+const HeroScene = lazy(() => import("@/three/HeroScene"));
 
-function supportsWebGL() {
-  try {
-    const canvas = document.createElement("canvas");
-    return !!(window.WebGLRenderingContext && canvas.getContext("webgl"));
-  } catch {
-    return false;
-  }
+function scrollToId(e: React.MouseEvent<HTMLAnchorElement>, id: string) {
+  e.preventDefault();
+  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 }
+
 
 const NAME_WORDS = profile.name.split(" ");
 
@@ -90,7 +88,7 @@ export default function Hero() {
               <HeroScene />
             </Suspense>
           </div>
-          <div className="absolute inset-y-0 left-0 w-48 bg-gradient-to-r from-bg to-transparent" />
+          <div className="absolute inset-y-0 left-0 w-48 bg-gradient-to-r from-background to-transparent" />
         </div>
       )}
 
@@ -99,7 +97,7 @@ export default function Hero() {
           {profile.kicker}
         </p>
 
-        <h1 className="type-display-xl mt-6 flex flex-wrap gap-x-[0.28em] text-ink">
+        <h1 className="type-display-xl mt-6 flex flex-wrap gap-x-[0.28em] text-foreground">
           {NAME_WORDS.map((word) => (
             <span key={word} className="hero-word block overflow-hidden pb-[0.08em]">
               <span className="block">{word}</span>
@@ -109,40 +107,27 @@ export default function Hero() {
 
         <p
           data-hero-stagger
-          className="type-lead mt-7 max-w-[46ch] text-muted"
+          className="type-lead mt-7 max-w-[46ch] text-muted-foreground"
         >
           {profile.heroLine}
         </p>
 
         <div data-hero-stagger className="mt-9 flex flex-wrap items-center gap-3">
-          <Magnetic>
-            <a
-              href="#work"
-              onClick={(e) => {
-                e.preventDefault();
-                document
-                  .getElementById("work")
-                  ?.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="pressable inline-flex min-h-11 items-center rounded-[var(--radius-input)] bg-ink px-5 text-sm font-medium text-bg hover:bg-ink/90"
-            >
+          <Button asChild size="lg" className="h-11 rounded-lg px-5">
+            <a href="#work" onClick={(e) => scrollToId(e, "work")}>
               View work
             </a>
-          </Magnetic>
-          <Magnetic>
-            <a
-              href="#contact"
-              onClick={(e) => {
-                e.preventDefault();
-                document
-                  .getElementById("contact")
-                  ?.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="pressable inline-flex min-h-11 items-center rounded-[var(--radius-input)] border border-border px-5 text-sm font-medium text-ink hover:border-border-strong"
-            >
+          </Button>
+          <Button
+            asChild
+            size="lg"
+            variant="outline"
+            className="h-11 rounded-lg bg-transparent px-5 shadow-none dark:bg-transparent"
+          >
+            <a href="#contact" onClick={(e) => scrollToId(e, "contact")}>
               Contact
             </a>
-          </Magnetic>
+          </Button>
         </div>
       </div>
     </section>

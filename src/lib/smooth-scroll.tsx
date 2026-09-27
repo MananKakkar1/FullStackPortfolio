@@ -1,7 +1,7 @@
 import { useEffect, useRef, type ReactNode } from "react";
 import { ReactLenis, type LenisRef } from "lenis/react";
-import { gsap, ScrollTrigger } from "../lib/scroll";
-import { usePrefersReducedMotion } from "../lib/hooks";
+import { gsap, ScrollTrigger } from "@/lib/scroll";
+import { usePrefersReducedMotion } from "@/lib/hooks";
 
 /**
  * App-wide smooth scroll (Lenis) driven by GSAP's ticker and bridged to

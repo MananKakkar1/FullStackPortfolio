@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
 /* Theme is a data attribute on <html>, not the OS preference, so the in-nav
    toggle wins. Make `dark:` utilities follow the same signal. */
@@ -9,21 +10,37 @@
   - Warm off-white / near-black canvas, one scarce accent.
   - Grotesque display, system SF for UI text, mono for meta.
   - Motion: transform + opacity only, custom ease-out, honours reduced motion.
-  - Radius scale (locked): cards/media 14px, inputs/buttons 10px, chips = pill.
+  - Components are shadcn/ui (src/components/ui) on the tokens below.
+  - Radius scale: cards/media rounded-xl (14px), buttons/inputs rounded-lg (10px), badges = pill.
 */
 
 :root {
-  --bg: #fbfbfa;
-  --surface: #ffffff;
-  --surface-2: #f4f3f1;
+  /* shadcn/ui token contract */
+  --background: #fbfbfa;
+  --foreground: #16161a;
+  --card: #ffffff;
+  --card-foreground: #16161a;
+  --popover: #ffffff;
+  --popover-foreground: #16161a;
+  --primary: #16161a;
+  --primary-foreground: #fbfbfa;
+  --secondary: #f4f3f1;
+  --secondary-foreground: #16161a;
+  --muted: #f4f3f1;
+  --muted-foreground: #5f5f66;
+  --accent: #f0efec;
+  --accent-foreground: #16161a;
+  --destructive: #b3261e;
   --border: rgba(17, 17, 17, 0.1);
-  --border-strong: rgba(17, 17, 17, 0.16);
-  --ink: #16161a;
-  --muted: #5f5f66;
+  --input: rgba(17, 17, 17, 0.14);
+  --ring: #2f6fed;
+  --radius: 0.625rem;
+
+  /* Project extras */
   --faint: #90909a;
-  --accent: #2f6fed;
-  --accent-ink: #ffffff;
-  --danger: #b3261e;
+  --border-strong: rgba(17, 17, 17, 0.16);
+  --brand: #2f6fed;
+  --brand-foreground: #ffffff;
 
   --nav-bg: rgba(251, 251, 250, 0.72);
   --nav-edge: rgba(255, 255, 255, 0.6);
@@ -43,8 +60,6 @@
   --gutter: 1.5rem;
   --space-section: clamp(3.5rem, 7vh, 5.5rem);
   --space-block: clamp(1.75rem, 4.5vh, 2.75rem);
-  --radius: 14px;
-  --radius-sm: 10px;
 
   --font-display: "Space Grotesk Variable", "SF Pro Display", -apple-system,
     BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -54,17 +69,29 @@
 }
 
 :root[data-theme="dark"] {
-  --bg: #0b0b0c;
-  --surface: #131316;
-  --surface-2: #1b1b1f;
+  --background: #0b0b0c;
+  --foreground: #f2f2ef;
+  --card: #131316;
+  --card-foreground: #f2f2ef;
+  --popover: #131316;
+  --popover-foreground: #f2f2ef;
+  --primary: #f2f2ef;
+  --primary-foreground: #0b0b0c;
+  --secondary: #1b1b1f;
+  --secondary-foreground: #f2f2ef;
+  --muted: #1b1b1f;
+  --muted-foreground: #a2a2a9;
+  --accent: #1f1f24;
+  --accent-foreground: #f2f2ef;
+  --destructive: #ff6b6b;
   --border: rgba(255, 255, 255, 0.12);
-  --border-strong: rgba(255, 255, 255, 0.22);
-  --ink: #f2f2ef;
-  --muted: #a2a2a9;
+  --input: rgba(255, 255, 255, 0.16);
+  --ring: #6aa1ff;
+
   --faint: #6a6a72;
-  --accent: #6aa1ff;
-  --accent-ink: #0b0b0c;
-  --danger: #ff6b6b;
+  --border-strong: rgba(255, 255, 255, 0.22);
+  --brand: #6aa1ff;
+  --brand-foreground: #0b0b0c;
 
   --nav-bg: rgba(11, 11, 12, 0.66);
   --nav-edge: rgba(255, 255, 255, 0.12);
@@ -78,32 +105,50 @@
 }
 
 @theme inline {
-  --color-bg: var(--bg);
-  --color-surface: var(--surface);
-  --color-surface-2: var(--surface-2);
-  --color-border: var(--border);
-  --color-border-strong: var(--border-strong);
-  --color-ink: var(--ink);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
-  --color-faint: var(--faint);
+  --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
-  --color-accent-ink: var(--accent-ink);
-  --color-danger: var(--danger);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-faint: var(--faint);
+  --color-border-strong: var(--border-strong);
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --shadow-soft: var(--shadow-soft);
 
   --font-display: var(--font-display);
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
-
-  --radius-card: var(--radius);
-  --radius-input: var(--radius-sm);
 
   --ease-out: var(--ease-out);
   --ease-in-out: var(--ease-in-out);
   --ease-spring: var(--spring);
 }
 
-* {
-  border-color: var(--border);
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
 }
 
 html {
@@ -113,8 +158,8 @@ html {
 
 body {
   margin: 0;
-  background-color: var(--bg);
-  color: var(--ink);
+  background-color: var(--background);
+  color: var(--foreground);
   font-family: var(--font-sans);
   font-size: 16px;
   line-height: 1.6;
@@ -135,12 +180,12 @@ html.lenis body {
 }
 
 ::selection {
-  background: var(--ink);
-  color: var(--bg);
+  background: var(--foreground);
+  color: var(--background);
 }
 
 :where(a, button, input, textarea, [tabindex]):focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--ring);
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -224,10 +269,6 @@ h4 {
     padding-block: var(--space-section);
   }
 
-  .hairline {
-    border: 0;
-    border-top: 1px solid var(--border);
-  }
 
   .link-underline {
     background-image: linear-gradient(currentColor, currentColor);
@@ -255,7 +296,7 @@ h4 {
     right: 0;
     top: 100%;
     height: 2.5rem;
-    background: linear-gradient(var(--bg), transparent);
+    background: linear-gradient(var(--background), transparent);
     pointer-events: none;
     opacity: 0;
     transition: opacity 240ms var(--ease-out);
@@ -277,17 +318,10 @@ h4 {
   transform: none;
 }
 
-.pressable {
-  transition: transform 160ms var(--ease-out), background-color 200ms ease,
-    color 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
-}
-.pressable:active {
-  transform: scale(0.98);
-}
 
 @media (prefers-reduced-transparency: reduce) {
   .material-chrome {
-    background: var(--bg);
+    background: var(--background);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
     border-bottom: 1px solid var(--border);
@@ -297,11 +331,11 @@ h4 {
 @media (prefers-contrast: more) {
   :root {
     --border: rgba(17, 17, 17, 0.28);
-    --muted: #3f3f46;
+    --muted-foreground: #3f3f46;
   }
   :root[data-theme="dark"] {
     --border: rgba(255, 255, 255, 0.32);
-    --muted: #c3c3c9;
+    --muted-foreground: #c3c3c9;
   }
 }
 
@@ -320,4 +354,39 @@ h4 {
     opacity: 1;
     transform: none;
   }
+}
+
+/* The front clamp shares the card's projected tool coordinate. */
+.robot-grip-seat {
+  position: absolute;
+  left: -9px;
+  top: calc(50% - 27px);
+  width: 17px;
+  height: 54px;
+  border: 1px solid #777972;
+  background: #353936;
+  border-radius: 3px;
+}
+.robot-grip-jaw {
+  position: absolute;
+  z-index: 2;
+  left: -15px;
+  top: calc(50% - 18px);
+  width: 31px;
+  height: 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 5px;
+  border: 1px solid #a4a59d;
+  border-radius: 3px;
+  background: linear-gradient(100deg, #777c76, #d1d0c4 45%, #aaa99f);
+  box-shadow: 3px 2px 4px #0005, inset -4px 0 #424740;
+  pointer-events: none;
+}
+.robot-grip-jaw i {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #363b37;
 }

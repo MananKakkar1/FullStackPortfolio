@@ -1,16 +1,18 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useLenis } from "lenis/react";
-import { ScrollTrigger } from "../lib/scroll";
-import Hero from "../sections/Hero";
-import About from "../sections/About";
-import Experience from "../sections/Experience";
-import Work from "../sections/Work";
-import Contact from "../sections/Contact";
+import { ScrollTrigger } from "@/lib/scroll";
+import { useRevealObserver } from "@/lib/reveal";
+import Hero from "@/sections/Hero";
+import About from "@/sections/About";
+import Experience from "@/sections/Experience";
+import Work from "@/sections/Work";
+import Contact from "@/sections/Contact";
 
 export default function Home() {
   const location = useLocation();
   const lenis = useLenis();
+  useRevealObserver();
 
   useEffect(() => {
     const state = location.state as { scrollTo?: string } | null;

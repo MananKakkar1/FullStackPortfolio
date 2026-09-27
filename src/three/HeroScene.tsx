@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import type { Group, Mesh } from "three";
-import { usePrefersReducedMotion } from "../../lib/hooks";
+import { usePrefersReducedMotion } from "@/lib/hooks";
 
 /**
  * A single restrained 3D accent: a slowly drifting wireframe polyhedron that
@@ -11,7 +11,7 @@ import { usePrefersReducedMotion } from "../../lib/hooks";
 
 function readAccentColor(): string {
   if (typeof window === "undefined") return "#888888";
-  const v = getComputedStyle(document.documentElement).getPropertyValue("--muted");
+  const v = getComputedStyle(document.documentElement).getPropertyValue("--muted-foreground");
   return v.trim() || "#888888";
 }
 

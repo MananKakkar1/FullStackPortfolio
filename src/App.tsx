@@ -6,12 +6,14 @@ import {
   useLocation,
 } from "react-router-dom";
 import { useLenis } from "lenis/react";
-import { IconContext } from "./lib/icons";
-import { ScrollTrigger } from "./lib/scroll";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import Home from "./pages/Home";
-import ProjectDetail from "./pages/ProjectDetail";
+import { IconContext } from "@/lib/icons";
+import { ScrollTrigger } from "@/lib/scroll";
+import { Toaster } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import Navbar from "@/layout/Navbar";
+import Footer from "@/layout/Footer";
+import Home from "@/pages/Home";
+import ProjectDetail from "@/pages/ProjectDetail";
 
 /** Keep pinned triggers and scroll position sane across client-side navigation. */
 function RouteEffects() {
@@ -30,6 +32,7 @@ function RouteEffects() {
 export default function App() {
   return (
     <IconContext.Provider value={{ weight: "bold", size: 18, mirrored: false }}>
+      <TooltipProvider delayDuration={200}>
       <BrowserRouter>
         <RouteEffects />
         <Navbar />
@@ -41,7 +44,9 @@ export default function App() {
           </Routes>
         </main>
         <Footer />
+        <Toaster position="bottom-right" />
       </BrowserRouter>
+      </TooltipProvider>
     </IconContext.Provider>
   );
 }

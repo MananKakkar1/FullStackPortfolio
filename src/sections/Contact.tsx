@@ -1,35 +1,38 @@
 import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
-import { profile, socials } from "../constants";
-import { gsap, useGSAP, withMotion } from "../lib/scroll";
-import Reveal from "../components/Reveal";
-import SectionHeading from "../components/SectionHeading";
-import { ArrowUpRight } from "../lib/icons";
+import { toast } from "sonner";
+import { profile, socials } from "@/constants";
+import { gsap, useGSAP, withMotion } from "@/lib/scroll";
+import { revealDelay } from "@/lib/reveal";
+import { ArrowUpRight } from "@/lib/icons";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import { Spinner } from "@/components/ui/spinner";
+import { Textarea } from "@/components/ui/textarea";
 
 const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID as string | undefined;
 const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string | undefined;
 const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string | undefined;
 const configured = Boolean(SERVICE_ID && TEMPLATE_ID && PUBLIC_KEY);
 
-type Status = "idle" | "sending" | "sent" | "error";
-type Field = "from_name" | "reply_to" | "message";
+type FieldName = "from_name" | "reply_to" | "message";
 
-const fieldClass =
-  "w-full rounded-[var(--radius-input)] border border-border bg-surface px-4 py-3 text-sm text-ink placeholder:text-faint transition-colors focus:border-border-strong";
+const inputClass = "h-11 rounded-lg bg-card px-4 shadow-none dark:bg-card";
 
-function validate(name: Field, value: string): string {
+function validate(name: FieldName, value: string): string {
   const v = value.trim();
   if (!v) return "Required";
-  if (name === "reply_to" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v))
-    return "Enter a valid email";
+  if (name === "reply_to" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) return "Enter a valid email";
   return "";
 }
 
 export default function Contact() {
   const root = useRef<HTMLElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
-  const [status, setStatus] = useState<Status>("idle");
-  const [errors, setErrors] = useState<Partial<Record<Field, string>>>({});
+  const [sending, setSending] = useState(false);
+  const [errors, setErrors] = useState<Partial<Record<FieldName, string>>>({});
 
   useGSAP(
     () => {
@@ -52,7 +55,7 @@ export default function Contact() {
   );
 
   const onBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const name = e.target.name as Field;
+    const name = e.target.name as FieldName;
     setErrors((prev) => ({ ...prev, [name]: validate(name, e.target.value) }));
   };
 
@@ -60,143 +63,139 @@ export default function Contact() {
     e.preventDefault();
     if (!formRef.current) return;
     const data = new FormData(formRef.current);
-    const next: Partial<Record<Field, string>> = {};
-    (["from_name", "reply_to", "message"] as Field[]).forEach((f) => {
+    const next: Partial<Record<FieldName, string>> = {};
+    (["from_name", "reply_to", "message"] as FieldName[]).forEach((f) => {
       const msg = validate(f, String(data.get(f) ?? ""));
       if (msg) next[f] = msg;
     });
     setErrors(next);
     if (Object.keys(next).length || !configured) return;
 
-    setStatus("sending");
+    setSending(true);
     try {
-      await emailjs.sendForm(SERVICE_ID!, TEMPLATE_ID!, formRef.current, {
-        publicKey: PUBLIC_KEY!,
-      });
-      setStatus("sent");
+      await emailjs.sendForm(SERVICE_ID!, TEMPLATE_ID!, formRef.current, { publicKey: PUBLIC_KEY! });
+      toast.success("Sent. Thanks, I'll be in touch.");
       formRef.current.reset();
     } catch {
-      setStatus("error");
+      toast.error("Something went wrong.", { description: `Email me directly at ${profile.email}.` });
+    } finally {
+      setSending(false);
     }
   };
+
+  const err = (name: FieldName) => (errors[name] ? [{ message: errors[name] }] : undefined);
 
   return (
     <section id="contact" ref={root} className="section-gap">
       <div className="shell">
-        <SectionHeading
-          title="Get in touch."
-          lead="Open to internships, collaborations, and interesting problems."
-        />
+        <div data-reveal>
+          <h2 className="type-display-l max-w-[20ch] text-foreground">Get in touch.</h2>
+          <p className="type-lead mt-5 max-w-[48ch] text-muted-foreground">
+            Open to research collaborations, open source, and interesting problems.
+          </p>
+        </div>
 
-        <div className="mt-[var(--space-block)] grid gap-12 md:grid-cols-[1fr_1.1fr] md:gap-16">
-          <Reveal className="space-y-6">
-            <p className="type-lead text-muted">
-              The fastest way to reach me is email.
-            </p>
+        <div
+          className={cn(
+            "mt-[var(--space-block)] grid gap-12 md:gap-16",
+            configured && "md:grid-cols-[1fr_1.1fr]",
+          )}
+        >
+          <div data-reveal className="space-y-6">
+            <p className="type-lead text-muted-foreground">The fastest way to reach me is email.</p>
             <a
               href={`mailto:${profile.email}`}
-              className="link-underline block font-display text-2xl font-medium text-ink"
+              className="link-underline block font-display text-2xl font-medium break-all text-foreground"
             >
               {profile.email}
             </a>
-            <ul className="flex flex-wrap gap-x-6 gap-y-2 pt-2">
+            <ul className="-ml-3 flex flex-wrap gap-x-1 gap-y-2 pt-2">
               {socials.map((s) => (
                 <li key={s.label}>
-                  <a
-                    href={s.url}
-                    target={s.url.startsWith("http") ? "_blank" : undefined}
-                    rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-1 text-sm text-muted transition-colors hover:text-ink"
+                  <Button
+                    asChild
+                    variant="link"
+                    className="gap-1 font-normal text-muted-foreground hover:text-foreground hover:no-underline"
                   >
-                    {s.label}
-                    <ArrowUpRight size={12} weight="bold" className="translate-y-px" />
-                  </a>
+                    <a
+                      href={s.url}
+                      target={s.url.startsWith("http") ? "_blank" : undefined}
+                      rel="noopener noreferrer"
+                    >
+                      {s.label}
+                      <ArrowUpRight size={12} weight="bold" className="translate-y-px" />
+                    </a>
+                  </Button>
                 </li>
               ))}
             </ul>
-          </Reveal>
+          </div>
 
-          <Reveal delay={80}>
-            {configured ? (
-              <form ref={formRef} onSubmit={onSubmit} noValidate className="contact-form space-y-4">
+          {configured && (
+            <form
+              ref={formRef}
+              onSubmit={onSubmit}
+              noValidate
+              data-reveal
+              style={revealDelay(80)}
+              className="contact-form"
+            >
+              <FieldGroup>
                 <div className="grid gap-4 sm:grid-cols-2">
-                  <label className="contact-field block">
-                    <span className="mb-1.5 block text-sm text-muted">Name</span>
-                    <input
+                  <Field className="contact-field" data-invalid={Boolean(errors.from_name)}>
+                    <FieldLabel htmlFor="from_name" className="font-normal text-muted-foreground">
+                      Name
+                    </FieldLabel>
+                    <Input
+                      id="from_name"
                       name="from_name"
                       onBlur={onBlur}
-                      className={fieldClass}
+                      className={inputClass}
                       placeholder="Your name"
                       aria-invalid={Boolean(errors.from_name)}
                     />
-                    {errors.from_name && (
-                      <span className="mt-1 block text-xs text-danger">{errors.from_name}</span>
-                    )}
-                  </label>
-                  <label className="contact-field block">
-                    <span className="mb-1.5 block text-sm text-muted">Email</span>
-                    <input
+                    <FieldError errors={err("from_name")} />
+                  </Field>
+                  <Field className="contact-field" data-invalid={Boolean(errors.reply_to)}>
+                    <FieldLabel htmlFor="reply_to" className="font-normal text-muted-foreground">
+                      Email
+                    </FieldLabel>
+                    <Input
+                      id="reply_to"
                       type="email"
                       name="reply_to"
                       onBlur={onBlur}
-                      className={fieldClass}
+                      className={inputClass}
                       placeholder="you@example.com"
                       aria-invalid={Boolean(errors.reply_to)}
                     />
-                    {errors.reply_to && (
-                      <span className="mt-1 block text-xs text-danger">{errors.reply_to}</span>
-                    )}
-                  </label>
+                    <FieldError errors={err("reply_to")} />
+                  </Field>
                 </div>
-                <label className="contact-field block">
-                  <span className="mb-1.5 block text-sm text-muted">Message</span>
-                  <textarea
+                <Field className="contact-field" data-invalid={Boolean(errors.message)}>
+                  <FieldLabel htmlFor="message" className="font-normal text-muted-foreground">
+                    Message
+                  </FieldLabel>
+                  <Textarea
+                    id="message"
                     name="message"
                     onBlur={onBlur}
                     rows={5}
-                    className={`${fieldClass} resize-y`}
+                    className="min-h-32 resize-y rounded-lg bg-card px-4 py-3 shadow-none dark:bg-card"
                     placeholder="What are you working on?"
                     aria-invalid={Boolean(errors.message)}
                   />
-                  {errors.message && (
-                    <span className="mt-1 block text-xs text-danger">{errors.message}</span>
-                  )}
-                </label>
-                <div className="contact-field flex items-center gap-4">
-                  <button
-                    type="submit"
-                    disabled={status === "sending"}
-                    className="pressable inline-flex min-h-11 items-center rounded-[var(--radius-input)] bg-ink px-5 text-sm font-medium text-bg hover:bg-ink/90 disabled:opacity-60"
-                  >
-                    {status === "sending" ? "Sending…" : "Send message"}
-                  </button>
-                  <p
-                    role="status"
-                    className="text-sm"
-                    style={{ color: status === "error" ? "var(--danger)" : "var(--muted)" }}
-                  >
-                    {status === "sent" && "Sent. Thanks, I'll be in touch."}
-                    {status === "error" && "Something went wrong. Email me directly?"}
-                  </p>
-                </div>
-              </form>
-            ) : (
-              <div className="rounded-[var(--radius-card)] border border-border bg-surface p-6 text-sm text-muted">
-                <p>
-                  The contact form uses EmailJS. Add{" "}
-                  <code className="font-mono text-xs text-ink">VITE_EMAILJS_SERVICE_ID</code>,{" "}
-                  <code className="font-mono text-xs text-ink">VITE_EMAILJS_TEMPLATE_ID</code>, and{" "}
-                  <code className="font-mono text-xs text-ink">VITE_EMAILJS_PUBLIC_KEY</code> to{" "}
-                  <code className="font-mono text-xs text-ink">.env</code> to enable it. Until then,
-                  reach me at{" "}
-                  <a href={`mailto:${profile.email}`} className="link-underline text-ink">
-                    {profile.email}
-                  </a>
-                  .
-                </p>
-              </div>
-            )}
-          </Reveal>
+                  <FieldError errors={err("message")} />
+                </Field>
+                <Field orientation="horizontal" className="contact-field">
+                  <Button type="submit" size="lg" disabled={sending} className="h-11 w-fit rounded-lg px-5">
+                    {sending && <Spinner />}
+                    {sending ? "Sending…" : "Send message"}
+                  </Button>
+                </Field>
+              </FieldGroup>
+            </form>
+          )}
         </div>
       </div>
     </section>
