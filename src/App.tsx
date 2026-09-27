@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import {
   BrowserRouter,
+  Navigate,
   Route,
   Routes,
   useLocation,
@@ -40,6 +41,11 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/work/:id" element={<ProjectDetail />} />
+            {/* Legacy routes from the previous site (the domain still forwards to /Home). */}
+            <Route path="/home" element={<Navigate to="/" replace />} />
+            <Route path="/about" element={<Navigate to="/#about" replace />} />
+            <Route path="/projects" element={<Navigate to="/#work" replace />} />
+            <Route path="/projects/:id" element={<ProjectDetail />} />
             <Route path="*" element={<ProjectDetail />} />
           </Routes>
         </main>
