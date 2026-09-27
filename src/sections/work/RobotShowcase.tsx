@@ -248,8 +248,10 @@ export default function RobotShowcase() {
       style={{ height: `calc(${projects.length * STEP_VH}vh + 100svh)` }}
     >
       <div className="sticky top-0 h-[100svh] overflow-hidden">
+        {/* Layers, back to front: pile (0–8, incl. a card down in its slot) →
+            robot canvas (10) → lifted card (20) → HUD / index / loader (30). */}
         {/* 3D stage */}
-        <div className="pointer-events-none absolute inset-0">
+        <div className="pointer-events-none absolute inset-0 z-10">
           {onScreen && (
             <Suspense fallback={null}>
               <RobotArm
@@ -270,7 +272,7 @@ export default function RobotShowcase() {
         {!ready && (
           <div
             role="status"
-            className="absolute bottom-[26%] left-[14%] flex items-center gap-2.5 font-mono text-xs tracking-[0.14em] text-muted-foreground uppercase"
+            className="absolute bottom-[26%] left-[14%] z-30 flex items-center gap-2.5 font-mono text-xs tracking-[0.14em] text-muted-foreground uppercase"
           >
             <Spinner className="size-4 text-brand" />
             Loading robot…
@@ -285,7 +287,7 @@ export default function RobotShowcase() {
           ref={hudRef}
           aria-hidden
           data-booting="true"
-          className="group shell-wide pointer-events-none absolute inset-x-0 top-[calc(var(--nav-h)+1.5rem)] font-mono text-[0.7rem] leading-relaxed text-faint"
+          className="group shell-wide pointer-events-none absolute inset-x-0 top-[calc(var(--nav-h)+1.5rem)] z-30 font-mono text-[0.7rem] leading-relaxed text-faint"
         >
           <div className="w-fit">
             <p className="mb-2 flex items-center gap-2 tracking-[0.14em] uppercase">
@@ -376,7 +378,7 @@ export default function RobotShowcase() {
         {/* Project index */}
         <nav
           aria-label="Projects"
-          className="shell-wide absolute inset-x-0 top-[calc(var(--nav-h)+1.25rem)] flex flex-col items-end gap-2"
+          className="shell-wide absolute inset-x-0 top-[calc(var(--nav-h)+1.25rem)] z-30 flex flex-col items-end gap-2"
         >
           <ol className="flex items-center gap-1">
             {projects.map((p, i) => (

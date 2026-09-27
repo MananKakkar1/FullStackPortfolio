@@ -324,8 +324,9 @@ function Arm({ motion, cardRef, hudRef, presentRef, pileRef, onReady }: ArmProps
       if (jaw) jaw.style.transform = `translateX(${((-m.grip * 22) / sc).toFixed(2)}px) scale(${(1 / sc).toFixed(4)})`;
       if (seat) seat.style.transform = `scale(${(1 / sc).toFixed(4)})`;
       card.style.pointerEvents = m.drop > 0.01 || m.hold < 1 ? "none" : "auto";
-      // Down at the pile the card sits in its slot's layer (neighbours overlap it);
-      // it only rises above the pile once it's lifted clear.
+      // Down at the pile the card sits in its slot's layer (0–8): neighbours
+      // overlap it and the robot canvas (z 10) draws over it, so the arm is
+      // always in front of the pile. It rises above the canvas once lifted clear.
       const layer = Math.round(THREE.MathUtils.lerp(from, to, m.travel));
       card.style.zIndex = pileAmt > 0.82 ? String(layer) : "20";
     }
