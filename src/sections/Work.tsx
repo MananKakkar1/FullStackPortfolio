@@ -45,7 +45,7 @@ export default function Work() {
               <Card className="h-full gap-0 overflow-hidden py-0 shadow-none transition-[transform,box-shadow,border-color] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-0.5 group-hover:border-border-strong group-hover:shadow-soft">
                 <AspectRatio ratio={16 / 10} className="overflow-hidden border-b bg-muted">
                   <img
-                    src={p.image}
+                    src={p.thumb ?? p.image}
                     alt={`${p.title} preview`}
                     loading="lazy"
                     className="size-full object-cover transition-transform duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"

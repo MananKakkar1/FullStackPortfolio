@@ -24,7 +24,7 @@ const L2 = 0.64; // forearm
 const L3 = 0.3; // wrist pivot -> fingertip centre
 
 // Screen anchor for the base, in normalized device coords.
-const BASE_NDC = new THREE.Vector2(-0.62, -0.78);
+const BASE_NDC = new THREE.Vector2(-0.52, -0.78);
 // Tool targets, relative to the base.
 const PRESENT = new THREE.Vector3(1.12, 0.92, 0.32);
 const SET_DOWN = new THREE.Vector3(0.78, 0.12, 0.62);

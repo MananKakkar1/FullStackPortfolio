@@ -182,14 +182,14 @@ export default function RobotShowcase() {
         {/* The card the arm is holding (positioned every frame by RobotArm) */}
         <div
           ref={cardRef}
-          className="absolute top-0 left-0 w-[23rem] origin-left opacity-0 will-change-transform xl:w-[25rem]"
+          className="absolute top-0 left-0 w-[26rem] origin-left opacity-0 will-change-transform xl:w-[30rem]"
         >
           <span aria-hidden className="robot-grip-seat" />
           <span aria-hidden data-jaw className="robot-grip-jaw"><i /><i /></span>
           <Card data-payload className="gap-4 overflow-hidden pt-0 shadow-soft">
             <AspectRatio ratio={16 / 10} className="overflow-hidden border-b bg-muted">
               <img
-                src={project.image}
+                src={project.thumb ?? project.image}
                 alt={`${project.title} screenshot`}
                 className="size-full object-cover object-top"
               />

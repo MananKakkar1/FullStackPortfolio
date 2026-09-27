@@ -4,9 +4,12 @@
 import cadpilotImg from "../assets/cadpilot.webp";
 import copycadderImg from "../assets/copycadder.webp";
 import sportsdeckImg from "../assets/sportsdeck.webp";
-import netlyImg from "../assets/Netly.png";
+import netlyImg from "../assets/netly.webp";
+import cadpilotThumb from "../assets/cadpilot-thumb.webp";
+import sportsdeckThumb from "../assets/sportsdeck-thumb.webp";
+import continuLearnThumb from "../assets/continulearn-thumb.webp";
 import etaImg from "../assets/ETA.png";
-import continuLearnImg from "../assets/cl.png";
+import continuLearnImg from "../assets/continulearn.webp";
 import shellImg from "../assets/shell.png";
 import salesImg from "../assets/SalesBoard.png";
 import sokobanImg from "../assets/sokoban.png";
@@ -166,6 +169,8 @@ export type Project = {
   stack: string[];
   highlights: string[];
   image: string;
+  /** Tighter crop for small cards; falls back to `image`. */
+  thumb?: string;
   sourceUrl?: string;
   liveUrl?: string;
 };
@@ -190,6 +195,7 @@ export const projects: Project[] = [
     ],
     sourceUrl: "https://github.com/MananKakkar1/CadPilot",
     image: cadpilotImg,
+    thumb: cadpilotThumb,
   },
   {
     id: "continulearn",
@@ -209,6 +215,7 @@ export const projects: Project[] = [
     liveUrl: "https://continu-learn.vercel.app",
     sourceUrl: "https://github.com/MananKakkar1/ContinuLearn",
     image: continuLearnImg,
+    thumb: continuLearnThumb,
   },
   {
     id: "sportsdeck",
@@ -227,6 +234,7 @@ export const projects: Project[] = [
     ],
     sourceUrl: "https://github.com/MananKakkar1/Sportsdeck",
     image: sportsdeckImg,
+    thumb: sportsdeckThumb,
   },
   {
     id: "copycadder",

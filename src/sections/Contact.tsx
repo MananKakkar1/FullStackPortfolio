@@ -87,7 +87,13 @@ export default function Contact() {
 
   return (
     <section id="contact" ref={root} className="section-gap">
-      <div className="shell">
+      {/* Without the form, the heading and contact block share one row. */}
+      <div
+        className={cn(
+          "shell",
+          !configured && "grid gap-12 md:grid-cols-[1.1fr_1fr] md:items-end md:gap-16",
+        )}
+      >
         <div data-reveal>
           <h2 className="type-display-l max-w-[20ch] text-foreground">Get in touch.</h2>
           <p className="type-lead mt-5 max-w-[48ch] text-muted-foreground">
@@ -97,8 +103,8 @@ export default function Contact() {
 
         <div
           className={cn(
-            "mt-[var(--space-block)] grid gap-12 md:gap-16",
-            configured && "md:grid-cols-[1fr_1.1fr]",
+            "grid gap-12 md:gap-16",
+            configured && "mt-[var(--space-block)] md:grid-cols-[1fr_1.1fr]",
           )}
         >
           <div data-reveal className="space-y-6">
