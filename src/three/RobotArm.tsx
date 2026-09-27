@@ -6,17 +6,38 @@ import { useTheme } from "@/lib/theme";
 
 /**
  * A procedural industrial arm (built from primitives, no model files) that
- * carries the project card: an HTML card and front clamp are pinned to
- * the tool coordinate every frame, completing the WebGL/DOM depth sandwich.
+ * picks project cards out of a fanned pile and presents them. The HTML card
+ * and front clamp are pinned to the tool coordinate every frame, completing
+ * the WebGL/DOM depth sandwich.
  *
  * Kinematics: base yaw + shoulder/elbow via closed-form two-link IK (law of
- * cosines) + a wrist pitch that keeps the gripper level. The tool target
- * moves between a presentation pose and a low "set down" pose driven by
- * `motion.drop` (0 = presenting, 1 = card set down), which the parent tweens
- * whenever the active project changes.
+ * cosines) + a wrist pitch that keeps the gripper level.
+ *
+ * Targets come from the DOM: `presentRef` marks where a held card is shown,
+ * and each `[data-slot]` inside `pileRef` marks a pile slot's anchor (the
+ * left-centre of that card). Screen anchors are ray-cast into the scene, so
+ * the layout is CSS-driven and the arm adapts to any viewport.
+ *
+ * The parent drives every phase through `motion` (the timeline is the
+ * trajectory):
+ *  - boot    0 to 1: folded home pose to the first pile slot (loading animation)
+ *  - drop    0 = presenting, 1 = at the pile
+ *  - from/to/travel: move along the pile between two slots
+ *  - grip    0 closed, 1 open
+ *  - hold    1 = a card is in the gripper, 0 = gripper empty
+ *  - heldSlot: which project's card is (or is about to be) in the gripper
  */
 
-export type ArmMotion = { drop: number; grip: number; exchange: number };
+export type ArmMotion = {
+  boot: number;
+  drop: number;
+  from: number;
+  to: number;
+  travel: number;
+  grip: number;
+  hold: number;
+  heldSlot: number;
+};
 
 const BASE_H = 0.34;
 const L1 = 0.72; // upper arm
@@ -25,9 +46,16 @@ const L3 = 0.3; // wrist pivot -> fingertip centre
 
 // Screen anchor for the base, in normalized device coords.
 const BASE_NDC = new THREE.Vector2(-0.52, -0.78);
-// Tool targets, relative to the base.
-const PRESENT = new THREE.Vector3(1.12, 0.92, 0.32);
-const SET_DOWN = new THREE.Vector3(0.78, 0.12, 0.62);
+// Folded "home" pose the arm boots from (base frame).
+const HOME = new THREE.Vector3(0.36, 0.62, 0.12);
+// Depth (world z offset from the base) of the planes DOM anchors are cast onto.
+const PRESENT_DEPTH = 0.32;
+const PILE_DEPTH = 0.55;
+// Card scale while presented vs. lying in the pile.
+export const PRESENT_SCALE = 0.86;
+export const SLOT_SCALE = 0.4;
+// Tip marker sits this far short of the IK tool point along the gripper.
+const TIP_LEAD = 0.02;
 
 const DEG = 180 / Math.PI;
 
@@ -56,6 +84,9 @@ export type ArmProps = {
   motion: RefObject<ArmMotion>;
   cardRef: RefObject<HTMLElement | null>;
   hudRef: RefObject<HTMLElement | null>;
+  presentRef: RefObject<HTMLElement | null>;
+  pileRef: RefObject<HTMLElement | null>;
+  onReady: () => void;
   reduced: boolean;
 };
 
@@ -115,10 +146,10 @@ function Link({ len, r0, r1 }: { len: number; r0: number; r1: number }) {
   );
 }
 
-function Arm({ motion, cardRef, hudRef }: ArmProps) {
+function Arm({ motion, cardRef, hudRef, presentRef, pileRef, onReady }: ArmProps) {
   const { theme } = useTheme();
   const brand = useMemo(() => cssVar("--brand", "#2f6fed"), [theme]); // eslint-disable-line react-hooks/exhaustive-deps
-  const { camera, size } = useThree();
+  const { camera, size, gl } = useThree();
   const root = useRef<THREE.Group>(null);
   const rig = useRef<Partial<Rig>>({});
   const cable = useRef<THREE.Mesh>(null);
@@ -128,17 +159,53 @@ function Arm({ motion, cardRef, hudRef }: ArmProps) {
     () => ({
       ray: new THREE.Raycaster(),
       plane: new THREE.Plane(new THREE.Vector3(0, 0, 1), 0),
+      ndc: new THREE.Vector2(),
       goal: new THREE.Vector3(),
+      atPile: new THREE.Vector3(),
+      slotPos: new THREE.Vector3(),
       tool: new THREE.Vector3(),
       tipW: new THREE.Vector3(),
       tipNdc: new THREE.Vector3(),
       basePt: new THREE.Vector3(),
-      previousDrop: -1,
+      present: new THREE.Vector3(0.9, 0.9, 0.3),
+      slots: [] as THREE.Vector3[],
+      slotRot: [] as number[],
+      slotEls: [] as HTMLElement[],
+      lastKey: "",
       frame: 0,
+      ready: false,
       pts: [0, 1, 2, 3].map(() => new THREE.Vector3()),
     }),
     [],
   );
+
+  /** Cast a DOM point (client px) onto a z-plane in front of the base; return base-local coords. */
+  const castLocal = (cx: number, cy: number, depth: number, out: THREE.Vector3) => {
+    const r = gl.domElement.getBoundingClientRect();
+    s.ndc.set(((cx - r.left) / r.width) * 2 - 1, -((cy - r.top) / r.height) * 2 + 1);
+    s.ray.setFromCamera(s.ndc, camera);
+    s.plane.constant = -(root.current!.position.z + depth);
+    if (!s.ray.ray.intersectPlane(s.plane, out)) return out;
+    root.current!.worldToLocal(out);
+    // Nudge forward so the tip marker (not the IK point) lands on the anchor.
+    const h = Math.hypot(out.x, out.z) || 1;
+    out.x += (out.x / h) * TIP_LEAD;
+    out.z += (out.z / h) * TIP_LEAD;
+    return out;
+  };
+
+  /** Re-read the DOM anchors (present slot + pile slots). Cheap; done on layout changes. */
+  const readAnchors = () => {
+    const p = presentRef.current?.getBoundingClientRect();
+    if (p) castLocal(p.left, p.top, PRESENT_DEPTH, s.present);
+    s.slotEls = Array.from(pileRef.current?.querySelectorAll<HTMLElement>("[data-slot]") ?? []);
+    s.slotEls.forEach((el, i) => {
+      const r = el.getBoundingClientRect();
+      s.slots[i] ??= new THREE.Vector3();
+      castLocal(r.left, r.top, PILE_DEPTH, s.slots[i]);
+      s.slotRot[i] = Number(el.dataset.rot ?? 0);
+    });
+  };
 
   useFrame(() => {
     const R = rig.current as Rig;
@@ -149,19 +216,33 @@ function Arm({ motion, cardRef, hudRef }: ArmProps) {
     if (lastSize.current !== key) {
       camera.updateMatrixWorld();
       s.ray.setFromCamera(BASE_NDC, camera);
+      s.plane.constant = 0;
       if (s.ray.ray.intersectPlane(s.plane, s.basePt))
         root.current.position.set(s.basePt.x, s.basePt.y, -0.25);
+      root.current.updateMatrixWorld();
       lastSize.current = key;
-      s.previousDrop = -1;
+      readAnchors();
+    } else if (s.frame % 30 === 0) {
+      root.current.updateMatrixWorld();
+      readAnchors(); // fonts / images settling can shift the layout
     }
+    if (!s.slots.length) return;
 
-    const drop = motion.current?.drop ?? 0;
-    const grip = motion.current?.grip ?? 0;
-    const exchange = motion.current?.exchange ?? 0;
+    const m = motion.current;
+    const n = s.slots.length;
+    const from = THREE.MathUtils.clamp(Math.round(m.from), 0, n - 1);
+    const to = THREE.MathUtils.clamp(Math.round(m.to), 0, n - 1);
 
-    // The timeline is the trajectory: no second damping pass that delays contact.
-    s.goal.lerpVectors(PRESENT, SET_DOWN, drop);
-    s.goal.y += Math.sin(drop * Math.PI) * 0.10;
+    // --- Trajectory: the timeline is the trajectory, no extra damping ------
+    // Along the pile: slot to slot with a small hop.
+    s.slotPos.lerpVectors(s.slots[from], s.slots[to], m.travel);
+    s.slotPos.y += Math.sin(m.travel * Math.PI) * (from === to ? 0 : 0.07);
+    // Pile <-> presentation, arcing up so the card clears the pile.
+    s.atPile.lerpVectors(s.present, s.slotPos, m.drop);
+    s.atPile.y += Math.sin(m.drop * Math.PI) * 0.1;
+    // Boot: unfold from home toward the pile.
+    s.goal.lerpVectors(HOME, s.atPile, m.boot);
+    s.goal.y += Math.sin(m.boot * Math.PI) * 0.14;
     s.tool.copy(s.goal);
 
     // --- IK (base frame, shoulder at y = BASE_H) ---------------------------
@@ -184,15 +265,17 @@ function Arm({ motion, cardRef, hudRef }: ArmProps) {
     R.roll.rotation.x = roll;
 
     // Independent grip phase: close fully before lifting the payload.
-    const open = 0.024 + grip * 0.065;
+    const open = 0.024 + m.grip * 0.065;
     R.fingerA.position.z = open;
     R.fingerB.position.z = -open;
 
-    R.led.emissiveIntensity = 0.4;
+    // Status LED breathes while calibrating, then settles.
+    R.led.emissiveIntensity = m.boot < 1 ? 0.6 + Math.sin(s.frame * 0.25) * 0.5 : 0.4;
     root.current.updateWorldMatrix(true, true);
 
-    // --- Cable harness through the joints ----------------------------------
-    if (cable.current && (s.frame === 0 || Math.abs(s.previousDrop - drop) > 0.0001)) {
+    // --- Cable harness through the joints (only while moving) --------------
+    const motionKey = `${m.boot.toFixed(4)}|${m.drop.toFixed(4)}|${m.travel.toFixed(4)}|${from}|${to}`;
+    if (cable.current && (s.frame === 0 || motionKey !== s.lastKey)) {
       const anchors = [R.cableA, R.cableB, R.cableC, R.cableD];
       anchors.forEach((a, i) => {
         a.getWorldPosition(s.pts[i]);
@@ -203,25 +286,40 @@ function Arm({ motion, cardRef, hudRef }: ArmProps) {
       cable.current.geometry.dispose();
       cable.current.geometry = next;
     }
-
-    s.previousDrop = drop;
+    s.lastKey = motionKey;
 
     // --- Pin the HTML card to the fingertips -------------------------------
     R.tip.getWorldPosition(s.tipW);
     s.tipNdc.copy(s.tipW).project(camera);
     const x = ((s.tipNdc.x + 1) / 2) * size.width;
     const y = ((1 - s.tipNdc.y) / 2) * size.height;
+    // Scale/rotation blend from presented to exactly matching the target slot.
+    const pileAmt = m.boot < 1 ? 1 : m.drop;
+    const slotRot = THREE.MathUtils.lerp(s.slotRot[from] ?? 0, s.slotRot[to] ?? 0, m.travel);
+    const sc = THREE.MathUtils.lerp(PRESENT_SCALE, SLOT_SCALE, pileAmt);
+    const rot = slotRot * pileAmt;
     const card = cardRef.current;
     if (card) {
       // A DOM front jaw completes the depth sandwich: rear jaw / card / front jaw.
-      // Both layers use this exact TCP. The card never scales away from the jaws.
-      card.style.opacity = "1";
-      card.style.transform = `translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, 0) translateY(-50%)`;
-      const payload = card.querySelector<HTMLElement>("[data-payload]");
+      // Both layers use this exact TCP.
+      card.style.opacity = m.hold > 0.5 ? "1" : "0";
+      card.style.transform = `translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, 0) translateY(-50%) rotate(${rot.toFixed(2)}deg) scale(${sc.toFixed(4)})`;
       const jaw = card.querySelector<HTMLElement>("[data-jaw]");
-      if (payload) payload.style.opacity = String(1 - exchange);
-      if (jaw) jaw.style.transform = `translateX(${-grip * 22}px)`;
-      card.style.pointerEvents = drop > 0.01 || exchange > 0 ? "none" : "auto";
+      const seat = card.querySelector<HTMLElement>("[data-seat]");
+      // The clamp is hardware: counter-scale so it stays gripper-sized.
+      if (jaw) jaw.style.transform = `translateX(${((-m.grip * 22) / sc).toFixed(2)}px) scale(${(1 / sc).toFixed(4)})`;
+      if (seat) seat.style.transform = `scale(${(1 / sc).toFixed(4)})`;
+      card.style.pointerEvents = m.drop > 0.01 || m.hold < 1 ? "none" : "auto";
+    }
+    // Pile: the held card's slot is empty while it's in the gripper.
+    const held = Math.round(m.heldSlot);
+    s.slotEls.forEach((el, i) => {
+      el.dataset.empty = i === held && m.hold > 0.5 ? "true" : "false";
+    });
+
+    if (!s.ready) {
+      s.ready = true;
+      onReady();
     }
 
     // --- Teach-pendant readout (every 4th frame) ---------------------------
@@ -237,10 +335,19 @@ function Arm({ motion, cardRef, hudRef }: ArmProps) {
       const tcp = hud.querySelector<HTMLElement>("[data-tcp]");
       if (tcp)
         tcp.textContent = [s.tool.x, s.tool.y, s.tool.z]
-          .map((n) => `${Math.round(n * 1000)}`.padStart(4, " "))
+          .map((v) => `${Math.round(v * 1000)}`.padStart(4, " "))
           .join("  ");
       const gripLabel = hud.querySelector<HTMLElement>("[data-grip]");
-      if (gripLabel) gripLabel.textContent = grip > 0.5 ? "OPEN" : "CLOSED";
+      if (gripLabel) gripLabel.textContent = m.grip > 0.5 ? "OPEN" : "CLOSED";
+      const status = hud.querySelector<HTMLElement>("[data-status]");
+      if (status)
+        status.textContent =
+          m.boot < 1
+            ? `Calibrating · ${String(Math.round(m.boot * 100)).padStart(3, " ")}%`
+            : m.drop > 0.02
+              ? "Pick & place · in motion"
+              : "Arm online · pick & place";
+      hud.dataset.booting = m.boot < 1 ? "true" : "false";
     }
   });
 

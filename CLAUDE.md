@@ -73,13 +73,15 @@ images are imported from `src/assets/`.
 ### 3D
 
 - `src/three/HeroScene.tsx`: wireframe icosahedron accent in the hero.
-- `src/three/RobotArm.tsx`: the Work section's centrepiece — a
-  procedural robot arm (primitives only, no model files) with closed-form IK
-  (base yaw + law-of-cosines shoulder/elbow + level wrist). It pins the HTML
-  project card to its gripper every frame and plays a pick-and-place swap
-  (`motion.drop` 0→1→0, tweened in `sections/work/RobotShowcase.tsx`) when
-  the scroll lands on a new project. It also writes the teach-pendant joint
-  readout via refs (no React re-render per frame).
+- `src/three/RobotArm.tsx`: the Work section's centrepiece — a procedural
+  robot arm (primitives only, no model files) with closed-form IK. It picks
+  project cards out of a fanned DOM pile and presents them. Targets are
+  read from the DOM (`presentRef`, `[data-slot]` in `pileRef`) and ray-cast
+  into the scene. Every phase is driven by `ArmMotion` (`boot`, `drop`,
+  `from/to/travel`, `grip`, `hold`, `heldSlot`) tweened by GSAP in
+  `sections/work/RobotShowcase.tsx` — the timeline is the trajectory. The
+  first pick (boot) doubles as the loading animation. `SLOT_SCALE` must
+  match `PILE_SCALE` in the showcase.
 - Both are `React.lazy`-loaded and only mounted when `supportsWebGL()`
   (`src/lib/webgl.ts`) passes. The showcase is desktop-only (≥1024px); smaller
   screens get a grid of `ProjectCard`s. Under reduced motion the arm snaps
