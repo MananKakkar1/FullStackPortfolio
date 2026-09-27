@@ -357,36 +357,4 @@ h4 {
 }
 
 /* The front clamp shares the card's projected tool coordinate. */
-.robot-grip-seat {
-  position: absolute;
-  left: -9px;
-  top: calc(50% - 27px);
-  width: 17px;
-  height: 54px;
-  border: 1px solid #777972;
-  background: #353936;
-  border-radius: 3px;
-}
-.robot-grip-jaw {
-  position: absolute;
-  z-index: 2;
-  left: -15px;
-  top: calc(50% - 18px);
-  width: 31px;
-  height: 36px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 5px;
-  border: 1px solid #a4a59d;
-  border-radius: 3px;
-  background: linear-gradient(100deg, #777c76, #d1d0c4 45%, #aaa99f);
-  box-shadow: 3px 2px 4px #0005, inset -4px 0 #424740;
-  pointer-events: none;
-}
-.robot-grip-jaw i {
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: #363b37;
-}
+

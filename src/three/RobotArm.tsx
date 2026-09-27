@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState, type RefObject } from "react";
+import { useEffect, useMemo, useRef, useState, type RefObject } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { ContactShadows, Environment, Lightformer, RoundedBox } from "@react-three/drei";
 import * as THREE from "three";
@@ -6,23 +6,22 @@ import { useTheme } from "@/lib/theme";
 
 /**
  * A procedural industrial arm (built from primitives, no model files) that
- * picks project cards out of a fanned pile and presents them. The HTML card
- * and front clamp are pinned to the tool coordinate every frame, completing
- * the WebGL/DOM depth sandwich.
+ * picks project cards out of a fanned rack and presents them. Everything that
+ * moves is real 3D: each card is a thin textured panel, so depth, occlusion,
+ * and perspective are physically consistent. A gripped card is re-parented to
+ * the tool flange (keeping its world transform), so the handoff between rack
+ * and gripper is exact.
  *
  * Kinematics: base yaw + shoulder/elbow via closed-form two-link IK (law of
- * cosines) + a wrist pitch that keeps the gripper level.
- *
- * Targets come from the DOM: `presentRef` marks where a held card is shown,
- * and each `[data-pile-slot]` inside `pileRef` marks a pile slot's anchor (the
- * left-centre of that card). Screen anchors are ray-cast into the scene, so
- * the layout is CSS-driven and the arm adapts to any viewport.
+ * cosines) + a wrist pitch that keeps the gripper level. Rack slot poses are
+ * computed by solving the IK at each slot, so a card sits in its slot exactly
+ * as the gripper would hold it.
  *
  * The parent drives every phase through `motion` (the timeline is the
  * trajectory):
- *  - boot    0 to 1: folded home pose to the first pile slot (loading animation)
- *  - drop    0 = presenting, 1 = at the pile
- *  - from/to/travel: move along the pile between two slots
+ *  - boot    0 to 1: folded home pose to the first rack slot (loading animation)
+ *  - drop    0 = presenting, 1 = at the rack
+ *  - from/to/travel: move along the rack between two slots
  *  - grip    0 closed, 1 open
  *  - hold    1 = a card is in the gripper, 0 = gripper empty
  *  - heldSlot: which project's card is (or is about to be) in the gripper
@@ -39,6 +38,8 @@ export type ArmMotion = {
   heldSlot: number;
 };
 
+export type ArmCard = { title: string; category: string; image: string };
+
 const BASE_H = 0.34;
 const L1 = 0.72; // upper arm
 const L2 = 0.64; // forearm
@@ -48,16 +49,28 @@ const L3 = 0.3; // wrist pivot -> fingertip centre
 const BASE_NDC = new THREE.Vector2(-0.52, -0.78);
 // Folded "home" pose the arm boots from (base frame).
 const HOME = new THREE.Vector3(0.36, 0.62, 0.12);
-// Depth (world z offset from the base) of the planes DOM anchors are cast onto.
-const PRESENT_DEPTH = 0.32;
-const PILE_DEPTH = 0.55;
-// Card scale while presented vs. lying in the pile.
-export const PRESENT_SCALE = 0.86;
-export const SLOT_SCALE = 0.4;
-// Tip marker sits this far short of the IK tool point along the gripper.
-const TIP_LEAD = 0.02;
+// Where a held card is presented: tool point in the base frame.
+const PRESENT = new THREE.Vector3(0.78, 1.14, 0.14);
+
+// Physical card: 16:10 screenshot plus a title strip.
+const CARD_W = 0.8;
+const CARD_H = CARD_W * (820 / 1024);
+const CARD_T = 0.008;
+const BITE = 0.035; // how far the card edge sits inside the fingers
+
+// The rack: slot i's tool point (the gripped left-edge midpoint), base frame.
+const RACK_X0 = 0.5;
+const RACK_DX = 0.1;
+const RACK_Y = 0.42; // card centre height
+const RACK_Z0 = -0.22;
+// Later slots stand in front. Slots differ by < 2° of base yaw, so this spacing
+// keeps neighbouring cards from intersecting (no z-fighting at their far edges).
+const RACK_DZ = 0.055;
+const SLOT_TILT = [-3, 2, -1.2, 2.6, -2, 1.2, -2.8, 1.6, -0.8]; // degrees, hand-placed look
 
 const DEG = 180 / Math.PI;
+const STRAIGHT_POS = new THREE.Vector3(CARD_W / 2 - BITE, 0, 0);
+const IDENTITY_Q = new THREE.Quaternion();
 
 function cssVar(name: string, fallback: string) {
   const v = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
@@ -82,13 +95,77 @@ type Rig = {
 
 export type ArmProps = {
   motion: RefObject<ArmMotion>;
-  cardRef: RefObject<HTMLElement | null>;
   hudRef: RefObject<HTMLElement | null>;
-  presentRef: RefObject<HTMLElement | null>;
-  pileRef: RefObject<HTMLElement | null>;
+  cards: ArmCard[];
   onReady: () => void;
   reduced: boolean;
 };
+
+/** Closed-form IK for a level gripper; returns joint angles for a base-frame tool point. */
+function solveIK(tool: THREE.Vector3) {
+  const yaw = Math.atan2(-tool.z, tool.x);
+  const h = Math.hypot(tool.x, tool.z) - L3;
+  const v = tool.y - BASE_H;
+  const d = THREE.MathUtils.clamp(Math.hypot(h, v), Math.abs(L1 - L2) + 1e-3, L1 + L2 - 1e-3);
+  const elbow = -Math.acos(THREE.MathUtils.clamp((d * d - L1 * L1 - L2 * L2) / (2 * L1 * L2), -1, 1));
+  const shoulder = Math.atan2(v, h) - Math.atan2(L2 * Math.sin(elbow), L1 + L2 * Math.cos(elbow));
+  const wrist = -shoulder - elbow; // level payload
+  return { yaw, shoulder, elbow, wrist };
+}
+
+const slotTool = (i: number, out = new THREE.Vector3()) =>
+  out.set(RACK_X0 + i * RACK_DX, RACK_Y, RACK_Z0 + i * RACK_DZ);
+
+/** Draw a card face: screenshot on top, category / index / title strip below. */
+async function drawCardTexture(card: ArmCard, i: number, total: number, dark: boolean) {
+  const W = 1024;
+  const H = 820;
+  const IMG_H = 640;
+  const c = document.createElement("canvas");
+  c.width = W;
+  c.height = H;
+  const g = c.getContext("2d")!;
+  const bg = dark ? "#131316" : "#ffffff";
+  const fg = dark ? "#f2f2ef" : "#16161a";
+  const muted = dark ? "#a2a2a9" : "#5f5f66";
+  const line = dark ? "rgba(255,255,255,0.14)" : "rgba(17,17,17,0.12)";
+
+  g.fillStyle = bg;
+  g.fillRect(0, 0, W, H);
+
+  const img = new Image();
+  img.src = card.image;
+  await img.decode().catch(() => undefined);
+  if (img.naturalWidth) {
+    // cover-fit, anchored to the top like the page thumbnails
+    const s = Math.max(W / img.naturalWidth, IMG_H / img.naturalHeight);
+    const w = img.naturalWidth * s;
+    g.drawImage(img, (W - w) / 2, 0, w, img.naturalHeight * s);
+  }
+  g.fillStyle = line;
+  g.fillRect(0, IMG_H, W, 3);
+
+  await document.fonts?.ready;
+  g.textBaseline = "alphabetic";
+  g.fillStyle = muted;
+  g.font = '500 30px "JetBrains Mono Variable", ui-monospace, monospace';
+  g.fillText(card.category.toUpperCase(), 44, IMG_H + 62);
+  const idx = `${String(i + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")}`;
+  g.fillText(idx, W - 44 - g.measureText(idx).width, IMG_H + 62);
+  g.fillStyle = fg;
+  g.font = '600 62px "Space Grotesk Variable", system-ui, sans-serif';
+  g.fillText(card.title, 44, IMG_H + 142);
+
+  // hairline border
+  g.strokeStyle = line;
+  g.lineWidth = 4;
+  g.strokeRect(2, 2, W - 4, H - 4);
+
+  const tex = new THREE.CanvasTexture(c);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  tex.anisotropy = 8;
+  return tex;
+}
 
 const shellMat = (
   <meshPhysicalMaterial color="#c7c4ba" roughness={0.48} metalness={0.32} clearcoat={0.15} />
@@ -146,33 +223,89 @@ function Link({ len, r0, r1 }: { len: number; r0: number; r1: number }) {
   );
 }
 
-function Arm({ motion, cardRef, hudRef, presentRef, pileRef, onReady }: ArmProps) {
+function Arm({ motion, hudRef, cards, onReady, reduced }: ArmProps) {
   const { theme } = useTheme();
+  const dark = theme === "dark";
   const brand = useMemo(() => cssVar("--brand", "#2f6fed"), [theme]); // eslint-disable-line react-hooks/exhaustive-deps
-  const { camera, size, gl } = useThree();
+  const { camera, size } = useThree();
   const root = useRef<THREE.Group>(null);
+  const rack = useRef<THREE.Group>(null);
   const rig = useRef<Partial<Rig>>({});
   const cable = useRef<THREE.Mesh>(null);
   const lastSize = useRef("");
+  const [texturesReady, setTexturesReady] = useState(false);
+
+  // One physical card per project. Edges/back are plain; the front gets a texture.
+  const cardMeshes = useMemo(() => {
+    const geo = new THREE.BoxGeometry(CARD_W, CARD_H, CARD_T);
+    return cards.map(() => {
+      const edge = new THREE.MeshStandardMaterial({ color: "#2a2a2f", roughness: 0.6 });
+      const front = new THREE.MeshStandardMaterial({
+        color: "#ffffff",
+        roughness: 0.55,
+        emissive: "#ffffff",
+        emissiveIntensity: 0.35,
+      });
+      // BoxGeometry groups: +x, -x, +y, -y, +z (front), -z (back)
+      const mesh = new THREE.Mesh(geo, [edge, edge, edge, edge, front, edge]);
+      mesh.castShadow = false;
+      return mesh;
+    });
+  }, [cards]);
+
+  // (Re)draw the card faces whenever the theme changes.
+  useEffect(() => {
+    let cancelled = false;
+    Promise.all(cards.map((c, i) => drawCardTexture(c, i, cards.length, dark))).then((texes) => {
+      if (cancelled) return texes.forEach((t) => t.dispose());
+      texes.forEach((t, i) => {
+        const front = (cardMeshes[i].material as THREE.Material[])[4] as THREE.MeshStandardMaterial;
+        front.map?.dispose();
+        front.map = t;
+        front.emissiveMap = t;
+        front.needsUpdate = true;
+      });
+      setTexturesReady(true);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [cards, cardMeshes, dark]);
+
+  useEffect(
+    () => () => {
+      cardMeshes.forEach((m) => {
+        (m.material as THREE.Material[]).forEach((mat) => {
+          (mat as THREE.MeshStandardMaterial).map?.dispose();
+          mat.dispose();
+        });
+      });
+      cardMeshes[0]?.geometry.dispose();
+    },
+    [cardMeshes],
+  );
 
   const s = useMemo(
     () => ({
       ray: new THREE.Raycaster(),
       plane: new THREE.Plane(new THREE.Vector3(0, 0, 1), 0),
-      ndc: new THREE.Vector2(),
       goal: new THREE.Vector3(),
-      atPile: new THREE.Vector3(),
+      atRack: new THREE.Vector3(),
       slotPos: new THREE.Vector3(),
-      tool: new THREE.Vector3(),
+      a: new THREE.Vector3(),
+      b: new THREE.Vector3(),
       tipW: new THREE.Vector3(),
-      tipNdc: new THREE.Vector3(),
       basePt: new THREE.Vector3(),
-      present: new THREE.Vector3(0.9, 0.9, 0.3),
-      slots: [] as THREE.Vector3[],
-      // Slot anchors in stage pixels, so the held card can land exactly on its slot.
-      slotPx: [] as { x: number; y: number }[],
-      slotRot: [] as number[],
-      slotEls: [] as HTMLElement[],
+      // card pose relative to the tip, per slot (includes that slot's tilt)
+      holdLocal: [] as THREE.Matrix4[],
+      // card pose in the rack (base frame), per slot
+      slotLocal: [] as THREE.Matrix4[],
+      attached: -1,
+      straight: new THREE.Matrix4(),
+      tmp: new THREE.Matrix4(),
+      tmpQ: new THREE.Quaternion(),
+      tmpP: new THREE.Vector3(),
+      tmpS: new THREE.Vector3(),
       lastKey: "",
       frame: 0,
       ready: false,
@@ -181,42 +314,54 @@ function Arm({ motion, cardRef, hudRef, presentRef, pileRef, onReady }: ArmProps
     [],
   );
 
-  /** Cast a DOM point (client px) onto a z-plane in front of the base; return base-local coords. */
-  const castLocal = (cx: number, cy: number, depth: number, out: THREE.Vector3) => {
-    const r = gl.domElement.getBoundingClientRect();
-    s.ndc.set(((cx - r.left) / r.width) * 2 - 1, -((cy - r.top) / r.height) * 2 + 1);
-    s.ray.setFromCamera(s.ndc, camera);
-    s.plane.constant = -(root.current!.position.z + depth);
-    if (!s.ray.ray.intersectPlane(s.plane, out)) return out;
-    root.current!.worldToLocal(out);
-    // Nudge forward so the tip marker (not the IK point) lands on the anchor.
-    const h = Math.hypot(out.x, out.z) || 1;
-    out.x += (out.x / h) * TIP_LEAD;
-    out.z += (out.z / h) * TIP_LEAD;
-    return out;
+  const applyPose = (R: Rig, q: ReturnType<typeof solveIK>) => {
+    R.yaw.rotation.y = q.yaw;
+    R.shoulder.rotation.z = q.shoulder;
+    R.elbow.rotation.z = q.elbow;
+    R.wrist.rotation.z = q.wrist;
+    R.roll.rotation.x = 0;
   };
 
-  /** Re-read the DOM anchors (present slot + pile slots). Cheap; done on layout changes. */
-  const readAnchors = () => {
-    const p = presentRef.current?.getBoundingClientRect();
-    if (p) castLocal(p.left, p.top, PRESENT_DEPTH, s.present);
-    // NB: not [data-slot] — every shadcn component sets data-slot too.
-    s.slotEls = Array.from(pileRef.current?.querySelectorAll<HTMLElement>("[data-pile-slot]") ?? []);
-    const stage = gl.domElement.getBoundingClientRect();
-    s.slotEls.forEach((el, i) => {
-      const r = el.getBoundingClientRect();
-      s.slots[i] ??= new THREE.Vector3();
-      castLocal(r.left, r.top, PILE_DEPTH, s.slots[i]);
-      s.slotPx[i] = { x: r.left - stage.left, y: r.top - stage.top };
-      s.slotRot[i] = Number(el.dataset.rot ?? 0);
+  /** Pose the rig at every slot once, and record exactly where each card sits. */
+  const buildRack = (R: Rig) => {
+    const rootInv = new THREE.Matrix4().copy(root.current!.matrixWorld).invert();
+    const offset = new THREE.Matrix4().makeTranslation(CARD_W / 2 - BITE, 0, 0);
+    s.straight.copy(offset);
+    cards.forEach((_, i) => {
+      applyPose(R, solveIK(slotTool(i, s.a)));
+      root.current!.updateMatrixWorld(true);
+      const tilt = new THREE.Matrix4().makeRotationZ((SLOT_TILT[i % SLOT_TILT.length] ?? 0) / DEG);
+      s.holdLocal[i] = new THREE.Matrix4().multiplyMatrices(tilt, offset);
+      s.slotLocal[i] = new THREE.Matrix4()
+        .copy(rootInv)
+        .multiply(R.tip.matrixWorld)
+        .multiply(s.holdLocal[i]);
     });
+    // Put every card in its slot.
+    cardMeshes.forEach((m, i) => {
+      rack.current!.add(m);
+      s.slotLocal[i].decompose(m.position, m.quaternion, m.scale);
+    });
+    s.attached = -1;
+  };
+
+  const placeInRack = (i: number) => {
+    const m = cardMeshes[i];
+    rack.current!.add(m);
+    s.slotLocal[i].decompose(m.position, m.quaternion, m.scale);
+  };
+
+  const attachToTip = (R: Rig, i: number) => {
+    const m = cardMeshes[i];
+    R.tip.add(m);
+    s.holdLocal[i].decompose(m.position, m.quaternion, m.scale);
   };
 
   useFrame(() => {
     const R = rig.current as Rig;
-    if (!root.current || !R.yaw) return;
+    if (!root.current || !rack.current || !R.yaw) return;
 
-    // Park the base at a fixed screen spot; recomputed on resize.
+    // Park the base at a fixed screen spot and scale the cell to the viewport.
     const key = `${size.width}x${size.height}`;
     if (lastSize.current !== key) {
       camera.updateMatrixWorld();
@@ -224,65 +369,63 @@ function Arm({ motion, cardRef, hudRef, presentRef, pileRef, onReady }: ArmProps
       s.plane.constant = 0;
       if (s.ray.ray.intersectPlane(s.plane, s.basePt))
         root.current.position.set(s.basePt.x, s.basePt.y, -0.25);
-      root.current.updateMatrixWorld();
+      const aspect = size.width / size.height;
+      root.current.scale.setScalar(THREE.MathUtils.clamp(aspect / 1.6, 0.78, 1.08));
+      root.current.updateMatrixWorld(true);
       lastSize.current = key;
-      readAnchors();
-    } else if (s.frame % 30 === 0) {
-      root.current.updateMatrixWorld();
-      readAnchors(); // fonts / images settling can shift the layout
+      const held = s.attached;
+      buildRack(R);
+      if (held >= 0) attachToTip(R, held);
+      s.attached = held;
     }
-    if (!s.slots.length) return;
 
     const m = motion.current;
-    const n = s.slots.length;
+    const n = cards.length;
     const from = THREE.MathUtils.clamp(Math.round(m.from), 0, n - 1);
     const to = THREE.MathUtils.clamp(Math.round(m.to), 0, n - 1);
 
     // --- Trajectory: the timeline is the trajectory, no extra damping ------
-    // Along the pile: slot to slot with a small hop.
-    s.slotPos.lerpVectors(s.slots[from], s.slots[to], m.travel);
-    s.slotPos.y += Math.sin(m.travel * Math.PI) * (from === to ? 0 : 0.07);
-    // Pile <-> presentation, arcing up so the card clears the pile.
-    s.atPile.lerpVectors(s.present, s.slotPos, m.drop);
-    s.atPile.y += Math.sin(m.drop * Math.PI) * 0.1;
-    // Boot: unfold from home toward the pile.
-    s.goal.lerpVectors(HOME, s.atPile, m.boot);
+    s.slotPos.lerpVectors(slotTool(from, s.a), slotTool(to, s.b), m.travel);
+    s.slotPos.y += Math.sin(m.travel * Math.PI) * (from === to ? 0 : 0.09);
+    // Rack <-> presentation, arcing up so the card clears the rack.
+    s.atRack.lerpVectors(PRESENT, s.slotPos, m.drop);
+    s.atRack.y += Math.sin(m.drop * Math.PI) * 0.12;
+    // Boot: unfold from home toward the rack.
+    s.goal.lerpVectors(HOME, s.atRack, m.boot);
     s.goal.y += Math.sin(m.boot * Math.PI) * 0.14;
-    s.tool.copy(s.goal);
 
-    // --- IK (base frame, shoulder at y = BASE_H) ---------------------------
-    const yaw = Math.atan2(-s.tool.z, s.tool.x);
-    const h = Math.hypot(s.tool.x, s.tool.z) - L3; // gripper stays level
-    const v = s.tool.y - BASE_H;
-    const d = THREE.MathUtils.clamp(Math.hypot(h, v), Math.abs(L1 - L2) + 1e-3, L1 + L2 - 1e-3);
-    const elbow = -Math.acos(
-      THREE.MathUtils.clamp((d * d - L1 * L1 - L2 * L2) / (2 * L1 * L2), -1, 1),
-    );
-    const shoulder =
-      Math.atan2(v, h) - Math.atan2(L2 * Math.sin(elbow), L1 + L2 * Math.cos(elbow));
-    const wrist = -shoulder - elbow; // maintain a rigid, level payload
-    const roll = 0;
-
-    R.yaw.rotation.y = yaw;
-    R.shoulder.rotation.z = shoulder;
-    R.elbow.rotation.z = elbow;
-    R.wrist.rotation.z = wrist;
-    R.roll.rotation.x = roll;
+    const q = solveIK(s.goal);
+    applyPose(R, q);
 
     // Independent grip phase: close fully before lifting the payload.
     const open = 0.024 + m.grip * 0.065;
     R.fingerA.position.z = open;
     R.fingerB.position.z = -open;
 
-    // Status LED breathes while calibrating, then settles.
     R.led.emissiveIntensity = m.boot < 1 ? 0.6 + Math.sin(s.frame * 0.25) * 0.5 : 0.4;
+
+    // --- Pick / place: re-parent the card between rack and gripper ---------
+    const want = m.hold > 0.5 ? Math.round(m.heldSlot) : -1;
+    if (want !== s.attached) {
+      if (s.attached >= 0) placeInRack(s.attached);
+      if (want >= 0) attachToTip(R, want);
+      s.attached = want;
+    }
+    // A held card straightens in the gripper once it's lifted clear.
+    if (s.attached >= 0) {
+      const lift = reduced ? 1 : THREE.MathUtils.smoothstep(1 - m.drop, 0.15, 0.7);
+      s.holdLocal[s.attached].decompose(s.tmpP, s.tmpQ, s.tmpS);
+      const card = cardMeshes[s.attached];
+      // Pivot about the gripped edge: blend both rotation and position to the straight pose.
+      card.position.copy(s.tmpP).lerp(STRAIGHT_POS, lift);
+      card.quaternion.copy(s.tmpQ).slerp(IDENTITY_Q, lift);
+    }
     root.current.updateWorldMatrix(true, true);
 
     // --- Cable harness through the joints (only while moving) --------------
     const motionKey = `${m.boot.toFixed(4)}|${m.drop.toFixed(4)}|${m.travel.toFixed(4)}|${from}|${to}`;
     if (cable.current && (s.frame === 0 || motionKey !== s.lastKey)) {
-      const anchors = [R.cableA, R.cableB, R.cableC, R.cableD];
-      anchors.forEach((a, i) => {
+      [R.cableA, R.cableB, R.cableC, R.cableD].forEach((a, i) => {
         a.getWorldPosition(s.pts[i]);
         cable.current!.worldToLocal(s.pts[i]);
       });
@@ -293,50 +436,7 @@ function Arm({ motion, cardRef, hudRef, presentRef, pileRef, onReady }: ArmProps
     }
     s.lastKey = motionKey;
 
-    // --- Pin the HTML card to the fingertips -------------------------------
-    R.tip.getWorldPosition(s.tipW);
-    s.tipNdc.copy(s.tipW).project(camera);
-    const tipX = ((s.tipNdc.x + 1) / 2) * size.width;
-    const tipY = ((1 - s.tipNdc.y) / 2) * size.height;
-    // Scale/rotation blend from presented to exactly matching the target slot.
-    const pileAmt = m.boot < 1 ? 1 : m.drop;
-    // At the pile, snap to the slot's measured anchor (not the IK estimate) so
-    // the pile card and the gripped card coincide to the pixel at handoff.
-    const pa = s.slotPx[from];
-    const pb = s.slotPx[to];
-    const anchorX = pa && pb ? THREE.MathUtils.lerp(pa.x, pb.x, m.travel) : tipX;
-    const anchorY = pa && pb ? THREE.MathUtils.lerp(pa.y, pb.y, m.travel) : tipY;
-    const snap = pileAmt * pileAmt * pileAmt; // only matters right at the pile
-    const x = THREE.MathUtils.lerp(tipX, anchorX, snap);
-    const y = THREE.MathUtils.lerp(tipY, anchorY, snap);
-    const slotRot = THREE.MathUtils.lerp(s.slotRot[from] ?? 0, s.slotRot[to] ?? 0, m.travel);
-    const sc = THREE.MathUtils.lerp(PRESENT_SCALE, SLOT_SCALE, pileAmt);
-    const rot = slotRot * pileAmt;
-    const card = cardRef.current;
-    if (card) {
-      // A DOM front jaw completes the depth sandwich: rear jaw / card / front jaw.
-      // Both layers use this exact TCP.
-      card.style.opacity = m.hold > 0.5 ? "1" : "0";
-      card.style.transform = `translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, 0) translateY(-50%) rotate(${rot.toFixed(2)}deg) scale(${sc.toFixed(4)})`;
-      const jaw = card.querySelector<HTMLElement>("[data-jaw]");
-      const seat = card.querySelector<HTMLElement>("[data-seat]");
-      // The clamp is hardware: counter-scale so it stays gripper-sized.
-      if (jaw) jaw.style.transform = `translateX(${((-m.grip * 22) / sc).toFixed(2)}px) scale(${(1 / sc).toFixed(4)})`;
-      if (seat) seat.style.transform = `scale(${(1 / sc).toFixed(4)})`;
-      card.style.pointerEvents = m.drop > 0.01 || m.hold < 1 ? "none" : "auto";
-      // Down at the pile the card sits in its slot's layer (0–8): neighbours
-      // overlap it and the robot canvas (z 10) draws over it, so the arm is
-      // always in front of the pile. It rises above the canvas once lifted clear.
-      const layer = Math.round(THREE.MathUtils.lerp(from, to, m.travel));
-      card.style.zIndex = pileAmt > 0.82 ? String(layer) : "20";
-    }
-    // Pile: the held card's slot is empty while it's in the gripper.
-    const held = Math.round(m.heldSlot);
-    s.slotEls.forEach((el, i) => {
-      el.dataset.empty = i === held && m.hold > 0.5 ? "true" : "false";
-    });
-
-    if (!s.ready) {
+    if (!s.ready && texturesReady) {
       s.ready = true;
       onReady();
     }
@@ -346,14 +446,14 @@ function Arm({ motion, cardRef, hudRef, presentRef, pileRef, onReady }: ArmProps
     const hud = hudRef.current;
     if (hud && s.frame % 4 === 0) {
       const rows = hud.querySelectorAll<HTMLElement>("[data-v]");
-      [yaw, shoulder, elbow, wrist, roll].forEach((rad, i) => {
+      [q.yaw, q.shoulder, q.elbow, q.wrist, 0].forEach((rad, i) => {
         const deg = rad * DEG;
         if (rows[i])
           rows[i].textContent = `${deg >= 0 ? "+" : "−"}${Math.abs(deg).toFixed(1).padStart(5, "0")}°`;
       });
       const tcp = hud.querySelector<HTMLElement>("[data-tcp]");
       if (tcp)
-        tcp.textContent = [s.tool.x, s.tool.y, s.tool.z]
+        tcp.textContent = [s.goal.x, s.goal.y, s.goal.z]
           .map((v) => `${Math.round(v * 1000)}`.padStart(4, " "))
           .join("  ");
       const gripLabel = hud.querySelector<HTMLElement>("[data-grip]");
@@ -375,6 +475,8 @@ function Arm({ motion, cardRef, hudRef, presentRef, pileRef, onReady }: ArmProps
     (o: Rig[K] | null) => {
       if (o) rig.current[k] = o;
     };
+
+  const rackLen = RACK_X0 + (cards.length - 1) * RACK_DX + CARD_W + 0.1;
 
   return (
     <>
@@ -444,6 +546,16 @@ function Arm({ motion, cardRef, hudRef, presentRef, pileRef, onReady }: ArmProps
             </group>
           </group>
         </group>
+        {/* Card rack: a low ledge the cards stand on */}
+        <RoundedBox
+          args={[rackLen - RACK_X0 + 0.2, 0.035, (cards.length - 1) * RACK_DZ + 0.16]}
+          radius={0.012}
+          smoothness={2}
+          position={[(RACK_X0 + rackLen) / 2 - 0.02, RACK_Y - CARD_H / 2 - 0.02, RACK_Z0 + ((cards.length - 1) * RACK_DZ) / 2]}
+        >
+          {actuatorMat}
+        </RoundedBox>
+        <group ref={rack} />
 
         <ContactShadows
           position={[0, 0.001, 0]}

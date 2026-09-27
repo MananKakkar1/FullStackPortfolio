@@ -1,13 +1,12 @@
-import { Suspense, lazy, useEffect, useRef, useState } from "react";
+import { Suspense, lazy, useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useLenis } from "lenis/react";
-import { projects, type Project } from "@/constants";
+import { projects } from "@/constants";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/scroll";
 import { usePrefersReducedMotion } from "@/lib/hooks";
 import { cn } from "@/lib/utils";
 import { ArrowRight, ArrowDown } from "@/lib/icons";
-import type { ArmMotion } from "@/three/RobotArm";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
+import type { ArmCard, ArmMotion } from "@/three/RobotArm";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -26,28 +25,19 @@ const RobotArm = lazy(() => import("@/three/RobotArm"));
 
 const STEP_VH = 70; // scroll distance per project
 const JOINTS = ["J1", "J2", "J3", "J4", "J5"];
-// Card scale in the pile. Must match SLOT_SCALE in three/RobotArm.tsx.
-const PILE_SCALE = 0.4;
-// A deliberately messy fan: per-slot rotation (deg) and vertical jitter (px).
-const SLOT_ROT = [-4, 2.5, -1.5, 3.5, -2.5, 1.5, -3.5, 2, -1];
-const SLOT_JITTER = [0, -6, 4, -3, 6, -5, 2, -7, 3];
-
-const cardWidth = "w-[28rem]";
 
 /**
- * Desktop Work section: a robot workcell. All project cards lie in a
- * semi-stacked pile; a procedural arm picks the active one out and presents
- * it. Scrolling to another project plays a real pick-and-place: the arm
- * returns the current card to its slot, travels along the pile, grips the
- * target card, and lifts it out. The first pick doubles as the loading
- * animation (the arm unfolds from its home pose while "calibrating").
+ * Desktop Work section: a robot workcell. Every project is a physical 3D
+ * card standing in a fanned rack; a procedural arm picks the active one out
+ * and presents it. Scrolling to another project plays a real pick-and-place:
+ * the arm returns the current card to its slot, travels along the rack, grips
+ * the target card, and lifts it out. The first pick doubles as the loading
+ * animation (the arm unfolds from its home pose while "calibrating"). The
+ * readable details and the link live in a static shadcn Card beside it.
  */
 export default function RobotShowcase() {
   const wrap = useRef<HTMLDivElement>(null);
-  const cardRef = useRef<HTMLDivElement>(null);
   const hudRef = useRef<HTMLDivElement>(null);
-  const presentRef = useRef<HTMLDivElement>(null);
-  const pileRef = useRef<HTMLDivElement>(null);
   const trigger = useRef<ScrollTrigger | null>(null);
   const motion = useRef<ArmMotion>({
     boot: 0,
@@ -72,6 +62,10 @@ export default function RobotShowcase() {
   const reduced = usePrefersReducedMotion();
   const lenis = useLenis();
   const project = projects[shown];
+  const cards = useMemo<ArmCard[]>(
+    () => projects.map((p) => ({ title: p.title, category: p.category, image: p.thumb ?? p.image })),
+    [],
+  );
   shownRef.current = shown;
 
   useGSAP(
@@ -193,54 +187,6 @@ export default function RobotShowcase() {
   const jumpToRef = useRef(jumpTo);
   jumpToRef.current = jumpTo;
 
-  // One card markup for both the held card and the pile, so the handoff is seamless.
-  const cardBody = (p: Project, i: number) => (
-    <Card className="gap-4 overflow-hidden pt-0 shadow-soft">
-      <AspectRatio ratio={16 / 10} className="overflow-hidden border-b bg-muted">
-        <img
-          src={p.thumb ?? p.image}
-          alt={`${p.title} screenshot`}
-          className="size-full object-cover object-top"
-        />
-      </AspectRatio>
-      <CardHeader>
-        <div className="flex items-center justify-between gap-3">
-          <Badge variant="outline" className="font-mono font-normal text-muted-foreground">
-            {p.category}
-          </Badge>
-          <span className="type-meta">
-            {String(i + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
-          </span>
-        </div>
-        <CardTitle className="type-display-m">{p.title}</CardTitle>
-        <CardDescription className="text-sm">{p.summary}</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <ul className="flex flex-wrap gap-1.5">
-          {p.stack.slice(0, 5).map((s) => (
-            <li key={s}>
-              <Badge variant="secondary" className="font-mono font-normal">
-                {s}
-              </Badge>
-            </li>
-          ))}
-        </ul>
-      </CardContent>
-      <CardFooter>
-        <Button asChild className="group h-10 rounded-lg px-4">
-          <Link to={`/work/${p.id}`}>
-            View project
-            <ArrowRight
-              size={15}
-              weight="bold"
-              className="transition-transform duration-200 group-hover:translate-x-1"
-            />
-          </Link>
-        </Button>
-      </CardFooter>
-    </Card>
-  );
-
   return (
     <div
       ref={wrap}
@@ -248,18 +194,14 @@ export default function RobotShowcase() {
       style={{ height: `calc(${projects.length * STEP_VH}vh + 100svh)` }}
     >
       <div className="sticky top-0 h-[100svh] overflow-hidden">
-        {/* Layers, back to front: pile (0–8, incl. a card down in its slot) →
-            robot canvas (10) → lifted card (20) → HUD / index / loader (30). */}
         {/* 3D stage */}
         <div className="pointer-events-none absolute inset-0 z-10">
           {onScreen && (
             <Suspense fallback={null}>
               <RobotArm
                 motion={motion}
-                cardRef={cardRef}
                 hudRef={hudRef}
-                presentRef={presentRef}
-                pileRef={pileRef}
+                cards={cards}
                 onReady={() => setReady(true)}
                 reduced={reduced}
                 active={onScreen}
@@ -278,9 +220,6 @@ export default function RobotShowcase() {
             Loading robot…
           </div>
         )}
-
-        {/* Where a held card is presented (arm target, read from the DOM) */}
-        <div ref={presentRef} aria-hidden className="absolute top-[40%] left-[43%] size-0" />
 
         {/* Teach-pendant readout */}
         <div
@@ -318,61 +257,51 @@ export default function RobotShowcase() {
           </div>
         </div>
 
-        {/* The pile: every project card, semi-stacked. Decorative; the index is the control. */}
-        <div
-          ref={pileRef}
-          aria-hidden
-          inert
-          className="pointer-events-none absolute bottom-[19%] left-[40%] size-0"
-        >
-          {projects.map((p, i) => (
-            <div
-              key={p.id}
-              data-pile-slot
-              data-rot={SLOT_ROT[i % SLOT_ROT.length]}
-              className="group absolute size-0"
-              style={{
-                left: `${i * 3.1}rem`,
-                top: `${SLOT_JITTER[i % SLOT_JITTER.length]}px`,
-                zIndex: i,
-              }}
-            >
-              {/* Empty-slot outline, visible while this card is in the gripper */}
-              <div
-                className={cn(
-                  cardWidth,
-                  "absolute top-0 left-0 aspect-[4/5] origin-left rounded-xl border-2 border-dashed border-border-strong opacity-0 group-data-[empty=true]:opacity-100",
-                )}
-                style={{
-                  transform: `translateY(-50%) rotate(${SLOT_ROT[i % SLOT_ROT.length]}deg) scale(${PILE_SCALE})`,
-                }}
-              />
-              <div
-                className={cn(
-                  cardWidth,
-                  "absolute top-0 left-0 origin-left group-data-[empty=true]:opacity-0",
-                )}
-                style={{
-                  transform: `translateY(-50%) rotate(${SLOT_ROT[i % SLOT_ROT.length]}deg) scale(${PILE_SCALE})`,
-                }}
-              >
-                {cardBody(p, i)}
+        {/* The presented project, readable and clickable (static; the 3D card is the visual) */}
+        <div className="shell-wide pointer-events-none absolute inset-x-0 top-[calc(var(--nav-h)+7.5rem)] z-30 flex justify-end">
+          <Card
+            key={project.id}
+            className={cn(
+              "pointer-events-auto w-[21rem] gap-4 shadow-soft transition-opacity duration-300 animate-in fade-in-0 slide-in-from-right-2 xl:w-[23rem]",
+              !booted && "opacity-0",
+            )}
+          >
+            <CardHeader>
+              <div className="flex items-center justify-between gap-3">
+                <Badge variant="outline" className="font-mono font-normal text-muted-foreground">
+                  {project.category}
+                </Badge>
+                <span className="type-meta">
+                  {String(shown + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
+                </span>
               </div>
-            </div>
-          ))}
-        </div>
-
-        {/* The card the arm is holding (positioned every frame by RobotArm) */}
-        <div
-          ref={cardRef}
-          className={cn(cardWidth, "absolute top-0 left-0 origin-left opacity-0 will-change-transform")}
-        >
-          <span aria-hidden data-seat className="robot-grip-seat" />
-          <span aria-hidden data-jaw className="robot-grip-jaw">
-            <i />
-            <i />
-          </span>
-          {cardBody(project, shown)}
+              <CardTitle className="type-display-m">{project.title}</CardTitle>
+              <CardDescription className="text-sm">{project.summary}</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ul className="flex flex-wrap gap-1.5">
+                {project.stack.slice(0, 5).map((t) => (
+                  <li key={t}>
+                    <Badge variant="secondary" className="font-mono font-normal">
+                      {t}
+                    </Badge>
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+            <CardFooter>
+              <Button asChild className="group h-10 rounded-lg px-4">
+                <Link to={`/work/${project.id}`}>
+                  View project
+                  <ArrowRight
+                    size={15}
+                    weight="bold"
+                    className="transition-transform duration-200 group-hover:translate-x-1"
+                  />
+                </Link>
+              </Button>
+            </CardFooter>
+          </Card>
         </div>
 
         {/* Project index */}
