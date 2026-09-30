@@ -345,6 +345,8 @@ export const projects: Project[] = [
       "Optimized memory usage and move storage.",
     ],
     sourceUrl: "https://github.com/MananKakkar1/Sokoban",
+    video: "/videos/sokoban.mp4",
+    videoPoster: "/videos/sokoban.jpg",
     image: sokobanImg,
   },
 ];
