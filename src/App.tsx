@@ -23,7 +23,13 @@ function RouteEffects() {
 
   useEffect(() => {
     lenis?.scrollTo(0, { immediate: true });
-    const id = window.setTimeout(() => ScrollTrigger.refresh(), 60);
+    // refresh() restores each scroller's cached position, and that cache can still hold the
+    // previous page's scroll. Writing 0 through ScrollTrigger's own scroll function resets it,
+    // otherwise the new page lands partway down.
+    const id = window.setTimeout(() => {
+      ScrollTrigger.getScrollFunc(window)(0);
+      ScrollTrigger.refresh();
+    }, 60);
     return () => window.clearTimeout(id);
   }, [pathname, lenis]);
 
