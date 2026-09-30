@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useLenis } from "lenis/react";
 import { projects } from "@/constants";
 import { cn } from "@/lib/utils";
+import { usePrefersReducedMotion } from "@/lib/hooks";
 import { useRevealObserver, revealDelay } from "@/lib/reveal";
 import { ArrowLeft, ArrowRight, ArrowUpRight, GithubLogo, MagnifyingGlassPlus } from "@/lib/icons";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
@@ -51,6 +52,7 @@ export default function ProjectDetail() {
   const prev = index >= 0 ? projects[(index - 1 + projects.length) % projects.length] : undefined;
   const next = index >= 0 ? projects[(index + 1) % projects.length] : undefined;
   const [progress, setProgress] = useState(0);
+  const reducedMotion = usePrefersReducedMotion();
 
   useRevealObserver(id);
 
@@ -179,7 +181,26 @@ export default function ProjectDetail() {
             </Card>
           </div>
 
-          {/* Screenshot — click to view full size */}
+          {/* Demo video when there is one (silent, loops inline); otherwise the zoomable screenshot */}
+          {project.video ? (
+            <div data-reveal className="mt-12 overflow-hidden rounded-xl border bg-muted shadow-soft">
+              <AspectRatio ratio={16 / 9}>
+                <video
+                  key={project.video}
+                  src={project.video}
+                  poster={project.videoPoster}
+                  aria-label={`${project.title} demo video`}
+                  className="size-full object-cover"
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  autoPlay={!reducedMotion}
+                  controls={reducedMotion}
+                />
+              </AspectRatio>
+            </div>
+          ) : (
           <Dialog>
             <DialogTrigger asChild>
               <button
@@ -211,6 +232,7 @@ export default function ProjectDetail() {
               />
             </DialogContent>
           </Dialog>
+          )}
 
           {/* Overview + highlights */}
           <div className="mt-16 grid gap-12 pb-12 lg:grid-cols-[1fr_1fr] lg:gap-16">

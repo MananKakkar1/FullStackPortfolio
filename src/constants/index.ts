@@ -173,6 +173,9 @@ export type Project = {
   thumb?: string;
   sourceUrl?: string;
   liveUrl?: string;
+  /** Silent demo video (served from public/); replaces the screenshot on the detail page. */
+  video?: string;
+  videoPoster?: string;
 };
 
 export const projects: Project[] = [
@@ -214,6 +217,8 @@ export const projects: Project[] = [
     ],
     liveUrl: "https://continu-learn.vercel.app",
     sourceUrl: "https://github.com/MananKakkar1/ContinuLearn",
+    video: "/videos/continulearn.mp4",
+    videoPoster: "/videos/continulearn.jpg",
     image: continuLearnImg,
     thumb: continuLearnThumb,
   },
@@ -251,6 +256,8 @@ export const projects: Project[] = [
       "Pen lifts between strokes for continuous multi-letter drawing.",
       "Time-optimal trajectory generation with Ruckig.",
     ],
+    video: "/videos/copycadder.mp4",
+    videoPoster: "/videos/copycadder.jpg",
     image: copycadderImg,
   },
   {
@@ -268,6 +275,8 @@ export const projects: Project[] = [
       "AI-powered CLI over GPT 5.",
       "Built-in TCP chat server for real-time client messaging.",
     ],
+    video: "/videos/custom-linux-shell.mp4",
+    videoPoster: "/videos/custom-linux-shell.jpg",
     image: shellImg,
   },
   {
